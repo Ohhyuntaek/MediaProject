@@ -5,16 +5,21 @@ public class Ally : MonoBehaviour
 {
     [SerializeField] private UnitData _unitData;
     [SerializeField] private Animator _animator;
-    private AllyStateMachine _stateMachine;
+    private StateMachine<Ally> _stateMachine;
     private float _lifeTimer;
+    private ISkill _skill;
     
     public Animator Animator => _animator;
     public UnitData UnitData => _unitData;
     
     
+    /// <summary>
+    /// 씬에 직접 배치시에만 스폰할때 Initialize 호출해줘야함.
+    /// 테스트용
+    /// </summary>
     private void Start()
     {
-        // 씬에서 직접 배치했을 경우만
+       
         if (_unitData != null)
         {
             Initialize(_unitData);
@@ -29,10 +34,9 @@ public class Ally : MonoBehaviour
     {
         _unitData = data;
         _lifeTimer = _unitData.Duration;
-        
-
-        _stateMachine = new AllyStateMachine();
-        _stateMachine.ChangeState(new AllyIdleState(this));
+        _skill = CreateSkillFromData(_unitData.AllySkillType);
+        _stateMachine = new StateMachine<Ally>(this);
+        _stateMachine.ChangeState(new AllyIdleState());
     }
 
     private void Update()
@@ -42,51 +46,48 @@ public class Ally : MonoBehaviour
         _lifeTimer -= Time.deltaTime;
         if (_lifeTimer <= 0f)
         {
-            _stateMachine.ChangeState(new AllyDeadState(this));
+            _stateMachine.ChangeState(new AllyDeadState());
         }
     }
 
-    public void ChangeState(IState newState)
+    public void ChangeState(IState<Ally> newState)
     {
         _stateMachine.ChangeState(newState);
     }
 
     public void PerformAttack()
     {
-        Debug.Log($"[Ally:{name}] {_unitData.UnitName} 공격 시도!");
-
-        switch (_unitData.AllySkillType)
+        if (_skill == null)
         {
-            case AllySkillType.MovementBlock:
-                Debug.Log("적 이동 제약 효과!");
-                break;
-            case AllySkillType.DamageDealer:
-                Debug.Log("피해 입힘!");
-                break;
-            case AllySkillType.Debuff:
-                Debug.Log("디버프 효과!");
-                break;
-            case AllySkillType.AllyBuff:
-                Debug.Log("아군 강화!");
-                break;
-            default:
-                Debug.Log("기본 공격");
-                break;
+            Debug.LogWarning($"[Ally:{name}] 스킬이 null입니다! 스킬 타입: {_unitData.AllySkillType}");
+            return;
         }
+        _skill.Activate(this);
     }
 
     public void PerformDie()
     {
         StartCoroutine(Die());
     }
+    
+    private ISkill CreateSkillFromData(AllySkillType skillType)
+    {
+        return skillType switch
+        {
+            AllySkillType.MovementBlock => new MovementBlockSkill(),
+            AllySkillType.Debuff => new DebuffSkill(),
+            AllySkillType.DamageDealer => new DamageSkill(),
+            _ => null
+        };
+    }
+    
     public IEnumerator Die()
     {
         Debug.Log($"[Ally:{name}] 사망");
         yield return null;
         
         float animLength = _animator.GetCurrentAnimatorStateInfo(0).length;
-        Debug.Log($"[Ally:{name}] 죽는 애니메이션 길이: {animLength}");
-
+        
         yield return new WaitForSeconds(animLength);
         Destroy(gameObject,0.6f);
     }
