@@ -1,0 +1,881 @@
+{
+    "Name": "RetroHeroes",
+    "Path": "Assets/SPUM/Resources/Addons",
+    "Version": "",
+    "CreationDate": "2024-09-10 23:27:06",
+    "SpumAnimationData": [],
+    "SpumTextureData": [
+        {
+            "Name": "Hair_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Archer_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Archer_1"
+        },
+        {
+            "Name": "Hair_Arhcer_2",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Arhcer_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Arhcer_2"
+        },
+        {
+            "Name": "Hair_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Healer_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Healer_1"
+        },
+        {
+            "Name": "Hair_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Healer_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Healer_2"
+        },
+        {
+            "Name": "Hair_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Knight_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Knight_1"
+        },
+        {
+            "Name": "Hair_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Knight_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Knight_2"
+        },
+        {
+            "Name": "Hair_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Rogue_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Rogue_1"
+        },
+        {
+            "Name": "Hair_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Rogue_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Rogue_2"
+        },
+        {
+            "Name": "Hair_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Sorcerer",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Sorcerer"
+        },
+        {
+            "Name": "Hair_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "Hair_Sorceress",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/0_Hair/Hair_Sorceress"
+        },
+        {
+            "Name": "Cloth_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Archer_1"
+        },
+        {
+            "Name": "Cloth_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Archer_1"
+        },
+        {
+            "Name": "Cloth_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Archer_1"
+        },
+        {
+            "Name": "Cloth_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Archer_2"
+        },
+        {
+            "Name": "Cloth_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Archer_2"
+        },
+        {
+            "Name": "Cloth_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Archer_2"
+        },
+        {
+            "Name": "Cloth_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Healer_1"
+        },
+        {
+            "Name": "Cloth_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Healer_1"
+        },
+        {
+            "Name": "Cloth_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Healer_1"
+        },
+        {
+            "Name": "Cloth_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Healer_2"
+        },
+        {
+            "Name": "Cloth_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Healer_2"
+        },
+        {
+            "Name": "Cloth_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Healer_2"
+        },
+        {
+            "Name": "Cloth_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Knight_1"
+        },
+        {
+            "Name": "Cloth_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Knight_1"
+        },
+        {
+            "Name": "Cloth_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Knight_1"
+        },
+        {
+            "Name": "Cloth_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Knight_2"
+        },
+        {
+            "Name": "Cloth_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Knight_2"
+        },
+        {
+            "Name": "Cloth_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Knight_2"
+        },
+        {
+            "Name": "Cloth_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Rogue_1"
+        },
+        {
+            "Name": "Cloth_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Rogue_1"
+        },
+        {
+            "Name": "Cloth_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Rogue_1"
+        },
+        {
+            "Name": "Cloth_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Rogue_2"
+        },
+        {
+            "Name": "Cloth_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Rogue_2"
+        },
+        {
+            "Name": "Cloth_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Rogue_2"
+        },
+        {
+            "Name": "Cloth_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Sorcerer"
+        },
+        {
+            "Name": "Cloth_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Sorcerer"
+        },
+        {
+            "Name": "Cloth_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Sorcerer"
+        },
+        {
+            "Name": "Cloth_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/2_Cloth/Cloth_Sorceress"
+        },
+        {
+            "Name": "Pant_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Archer_2"
+        },
+        {
+            "Name": "Pant_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Archer_2"
+        },
+        {
+            "Name": "Pant_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Healer_1"
+        },
+        {
+            "Name": "Pant_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Healer_1"
+        },
+        {
+            "Name": "Pant_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Healer_2"
+        },
+        {
+            "Name": "Pant_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Healer_2"
+        },
+        {
+            "Name": "Pant_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Knight_1"
+        },
+        {
+            "Name": "Pant_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Knight_1"
+        },
+        {
+            "Name": "Pant_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Knight_2"
+        },
+        {
+            "Name": "Pant_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Knight_2"
+        },
+        {
+            "Name": "Pant_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Rogue_1"
+        },
+        {
+            "Name": "Pant_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Rogue_1"
+        },
+        {
+            "Name": "Pant_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Rogue_2"
+        },
+        {
+            "Name": "Pant_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Rogue_2"
+        },
+        {
+            "Name": "Pant_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Sorcerer"
+        },
+        {
+            "Name": "Pant_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Sorcerer"
+        },
+        {
+            "Name": "Pant_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Sorceress"
+        },
+        {
+            "Name": "Pant_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/3_Pant/Pant_Sorceress"
+        },
+        {
+            "Name": "Helmet_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Archer_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Archer_1"
+        },
+        {
+            "Name": "Helmet_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Archer_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Archer_2"
+        },
+        {
+            "Name": "Helmet_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Healer_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Healer_1"
+        },
+        {
+            "Name": "Helmet_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Healer_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Healer_2"
+        },
+        {
+            "Name": "Helmet_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Knight_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Knight_1"
+        },
+        {
+            "Name": "Helmet_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Knight_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Knight_2"
+        },
+        {
+            "Name": "Helmet_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Rogue_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Rogue_1"
+        },
+        {
+            "Name": "Helmet_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Rogue_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Rogue_2"
+        },
+        {
+            "Name": "Helmet_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Sorcerer",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Sorcerer"
+        },
+        {
+            "Name": "Helmet_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Helmet_Sorceress",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/4_Helmet/Helmet_Sorceress"
+        },
+        {
+            "Name": "Armor_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Archer_1"
+        },
+        {
+            "Name": "Armor_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Archer_1"
+        },
+        {
+            "Name": "Armor_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Archer_2"
+        },
+        {
+            "Name": "Armor_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Archer_2"
+        },
+        {
+            "Name": "Armor_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Healer_1"
+        },
+        {
+            "Name": "Armor_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Healer_2"
+        },
+        {
+            "Name": "Armor_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Knight_1"
+        },
+        {
+            "Name": "Armor_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Knight_1"
+        },
+        {
+            "Name": "Armor_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Knight_1"
+        },
+        {
+            "Name": "Armor_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Knight_2"
+        },
+        {
+            "Name": "Armor_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Knight_2"
+        },
+        {
+            "Name": "Armor_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Knight_2"
+        },
+        {
+            "Name": "Armor_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Rogue_1"
+        },
+        {
+            "Name": "Armor_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Rogue_1"
+        },
+        {
+            "Name": "Armor_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Rogue_1"
+        },
+        {
+            "Name": "Armor_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Rogue_2"
+        },
+        {
+            "Name": "Armor_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Rogue_2"
+        },
+        {
+            "Name": "Armor_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Rogue_2"
+        },
+        {
+            "Name": "Armor_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Armor",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/5_Armor/Armor_Sorcerer"
+        },
+        {
+            "Name": "Weapon_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Knight_1",
+            "PartSubType": "Sword",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/0_Sword/Weapon_Knight_1"
+        },
+        {
+            "Name": "Weapon_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Knight_2",
+            "PartSubType": "Sword",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/0_Sword/Weapon_Knight_2"
+        },
+        {
+            "Name": "Weapon_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Archer_1",
+            "PartSubType": "Bow",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/2_Bow/Weapon_Archer_1"
+        },
+        {
+            "Name": "Weapon_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Archer_2",
+            "PartSubType": "Bow",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/2_Bow/Weapon_Archer_2"
+        },
+        {
+            "Name": "Shield_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Shield_Knight_1",
+            "PartSubType": "Shield",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/3_Shield/Shield_Knight_1"
+        },
+        {
+            "Name": "Shield_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Shield_Knight_2",
+            "PartSubType": "Shield",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/3_Shield/Shield_Knight_2"
+        },
+        {
+            "Name": "Shield_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Shield_Sorcerer",
+            "PartSubType": "Shield",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/3_Shield/Shield_Sorcerer"
+        },
+        {
+            "Name": "Shield_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Shield_Sorceress",
+            "PartSubType": "Shield",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/3_Shield/Shield_Sorceress"
+        },
+        {
+            "Name": "Weapon_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Healer_1",
+            "PartSubType": "Wand",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/5_Wand/Weapon_Healer_1"
+        },
+        {
+            "Name": "Weapon_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Healer_2",
+            "PartSubType": "Wand",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/5_Wand/Weapon_Healer_2"
+        },
+        {
+            "Name": "Weapon_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Sorcerer",
+            "PartSubType": "Wand",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/5_Wand/Weapon_Sorcerer"
+        },
+        {
+            "Name": "Weapon_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Sorceress",
+            "PartSubType": "Wand",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/5_Wand/Weapon_Sorceress"
+        },
+        {
+            "Name": "Weapon_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Rogue_1",
+            "PartSubType": "Dagger",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/7_Dagger/Weapon_Rogue_1"
+        },
+        {
+            "Name": "Weapon_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "Weapon_Rogue_2",
+            "PartSubType": "Dagger",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/6_Weapons/7_Dagger/Weapon_Rogue_2"
+        },
+        {
+            "Name": "Back_Archer_1",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Archer_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Archer_1"
+        },
+        {
+            "Name": "Back_Archer_2",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Archer_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Archer_2"
+        },
+        {
+            "Name": "Back_Healer_1",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Healer_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Healer_1"
+        },
+        {
+            "Name": "Back_Healer_2",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Healer_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Healer_2"
+        },
+        {
+            "Name": "Back_Knight_1",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Knight_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Knight_1"
+        },
+        {
+            "Name": "Back_Knight_2",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Knight_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Knight_2"
+        },
+        {
+            "Name": "Back_Rogue_1",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Rogue_1",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Rogue_1"
+        },
+        {
+            "Name": "Back_Rogue_2",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Rogue_2",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Rogue_2"
+        },
+        {
+            "Name": "Back_Sorcerer",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Sorcerer",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Sorcerer"
+        },
+        {
+            "Name": "Back_Sorceress",
+            "UnitType": "Unit",
+            "PartType": "Back",
+            "SubType": "Back_Sorceress",
+            "PartSubType": "",
+            "Path": "Addons/RetroHeroes/0_Unit/0_Sprite/7_Back/Back_Sorceress"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4fd99ad1026eb4676b6ed98658f868a9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 192747
+  packageName: 2D Retro Heroes - SPUM Premium Addon Pack
+  packageVersion: 3.0.0
+  assetPath: Assets/SPUM/Sample/Prefabs/SamplePlayer.prefab
+  uploadId: 694042
