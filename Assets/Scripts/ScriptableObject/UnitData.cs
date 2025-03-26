@@ -8,6 +8,7 @@ public enum DamageType { Physical, Magical }
 public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff }
 public enum EnemySkillType { None, AllySupporter, AllyDisruptor, PlayerDebuffer }
 public enum PlayerSkillType{Test1,Test2,Test3}
+public enum TargetingType { Single, Area }
 
 [CreateAssetMenu(fileName = "NewUnitData", menuName = "SO/Unit Data")]
 public class UnitData : ScriptableObject
@@ -24,6 +25,8 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("스킬 이름")] private string _skillname;
     [SerializeField, LabelText("스킬 관련 설명, 추후 툴팁 개발 가능성")] private string _skilldescripter;
     [SerializeField, LabelText("스킬 이펙트")] private GameObject _skillEffect;
+    [SerializeField, LabelText("스킬 범위/단일")] private TargetingType _targetingType;
+    [SerializeField, LabelText("스킬/공격 사정거리 ")] private float _attackRange;
     
 
     [ShowIf(nameof(IsAlly)), LabelText("아군 스킬 타입")]
@@ -37,6 +40,7 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("공격 속도")] private float _attackSpeed;
     [SerializeField, LabelText("최대 체력")] private float _maxHP;
     [SerializeField, LabelText("이동 가능 여부")] private bool _canMove;
+    
 
     [Title("플레이어 전용 스탯"), ShowIf(nameof(IsPlayer))] 
     [SerializeField, LabelText("유지 시간")] private PlayerSkillType _playerSkillType;
@@ -65,6 +69,8 @@ public class UnitData : ScriptableObject
     public GameObject SkillEffect => _skillEffect;
     public string SkillName => _skillname;
     public string SkillDescriptor => _skilldescripter;
+    public TargetingType TargetingType => _targetingType;
+    public float AttackRange => _attackRange;
     
     
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;

@@ -59,7 +59,7 @@ public class Ally : MonoBehaviour
     {
         if (_skill == null)
         {
-            Debug.LogWarning($"[Ally:{name}] 스킬이 null입니다! 스킬 타입: {_unitData.AllySkillType}");
+            Debug.LogWarning($"[Ally:{name}] 스킬이 null");
             return;
         }
         _skill.Activate(this);
