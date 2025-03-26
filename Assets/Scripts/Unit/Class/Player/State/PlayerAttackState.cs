@@ -6,7 +6,7 @@ public class PlayerAttackState : IState<Player>
 
     public void Enter(Player player)
     {
-        Debug.Log($"[Player:{player.name}] 공격 스킬 발동!");
+        Debug.Log($"[Player:{player.name}] 공격 발동!");
         player.Animator?.SetTrigger("2_Attack");
         player.PerformSkill();
         _skillDuration = player.UnitData.SkillCoolTime; 

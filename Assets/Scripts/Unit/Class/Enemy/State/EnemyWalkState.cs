@@ -1,5 +1,3 @@
-
-
 public class EnemyWalkState : IState<Enemy>
 {
     public void Enter(Enemy enemy)

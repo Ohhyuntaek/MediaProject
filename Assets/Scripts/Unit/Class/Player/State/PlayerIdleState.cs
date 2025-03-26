@@ -11,7 +11,7 @@ public class PlayerIdleState : IState<Player>
 
     public void Update(Player player)
     {
-        //테스트용
+       
         _attackTimer -= Time.deltaTime;
 
         if (_attackTimer <= 0f)

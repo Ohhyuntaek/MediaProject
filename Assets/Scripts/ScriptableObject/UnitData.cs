@@ -43,7 +43,7 @@ public class UnitData : ScriptableObject
     
 
     [Title("플레이어 전용 스탯"), ShowIf(nameof(IsPlayer))] 
-    [SerializeField, LabelText("유지 시간")] private PlayerSkillType _playerSkillType;
+    [SerializeField, LabelText("플레이어 스킬 타입")] private PlayerSkillType _playerSkillType;
 
     [Title("아군 전용 스탯"), ShowIf(nameof(IsAlly))]
     [SerializeField, LabelText("유지 시간")] private float _duration;

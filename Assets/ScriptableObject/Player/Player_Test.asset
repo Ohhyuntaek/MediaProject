@@ -15,12 +15,19 @@ MonoBehaviour:
   _unitName: 
   _unitFaction: 2
   _unitType: 0
-  _damageType: 1
+  _damageType: 0
+  skillCoolTime: 0
+  _skillname: 
+  _skilldescripter: 
+  _skillEffect: {fileID: 0}
+  _targetingType: 0
+  _attackRange: 0
   _allySkillType: 0
   _enemySkillType: 0
-  _baseAttack: 0
-  _attackSpeed: 0
+  _baseAttack: 1
+  _attackSpeed: 1
   _maxHP: 0
   _canMove: 0
+  _playerSkillType: 0
   _duration: 0
   _moveSpeed: 0

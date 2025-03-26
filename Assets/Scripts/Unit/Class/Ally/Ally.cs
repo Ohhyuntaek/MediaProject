@@ -42,7 +42,6 @@ public class Ally : MonoBehaviour
     private void Update()
     {
         _stateMachine?.Update();
-
         _lifeTimer -= Time.deltaTime;
         if (_lifeTimer <= 0f)
         {

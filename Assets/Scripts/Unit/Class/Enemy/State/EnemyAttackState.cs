@@ -13,10 +13,10 @@ public class EnemyAttackState : IState<Enemy>
     public void Update(Enemy enemy)
     {
         _attackTimer -= Time.deltaTime;
-
-        if (_attackTimer <= 0f)
+        Debug.Log(enemy.IsTargetInRange());
+        if (_attackTimer <= 0f) 
         {
-            if (enemy.IsTargetInRange())
+            if (enemy.IsTargetInRange()) // 사정거리 안인 경우
             {
                 enemy.PerformAttack();
                 _attackTimer = 1f / enemy.UnitData.AttackSpeed;
@@ -26,7 +26,14 @@ public class EnemyAttackState : IState<Enemy>
                 enemy.ChangeState(new EnemyWalkState());
             }
         }
+        else
+        {
+            enemy.ChangeState(new EnemyIdleState());
+        }
     }
 
-    public void Exit(Enemy enemy) { }
+    public void Exit(Enemy enemy)
+    {
+        //TODO : 타겟 정보 가져오는 함수 필요 + 데미지 입히는 함수 추가
+    }
 }

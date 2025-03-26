@@ -11,7 +11,7 @@ public class EnemyStunState : IState<Enemy>
 
     public void Enter(Enemy enemy)
     {
-        enemy.Animator?.SetTrigger("Stun");
+        //enemy.Animator?.SetTrigger("");
     }
 
     public void Update(Enemy enemy)
@@ -19,7 +19,7 @@ public class EnemyStunState : IState<Enemy>
         _stunTimer -= Time.deltaTime;
         if (_stunTimer <= 0f)
         {
-            enemy.ChangeState(new EnemyWalkState());
+            enemy.ChangeState(new EnemyIdleState());
         }
     }
 
