@@ -1242,12 +1242,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defenderCards:
-  - {fileID: 7288847491265982114, guid: b241b164afe05a142a223b334861dbb4, type: 3}
-  - {fileID: 7288847491265982114, guid: ccbd7cfb158e00b4aa41c72bad45db4b, type: 3}
-  - {fileID: 7288847491265982114, guid: 13abc05a28f6f064492f40cbe7b4c928, type: 3}
-  - {fileID: 7288847491265982114, guid: c0c2016a3dd1631489c192e490e01a49, type: 3}
-  - {fileID: 7288847491265982114, guid: 2b69327f5c72d854982054e326ca75ce, type: 3}
-  - {fileID: 7288847491265982114, guid: 58a50576c4891ac49b115fc6de407a1a, type: 3}
+  - {fileID: 4100903904130682105, guid: b241b164afe05a142a223b334861dbb4, type: 3}
+  - {fileID: 4100903904130682105, guid: ccbd7cfb158e00b4aa41c72bad45db4b, type: 3}
+  - {fileID: 4100903904130682105, guid: 13abc05a28f6f064492f40cbe7b4c928, type: 3}
+  - {fileID: 4100903904130682105, guid: c0c2016a3dd1631489c192e490e01a49, type: 3}
+  - {fileID: 4100903904130682105, guid: 2b69327f5c72d854982054e326ca75ce, type: 3}
+  - {fileID: 4100903904130682105, guid: 58a50576c4891ac49b115fc6de407a1a, type: 3}
   cardSlots:
   - {fileID: 1964729884}
   - {fileID: 647200317}
