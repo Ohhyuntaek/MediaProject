@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public enum UnitFaction { Ally, Enemy, Player }
 public enum UnitType { Front, Middle, Rear }
 public enum DamageType { Physical, Magical }
-public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff }
+public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff,KnockBack }
 public enum EnemySkillType { None, AllySupporter, AllyDisruptor, PlayerDebuffer }
 public enum PlayerSkillType{Test1,Test2,Test3}
 public enum TargetingType { Single, Area }
@@ -26,7 +26,7 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("스킬 관련 설명, 추후 툴팁 개발 가능성")] private string _skilldescripter;
     [SerializeField, LabelText("스킬 이펙트")] private GameObject _skillEffect;
     [SerializeField, LabelText("스킬 범위/단일")] private TargetingType _targetingType;
-    [SerializeField, LabelText("스킬/공격 사정거리 ")] private float _attackRange;
+    [SerializeField, LabelText("스킬/공격 사정거리 ")] private int _attackRange;
     
 
     [ShowIf(nameof(IsAlly)), LabelText("아군 스킬 타입")]
@@ -70,7 +70,7 @@ public class UnitData : ScriptableObject
     public string SkillName => _skillname;
     public string SkillDescriptor => _skilldescripter;
     public TargetingType TargetingType => _targetingType;
-    public float AttackRange => _attackRange;
+    public int AttackRange => _attackRange;
     
     
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;

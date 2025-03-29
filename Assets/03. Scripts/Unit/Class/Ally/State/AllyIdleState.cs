@@ -20,8 +20,5 @@ public class AllyIdleState : IState<Ally>
         }
     }
 
-    public void Exit(Ally ally)
-    {
-    
-    }
+    public void Exit(Ally ally) { }
 }

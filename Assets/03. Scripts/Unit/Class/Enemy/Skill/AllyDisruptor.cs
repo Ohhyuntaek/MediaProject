@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class AllyDisruptor : ISkill
+public class AllyDisruptor : ISkill<Enemy>
 {
-    public void Activate(MonoBehaviour caster)
+    public void Activate(Enemy owner)
     {
-        Debug.Log($"[{caster.name}] Ally 방해 스킬 발동!");
+        throw new System.NotImplementedException();
     }
 }
