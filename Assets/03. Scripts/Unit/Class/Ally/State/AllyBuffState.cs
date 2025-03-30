@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+public enum BuffType
+{
+    ATKSPEED
+}
 public class AllyBuffState : IState<Ally>
 {
     private int _enemyCount;

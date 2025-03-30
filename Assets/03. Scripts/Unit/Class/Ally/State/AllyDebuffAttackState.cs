@@ -33,7 +33,7 @@ public class AllyDebuffAttackState : IState<Ally>
     {
         int rand = Random.Range(0, 3);
         string trigger = GetTriggerByIndex(rand);
-
+        Debug.Log($"{ally.UnitData.UnitName} 이 {trigger} 스킬 시전");
         
         ally.Animator.SetTrigger(trigger);
 
