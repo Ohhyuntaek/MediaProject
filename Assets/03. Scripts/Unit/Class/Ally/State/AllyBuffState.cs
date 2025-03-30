@@ -12,19 +12,15 @@ public class AllyBuffState : IState<Ally>
 
     public void Enter(Ally ally)
     {
-        ally.StartCoroutine(BuffRoutine(ally));
+        ally.StartCoroutine(BuffRoutineJandark(ally));
     }
 
-    private IEnumerator BuffRoutine(Ally ally)
+    private IEnumerator BuffRoutineJandark(Ally ally)
     {
-      
+       
         ally.Animator.SetTrigger("3_Buff");
         yield return new WaitForSeconds(0.5f); 
-
-        
-        ally.ApplyAllyAttackSpeedBuff(_enemyCount);
-
-      
+        ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
         ally.ChangeState(new AllyIdleState());
     }
 

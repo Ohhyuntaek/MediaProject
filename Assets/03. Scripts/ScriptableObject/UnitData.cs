@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
 public enum UnitFaction { Ally, Enemy, Player }
+public enum UnitTribe{Person,}
 public enum UnitType { Front, Middle, Rear }
 public enum DamageType { Physical, Magical }
 public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff,KnockBack }
@@ -18,13 +20,14 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("소속")] private UnitFaction _unitFaction;
     [SerializeField, LabelText("배치 타입")] private UnitType _unitType;
     [SerializeField, LabelText("피해 타입")] private DamageType _damageType;
+    [SerializeField, LabelText("유닛 종족")] private UnitTribe _unitTribe;
     
     [FormerlySerializedAs("_skillCooltime")]
     [Title("스킬 관련 공통")]
-    [SerializeField, LabelText("스킬 쿨타임")] private float skillCoolTime;
+    [SerializeField, LabelText("스킬 쿨타임")] private float _skillCoolTime;
     [SerializeField, LabelText("스킬 이름")] private string _skillname;
     [SerializeField, LabelText("스킬 관련 설명, 추후 툴팁 개발 가능성")] private string _skilldescripter;
-    [SerializeField, LabelText("스킬 이펙트")] private GameObject _skillEffect;
+    [SerializeField, LabelText("스킬 이펙트")] private List<GameObject> _skillEffect;
     [SerializeField, LabelText("스킬 범위/단일")] private TargetingType _targetingType;
     [SerializeField, LabelText("스킬/공격 사정거리 ")] private int _attackRange;
     
@@ -65,13 +68,13 @@ public class UnitData : ScriptableObject
     public bool CanMove => _canMove;
     public float Duration => _duration;
     public float MoveSpeed => _moveSpeed;
-    public float SkillCoolTime => skillCoolTime;
-    public GameObject SkillEffect => _skillEffect;
+    public float SkillCoolTime => _skillCoolTime;
+    public List<GameObject> SkillEffect => _skillEffect;
     public string SkillName => _skillname;
     public string SkillDescriptor => _skilldescripter;
     public TargetingType TargetingType => _targetingType;
     public int AttackRange => _attackRange;
-    
+    public UnitTribe UnitTribe => _unitTribe;
     
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;
     private bool IsEnemy() => _unitFaction == UnitFaction.Enemy;

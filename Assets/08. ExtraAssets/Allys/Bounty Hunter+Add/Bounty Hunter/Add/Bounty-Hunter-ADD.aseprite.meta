@@ -2,7 +2,52 @@ fileFormatVersion: 2
 guid: c4c44f0b3fcf9834b91ff8137b4d56fa
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Attack 3 hit
+    second: {fileID: 7400000, guid: db4ebfa3470af8f4ab2399912ff121a7, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Drop bomb
+    second: {fileID: 7400000, guid: 6d4eb50b7d48212409ccb3cbdc5f4fe5, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WallSlide Aim
+    second: {fileID: 7400000, guid: 71c8d6b1202ab9b4cb26d9befc812cbf, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WallSlide Shoot
+    second: {fileID: 7400000, guid: cb6c5e3edc42598428727549360ab826, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: bomb
+    second: {fileID: 7400000, guid: effbcdab38200f849a82e693f804d9e5, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: bomb boom
+    second: {fileID: 7400000, guid: 23be61020ab173a40b2c2950f0f680d1, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: bomb idle
+    second: {fileID: 7400000, guid: 014058fa25cba7b419c770723b0bd9a7, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: double jump
+    second: {fileID: 7400000, guid: 3b6aa60be3f2cfe42b04bcb57e9b7850, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: explos
+    second: {fileID: 7400000, guid: 841b096f626360c44b7e6cb8775f3197, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -98,7 +143,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638788666860469920
+  platformSettingsDirtyTick: 638789550531569718
   textureAssetName: 
   singleSpriteImportData:
   - name: 

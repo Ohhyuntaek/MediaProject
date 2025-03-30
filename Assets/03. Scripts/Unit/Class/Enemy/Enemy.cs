@@ -109,4 +109,9 @@ public class Enemy : MonoBehaviour
     {
         _target = target;
     }
+
+    public void ApplyDebuff(DebuffType selectedDebuff)
+    {
+        throw new System.NotImplementedException();
+    }
 }

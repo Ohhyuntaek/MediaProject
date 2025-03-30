@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class KnockbackAttackState : IState<Ally>
 {
@@ -13,19 +14,28 @@ public class KnockbackAttackState : IState<Ally>
         ally.Animator.SetTrigger("2_1KnockBack");
         yield return new WaitForSeconds(1f / ally.UnitData.AttackSpeed);
 
-        // 🧠 PerformAttack 내부에서 넉백 + 카운트 → ally에 저장
+        
         ally.PerformAttack();
+        string _unitName = ally.UnitData.UnitName;
 
-        // ⛓ 상태 전이
-        if (ally.UnitData.UnitName == "KnockbackWarrior")
+        switch (_unitName)
         {
-            // 넉백 대상 수를 ally가 기억하고 있음
-            ally.ChangeState(new AllyBuffState(ally.GetLastKnockbackEnemyCount()));
+            case "KnockbackWarrior":
+                if (ally.OnTile)
+                { 
+                    ally.ChangeState(new AllyBuffState(ally.GetLastKnockbackEnemyCount()));
+                }
+                else
+                {
+                    ally.ChangeState(new AllyIdleState());
+                }
+                break;
+           default:
+                ally.ChangeState(new AllyIdleState());
+                break;
+           
         }
-        else
-        {
-            ally.ChangeState(new AllyIdleState());
-        }
+      
     }
 
     public void Update(Ally ally) { }
