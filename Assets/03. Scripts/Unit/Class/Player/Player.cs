@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private StateMachine<Player> _stateMachine;
     private bool _canUseSkill = true;
     private float _skillCooldownTimer;
-    private ISkill _skill;
+    private ISkill<Player> _skill;
     private float _hp;
 
     public Animator Animator => _animator;
@@ -84,14 +84,16 @@ public class Player : MonoBehaviour
     }
     
     
-    private ISkill CreateSkillFromData(PlayerSkillType skillType)
+    private ISkill<Player> CreateSkillFromData(PlayerSkillType skillType)
     {
         return skillType switch
         {
+        /*
             PlayerSkillType.Test1 => new MovementBlockSkill(),
             PlayerSkillType.Test2 => new DebuffSkill(),
             PlayerSkillType.Test3 => new DamageSkill(),
             _ => null
+            */
         };
     }
     

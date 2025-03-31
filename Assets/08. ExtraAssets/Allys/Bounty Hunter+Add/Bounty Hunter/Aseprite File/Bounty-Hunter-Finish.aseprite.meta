@@ -2,7 +2,147 @@ fileFormatVersion: 2
 guid: d8db45c20eeca424c8472a5a3b1fbf3f
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Air Hurt
+    second: {fileID: 7400000, guid: 93a27b0052a1c7b4799b844d39ea8bf5, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Air attack
+    second: {fileID: 7400000, guid: 7d6189e684afa924197ad4fa84612753, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Attack
+    second: {fileID: 7400000, guid: a267c596926c69e4ba11c285cc82d586, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Croush Aim
+    second: {fileID: 7400000, guid: b138a05e27720ae4aa679fdabe08e0df, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Dash
+    second: {fileID: 7400000, guid: 55246b6763f07eb4e93d76c164d026e9, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Dash attack
+    second: {fileID: 7400000, guid: 60f2274b33946a84597868ed6f46fb66, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Death
+    second: {fileID: 7400000, guid: 98243b2c115029f49a0b3d6e1a2ba24b, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Death fall
+    second: {fileID: 7400000, guid: 104977d3713167c4dbfedaa539ac2712, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Edge Climb
+    second: {fileID: 7400000, guid: 47d7320b64a2cd344a2c92a11f807be3, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Edge Grab
+    second: {fileID: 7400000, guid: 8c79e88e88daadd4cbb25ff1d17b19b2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Fall
+    second: {fileID: 7400000, guid: 680121dc41f9e3f4cb8cdf5682aeee5d, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Fall aim
+    second: {fileID: 7400000, guid: bae1c11ebc6f2d34e81f3521556b8cc1, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Hurt
+    second: {fileID: 7400000, guid: 9223092ca36b3e740acde3207342fa22, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Idle
+    second: {fileID: 7400000, guid: d700b1754018f7241a988bf6b27866f2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Idle Aim
+    second: {fileID: 7400000, guid: 6c4015e4620a5f84bb5fed743faf66da, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Jump
+    second: {fileID: 7400000, guid: 819d4c5d3ff4c22428dfdb70c053917a, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Jump Aim
+    second: {fileID: 7400000, guid: d81f61c1cf7831348aa96e13ef4a587e, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Ladder Up
+    second: {fileID: 7400000, guid: 6e1c2210f8399d54da723f9970c9dc52, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Roll
+    second: {fileID: 7400000, guid: 39d6e61d462d21e4db386a6ae6f54262, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Run
+    second: {fileID: 7400000, guid: 18540c17983ced84d9b9953976e93602, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Run aim
+    second: {fileID: 7400000, guid: f412c21032dbd7a43a4288484ca88973, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Shoot
+    second: {fileID: 7400000, guid: b2bec5022236319459398d4c5980ed50, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Shoot Croush
+    second: {fileID: 7400000, guid: a3ddd20ed7a951c4f9cf6c3c5c13082a, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Shoot fall
+    second: {fileID: 7400000, guid: fe51aef600a79a848b1092b3abd237fe, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Shoot jump
+    second: {fileID: 7400000, guid: 78c7ffce2e4030040954c6f94952cc3f, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Slide
+    second: {fileID: 7400000, guid: 04280ecc7fa440743b61140e2a6c7c07, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: WallSlide
+    second: {fileID: 7400000, guid: 7c60d0e0e357f4b4e89678011ed65a10, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: croush
+    second: {fileID: 7400000, guid: 94200cab720bd4d4b925226eced81337, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -98,7 +238,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638789627994008188
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -4549,6 +4689,42 @@ ScriptedImporter:
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0

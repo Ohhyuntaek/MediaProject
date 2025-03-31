@@ -2,7 +2,47 @@ fileFormatVersion: 2
 guid: 1683595498d1cfa449149d8982eb4ad8
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: AirAtkCombo
+    second: {fileID: 7400000, guid: a0b344687eb185b46b07a2cdb60b500b, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Falling
+    second: {fileID: 7400000, guid: 7d7e16c7dc3cead4ab6eaec4f81d6f1b, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: FrontHeavyAtk
+    second: {fileID: 7400000, guid: 448950edbcc71c440abf02714c30c512, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: HeavyAirAtk
+    second: {fileID: 7400000, guid: 42a67f8f79caf7e42827fd457903b770, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: LightAtk
+    second: {fileID: 7400000, guid: 8d89d52ff960eed4a87c5ed6e112e5be, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Loop
+    second: {fileID: 7400000, guid: 14ade66f2d65f5a4c84d8ba9d2faf874, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Slashs
+    second: {fileID: 7400000, guid: a04ff1834c03f204584a5caae300956e, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: UpLightAtk
+    second: {fileID: 7400000, guid: e79d078d7e49f064f87f55cc5f71822e, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -98,7 +138,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638788729611493405
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -3049,6 +3089,42 @@ ScriptedImporter:
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0

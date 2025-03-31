@@ -1,17 +1,32 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class DebuffSkill : ISkill
+public enum DebuffType
 {
-    public void Activate(MonoBehaviour caster)
+    DamageAmp,   // 데미지 20% 증가
+    Stun,        // 일정 시간 기절
+    Slow         // 이동속도 감소
+}
+public class DebuffSkill : ISkill<Ally>
+{
+    public void Activate(Ally owner)
     {
-        if (CheckAlllyOrPlayer(caster))
+        
+        List<Enemy> targets = owner.DetectNearestEnemyTileEnemies(); 
+
+        if (targets.Count == 0)
         {
-            Debug.Log($"[{caster.name}] 디버프 스킬 발동!");
-            //적 범위 확인 후 스킬 효과 구현 필요 => 맵이 어느정도 완성되면  구현 예정 
+            return;
+        } 
+        int rand = Random.Range(0, 3);
+        DebuffType selectedDebuff = (DebuffType)rand;
+
+        
+        foreach (Enemy enemy in targets)
+        {
+            enemy.ApplyDebuff(selectedDebuff);
         }
-    }
-    private bool CheckAlllyOrPlayer(MonoBehaviour caster)
-    {
-        return caster is Ally ally || caster is Player;
+
+        
     }
 }

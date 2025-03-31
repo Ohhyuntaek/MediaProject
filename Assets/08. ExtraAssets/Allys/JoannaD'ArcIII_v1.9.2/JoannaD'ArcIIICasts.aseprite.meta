@@ -2,7 +2,92 @@ fileFormatVersion: 2
 guid: 79cc9bcf124193e43930c019473fd294
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Cast
+    second: {fileID: 7400000, guid: a93710c4865e4c749b67be36c88c0ca9, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: CastBuff
+    second: {fileID: 7400000, guid: e241ffc155264a741994adbee6911140, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: CastShieldBuff
+    second: {fileID: 7400000, guid: 7b6c8bee3211a2f46af9933290c5f361, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Cast_0
+    second: {fileID: 7400000, guid: 459923b5a3fa5bd4e8c77d4acfdd1c97, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting
+    second: {fileID: 7400000, guid: 6807e0414408a9b49855ea15aef78f9a, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting_0
+    second: {fileID: 7400000, guid: d2fddcf456ff9e249891b32768a6ea4d, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting_1
+    second: {fileID: 7400000, guid: 4b74f9af700e9ca4197621e53d956dd2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting_2
+    second: {fileID: 7400000, guid: cf18d2d4d896def4db7e1fc934bce845, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charge
+    second: {fileID: 7400000, guid: f7e16b5d3ddaeca408ee1a54b4047a82, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charging
+    second: {fileID: 7400000, guid: 63916a5fa58d37b43b73c8b356eed51c, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charging_0
+    second: {fileID: 7400000, guid: 4ed45db2e1aa0514cae0bcd0f3b23448, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: GreatHeal
+    second: {fileID: 7400000, guid: da8f71ff08c65c0489d453ccdb8a57eb, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Heal
+    second: {fileID: 7400000, guid: 60111b25557eee446a3ac39054f935a6, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: HolySlash
+    second: {fileID: 7400000, guid: 196a6ae4af848f34b9f477cd2f270c13, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: LightCut
+    second: {fileID: 7400000, guid: 4b7bf0d246ba285448f3fd24b4a1587c, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Slash
+    second: {fileID: 7400000, guid: 6468b220067b3ad4184433e11f359ecc, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: ToCharge
+    second: {fileID: 7400000, guid: 95c59ccb82725f544a8a8d2ba1f30923, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -80,7 +165,7 @@ ScriptedImporter:
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
-    generateModelPrefab: 1
+    generateModelPrefab: 0
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
@@ -93,12 +178,12 @@ ScriptedImporter:
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
-    generateModelPrefab: 1
+    generateModelPrefab: 0
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638788731931816140
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -4879,6 +4964,42 @@ ScriptedImporter:
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0

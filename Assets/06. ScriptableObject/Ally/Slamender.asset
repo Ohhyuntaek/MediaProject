@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacdbdd950bb79f47bcfb029c181a17a, type: 3}
+  m_Name: Slamender
+  m_EditorClassIdentifier: 
+  _unitName: Slamander
+  _unitFaction: 0
+  _unitType: 2
+  _damageType: 1
+  skillCoolTime: 0
+  _skillname: 
+  _skilldescripter: 
+  _skillEffect:
+  - {fileID: 8162922584118746252, guid: 670b1de3f7bf59746a9508e3c514c838, type: 3}
+  - {fileID: 107832751931021034, guid: 2705b49c8610aef4b9c7f47a6bd5e8d5, type: 3}
+  - {fileID: 3309304063507801234, guid: 2061ed4341f067f44ae7cddc1fe31f7f, type: 3}
+  _targetingType: 0
+  _attackRange: 0
+  _allySkillType: 3
+  _enemySkillType: 0
+  _baseAttack: 0
+  _attackSpeed: 1
+  _maxHP: 100
+  _canMove: 0
+  _playerSkillType: 0
+  _duration: 10
+  _moveSpeed: 0

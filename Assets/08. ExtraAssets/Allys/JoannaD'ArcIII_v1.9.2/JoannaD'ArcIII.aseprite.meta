@@ -2,7 +2,112 @@ fileFormatVersion: 2
 guid: 35e12643804e4ad46b39b663d549ee09
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Block
+    second: {fileID: 7400000, guid: 31be576e86ae7b041b902512ac3614ef, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Blocking
+    second: {fileID: 7400000, guid: ed64b260df701e942a45ec5b960c1c5a, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: BreakBlock
+    second: {fileID: 7400000, guid: 2b76f5a4bc9ffb94fad6bdcd16192132, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Dash
+    second: {fileID: 7400000, guid: ad67149047643fc4e91820a0eac0d145, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Dashing
+    second: {fileID: 7400000, guid: d7063e16bbd3b344488d63ad98b5f3af, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Falling
+    second: {fileID: 7400000, guid: 7d7e16c7dc3cead4ab6eaec4f81d6f1b, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Idle
+    second: {fileID: 7400000, guid: 2498b4521cb52204aa8b57b63ded4a6e, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Jump&Fall
+    second: {fileID: 7400000, guid: eaa295619d06f334aa2804d4dd08d6f8, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Jumping
+    second: {fileID: 7400000, guid: ee7e46e9bf721ab42b540252ad65c7db, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Roll
+    second: {fileID: 7400000, guid: f5278e0f3a2528846bc9733a49e1edbd, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Run
+    second: {fileID: 7400000, guid: 84caa0a06fcded74ab70fbb25c068731, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Running
+    second: {fileID: 7400000, guid: f3dff3857dc25614cb1a31c4de07b4f2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: RunningLeft
+    second: {fileID: 7400000, guid: 3358a49a1fa2c074892e2153b1ae92f8, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: SFalling
+    second: {fileID: 7400000, guid: d8fd57ed36e6363409b703c7db4efc34, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: SRoll
+    second: {fileID: 7400000, guid: ffc7cbe93a9983b40b3cb28e815153d6, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Slding
+    second: {fileID: 7400000, guid: 223b72368ae08214ea68e5e85f8bdcae, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Slide
+    second: {fileID: 7400000, guid: 57a73b2ab7e4f6f49ae27d67c37976e2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: SprintJump
+    second: {fileID: 7400000, guid: bf28d2096cb87644fadaba8efbb3867b, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Turn
+    second: {fileID: 7400000, guid: 0a2c64d9260c7944484466a665adabe2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Walk
+    second: {fileID: 7400000, guid: 28f0cbec7eb548f4e9ddbf23f6880f04, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Walking
+    second: {fileID: 7400000, guid: 7fa0143aff0144d478682288c81620d3, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -98,7 +203,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638788728419527295
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -5179,6 +5284,42 @@ ScriptedImporter:
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0

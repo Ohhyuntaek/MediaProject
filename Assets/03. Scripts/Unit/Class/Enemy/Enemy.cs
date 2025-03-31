@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private UnitData _unitData;
-    private ISkill _skill;
+    private ISkill<Enemy> _skill;
     private StateMachine<Enemy> _stateMachine;
     [SerializeField] private Transform _target; // 일단 테스트용으로 타겟을 확정적으로 줘보장
     private float _attackCooldown;
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(animLength);
         Destroy(gameObject, 0.6f);
     }
-    private ISkill CreateSkillFromData(EnemySkillType skillType)
+    private ISkill<Enemy> CreateSkillFromData(EnemySkillType skillType)
     {
         return skillType switch
         {
@@ -108,5 +108,10 @@ public class Enemy : MonoBehaviour
     public void SetTarget(Transform target)
     {
         _target = target;
+    }
+
+    public void ApplyDebuff(DebuffType selectedDebuff)
+    {
+        throw new System.NotImplementedException();
     }
 }

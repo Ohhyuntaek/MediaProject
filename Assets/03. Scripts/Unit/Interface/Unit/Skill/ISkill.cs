@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ISkill 
+public interface ISkill<T> where T : MonoBehaviour
 {
-    void Activate(MonoBehaviour caster);
+    void Activate(T owner);
 }
