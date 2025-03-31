@@ -53,6 +53,9 @@ TagManager:
   - name: DecoObj
     uniqueID: 1355117705
     locked: 0
+  - name: Allys
+    uniqueID: 894252433
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
