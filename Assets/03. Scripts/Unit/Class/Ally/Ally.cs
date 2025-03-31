@@ -13,7 +13,7 @@ public class Ally : MonoBehaviour
     private StateMachine<Ally> _stateMachine;
     private float _lifeTimer;
     private ISkill<Ally> _skill;
-    private bool _isDead=false;
+    [SerializeField] private bool _isDead=false;
     private bool _finalSkill = false; // 스킬을 단 한번만 사용할 수 있는 캐릭터시 사용
     [SerializeField]private bool _isOnTile = false;
 
@@ -50,11 +50,12 @@ public class Ally : MonoBehaviour
         _stateMachine?.Update();
 
         _lifeTimer -= Time.deltaTime;
+        
         if (!_isDead && _lifeTimer <= 0f)
         {
-            _isDead = true;
             _stateMachine.ChangeState(new AllyDeadState());
         }
+        
     }
 
     public void ChangeState(IState<Ally> newState)
@@ -82,7 +83,20 @@ public class Ally : MonoBehaviour
 
     public void PerformDie()
     {
-        StartCoroutine(Die());
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.9f)
+        {
+            if (_isDead)
+            {
+                Debug.Log("[Ally] 이미 사망 상태입니다.");
+            }
+            Debug.Log($"[Ally:{name}] 사망 시작");
+            Debug.Log($"[Ally:{name}] 오브젝트 제거!");
+            _isDead = true;
+        }
+        
+        if (_isDead)
+            Destroy(gameObject);
     }
 
     [CanBeNull]
@@ -97,23 +111,6 @@ public class Ally : MonoBehaviour
             _ => null
         };
     }
-
-    private IEnumerator Die()
-    {
-        if (_isDead)
-        {
-            Debug.Log("[Ally] 이미 사망 상태입니다.");
-            
-        }
-
-        _isDead = true;
-        Debug.Log($"[Ally:{name}] 사망 시작");
-        Debug.Log($"[Ally:{name}] 오브젝트 제거!");
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
-       
-    }
-
 
     public bool OnTile => _isOnTile;
 
