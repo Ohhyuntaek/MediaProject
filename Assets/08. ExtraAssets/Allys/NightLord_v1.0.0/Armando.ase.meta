@@ -2,7 +2,177 @@ fileFormatVersion: 2
 guid: a320641fa47a3f947b40df67fe711aef
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: BodyLoop
+    second: {fileID: 7400000, guid: 4d8e4b99350676a48852c2bdf2398202, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Breaking
+    second: {fileID: 7400000, guid: 45420e7785f5a0f4fb6a4c21d5e96e8f, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting
+    second: {fileID: 7400000, guid: 4dd0c99a77d9b7f4e8fc44cfd2e88cd2, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting_0
+    second: {fileID: 7400000, guid: df34456ddcc84e547ba1cb64ee7c45f0, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Casting_1
+    second: {fileID: 7400000, guid: c7818ab83afa8654b82b3b0034701e24, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charge
+    second: {fileID: 7400000, guid: 7e74e6f4a3486bb48ac030def9d334ef, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charge_0
+    second: {fileID: 7400000, guid: b833edce56df3504e9945434117376d0, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charging
+    second: {fileID: 7400000, guid: 64b4815678b037a4e88f9611646fcead, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Charging_0
+    second: {fileID: 7400000, guid: 80eaca0cbb3e0db48973c3efda48f6f7, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Dash
+    second: {fileID: 7400000, guid: 43e23980bd94c7e45be8a3821c562b4c, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Dashing
+    second: {fileID: 7400000, guid: a5a77bcf055283749a09e03e7958e784, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Death
+    second: {fileID: 7400000, guid: fe6dd6477171ab64fabb36ee5a269bbd, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Emerge
+    second: {fileID: 7400000, guid: b84360088d9848c4ca146913a3fd0569, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Falling
+    second: {fileID: 7400000, guid: 87a4a0fe19f4b6f49ad171c7429ad094, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Floating
+    second: {fileID: 7400000, guid: 165b3aeee183bc6409a646aeb8949302, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Grabbing
+    second: {fileID: 7400000, guid: d5b5c6ace1e1b694aa4b0c679a8471d8, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: HitAndStun
+    second: {fileID: 7400000, guid: 8d6475800956ece45ace78f9929acfdf, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Hited
+    second: {fileID: 7400000, guid: 3b06ac9c357306d498fbdbe0964cf747, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Idle
+    second: {fileID: 7400000, guid: 6c40e056c3c32ea4fbcc7be82399c47e, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Jump&Fall
+    second: {fileID: 7400000, guid: 045d3838d775e4e4fbf42f015506ed30, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Jumping
+    second: {fileID: 7400000, guid: 05ca4148e971e7f40b152c55cdbafcd4, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: LightAtkCombo
+    second: {fileID: 7400000, guid: 33a72b4c2673002488d82d1e9b349e3f, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: OutStun
+    second: {fileID: 7400000, guid: a7c202b8acf4cf24c8dbe38acf25c42d, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Release
+    second: {fileID: 7400000, guid: 4ead30c726bd99a4cbfb3a05bcdc0aa0, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Run
+    second: {fileID: 7400000, guid: 9ba9b52eee84f974ea040d18e822e710, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Running
+    second: {fileID: 7400000, guid: 0ca7e584c0751f346a19fcb2b49c6d9e, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Spell1
+    second: {fileID: 7400000, guid: 3f0390207192f50419a72a2ccd8fd8c7, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Spell2
+    second: {fileID: 7400000, guid: 347c20429b08a5642b66959435a8b2b8, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Stun
+    second: {fileID: 7400000, guid: f3a075704b08ba1479cd970bac4115e4, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Stuned
+    second: {fileID: 7400000, guid: 0274ffdb43d05ad4b8ac57af09fb65ad, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Summon
+    second: {fileID: 7400000, guid: 45220ab5aafceec4cbdaec2946510e5d, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Waiting
+    second: {fileID: 7400000, guid: 022d9238c7a489f4ea8b4247904ac0f1, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Walk
+    second: {fileID: 7400000, guid: f9be27c4542e75b4080e332e1cd9d506, type: 2}
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Walking
+    second: {fileID: 7400000, guid: 2249664df5979124e93fd75eae53743d, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -36,7 +206,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 64
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -98,7 +268,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638791334731763260
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -10099,6 +10269,42 @@ ScriptedImporter:
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0

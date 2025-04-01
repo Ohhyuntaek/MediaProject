@@ -16,10 +16,13 @@ MonoBehaviour:
   _unitFaction: 0
   _unitType: 2
   _damageType: 1
-  skillCoolTime: 0
+  _unitTribe: 0
+  _canRevive: 0
+  _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
-  _skillEffect: {fileID: 0}
+  _skillEffect:
+  - {fileID: 0}
   _targetingType: 0
   _attackRange: 1
   _allySkillType: 5
@@ -29,5 +32,5 @@ MonoBehaviour:
   _maxHP: 100
   _canMove: 0
   _playerSkillType: 0
-  _duration: 10
+  _duration: 5
   _moveSpeed: 0

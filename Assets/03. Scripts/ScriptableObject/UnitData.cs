@@ -21,6 +21,7 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("배치 타입")] private UnitType _unitType;
     [SerializeField, LabelText("피해 타입")] private DamageType _damageType;
     [SerializeField, LabelText("유닛 종족")] private UnitTribe _unitTribe;
+    [SerializeField, LabelText("부활 가능 여부")] private bool _canRevive;
     
     [FormerlySerializedAs("_skillCooltime")]
     [Title("스킬 관련 공통")]
@@ -54,7 +55,11 @@ public class UnitData : ScriptableObject
     [Title("적군 전용 스탯"), ShowIf(nameof(IsEnemy))]
     [SerializeField, LabelText("이동 속도")] private float _moveSpeed;
 
-    
+    public void SetReviveStats()
+    {
+        _baseAttack = 5;
+        _duration = 10f; 
+    }
     public string UnitName => _unitName;
     public UnitFaction UnitFaction => _unitFaction;
     public UnitType UnitType => _unitType;
@@ -75,7 +80,7 @@ public class UnitData : ScriptableObject
     public TargetingType TargetingType => _targetingType;
     public int AttackRange => _attackRange;
     public UnitTribe UnitTribe => _unitTribe;
-    
+    public bool CanRevive => _canRevive;
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;
     private bool IsEnemy() => _unitFaction == UnitFaction.Enemy;
     private bool IsPlayer() => _unitFaction == UnitFaction.Player;

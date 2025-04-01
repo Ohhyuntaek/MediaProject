@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Charge
+  serializedVersion: 7
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves:
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 16
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 43572049381195195, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.069999695
+      value: {fileID: -9084088813909193553, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.16999912
+      value: {fileID: 4573128804857535898, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.2699995
+      value: {fileID: 7117724732021004997, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.3699999
+      value: {fileID: 4355265435792628671, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.4699993
+      value: {fileID: 4296223387871701766, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.53999996
+      value: {fileID: 6165886323303621017, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.60999966
+      value: {fileID: -2308298915456027766, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.67999935
+      value: {fileID: -3776734634070655781, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.75
+      value: {fileID: -3514951641451208834, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.8199997
+      value: {fileID: -893259964726562665, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.8899994
+      value: {fileID: -250703000284476961, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 0.9599991
+      value: {fileID: 3283376938041038532, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 1.0299997
+      value: {fileID: -8126643204750418559, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    - time: 1.0899998
+      value: {fileID: -8126643204750418559, guid: a320641fa47a3f947b40df67fe711aef, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  m_SampleRate: 100
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings: []
+    pptrCurveMapping: []
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 1.0999998
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 1
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 0
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 16
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events: []
