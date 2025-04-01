@@ -32,5 +32,5 @@ MonoBehaviour:
   _maxHP: 100
   _canMove: 0
   _playerSkillType: 0
-  _duration: 5
+  _duration: 30
   _moveSpeed: 0
