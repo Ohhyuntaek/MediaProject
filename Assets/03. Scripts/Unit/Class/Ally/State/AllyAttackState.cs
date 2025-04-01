@@ -20,7 +20,7 @@ public class AllyAttackState : IState<Ally>
         
         ally.PerformAttack();
 
-        
+        AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
         switch (ally.UnitData.UnitName)
         {
             case "KnockbackWarrior":
@@ -30,8 +30,13 @@ public class AllyAttackState : IState<Ally>
             case "Slamander":
                 if (!ally.FinalSkill)
                 {
+                    
                     ally.ChangeState(new AllyDebuffAttackState());
                     ally.SetFinalSkill(true);
+                }
+                else
+                {
+                    ally.ChangeState(new AllyIdleState());
                 }
                 break;
             case "BountyHunter" :
