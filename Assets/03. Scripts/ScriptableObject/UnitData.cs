@@ -7,7 +7,7 @@ public enum UnitFaction { Ally, Enemy, Player }
 public enum UnitTribe{Person,}
 public enum UnitType { Front, Middle, Rear }
 public enum DamageType { Physical, Magical }
-public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff,KnockBack }
+public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff,KnockBack,NightLord }
 public enum EnemySkillType { None, AllySupporter, AllyDisruptor, PlayerDebuffer }
 public enum PlayerSkillType{Test1,Test2,Test3}
 public enum TargetingType { Single, Area }
@@ -40,7 +40,7 @@ public class UnitData : ScriptableObject
     [SerializeField] private EnemySkillType _enemySkillType;
 
     [Title("공통 스탯")]
-    [SerializeField, LabelText("공격력")] private float _baseAttack;
+    [SerializeField, LabelText("공격력")] private int _baseAttack;
     [SerializeField, LabelText("공격 속도")] private float _attackSpeed;
     [SerializeField, LabelText("최대 체력")] private float _maxHP;
     [SerializeField, LabelText("이동 가능 여부")] private bool _canMove;
@@ -55,11 +55,7 @@ public class UnitData : ScriptableObject
     [Title("적군 전용 스탯"), ShowIf(nameof(IsEnemy))]
     [SerializeField, LabelText("이동 속도")] private float _moveSpeed;
 
-    public void SetReviveStats()
-    {
-        _baseAttack = 5;
-        _duration = 10f; 
-    }
+    
     public string UnitName => _unitName;
     public UnitFaction UnitFaction => _unitFaction;
     public UnitType UnitType => _unitType;
@@ -67,7 +63,7 @@ public class UnitData : ScriptableObject
     public AllySkillType AllySkillType => _allySkillType;
     public PlayerSkillType PlayerSkillType => _playerSkillType;
     public EnemySkillType EnemySkillType => _enemySkillType;
-    public float BaseAttack => _baseAttack;
+    public int BaseAttack => _baseAttack;
     public float AttackSpeed => _attackSpeed;
     public float MaxHP => _maxHP;
     public bool CanMove => _canMove;

@@ -114,4 +114,9 @@ public class Enemy : MonoBehaviour
     {
         throw new System.NotImplementedException();
     }
+
+    public void TakeDamage(int damage)
+    {
+        _hp -= damage;
+    }
 }

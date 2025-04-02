@@ -24,7 +24,7 @@ MonoBehaviour:
   _skillEffect: []
   _targetingType: 0
   _attackRange: 2
-  _allySkillType: 0
+  _allySkillType: 6
   _enemySkillType: 0
   _baseAttack: 5
   _attackSpeed: 2
