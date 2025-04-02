@@ -3,9 +3,13 @@ using System.Collections;
 
 public class AllyDebuffAttackState : IState<Ally>
 {
+    private string _unitName;
+    private bool finished = false;
     public void Enter(Ally ally)
     {
-        ally.StartCoroutine(DebuffRoutine(ally));
+        _unitName = ally.UnitData.UnitName;
+        PlaySlamanderDebuffAnimation(ally);
+        //ally.StartCoroutine(DebuffRoutine(ally));
     }
 
     private IEnumerator DebuffRoutine(Ally ally)
@@ -13,7 +17,7 @@ public class AllyDebuffAttackState : IState<Ally>
         switch (ally.UnitData.UnitName)
         {
             case "Slamander":
-                yield return PlaySlamanderDebuffAnimation(ally);
+                PlaySlamanderDebuffAnimation(ally);
                 break;
 
             case "DebuffCaster":
@@ -29,7 +33,7 @@ public class AllyDebuffAttackState : IState<Ally>
     }
 
    
-    private IEnumerator PlaySlamanderDebuffAnimation(Ally ally)
+    private void  PlaySlamanderDebuffAnimation(Ally ally)
     {
         int rand = Random.Range(0, 3);
         string trigger = GetTriggerByIndex(rand);
@@ -49,11 +53,7 @@ public class AllyDebuffAttackState : IState<Ally>
             GameObject effect = Object.Instantiate(skillEffectPrefab, spawnPos, spawnRot);
             Object.Destroy(effect, 2f); 
         }
-
         
-        yield return new WaitForSeconds(1f / ally.UnitData.AttackSpeed);
-
-       
         ally.PerformAttack();
     }
 
@@ -80,6 +80,14 @@ public class AllyDebuffAttackState : IState<Ally>
         };
     }
 
-    public void Update(Ally ally) { }
+    public void Update(Ally ally)
+    {
+        AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
+        if ((stateInfo.IsName("Debuff") || stateInfo.IsName("Debuff1") ||stateInfo.IsName("Debuff2"))  && !finished && stateInfo.normalizedTime > 0.9f)
+        {
+            finished = true;
+            ally.ChangeState(new AllyIdleState());
+        }
+    }
     public void Exit(Ally ally) { }
 }

@@ -8,7 +8,7 @@ public enum BuffType
 public class AllyBuffState : IState<Ally>
 {
     private int _enemyCount;
-
+    private bool finished = false;
     public AllyBuffState(int enemyCount)
     {
         _enemyCount = enemyCount;
@@ -16,7 +16,8 @@ public class AllyBuffState : IState<Ally>
 
     public void Enter(Ally ally)
     {
-        ally.StartCoroutine(BuffRoutineJandark(ally));
+        //ally.StartCoroutine(BuffRoutineJandark(ally));
+        ally.Animator.SetTrigger("3_Buff");
     }
 
     private IEnumerator BuffRoutineJandark(Ally ally)
@@ -28,6 +29,14 @@ public class AllyBuffState : IState<Ally>
         ally.ChangeState(new AllyIdleState());
     }
 
-    public void Update(Ally ally) { }
+    public void Update(Ally ally)
+    {
+        AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Buff") && !finished && stateInfo.normalizedTime > 0.9f)
+        {
+            ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
+            ally.ChangeState(new AllyIdleState());
+        }
+    }
     public void Exit(Ally ally) { }
 }
