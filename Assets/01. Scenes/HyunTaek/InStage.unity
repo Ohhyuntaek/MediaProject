@@ -1521,6 +1521,7 @@ MonoBehaviour:
   - allyType: 5
     prefab: {fileID: 8626517506107298765, guid: c098ad4787c858145849db4efa763631, type: 3}
     poolSize: 5
+  activateAllies: []
 --- !u!1 &1098122665
 GameObject:
   m_ObjectHideFlags: 0
