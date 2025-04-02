@@ -47,6 +47,7 @@ public class AllyPoolManager : MonoBehaviour
             GameObject obj = pool.pool.Dequeue();
             obj.transform.position = spawnPos;
             obj.SetActive(true);
+            obj.GetComponent<Ally>().Init(spawnPos);
             return obj;
         }
 
@@ -55,8 +56,11 @@ public class AllyPoolManager : MonoBehaviour
 
     public void ReturnAlly(AllyType type, GameObject ally)
     {
-        ally.SetActive(false);
+        // 타일 반환
         TileManager.Instance.FreeTile(ally.transform.position);
+        
+        // Ally 비활성화 후 풀에 다시 넣기
+        ally.SetActive(false);
         
         var pool = System.Array.Find(allyPools, p => p.allyType == type);
         pool.pool.Enqueue(ally);

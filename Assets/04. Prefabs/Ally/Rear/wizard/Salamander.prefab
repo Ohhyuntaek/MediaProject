@@ -127,3 +127,4 @@ MonoBehaviour:
   _animator: {fileID: 4182171967097036550}
   _isDead: 0
   _isOnTile: 0
+  allyType: 5

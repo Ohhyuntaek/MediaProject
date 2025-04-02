@@ -115,7 +115,7 @@ TextureImporter:
         serializedVersion: 2
         x: 7
         y: 8
-        width: 41
+        width: 48
         height: 48
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -127,28 +127,6 @@ TextureImporter:
       bones: []
       spriteID: f873fa56cbbda0f44b475ce50553d130
       internalID: 215557195
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle7_1
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 23
-        width: 10
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0148e9ea262a7f448bae7623618950ca
-      internalID: 89574428
       vertices: []
       indices: 
       edges: []

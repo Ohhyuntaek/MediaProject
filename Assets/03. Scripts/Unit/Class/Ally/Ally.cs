@@ -19,7 +19,17 @@ public class Ally : MonoBehaviour
 
     public Animator Animator => _animator;
     public UnitData UnitData => _unitData;
+    
+    public AllyType allyType;
+    private Vector3 occupiedTilePosition;
 
+    public void Init(Vector3 tilePosition)
+    {
+        occupiedTilePosition = tilePosition;
+        _isOnTile = true;
+        _isDead = false;
+    }
+    
     private void Start()
     {
         if (_unitData != null)
@@ -89,14 +99,17 @@ public class Ally : MonoBehaviour
             if (_isDead)
             {
                 Debug.Log("[Ally] 이미 사망 상태입니다.");
+                return;
             }
-            Debug.Log($"[Ally:{name}] 사망 시작");
-            Debug.Log($"[Ally:{name}] 오브젝트 제거!");
+            Debug.Log($"[Ally:{name}] 사망 시작 및 반환 처리");
             _isDead = true;
+            
+            // 타일 반환
+            TileManager.Instance.FreeTile(occupiedTilePosition);
+            
+            // 오브젝트 풀에 복귀
+            AllyPoolManager.Instance.ReturnAlly(allyType, this.gameObject);
         }
-        
-        if (_isDead)
-            Destroy(gameObject);
     }
 
     [CanBeNull]
