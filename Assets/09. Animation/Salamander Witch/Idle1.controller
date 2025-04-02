@@ -82,7 +82,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FireCast
+  m_Name: Debuff
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -387,7 +387,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IceCast
+  m_Name: Debuff1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -465,7 +465,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ThunderCast
+  m_Name: Debuff2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
