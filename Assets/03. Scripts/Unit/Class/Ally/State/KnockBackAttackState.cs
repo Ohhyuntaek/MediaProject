@@ -42,6 +42,11 @@ public class KnockbackAttackState : IState<Ally>
 
     public void Update(Ally ally)
     {
+        TransitionTo(ally);
+    }
+
+    private void TransitionTo(Ally ally)
+    {
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("KnockBackAttack") && !finished && stateInfo.normalizedTime > 0.9f)
         {
@@ -66,5 +71,6 @@ public class KnockbackAttackState : IState<Ally>
             }
         }
     }
+
     public void Exit(Ally ally) { }
 }

@@ -31,6 +31,11 @@ public class AllyBuffState : IState<Ally>
 
     public void Update(Ally ally)
     {
+        TranstionTo(ally);
+    }
+
+    private void TranstionTo(Ally ally)
+    {
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Buff") && !finished && stateInfo.normalizedTime > 0.9f)
         {
@@ -38,5 +43,6 @@ public class AllyBuffState : IState<Ally>
             ally.ChangeState(new AllyIdleState());
         }
     }
+
     public void Exit(Ally ally) { }
 }

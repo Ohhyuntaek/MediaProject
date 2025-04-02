@@ -55,11 +55,16 @@ public class AllyAttackState : IState<Ally>
 
     public void Update(Ally ally)
     {
+        TranstionTo(ally);
+    }
+
+    private void TranstionTo(Ally ally)
+    {
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Attack") && !finished && stateInfo.normalizedTime > 0.9f)
         {
             finished = true;
-            ;switch (ally.UnitData.UnitName)
+            switch (ally.UnitData.UnitName)
             {
                 case "KnockbackWarrior":
                     ally.ChangeState(new KnockbackAttackState());
