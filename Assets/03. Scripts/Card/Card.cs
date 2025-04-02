@@ -12,13 +12,23 @@ public enum CardType
 public class Card : MonoBehaviour
 {
     public int slotIndex;
-
     public CardType cardType;
+
+    public AllyType allyType;
+    public LineType lineType;
     
     public void OnButtonClick()
     {
-        Destroy(this.gameObject);
-        
-        GameManager.Instance.ShiftCardsLeft(slotIndex);
+        GameObject spawned = AllyPoolManager.Instance.SpawnAlly(allyType, lineType);
+
+        if (spawned != null)
+        {
+            Destroy(this.gameObject);
+            GameManager.Instance.ShiftCardsLeft(slotIndex);   
+        }
+        else
+        {
+            Debug.Log("No available tile or ally in pool");
+        }
     }
 }

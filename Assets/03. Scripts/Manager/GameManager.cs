@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 
     public void ShiftCardsLeft(int slotIndex)
     {
-        Debug.Log("Shift Cards Left");
-        
         for (int i = slotIndex + 1; i < cardSlots.Length; i++)
         {
             if (cardSlots[i].childCount > 0)
