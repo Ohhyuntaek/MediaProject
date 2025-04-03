@@ -14,9 +14,11 @@ public class Ally : MonoBehaviour
     private float _lifeTimer;
     private ISkill<Ally> _skill;
     [SerializeField] private bool _isDead=false;
+    private int _totalDamage = 0;
     private bool _finalSkill = false; // 스킬을 단 한번만 사용할 수 있는 캐릭터시 사용
+    private bool _revived = false; // 부활한 적이 있으면 true 아직 안햇으면 false;
     [SerializeField]private bool _isOnTile = false;
-
+    private float _totallifeTime = 0;
     public Animator Animator => _animator;
     public UnitData UnitData => _unitData;
     
@@ -57,9 +59,14 @@ public class Ally : MonoBehaviour
         _stateMachine?.Update();
 
         _lifeTimer -= Time.deltaTime;
-        _stateMachine?.Update();
-
-        _lifeTimer -= Time.deltaTime;
+        _totallifeTime += Time.deltaTime;
+        if (_unitData.UnitName == "NightLord" && !_revived && _lifeTimer<=0f)
+        {
+            _revived = true;
+            _lifeTimer = 8f;
+            _stateMachine.ChangeState(new AllyReviveState());
+            return;
+        }
         
         if (!_isDead && _lifeTimer <= 0f)
         {
@@ -121,6 +128,7 @@ public class Ally : MonoBehaviour
             AllySkillType.Debuff => new DebuffSkill(),
             AllySkillType.DamageDealer => new DamageSkill(),
             AllySkillType.KnockBack => new KnockbackSkill(),
+            AllySkillType.NightLord => new NightLordSkill(),
             _ => null
         };
     }
@@ -144,10 +152,21 @@ public class Ally : MonoBehaviour
         return new List<Enemy>();
     }
 
-    public void ApllyDamage(Enemy target)
+    public void ApllyDamageSingle(Enemy target)
     {
         // TODO: 데미지 계산
-       
+        _totalDamage += 30;
+
+    }
+
+    public void ApllyDamageMulti(List<Enemy> target,int atk)
+    {
+        _totalDamage = 0;
+        foreach (Enemy enemy in target)
+        {
+            enemy.TakeDamage(atk);
+            _totalDamage += atk;
+        }
     }
 
     public void ApplyKnockback(List<Enemy> targets)
@@ -167,7 +186,11 @@ public class Ally : MonoBehaviour
     public void SetLastKnockbackEnemyCount(int count) => _lastKnockbackEnemyCount = count;
     public int GetLastKnockbackEnemyCount() => _lastKnockbackEnemyCount;
     public bool FinalSkill => _finalSkill;
-
+    public void SetLifetime(float time) => _lifeTimer += time;
+    public int GetTotalDamage => _totalDamage;
+    public void SetTotalDamage(int damage) => _totalDamage = damage;
+    public bool GetRevive() => _revived;
+    public float GetTotalLifeTime => _totallifeTime;
     public void SetFinalSkill(bool use)
     {
         _finalSkill = use;

@@ -9,6 +9,7 @@ public class AllyAttackState : IState<Ally>
     {
         //ally.StartCoroutine(AttackRoutine(ally));
         ally.Animator.SetTrigger("2_Attack");
+        Debug.Log($"{ally.UnitData.name} 공격");
     }
 
     private IEnumerator AttackRoutine(Ally ally)
@@ -87,6 +88,9 @@ public class AllyAttackState : IState<Ally>
                     //else(발판 미적용 시) //TODO : 단일공격
                     //TODO : 바운티 헌터 구현 
                     break;
+                case "NightLord" :
+                    ally.ChangeState(new AllyIdleState());
+                    break;
 
                 default:
                     ally.ChangeState(new AllyIdleState());
@@ -95,5 +99,8 @@ public class AllyAttackState : IState<Ally>
         }
     }
 
-    public void Exit(Ally ally) { }
+    public void Exit(Ally ally)
+    {
+        ally.PerformAttack();
+    }
 }
