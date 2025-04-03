@@ -1,59 +1,44 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class TargetDetector : MonoBehaviour
+public class AttackAreaGizmoDrawer : MonoBehaviour
 {
-    [Header("설정")]
-    public float tileDistance = 1.73f; // isometric 타일 간 거리
-    public int detectionRange = 3;
-    public LayerMask targetLayer; // 적 유닛 레이어
-
-    [Header("디버그")]
-    public bool showGizmos = true;
-    public Color gizmoColor = Color.red;
-
-    /// <summary>
-    /// 지정 방향으로 Raycast를 발사하여 Enemy 감지
-    /// </summary>
-    public List<Enemy> DetectEnemiesInDirection(Vector3 direction)
-    {
-        List<Enemy> targets = new List<Enemy>();
-
-        for (int i = 1; i <= detectionRange; i++)
-        {
-            Vector3 start = transform.position + direction * tileDistance * i;
-            Ray ray = new Ray(start + Vector3.up * 1f, Vector3.down); // 위에서 아래로
-
-            if (Physics.Raycast(ray, out RaycastHit hit, 2f, targetLayer))
-            {
-                if (hit.collider.TryGetComponent(out Enemy enemy))
-                {
-                    targets.Add(enemy);
-                }
-            }
-        }
-
-        return targets;
-    }
-
-    /// <summary>
-    /// 현재 forward 방향 기준으로 적 감지 (예시용)
-    /// </summary>
-    public List<Enemy> DetectForwardEnemies()
-    {
-        return DetectEnemiesInDirection(transform.forward);
-    }
+    [Header("타일맵 설정")]
+    public Tilemap enemyPathTilemap; // 적군 경로 타일맵 (TilemapCollider2D가 적용된 타일맵)
+    
+    [Header("공격 범위 설정")]
+    public int attackRange = 3; // 공격 사정거리 (칸 단위, 최소 1 이상)
 
     private void OnDrawGizmosSelected()
     {
-        if (!showGizmos) return;
+        if (enemyPathTilemap == null)
+            return;
 
-        Gizmos.color = gizmoColor;
+        // 유닛의 현재 위치를 기준으로 타일맵 셀 좌표로 변환
+        Vector3Int unitCell = enemyPathTilemap.WorldToCell(transform.position);
 
-        for (int i = 1; i <= detectionRange; i++)
+        // "바로 앞 한 칸"은 unitCell에서 y+1, 그리고 그 칸에서 오른쪽으로 attackRange만큼의 셀들을 그립니다.
+        for (int offsetX = 0; offsetX < attackRange; offsetX++)
         {
-            Vector3 pos = transform.position + transform.forward * tileDistance * i;
-            Gizmos.DrawWireCube(pos + Vector3.up * 0.5f, Vector3.one * 0.5f);
+            // 셀 좌표: x는 unitCell.x + offsetX, y는 unitCell.y + 1 (바로 앞)
+            Vector3Int targetCell = new Vector3Int(unitCell.x + offsetX, unitCell.y + 1, unitCell.z);
+            
+            // 셀의 중앙 위치 (아이소메트릭 타일맵에서는 GetCellCenterWorld()가 유용)
+            Vector3 cellCenter = enemyPathTilemap.GetCellCenterWorld(targetCell);
+            
+            // 아이소메트릭 타일 모양(마름모)를 그리기 위한 각 꼭짓점 계산
+            Vector3 top = cellCenter + new Vector3(0, enemyPathTilemap.cellSize.y / 2f, 0);
+            Vector3 right = cellCenter + new Vector3(enemyPathTilemap.cellSize.x / 2f, 0, 0);
+            Vector3 bottom = cellCenter + new Vector3(0, -enemyPathTilemap.cellSize.y / 2f, 0);
+            Vector3 left = cellCenter + new Vector3(-enemyPathTilemap.cellSize.x / 2f, 0, 0);
+
+            // Gizmo 색상 설정
+            Gizmos.color = Color.red;
+            // 네 꼭짓점을 연결하여 마름모(다이아몬드) 형태로 그립니다.
+            Gizmos.DrawLine(top, right);
+            Gizmos.DrawLine(right, bottom);
+            Gizmos.DrawLine(bottom, left);
+            Gizmos.DrawLine(left, top);
         }
     }
 }

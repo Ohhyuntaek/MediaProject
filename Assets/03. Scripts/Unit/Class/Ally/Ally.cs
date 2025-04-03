@@ -8,7 +8,7 @@ public class Ally : MonoBehaviour
 {
     [SerializeField] private UnitData _unitData;
     [SerializeField] private Animator _animator;
-    
+   
     private int _lastKnockbackEnemyCount = 0;
     private StateMachine<Ally> _stateMachine;
     private float _lifeTimer;
@@ -42,6 +42,7 @@ public class Ally : MonoBehaviour
         {
             Debug.LogWarning($"[{name}] UnitData가 할당되지 않았습니다.");
         }
+       
     }
 
     public void Initialize(UnitData data)
