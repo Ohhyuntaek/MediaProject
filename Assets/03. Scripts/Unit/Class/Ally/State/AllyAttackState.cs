@@ -7,7 +7,6 @@ public class AllyAttackState : IState<Ally>
     private bool finished = false;
     public void Enter(Ally ally)
     {
-        //ally.StartCoroutine(AttackRoutine(ally));
         ally.Animator.SetTrigger("2_Attack");
         Debug.Log($"{ally.UnitData.name} 공격");
     }
