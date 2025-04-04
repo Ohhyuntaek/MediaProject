@@ -4,10 +4,11 @@ using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Tilemap _enemyPathTilemap; // 적군 경로 타일맵
+    
     [SerializeField] private Animator _animator;
     [SerializeField] private EnemyData _enemyData;
-    [SerializeField] private Transform _target; // 테스트용으로 타겟(플레이어)을 할당
+    [SerializeField] private Transform _target;
+    [SerializeField] private Transform _destination; 
     private ISkill<Enemy> _skill;
     private StateMachine<Enemy> _stateMachine;
 
@@ -38,10 +39,11 @@ public class Enemy : MonoBehaviour
         _hp = _enemyData.MaxHp;
         _moveSpeed = _enemyData.MoveSpeed;
         _attackCooldown = 1f / _enemyData.AtkSpeed;
-        _attackRange = _enemyData.ATKRange;  // EnemyData에 ATKRange 프로퍼티가 있다고 가정
+        _attackRange = _enemyData.ATKRange;  
         _skill = CreateSkillFromData(_enemyData.Skill);
         _stateMachine = new StateMachine<Enemy>(this);
-        _stateMachine.ChangeState(new EnemyWalkState());
+        _stateMachine.ChangeState(new EnemyWalkState(_destination));
+        
     }
 
     private void Update()
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
         _stateMachine.ChangeState(newState);
     }
 
-    // 타겟(플레이어)을 향해 이동하는 메서드
+    
     public void MoveForward()
     {
         if (_target == null)
@@ -69,7 +71,7 @@ public class Enemy : MonoBehaviour
         transform.position += direction * _moveSpeed * Time.deltaTime;
     }
 
-    // 타겟이 공격 범위 내에 있는지 확인
+    
     public bool IsTargetInRange()
     {
         if (_target == null)
@@ -95,20 +97,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 사망 처리 메서드
+ 
     public void PerformDie()
     {
-        StartCoroutine(Die());
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Death") && stateInfo.normalizedTime > 0.9f)
+        {
+            Destroy(gameObject,0.5f);
+        }
     }
 
-    private IEnumerator Die()
-    {
-        Debug.Log($"[{name}] 사망 처리 시작");
-        // 현재 애니메이션 상태의 길이를 가져와 대기 후 제거
-        float animLength = _animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(animLength);
-        Destroy(gameObject);
-    }
+   
 
     private ISkill<Enemy> CreateSkillFromData(EnemySkill skillType)
     {
@@ -130,6 +129,15 @@ public class Enemy : MonoBehaviour
     {
         
     }
+    private void OnDrawGizmosSelected()
+    {
+        if (_destination != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, _destination.position);
+        }
+    }
 
-    public Tilemap EnemyPathTilemap => _enemyPathTilemap;
+    
+    public Animator EnemyAnimatior => _animator;
 }

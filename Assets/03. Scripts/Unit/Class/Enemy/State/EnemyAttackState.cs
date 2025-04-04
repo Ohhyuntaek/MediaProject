@@ -23,7 +23,7 @@ public class EnemyAttackState : IState<Enemy>
             }
             else
             {
-                enemy.ChangeState(new EnemyWalkState());
+                //enemy.ChangeState(new EnemyWalkState());
             }
         }
         else

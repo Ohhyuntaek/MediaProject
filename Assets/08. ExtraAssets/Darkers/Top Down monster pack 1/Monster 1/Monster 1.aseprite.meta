@@ -27,7 +27,7 @@ ScriptedImporter:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
       name: death
-    second: {fileID: 7400000, guid: 1ffee0ec1b055fd4eb341da78a9725c7, type: 2}
+    second: {instanceID: 0}
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
