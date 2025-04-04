@@ -8,7 +8,7 @@ public class AllyAttackState : IState<Ally>
     public void Enter(Ally ally)
     {
         ally.Animator.SetTrigger("2_Attack");
-        Debug.Log($"{ally.UnitData.name} 공격");
+        //Debug.Log($"{ally.UnitData.name} 공격");
     }
 
     private IEnumerator AttackRoutine(Ally ally)

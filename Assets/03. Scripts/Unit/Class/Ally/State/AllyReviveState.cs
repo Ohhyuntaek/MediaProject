@@ -1,6 +1,5 @@
 
 
-
 using UnityEngine;
 
 public class AllyReviveState :IState<Ally>

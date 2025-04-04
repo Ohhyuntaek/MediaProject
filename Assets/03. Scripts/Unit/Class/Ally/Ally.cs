@@ -8,7 +8,13 @@ public class Ally : MonoBehaviour
 {
     [SerializeField] private UnitData _unitData;
     [SerializeField] private Animator _animator;
-   
+    [Header("Raycaster 설정 (캐릭터 자식에 배치)")]
+    [SerializeField] private RaycastTileHighlighter2D leftRaycaster;   // 캐릭터 왼쪽(발 쪽)에 배치
+    [SerializeField] private RaycastTileHighlighter2D rightRaycaster;  // 캐릭터 오른쪽(머리 쪽)에 배치
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float tileWidth = 1.0f;
+    [SerializeField] private float tileHeight =  1.0f;
+
     private int _lastKnockbackEnemyCount = 0;
     private StateMachine<Ally> _stateMachine;
     private float _lifeTimer;
@@ -31,9 +37,11 @@ public class Ally : MonoBehaviour
         _isOnTile = true;
         _isDead = false;
     }
+   
     
     private void Start()
     {
+        
         if (_unitData != null)
         {
             Initialize(_unitData);
@@ -42,6 +50,7 @@ public class Ally : MonoBehaviour
         {
             Debug.LogWarning($"[{name}] UnitData가 할당되지 않았습니다.");
         }
+        GetFlip();
        
     }
 
@@ -57,6 +66,7 @@ public class Ally : MonoBehaviour
 
     private void Update()
     {
+        DetectTargets(2);
         _stateMachine?.Update();
 
         _lifeTimer -= Time.deltaTime;
@@ -149,9 +159,64 @@ public class Ally : MonoBehaviour
 
     public List<Enemy> DetectTargets(int range)
     {
-        // TODO: 범위 내 적 탐지 후 최대 3명까지 반환
-        return new List<Enemy>();
+        List<Enemy> targets = new List<Enemy>();
+
+        // 자식에 있는 RaycastTileHighlighter2D 컴포넌트를 가져옵니다.
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        RaycastTileHighlighter2D tileHighlighter = null;
+        if (spriteRenderer != null && spriteRenderer.flipX)
+            tileHighlighter = rightRaycaster;
+        else
+            tileHighlighter = leftRaycaster;
+        if (tileHighlighter == null)
+        {
+            Debug.LogWarning("RaycastTileHighlighter2D 컴포넌트를 찾을 수 없습니다.");
+            return targets;
+        }
+
+        tileHighlighter.DetectTiles(range);
+
+        // hitCellPos(레이로 맞춘 타일)이 있다면 그 셀부터 검사합니다.
+        if (tileHighlighter.hitCellPos.HasValue)
+        {
+            // 1. hitTile (레이로 맞춘 타일) 자체를 검사
+            Vector3Int hitTile = tileHighlighter.hitCellPos.Value;
+            if (tileHighlighter._tilemap.HasTile(hitTile))
+            {
+                Vector3 center = tileHighlighter._tilemap.GetCellCenterWorld(hitTile);
+                Collider2D[] cols = Physics2D.OverlapPointAll(center, _enemyLayer);
+                foreach (Collider2D col in cols)
+                {
+                    Debug.Log($"{gameObject.name}이 {col.name} (hitTile) 찾았다");
+                    Enemy enemy = col.GetComponent<Enemy>();
+                    if (enemy != null && !targets.Contains(enemy))
+                        targets.Add(enemy);
+                }
+            }
+
+            // 2. hitTile의 오른쪽으로 확장된 타일들 검사 (rangeCells)
+            if (tileHighlighter.rangeCells != null)
+            {
+                foreach (Vector3Int cell in tileHighlighter.rangeCells)
+                {
+                    if (!tileHighlighter._tilemap.HasTile(cell))
+                        continue;
+
+                    Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
+                    Collider2D[] cols = Physics2D.OverlapPointAll(cellCenter, _enemyLayer);
+                    foreach (Collider2D col in cols)
+                    {
+                        Debug.Log($"{gameObject.name}이 {col.name} (rangeCell) 찾았다");
+                        Enemy enemy = col.GetComponent<Enemy>();
+                        if (enemy != null && !targets.Contains(enemy))
+                            targets.Add(enemy);
+                    }
+                }
+            }
+        }
+        return targets;
     }
+
 
     public void ApllyDamageSingle(Enemy target)
     {
@@ -183,6 +248,22 @@ public class Ally : MonoBehaviour
         // 2. 버프 타입마다 다르게 적용 필요 혹은 캐릭터마다
         
     }
+
+    public void GetFlip()
+    {
+
+        if (leftRaycaster.GetTargetTileTag() == null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+    }
+    
+   
    
     public void SetLastKnockbackEnemyCount(int count) => _lastKnockbackEnemyCount = count;
     public int GetLastKnockbackEnemyCount() => _lastKnockbackEnemyCount;
