@@ -7,7 +7,7 @@ public class EnemyAttackState : IState<Enemy>
     public void Enter(Enemy enemy)
     {
         enemy.Animator?.SetTrigger("2_Attack");
-        _attackTimer = 1f / enemy.UnitData.AttackSpeed;
+        _attackTimer = 1f / enemy.EnemyData.AtkSpeed;
     }
 
     public void Update(Enemy enemy)
@@ -19,7 +19,7 @@ public class EnemyAttackState : IState<Enemy>
             if (enemy.IsTargetInRange()) // 사정거리 안인 경우
             {
                 enemy.PerformAttack();
-                _attackTimer = 1f / enemy.UnitData.AttackSpeed;
+                _attackTimer = 1f / enemy.EnemyData.AtkSpeed;
             }
             else
             {
