@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 22991762}
   - component: {fileID: 22991764}
   - component: {fileID: 22991763}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DecorateTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1227,7 +1227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 679630896}
   - component: {fileID: 679630895}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2164,7 +2164,7 @@ GameObject:
   - component: {fileID: 1775946182}
   - component: {fileID: 1775946184}
   - component: {fileID: 1775946183}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5110,7 +5110,7 @@ GameObject:
   - component: {fileID: 2098034984}
   - component: {fileID: 2098034986}
   - component: {fileID: 2098034985}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DefenderTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

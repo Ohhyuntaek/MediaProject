@@ -5,9 +5,7 @@ public class TileManager : MonoBehaviour
 {
     public static TileManager Instance;
 
-    private List<AllyTile> frontTiles = new();
-    private List<AllyTile> midTiles = new();
-    private List<AllyTile> rearTiles = new();
+    private List<AllyTile> allTiles = new();
 
     void Awake()
     {
@@ -15,52 +13,35 @@ public class TileManager : MonoBehaviour
 
         foreach (AllyTile tile in FindObjectsOfType<AllyTile>())
         {
-            switch (tile.lineType)
-            {
-                case LineType.Front:
-                    frontTiles.Add(tile);
-                    break;
-                case LineType.Mid:
-                    midTiles.Add(tile);
-                    break;
-                case LineType.Rear:
-                    rearTiles.Add(tile);
-                    break;
-            }
+            allTiles.Add(tile);
         }
     }
 
-    public Vector3 GetAvailableTilePosition(LineType line)
+    // 모든 타일 중 하나 반환
+    public AllyTile GetAvailableTile()
     {
-        List<AllyTile> tileList = line switch
-        {
-            LineType.Front => frontTiles,
-            LineType.Mid => midTiles,
-            LineType.Rear => rearTiles,
-            _ => null
-        };
-
-        foreach (var tile in tileList)
+        foreach (var tile in allTiles)
         {
             if (!tile.isOccupied)
             {
                 tile.isOccupied = true;
-                return tile.transform.position;
+                return tile;
             }
         }
 
-        return Vector3.zero;
+        return null;
     }
 
     public void FreeTile(Vector3 position)
     {
-        foreach (AllyTile tile in FindObjectsOfType<AllyTile>())
+        foreach (AllyTile tile in allTiles)
         {
             if (tile.transform.position == position)
-            {
+            {   
                 tile.isOccupied = false;
                 break;
             }
         }
     }
 }
+

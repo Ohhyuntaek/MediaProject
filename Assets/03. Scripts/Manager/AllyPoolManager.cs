@@ -39,23 +39,28 @@ public class AllyPoolManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnAlly(AllyType type, LineType line)
+    public GameObject SpawnAlly(AllyType type, LineType cardLine)
     {
-        Vector3 spawnPos = TileManager.Instance.GetAvailableTilePosition(line);
-        if (spawnPos == Vector3.zero)
-            return null;
-        
+        AllyTile tile = TileManager.Instance.GetAvailableTile();
+        if (tile == null) return null;
+
         var pool = System.Array.Find(allyPools, p => p.allyType == type);
         if (pool.pool.Count > 0)
         {
             GameObject obj = pool.pool.Dequeue();
-            obj.transform.position = spawnPos;
+            obj.transform.position = tile.transform.position;
             obj.SetActive(true);
-            obj.GetComponent<Ally>().Init(spawnPos);
-            
-            // 활성화 된 Ally로 등록
+
+            Ally ally = obj.GetComponent<Ally>();
+            ally.Init(tile.transform.position, tile);
+
+            // 발판 강화 조건 확인
+            if (tile.lineType == cardLine)
+            {
+                ally.ApplyTileBonus(); // 강화 효과 부여
+            }
+
             activateAllies.Add(obj);
-            
             return obj;
         }
 
@@ -80,7 +85,7 @@ public class AllyPoolManager : MonoBehaviour
         pool.pool.Enqueue(ally);
     }
     
-    public void PrintActivateAiilies()
+    public void PrintActivateAllies()
     {
         // 현재 활성화 되어 있는 Ally의 리스트를 로그에 표시
         foreach (var ally in AllyPoolManager.Instance.activateAllies)
