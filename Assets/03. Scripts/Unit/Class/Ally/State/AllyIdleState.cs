@@ -8,7 +8,7 @@ public class AllyIdleState : IState<Ally>
     {
         _attackTimer = 1f / ally.UnitData.AttackSpeed;
         ally.Animator?.SetBool("1_Move", false);
-        Debug.Log("아이들상태 진입");
+        //Debug.Log("아이들상태 진입");
     }
 
     public void Update(Ally ally)

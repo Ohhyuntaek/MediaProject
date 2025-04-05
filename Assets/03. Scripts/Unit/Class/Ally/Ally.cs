@@ -66,7 +66,7 @@ public class Ally : MonoBehaviour
 
     private void Update()
     {
-        DetectTargets(2);
+        
         _stateMachine?.Update();
 
         _lifeTimer -= Time.deltaTime;
@@ -93,6 +93,27 @@ public class Ally : MonoBehaviour
     }
 
     public void PerformAttack()
+    {
+        List<Enemy> enemy = DetectTargets(_unitData.AttackRange);
+        if (enemy.Count > 0)
+        {
+            if (_unitData.TargetingType == TargetingType.Single)
+            {
+
+                enemy[0].TakeDamage(_unitData.BaseAttack);
+
+            }
+            else
+            {
+                foreach (Enemy target in enemy)
+                {
+                    target.TakeDamage(_unitData.BaseAttack);
+                }
+            }
+        }
+    }
+
+    public void PerformSkill()
     {
         if (_isDead)
         {

@@ -23,7 +23,7 @@ public class EnemyAttackState : IState<Enemy>
             }
             else
             {
-                //enemy.ChangeState(new EnemyWalkState());
+                enemy.ChangeState(new EnemyWalkState());
             }
         }
         else
@@ -34,6 +34,6 @@ public class EnemyAttackState : IState<Enemy>
 
     public void Exit(Enemy enemy)
     {
-        //TODO : 타겟 정보 가져오는 함수 필요 + 데미지 입히는 함수 추가
+      
     }
 }

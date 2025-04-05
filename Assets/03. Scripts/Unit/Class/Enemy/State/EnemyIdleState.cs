@@ -20,9 +20,9 @@ public class EnemyIdleState : IState<Enemy>
             {
                 enemy.ChangeState(new EnemyAttackState());
             }
-            else 
+            else
             {
-                //enemy.ChangeState(new EnemyWalkState());
+                
             }
         }
     }

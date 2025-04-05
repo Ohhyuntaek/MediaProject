@@ -4,12 +4,10 @@ public class EnemyWalkState : IState<Enemy>
 {
     
     private Transform _destination; 
-    public EnemyWalkState(Transform destination)
-    {
-        _destination = destination;
-    }
+   
     public void Enter(Enemy enemy)
     {
+        _destination = enemy.GetDestination();
         enemy.Animator.SetBool("1_Move",true);
     }
 
@@ -27,7 +25,7 @@ public class EnemyWalkState : IState<Enemy>
         enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, _destination.position, step);
 
         // 목표에 도달하면 Idle 상태 등으로 전환(또는 다른 행동 수행)
-        if (Vector3.Distance(enemy.transform.position, _destination.position) < 0.1f)
+        if (enemy.IsTargetInRange())
         {
             Debug.Log($"{enemy.name} - 도착지에 도달");
             enemy.ChangeState(new EnemyIdleState());

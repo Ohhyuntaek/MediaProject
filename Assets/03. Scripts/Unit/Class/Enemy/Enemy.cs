@@ -8,7 +8,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private Transform _target;
-    [SerializeField] private Transform _destination; 
+    [SerializeField] private Transform _destination;
+    [SerializeField] private Transform leftSpawnPosition;
+    [SerializeField] private Transform rightSpawnPosition;  
     private ISkill<Enemy> _skill;
     private StateMachine<Enemy> _stateMachine;
 
@@ -42,7 +44,7 @@ public class Enemy : MonoBehaviour
         _attackRange = _enemyData.ATKRange;  
         _skill = CreateSkillFromData(_enemyData.Skill);
         _stateMachine = new StateMachine<Enemy>(this);
-        _stateMachine.ChangeState(new EnemyWalkState(_destination));
+        _stateMachine.ChangeState(new EnemyWalkState());
         
     }
 
@@ -62,21 +64,19 @@ public class Enemy : MonoBehaviour
     }
 
     
-    public void MoveForward()
-    {
-        if (_target == null)
-            return;
-
-        Vector3 direction = (_target.position - transform.position).normalized;
-        transform.position += direction * _moveSpeed * Time.deltaTime;
-    }
+    
 
     
     public bool IsTargetInRange()
     {
-        if (_target == null)
+        if (Vector3.Distance(transform.position, _destination.position) < 0.1f)
+        {
+            return true;
+        }
+        else
+        {
             return false;
-        return Vector3.Distance(transform.position, _target.position) <= _attackRange;
+        }
     }
 
     // 공격 수행 메서드 (상태 전환에 따라 호출)
@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _hp -= damage;
+        Debug.Log("데미지 받음 ㅠㅠ ");
         if (_hp <= 0)
         {
             _stateMachine.ChangeState(new EnemyDeadState());
@@ -129,6 +130,33 @@ public class Enemy : MonoBehaviour
     {
         
     }
+    public void ApplySpeedBuff(float buffMultiplier, float duration)
+    {
+        
+        float originalSpeed = _enemyData.MoveSpeed;
+        _moveSpeed = originalSpeed * buffMultiplier;
+    
+      
+        StartCoroutine(RemoveSpeedBuffAfter(duration, originalSpeed));
+    }
+    private IEnumerator RemoveSpeedBuffAfter(float duration, float originalSpeed)
+    {
+        yield return new WaitForSeconds(duration);
+        _moveSpeed = originalSpeed;
+    }
+
+    public void SetDestinationWhenSpawn()
+    {
+        if (transform == leftSpawnPosition)
+        {
+            _destination = GameObject.Find("LeftDestination").transform;
+        }
+        else
+        {
+            _destination = GameObject.Find("RightDestination").transform;
+        }
+        
+    }
     private void OnDrawGizmosSelected()
     {
         if (_destination != null)
@@ -137,6 +165,8 @@ public class Enemy : MonoBehaviour
             Gizmos.DrawLine(transform.position, _destination.position);
         }
     }
+
+    public Transform GetDestination() => _destination;
 
     
     public Animator EnemyAnimatior => _animator;
