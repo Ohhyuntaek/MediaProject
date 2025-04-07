@@ -17,6 +17,7 @@ MonoBehaviour:
   _unitType: 2
   _damageType: 1
   _unitTribe: 0
+  _canRevive: 0
   _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
@@ -28,7 +29,7 @@ MonoBehaviour:
   _attackRange: 0
   _allySkillType: 3
   _enemySkillType: 0
-  _baseAttack: 0
+  _baseAttack: 100
   _attackSpeed: 1
   _maxHP: 100
   _canMove: 0

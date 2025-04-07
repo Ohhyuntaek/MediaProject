@@ -29,11 +29,11 @@ public class KnockbackAttackState : IState<Ally>
                 }
                 else
                 {
-                    ally.ChangeState(new AllyIdleState());
+                    ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
                 }
                 break;
            default:
-                ally.ChangeState(new AllyIdleState());
+                ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
                 break;
            
         }
@@ -61,11 +61,11 @@ public class KnockbackAttackState : IState<Ally>
                     }
                     else
                     {
-                        ally.ChangeState(new AllyIdleState());
+                        ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
                     }
                     break;
                 default:
-                    ally.ChangeState(new AllyIdleState());
+                    ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
                     break;
            
             }

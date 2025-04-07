@@ -7,7 +7,7 @@ public enum DebuffType
     Stun,        // 일정 시간 기절
     Slow         // 이동속도 감소
 }
-public class DebuffSkill : ISkill<Ally>
+public class DebuffSkill : ISkill<Ally> //selemender
 {
     public void Activate(Ally owner)
     {
@@ -24,9 +24,24 @@ public class DebuffSkill : ISkill<Ally>
         
         foreach (Enemy enemy in targets)
         {
-            enemy.ApplyDebuff(selectedDebuff);
+            if (selectedDebuff == DebuffType.DamageAmp)
+            {
+                enemy.ApplyDefenseBuffDebuff(2f,3f,false);
+            }
+            else if (selectedDebuff == DebuffType.Slow)
+            {
+                enemy.ApplySpeedBuffDebuff(2f,3f,false);
+            }
+            else
+            {
+                enemy.ApplyStun(2f);
+            }
+            enemy.TakeDamage(10);
         }
 
         
     }
+    
+
+
 }

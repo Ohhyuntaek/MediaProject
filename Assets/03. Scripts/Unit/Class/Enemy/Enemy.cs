@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed;
     private float _attackRange;
     private float _hp;
+    private float _defense;
 
     public Animator Animator => _animator;
     public EnemyData EnemyData => _enemyData;
@@ -41,7 +42,8 @@ public class Enemy : MonoBehaviour
         _hp = _enemyData.MaxHp;
         _moveSpeed = _enemyData.MoveSpeed;
         _attackCooldown = 1f / _enemyData.AtkSpeed;
-        _attackRange = _enemyData.ATKRange;  
+        _attackRange = _enemyData.ATKRange;
+        _defense = _enemyData.Deffense; 
         _skill = CreateSkillFromData(_enemyData.Skill);
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
@@ -126,23 +128,67 @@ public class Enemy : MonoBehaviour
         ChangeState(new EnemyStunState(duration));
     }
 
-    public void ApplyDebuff(DebuffType type)
+    public void ApplyDebuff(DebuffType type,float duration)
     {
-        
+        switch (type)
+        {
+            case DebuffType.Slow:
+                _moveSpeed--;
+                break;
+            case DebuffType.DamageAmp:
+                _defense--;
+                break;
+            case DebuffType.Stun:
+                ApplyStun(duration);
+                break;
+        }
     }
-    public void ApplySpeedBuff(float buffMultiplier, float duration)
+  
+    /// <summary>
+    /// 적군에게 버프 혹은 디버프를 적용하는 함수
+    /// </summary>
+    /// <param name="times"></param>
+    /// <param name="duration"></param>
+    /// <param name="buffOrDebuff"> 버프인 경우라면 true, 디버프라면 false 값을 준다.</param>
+    public void ApplySpeedBuffDebuff(float times , float duration,bool buffOrDebuff)
     {
         
         float originalSpeed = _enemyData.MoveSpeed;
-        _moveSpeed = originalSpeed * buffMultiplier;
-    
-      
-        StartCoroutine(RemoveSpeedBuffAfter(duration, originalSpeed));
+        if (buffOrDebuff)
+        {
+            _moveSpeed = originalSpeed * times;
+        }
+        else
+        {
+            _moveSpeed = originalSpeed / times;
+        }
+        
+        StartCoroutine(RemoveSpeedBuffDebuffAfter(duration, originalSpeed));
     }
-    private IEnumerator RemoveSpeedBuffAfter(float duration, float originalSpeed)
+
+    public void ApplyDefenseBuffDebuff(float times, float duration, bool buffOrDebuff)
+    {
+        float originalDefense = -_enemyData.Deffense;
+        if (buffOrDebuff)
+        {
+            _defense = originalDefense * times;
+        }
+        else
+        {
+            originalDefense = originalDefense / times;
+        }
+
+        StartCoroutine(RemoveDeffenseBuffDebuffAfter(duration, originalDefense));
+    }
+    private IEnumerator RemoveSpeedBuffDebuffAfter(float duration, float originalSpeed)
     {
         yield return new WaitForSeconds(duration);
         _moveSpeed = originalSpeed;
+    }
+    private IEnumerator RemoveDeffenseBuffDebuffAfter(float duration, float originalDefense)
+    {
+        yield return new WaitForSeconds(duration);
+        _defense = originalDefense;
     }
 
     public void SetDestinationWhenSpawn()

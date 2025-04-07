@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.Tilemaps;
 
 public class Ally : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class Ally : MonoBehaviour
         _skill = CreateSkillFromData(_unitData.AllySkillType);
 
         _stateMachine = new StateMachine<Ally>(this);
-        _stateMachine.ChangeState(new AllyIdleState());
+        _stateMachine.ChangeState(new AllyIdleState(1/_unitData.AttackSpeed));
     }
 
     private void Update()
@@ -95,6 +96,7 @@ public class Ally : MonoBehaviour
     public void PerformAttack()
     {
         List<Enemy> enemy = DetectTargets(_unitData.AttackRange);
+        if(enemy.Count==0) return;
         if (enemy.Count > 0)
         {
             if (_unitData.TargetingType == TargetingType.Single)
@@ -269,6 +271,58 @@ public class Ally : MonoBehaviour
         // 2. 버프 타입마다 다르게 적용 필요 혹은 캐릭터마다
         
     }
+    public List<Enemy> DetectNearestEnemyTileEnemies()
+    {
+        List<Enemy> nearestEnemies = new List<Enemy>();
+
+        // 씬에 존재하는 모든 Enemy 오브젝트들을 가져옵니다.
+        Enemy[] allEnemies = FindObjectsOfType<Enemy>();
+        if (allEnemies.Length == 0)
+            return nearestEnemies;
+
+        // Ally 자신의 위치를 기준으로 가장 가까운 적을 찾습니다.
+        Vector3 allyPos = transform.position;
+        Enemy nearestEnemy = null;
+        float minDistSqr = Mathf.Infinity;
+        foreach (Enemy e in allEnemies)
+        {
+            float distSqr = (e.transform.position - allyPos).sqrMagnitude;
+            if (distSqr < minDistSqr)
+            {
+                minDistSqr = distSqr;
+                nearestEnemy = e;
+            }
+        }
+
+        // 가장 가까운 적의 타일을 찾기 위해, rayHighcaster가 사용하는 타일맵을 참조합니다.
+        // (왼쪽 혹은 오른쪽 rayHighcaster 중 하나의 타일맵을 사용합니다.)
+        Tilemap tm = null;
+        if (leftRaycaster != null && leftRaycaster._tilemap != null)
+            tm = leftRaycaster._tilemap;
+        else if (rightRaycaster != null && rightRaycaster._tilemap != null)
+            tm = rightRaycaster._tilemap;
+    
+        if (tm == null)
+        {
+            Debug.LogWarning("적군 타일맵을 찾을 수 없습니다.");
+            return nearestEnemies;
+        }
+
+        // 가장 가까운 적의 위치를 타일 좌표로 변환합니다.
+        Vector3Int targetCell = tm.WorldToCell(nearestEnemy.transform.position);
+
+        // 모든 적들 중에서, 해당 타일(Cell)에 위치한 적들을 반환합니다.
+        foreach (Enemy e in allEnemies)
+        {
+            Vector3Int cell = tm.WorldToCell(e.transform.position);
+            if (cell == targetCell && !nearestEnemies.Contains(e))
+            {
+                nearestEnemies.Add(e);
+            }
+        }
+
+        return nearestEnemies;
+    }
 
     public void GetFlip()
     {
@@ -299,9 +353,5 @@ public class Ally : MonoBehaviour
         _finalSkill = use;
     }
 
-    public List<Enemy> DetectNearestEnemyTileEnemies()
-    {
-        //TODO: 가장 가까운 적 리스트 찾기
-        return new List<Enemy>();
-    }
+   
 }

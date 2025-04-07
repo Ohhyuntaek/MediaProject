@@ -32,11 +32,11 @@ public class AllyReviveState :IState<Ally>
             {
                 case "NightLord":
                         Debug.Log("부활 후 idle 상태 진입");
-                        ally.ChangeState(new AllyIdleState());
+                        ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
                     
                     break;
                 default:
-                    ally.ChangeState(new AllyIdleState());
+                    ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
                     break;
            
             }

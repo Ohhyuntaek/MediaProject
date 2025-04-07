@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AllyDebuffAttackState : IState<Ally>
 {
@@ -51,20 +52,33 @@ public class AllyDebuffAttackState : IState<Ally>
         if ((stateInfo.IsName("Debuff") || stateInfo.IsName("Debuff1") ||stateInfo.IsName("Debuff2"))  && !finished && stateInfo.normalizedTime > 0.9f)
         {
             finished = true;
-            ally.ChangeState(new AllyIdleState());
-            GameObject skillEffectPrefab = ally.UnitData.SkillEffect[rand];
+            SpawnEffect(ally);
+            ally.PerformSkill();
+            ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
+          
+        }
+    }
 
-        
-            Vector3 spawnPos = ally.transform.position + Vector3.up * 1.5f; //TODO : 적군 위치에 맞게 스폰시키기 
+    private void SpawnEffect(Ally ally)
+    {
+        GameObject skillEffectPrefab = ally.UnitData.SkillEffect[rand];
+        List<Enemy> _detectList = ally.DetectNearestEnemyTileEnemies();
+        if (_detectList.Count > 0)
+        {
+            Vector3 spawnPos = _detectList[0].gameObject.transform.position;
             Quaternion spawnRot = Quaternion.identity;
 
             if (skillEffectPrefab != null)
             {
                 GameObject effect = Object.Instantiate(skillEffectPrefab, spawnPos, spawnRot);
-                Object.Destroy(effect, 2f); 
+                Object.Destroy(effect, 2f);
             }
         }
     }
 
-    public void Exit(Ally ally) { }
+    public void Exit(Ally ally)
+    {
+        
+        ally.SetFinalSkill(true);
+    }
 }

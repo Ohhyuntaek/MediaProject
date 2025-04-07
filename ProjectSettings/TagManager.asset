@@ -58,6 +58,9 @@ TagManager:
   - name: Allys
     uniqueID: 894252433
     locked: 0
+  - name: Effect
+    uniqueID: 3734843981
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

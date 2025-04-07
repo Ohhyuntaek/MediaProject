@@ -13,7 +13,7 @@ public class EnemyAttackState : IState<Enemy>
     public void Update(Enemy enemy)
     {
         _attackTimer -= Time.deltaTime;
-        Debug.Log(enemy.IsTargetInRange());
+        
         if (_attackTimer <= 0f) 
         {
             if (enemy.IsTargetInRange()) // 사정거리 안인 경우

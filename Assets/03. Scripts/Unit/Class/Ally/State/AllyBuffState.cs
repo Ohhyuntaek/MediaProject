@@ -26,7 +26,7 @@ public class AllyBuffState : IState<Ally>
         ally.Animator.SetTrigger("3_Buff");
         yield return new WaitForSeconds(0.5f); 
         ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
-        ally.ChangeState(new AllyIdleState());
+        ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
     }
 
     public void Update(Ally ally)
@@ -40,7 +40,7 @@ public class AllyBuffState : IState<Ally>
         if (stateInfo.IsName("Buff") && !finished && stateInfo.normalizedTime > 0.9f)
         {
             ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
-            ally.ChangeState(new AllyIdleState());
+            ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
         }
     }
 
