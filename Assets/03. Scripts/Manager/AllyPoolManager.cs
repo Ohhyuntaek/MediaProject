@@ -50,6 +50,7 @@ public class AllyPoolManager : MonoBehaviour
             GameObject obj = pool.pool.Dequeue();
             obj.transform.position = tile.transform.position;
             obj.SetActive(true);
+            tile.isOccupied = true;
 
             Ally ally = obj.GetComponent<Ally>();
             ally.Init(tile.transform.position, tile);
@@ -70,6 +71,7 @@ public class AllyPoolManager : MonoBehaviour
     public void ReturnAlly(AllyType type, GameObject ally)
     {
         // 타일 반환
+        Debug.Log("Position: " + ally.transform.position.ToString());
         TileManager.Instance.FreeTile(ally.transform.position);
 
         // 활성화 된 Ally 리스트에서 제거

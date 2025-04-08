@@ -24,7 +24,6 @@ public class TileManager : MonoBehaviour
         {
             if (!tile.isOccupied)
             {
-                tile.isOccupied = true;
                 return tile;
             }
         }

@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09d18e44edf60949afd9f68b1d39fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allTiles: []
 --- !u!1 &22991761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,13 +1519,13 @@ MonoBehaviour:
   allyPools:
   - allyType: 0
     prefab: {fileID: 2675717128330614580, guid: 3eaa82fd8d69f5d4098a2a1f7d0cf2c4, type: 3}
-    poolSize: 5
+    poolSize: 30
   - allyType: 1
     prefab: {fileID: 2723865938899064004, guid: 0a5463a359590c64eb78f79f5c023040, type: 3}
-    poolSize: 5
+    poolSize: 30
   - allyType: 5
     prefab: {fileID: 8626517506107298765, guid: c098ad4787c858145849db4efa763631, type: 3}
-    poolSize: 5
+    poolSize: 30
   activateAllies: []
 --- !u!1 &1098122665
 GameObject:
