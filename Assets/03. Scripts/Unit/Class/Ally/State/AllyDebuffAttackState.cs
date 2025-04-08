@@ -6,11 +6,12 @@ public class AllyDebuffAttackState : IState<Ally>
 {
     private string _unitName;
     private bool finished = false;
-    private int rand;
+    private int index;
     public void Enter(Ally ally)
     {
         _unitName = ally.UnitData.UnitName;
-        rand = Random.Range(0, 3);
+         ally.SetSkillRandomNum(Random.Range(0, 3));
+         index = ally.GetSkillRandomNum();
         PlaySlamanderDebuffAnimation(ally);
         //ally.StartCoroutine(DebuffRoutine(ally));
     }
@@ -19,7 +20,7 @@ public class AllyDebuffAttackState : IState<Ally>
    
     private void  PlaySlamanderDebuffAnimation(Ally ally)
     {
-        string trigger = GetTriggerByIndex(rand);
+        string trigger = GetTriggerByIndex(index);
         Debug.Log($"{ally.UnitData.UnitName} 이 {trigger} 스킬 시전");
         
         ally.Animator.SetTrigger(trigger);
@@ -54,14 +55,15 @@ public class AllyDebuffAttackState : IState<Ally>
             finished = true;
             SpawnEffect(ally);
             ally.PerformSkill();
-            ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
+            ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
           
         }
     }
 
     private void SpawnEffect(Ally ally)
-    {
-        GameObject skillEffectPrefab = ally.UnitData.SkillEffect[rand];
+    {   
+        
+        GameObject skillEffectPrefab = ally.UnitData.SkillEffect[index];
         List<Enemy> _detectList = ally.DetectNearestEnemyTileEnemies();
         if (_detectList.Count > 0)
         {
@@ -78,7 +80,6 @@ public class AllyDebuffAttackState : IState<Ally>
 
     public void Exit(Ally ally)
     {
-        
         ally.SetFinalSkill(true);
     }
 }

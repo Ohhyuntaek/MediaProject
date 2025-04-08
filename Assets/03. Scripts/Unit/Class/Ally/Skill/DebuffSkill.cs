@@ -18,8 +18,9 @@ public class DebuffSkill : ISkill<Ally> //selemender
         {
             return;
         } 
-        int rand = Random.Range(0, 3);
-        DebuffType selectedDebuff = (DebuffType)rand;
+        Debug.Log(targets.Count +" 그 셀에 있는 적의 숫자 ");
+
+        DebuffType selectedDebuff = (DebuffType)owner.GetSkillRandomNum();
 
         
         foreach (Enemy enemy in targets)
@@ -32,8 +33,9 @@ public class DebuffSkill : ISkill<Ally> //selemender
             {
                 enemy.ApplySpeedBuffDebuff(2f,3f,false);
             }
-            else
+            else if(selectedDebuff == DebuffType.Stun)
             {
+                Debug.Log(enemy.name);
                 enemy.ApplyStun(2f);
             }
             enemy.TakeDamage(10);

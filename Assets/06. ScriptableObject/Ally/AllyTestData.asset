@@ -24,7 +24,7 @@ MonoBehaviour:
   _skillEffect:
   - {fileID: 0}
   _targetingType: 0
-  _attackRange: 1
+  _attackRange: 2
   _allySkillType: 5
   _enemySkillType: 0
   _baseAttack: 12

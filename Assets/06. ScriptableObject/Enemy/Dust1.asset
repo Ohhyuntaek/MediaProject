@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Dust1
   m_EditorClassIdentifier: 
   _moveSpeed: 0.5
-  _maxHp: 1
+  _maxHp: 10000
   _atkSpeed: 0.5
   _damage: 5
   _range: 0
+  _defense: 0
   _enemySkill: 0
   _enemyType: 0

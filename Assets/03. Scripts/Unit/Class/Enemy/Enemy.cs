@@ -161,9 +161,15 @@ public class Enemy : MonoBehaviour
         else
         {
             _moveSpeed = originalSpeed / times;
+            Debug.Log("moveSpeed 감소 " + originalSpeed + " "+ _moveSpeed);
         }
         
         StartCoroutine(RemoveSpeedBuffDebuffAfter(duration, originalSpeed));
+    }
+    private IEnumerator RemoveSpeedBuffDebuffAfter(float duration, float originalSpeed)
+    {
+        yield return new WaitForSeconds(duration);
+        _moveSpeed = originalSpeed;
     }
 
     public void ApplyDefenseBuffDebuff(float times, float duration, bool buffOrDebuff)
@@ -180,11 +186,7 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(RemoveDeffenseBuffDebuffAfter(duration, originalDefense));
     }
-    private IEnumerator RemoveSpeedBuffDebuffAfter(float duration, float originalSpeed)
-    {
-        yield return new WaitForSeconds(duration);
-        _moveSpeed = originalSpeed;
-    }
+    
     private IEnumerator RemoveDeffenseBuffDebuffAfter(float duration, float originalDefense)
     {
         yield return new WaitForSeconds(duration);
@@ -216,4 +218,5 @@ public class Enemy : MonoBehaviour
 
     
     public Animator EnemyAnimatior => _animator;
+    public float MoveSpeed => _moveSpeed;
 }

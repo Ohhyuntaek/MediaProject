@@ -22,9 +22,10 @@ public class EnemyIdleState : IState<Enemy>
             }
             else
             {
-                
+                enemy.ChangeState(new EnemyWalkState());
             }
         }
+        
     }
 
     public void Exit(Enemy enemy)

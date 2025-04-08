@@ -11,14 +11,15 @@ public class KnockbackSkill : ISkill<Ally>
         if (targets.Count == 0)
         {
             Debug.Log("넉백 대상 없음");
-            return;
+            
         }
-
+        else
+        {
+            Debug.Log("넉백적용");
+            ally.ApplyKnockback(targets);
+            ally.SetLastKnockbackEnemyCount(targets.Count);
+        }
         
-        ally.ApplyKnockback(targets);
-
-        
-        ally.SetLastKnockbackEnemyCount(targets.Count);
     }
     
 

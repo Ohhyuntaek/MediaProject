@@ -10,8 +10,6 @@ public class AllyAttackState : IState<Ally>
     public void Enter(Ally ally)
     {
         ally.Animator.SetTrigger("2_Attack");
-        
-
     }
     
 
@@ -38,13 +36,13 @@ public class AllyAttackState : IState<Ally>
                     }
                     else
                     {
-                        ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
+                        ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     }
                     break;
 
                 case "Slamander":
                     _detected = ally.DetectNearestEnemyTileEnemies();
-                    if (/*!ally.FinalSkill &&*/ _detected.Count>0)
+                    if (!ally.FinalSkill && _detected.Count>0)
                     {
                     
                         ally.ChangeState(new AllyDebuffAttackState());
@@ -52,7 +50,7 @@ public class AllyAttackState : IState<Ally>
                     }
                     else
                     {
-                        ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
+                        ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     }
                     break;
                 case "BountyHunter" :
@@ -61,11 +59,11 @@ public class AllyAttackState : IState<Ally>
                     //TODO : 바운티 헌터 구현 
                     break;
                 case "NightLord" :
-                    ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
+                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
 
                 default:
-                    ally.ChangeState(new AllyIdleState(1/ally.UnitData.AttackSpeed));
+                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
             }
         }

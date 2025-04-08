@@ -33,10 +33,6 @@ public class AllyIdleState : IState<Ally>
                     {
                         ally.ChangeState(new AllyAttackState());
                     }
-                    else if(ally.DetectNearestEnemyTileEnemies().Count>0)
-                    {
-                        ally.ChangeState(new AllyDebuffAttackState());
-                    }
                     else
                     {
                         ally.ChangeState(new AllyIdleState(_attackTimer));

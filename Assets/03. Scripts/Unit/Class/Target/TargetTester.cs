@@ -11,7 +11,7 @@ public class RaycastTileHighlighter2D : MonoBehaviour
     public LayerMask tileLayerMask;   // 타일맵 콜라이더가 속한 레이어
 
     [Header("공격 사정거리 설정")]
-    public int attackRange = 3;       // 공격 사정거리 (칸 단위)
+    public int attackRange = 1;       // 공격 사정거리 (칸 단위)
     
     [Header("디버그 색상")]
     public Color hitTileColor = Color.red;       // 레이로 맞춘 타일 색상
@@ -71,6 +71,8 @@ public class RaycastTileHighlighter2D : MonoBehaviour
         {
             Debug.LogWarning("게임 오브젝트 이름이 'LEFT' 또는 'RIGHT'가 아닙니다.");
         }
+
+        attackRange = transform.parent.GetComponent<Ally>().UnitData.AttackRange;
     }
 
     public bool GetHitTileMap()
@@ -149,35 +151,31 @@ public class RaycastTileHighlighter2D : MonoBehaviour
         if (_tilemap == null)
             return;
 
-        // 레이로 맞춘 타일(hitCellPos) 그리기
+        // hitCellPos(레이로 맞춘 타일)이 존재한다면,
         if (hitCellPos.HasValue)
         {
-            // hitTile을 빨간색 다이아몬드로 표시
-            DrawIsometricDiamond(hitCellPos.Value, hitTileColor);
-
-            // hitTile 위치에도 초록색 구체를 그려 OverlapPointAll 검사 지점을 시각화
-            Vector3 hitCenter = _tilemap.GetCellCenterWorld(hitCellPos.Value);
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(hitCenter, 0.1f);
-
-            // 사정거리 칸(rangeCells)도 그리기
-            if (rangeCells != null)
+            // hitCellPos를 중심으로 좌우로 확장된 영역을 그립니다.
+            // 예를 들어, attackRange가 1이면 -1, 0, 1 (총 3칸)을 계산합니다.
+            Vector3Int centerCell = hitCellPos.Value;
+            for (int dx = -attackRange; dx <= attackRange; dx++)
             {
-                foreach (Vector3Int cell in rangeCells)
-                {
-                    if (_tilemap.HasTile(cell))
-                    {
-                        DrawIsometricDiamond(cell, rangeTileColor);
+                Vector3Int cell = new Vector3Int(centerCell.x + dx, centerCell.y, centerCell.z);
 
-                        // 각 셀 중심에 작은 구체를 그려서 OverlapPointAll 검사 지점을 시각화
-                        Vector3 cellCenter = _tilemap.GetCellCenterWorld(cell);
-                        Gizmos.color = Color.green;
-                        Gizmos.DrawSphere(cellCenter, 0.1f);
-                    }
+                if (_tilemap.HasTile(cell))
+                {
+                    // 중심 셀(hitCellPos)인 경우 hitTileColor, 나머지는 rangeTileColor로 설정
+                    Color drawColor = (dx == 0) ? hitTileColor : rangeTileColor;
+                    DrawIsometricDiamond(cell, drawColor);
+
+                    // 각 셀의 중심에 작은 초록색 구체를 그려 OverlapPointAll 검사 지점을 시각화합니다.
+                    Vector3 cellCenter = _tilemap.GetCellCenterWorld(cell);
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawSphere(cellCenter, 0.1f);
                 }
             }
         }
     }
+
 
 
     /// <summary>
