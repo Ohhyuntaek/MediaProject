@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa53806cb9555174f9cfd38814442e54, type: 3}
-  m_Name: Dust1
+  m_Name: Dust2
   m_EditorClassIdentifier: 
-  _moveSpeed: 0.5
-  _maxHp: 10
-  _atkSpeed: 2
-  _damage: 1
-  _range: 0
+  _moveSpeed: 0.3
+  _maxHp: 30
+  _atkSpeed: 1
+  _damage: 5
+  _range: 1
   _defense: 0
   _enemySkill: 0
   _enemyType: 0

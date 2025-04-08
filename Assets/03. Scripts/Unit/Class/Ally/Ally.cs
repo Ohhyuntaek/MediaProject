@@ -14,8 +14,8 @@ public class Ally : MonoBehaviour
     [SerializeField] private RaycastTileHighlighter2D leftRaycaster;   // 캐릭터 왼쪽(발 쪽)에 배치
     [SerializeField] private RaycastTileHighlighter2D rightRaycaster;  // 캐릭터 오른쪽(머리 쪽)에 배치
     [SerializeField] private LayerMask _enemyLayer;
-    [SerializeField] private float tileWidth = 1.0f;
-    [SerializeField] private float tileHeight =  1.0f;
+     private float tileWidth = 0.9f;
+    private float tileHeight =  0.9f;
 
     private float _atkSpd;
 
@@ -186,62 +186,71 @@ public class Ally : MonoBehaviour
     }
 
     public List<Enemy> DetectTargets(int range)
-{
-    List<Enemy> targets = new List<Enemy>();
-
-    // 자식에 있는 RaycastTileHighlighter2D 컴포넌트를 가져옵니다.
-    SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-    RaycastTileHighlighter2D tileHighlighter = null;
-    if (spriteRenderer != null && spriteRenderer.flipX)
-        tileHighlighter = rightRaycaster;
-    else
-        tileHighlighter = leftRaycaster;
-    if (tileHighlighter == null)
     {
-        Debug.LogWarning("RaycastTileHighlighter2D 컴포넌트를 찾을 수 없습니다.");
-        return targets;
-    }
-
-    // 인자로 받은 range 값을 사용해 레이캐스트를 수행하여 hitCellPos와 rangeCells를 업데이트 합니다.
-    // (기존 코드에서는 rangeCells에 오른쪽으로만 확장되었지만, 여기서는 중심 타일부터 좌우로 범위를 확장합니다.)
-    tileHighlighter.DetectTiles(range);
-
-    // hitCellPos(레이로 맞춘 타일)가 존재하면,
-    if (tileHighlighter.hitCellPos.HasValue)
-    {
-        // centerTile : 레이로 맞춘 타일
-        Vector3Int centerTile = tileHighlighter.hitCellPos.Value;
-        List<Vector3Int> cellsToCheck = new List<Vector3Int>();
-
-        // centerTile에서 좌측(-range)부터 우측(+range)까지 총 2 * range + 1 칸을 검사합니다.
-        for (int dx = -range; dx <= range; dx++)
+        List<Enemy> targets = new List<Enemy>();
+        bool dir = false;// left면 flase true면 right
+        // 자식에 있는 RaycastTileHighlighter2D를 가져옵니다.
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        RaycastTileHighlighter2D tileHighlighter = null;
+        if (spriteRenderer != null && spriteRenderer.flipX)
         {
-            Vector3Int cell = new Vector3Int(centerTile.x + dx, centerTile.y, centerTile.z);
-            // 해당 셀에 타일이 존재하는지 확인 (타일이 없다면 건너뜁니다)
-            if (tileHighlighter._tilemap.HasTile(cell))
-            {
-                cellsToCheck.Add(cell);
-            }
+            tileHighlighter = rightRaycaster;
+            dir = true;
+        }
+        else
+            tileHighlighter = leftRaycaster;
+        if (tileHighlighter == null)
+        {
+            Debug.LogWarning("RaycastTileHighlighter2D 컴포넌트를 찾을 수 없습니다.");
+            return targets;
         }
 
-        // 각 셀의 중심에서 enemyLayer에 포함된 모든 콜라이더를 검사하여 Enemy 컴포넌트를 가져옵니다.
-        foreach (Vector3Int cell in cellsToCheck)
+        // 인자로 받은 range 값을 사용해 DetectTiles()를 호출하여 hitCellPos와 rangeCells 등 내부 데이터를 업데이트
+        tileHighlighter.DetectTiles(range);
+
+        // hitCellPos(레이로 맞춘 타일)가 있다면,
+        if (tileHighlighter.hitCellPos.HasValue)
         {
-            Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
-            Collider2D[] cols = Physics2D.OverlapPointAll(cellCenter, _enemyLayer);
-            foreach (Collider2D col in cols)
+            // hitCellPos를 중심으로 맨해튼 다이아몬드 영역 내의 모든 셀을 구합니다.
+            Vector3Int centerTile = tileHighlighter.hitCellPos.Value;
+            List<Vector3Int> cellsToCheck = new List<Vector3Int>();
+
+            for (int dx = -range; dx <= range; dx++)
             {
-                Debug.Log($"{gameObject.name}이 셀 {cell}에서 {col.name} 을(를) 찾았다");
-                Enemy enemy = col.GetComponent<Enemy>();
-                if (enemy != null && !targets.Contains(enemy))
+                for (int dy = -range; dy <= range; dy++)
                 {
-                    targets.Add(enemy);
+                    if (Mathf.Abs(dx) + Mathf.Abs(dy) <= range)
+                    {
+                        Vector3Int cell = new Vector3Int(centerTile.x + dx, centerTile.y + dy, centerTile.z);
+                        // 해당 셀에 타일이 존재하는 경우에만 검사 대상에 추가
+                        if (tileHighlighter._tilemap.HasTile(cell))
+                            cellsToCheck.Add(cell);
+                    }
+                }
+            }
+
+            // 각 셀의 영역 전체(OverlapBoxAll)를 검사합니다.
+            // 아이소메트릭 타일맵에서는 타일이 회전되어 보이므로, 회전값 45° (필요시 보정)로 OverlapBoxAll를 호출합니다.
+            
+            foreach (Vector3Int cell in cellsToCheck)
+            {
+                Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
+                // cellSize는 타일 하나의 크기입니다. 여유를 위해 약간 축소할 수 있습니다.
+                Vector3 cellSize = tileHighlighter._tilemap.cellSize * 0.9f;
+
+                Collider2D[] cols = Physics2D.OverlapBoxAll(cellCenter, cellSize, 0f, _enemyLayer);
+                foreach (Collider2D col in cols)
+                {
+                    Debug.Log($"{gameObject.name}이 셀 {cell}에서 {col.name} 을(를) 찾았다");
+                    Enemy enemy = col.GetComponent<Enemy>();
+                    if (enemy != null && !targets.Contains(enemy) && dir == enemy.Direction)
+                        targets.Add(enemy);
                 }
             }
         }
+            return targets;
     }
-    return targets;
-}
+
 
 
 

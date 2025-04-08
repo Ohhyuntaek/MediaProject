@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 107832751931021034, guid: 2705b49c8610aef4b9c7f47a6bd5e8d5, type: 3}
   - {fileID: 3309304063507801234, guid: 2061ed4341f067f44ae7cddc1fe31f7f, type: 3}
   _targetingType: 0
-  _attackRange: 1
+  _attackRange: 2
   _allySkillType: 3
   _enemySkillType: 0
   _baseAttack: 100

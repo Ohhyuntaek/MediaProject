@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform rightSpawnPosition;  
     private ISkill<Enemy> _skill;
     private StateMachine<Enemy> _stateMachine;
-
+    private bool _isDead = false;
+    private bool _dir=false;
     private float _attackCooldown;
     private float _moveSpeed;
     private float _attackRange;
@@ -45,6 +46,7 @@ public class Enemy : MonoBehaviour
         _attackRange = _enemyData.ATKRange;
         _defense = _enemyData.Deffense; 
         _skill = CreateSkillFromData(_enemyData.Skill);
+        if (_destination.gameObject.name.Contains("Right")) _dir = true;
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
         
@@ -54,8 +56,9 @@ public class Enemy : MonoBehaviour
     {
         _stateMachine?.Update();
 
-        if (_hp <= 0)
+        if (_hp <= 0 && !_isDead)
         {
+            _isDead = true;
             _stateMachine.ChangeState(new EnemyDeadState());
         }
     }
@@ -104,9 +107,9 @@ public class Enemy : MonoBehaviour
     public void PerformDie()
     {
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsName("Death") && stateInfo.normalizedTime > 0.9f)
+        if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.9f)
         {
-            Destroy(gameObject,0.5f);
+            gameObject.SetActive(false);
         }
     }
 
@@ -219,4 +222,5 @@ public class Enemy : MonoBehaviour
     
     public Animator EnemyAnimatior => _animator;
     public float MoveSpeed => _moveSpeed;
+    public bool Direction => _dir;
 }
