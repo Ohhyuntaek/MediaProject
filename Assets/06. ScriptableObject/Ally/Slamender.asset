@@ -18,6 +18,7 @@ MonoBehaviour:
   _damageType: 1
   _unitTribe: 0
   _canRevive: 0
+  _attackRange: 3
   _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
@@ -25,14 +26,11 @@ MonoBehaviour:
   - {fileID: 8162922584118746252, guid: 670b1de3f7bf59746a9508e3c514c838, type: 3}
   - {fileID: 107832751931021034, guid: 2705b49c8610aef4b9c7f47a6bd5e8d5, type: 3}
   - {fileID: 3309304063507801234, guid: 2061ed4341f067f44ae7cddc1fe31f7f, type: 3}
-  _targetingType: 0
-  _attackRange: 2
+  _targetingType: 1
   _allySkillType: 3
-  _enemySkillType: 0
-  _baseAttack: 100
+  _baseAttack: 3
   _attackSpeed: 1
   _maxHP: 100
-  _canMove: 0
+  _image: {fileID: 0}
   _playerSkillType: 0
-  _duration: 30
-  _moveSpeed: 0
+  _duration: 5

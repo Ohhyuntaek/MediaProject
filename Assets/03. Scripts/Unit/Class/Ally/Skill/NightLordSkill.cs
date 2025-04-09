@@ -11,9 +11,9 @@ public class NightLordSkill : ISkill<Ally>
         //1.적탐지
         List<Enemy> detectList = owner.DetectTargets(3);
         //2.데미지 적용
-        owner.ApllyDamageMulti(detectList,owner.UnitData.BaseAttack);
+        owner.ApllyDamageMulti(detectList);
         //3. 조건검사
-        if (owner.GetTotalDamage >= 0 && owner.GetTotalLifeTime<12f)
+        if (owner.GetTotalDamage >= 30 && owner.GetTotalLifeTime<12f)
         {
             owner.SetLifetime(1.5f);
         }

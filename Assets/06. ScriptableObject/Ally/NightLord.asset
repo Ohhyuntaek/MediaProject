@@ -18,18 +18,16 @@ MonoBehaviour:
   _damageType: 0
   _unitTribe: 0
   _canRevive: 1
+  _attackRange: 1
   _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
   _skillEffect: []
-  _targetingType: 0
-  _attackRange: 2
+  _targetingType: 1
   _allySkillType: 6
-  _enemySkillType: 0
-  _baseAttack: 5
+  _baseAttack: 3
   _attackSpeed: 2
   _maxHP: 30
-  _canMove: 0
+  _image: {fileID: 0}
   _playerSkillType: 0
   _duration: 5
-  _moveSpeed: 0

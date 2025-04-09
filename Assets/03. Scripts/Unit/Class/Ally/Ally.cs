@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.Tilemaps;
 
 public class Ally : MonoBehaviour
@@ -24,6 +23,7 @@ public class Ally : MonoBehaviour
     private float _lifeTimer;
     private ISkill<Ally> _skill;
     [SerializeField] private bool _isDead=false;
+    private int _baseAttack;
     private int _totalDamage = 0;
     private bool _finalSkill = false; // 스킬을 단 한번만 사용할 수 있는 캐릭터시 사용
     private bool _revived = false; // 부활한 적이 있으면 true 아직 안햇으면 false;
@@ -54,7 +54,7 @@ public class Ally : MonoBehaviour
         {
             Debug.LogWarning($"[{name}] UnitData가 할당되지 않았습니다.");
         }
-        GetFlip();
+       
        
     }
 
@@ -64,8 +64,10 @@ public class Ally : MonoBehaviour
         _lifeTimer = _unitData.Duration;
         _skill = CreateSkillFromData(_unitData.AllySkillType);
         _atkSpd = _unitData.AttackSpeed;
+        _baseAttack = _unitData.BaseAttack;
         _stateMachine = new StateMachine<Ally>(this);
-        _stateMachine.ChangeState(new AllyIdleState(1/_unitData.AttackSpeed));
+        _stateMachine.ChangeState(new AllyIdleState(1/_atkSpd));
+        GetFlip();
     }
 
     private void Update()
@@ -105,14 +107,14 @@ public class Ally : MonoBehaviour
             if (_unitData.TargetingType == TargetingType.Single)
             {
 
-                enemy[0].TakeDamage(_unitData.BaseAttack);
+                enemy[0].TakeDamage(_baseAttack);
 
             }
             else
             {
                 foreach (Enemy target in enemy)
                 {
-                    target.TakeDamage(_unitData.BaseAttack);
+                    target.TakeDamage(_baseAttack);
                 }
             }
         }
@@ -261,13 +263,13 @@ public class Ally : MonoBehaviour
 
     }
 
-    public void ApllyDamageMulti(List<Enemy> target,int atk)
+    public void ApllyDamageMulti(List<Enemy> target)
     {
         _totalDamage = 0;
         foreach (Enemy enemy in target)
         {
-            enemy.TakeDamage(atk);
-            _totalDamage += atk;
+            enemy.TakeDamage(_baseAttack);
+            _totalDamage += _baseAttack;
         }
     }
 
@@ -422,6 +424,8 @@ public class Ally : MonoBehaviour
 
     public void SetSkillRandomNum(int value) => skillNumByRandom = value;
     public int GetSkillRandomNum() => skillNumByRandom;
+    public int BASEATTACK => _baseAttack;
+    public void SetBaseAttack(int change) => _baseAttack = change;
 
 
 }
