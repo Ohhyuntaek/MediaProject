@@ -1,53 +1,64 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour
 {
+    
     [SerializeField] private Animator _animator;
-    [SerializeField] private UnitData _unitData;
+    [SerializeField] private EnemyData _enemyData;
+    [SerializeField] private Transform _target;
+    [SerializeField] private Transform _destination;
+    [SerializeField] private Transform leftSpawnPosition;
+    [SerializeField] private Transform rightSpawnPosition;  
     private ISkill<Enemy> _skill;
     private StateMachine<Enemy> _stateMachine;
-    [SerializeField] private Transform _target; // 일단 테스트용으로 타겟을 확정적으로 줘보장
+    private bool _isDead = false;
+    private bool _dir=false;
     private float _attackCooldown;
     private float _moveSpeed;
     private float _attackRange;
     private float _hp;
+    private float _defense;
 
     public Animator Animator => _animator;
-    public UnitData UnitData => _unitData;
+    public EnemyData EnemyData => _enemyData;
+    public Transform Target => _target; // 타겟 접근용
 
     private void Start()
     {
-        if (_unitData != null)
+        if (_enemyData != null)
         {
-            Initialize(_unitData);
+            Initialize(_enemyData);
         }
         else
         {
-            Debug.LogWarning($"[Enemy:{name}] UnitData가 할당되지 않았습니다.");
+            Debug.LogWarning($"[{name}] EnemyData가 할당되지 않았습니다.");
         }
     }
 
-    public void Initialize(UnitData data)
+    public void Initialize(EnemyData data)
     {
-    
-        _unitData = data;
-        _attackCooldown = 1f / _unitData.AttackSpeed;
-        _moveSpeed = _unitData.MoveSpeed;
-        _attackRange = _unitData.AttackRange;
-        _hp = _unitData.MaxHP;
-        _skill = CreateSkillFromData(_unitData.EnemySkillType);
+        _enemyData = data;
+        _hp = _enemyData.MaxHp;
+        _moveSpeed = _enemyData.MoveSpeed;
+        _attackCooldown = 1f / _enemyData.AtkSpeed;
+        _attackRange = _enemyData.ATKRange;
+        _defense = _enemyData.Deffense; 
+        _skill = CreateSkillFromData(_enemyData.Skill);
+        if (_destination.gameObject.name.Contains("Right")) _dir = true;
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
+        
     }
 
     private void Update()
     {
         _stateMachine?.Update();
 
-        
-        if (_hp < 0f)
+        if (_hp <= 0 && !_isDead)
         {
+            _isDead = true;
             _stateMachine.ChangeState(new EnemyDeadState());
         }
     }
@@ -57,66 +68,159 @@ public class Enemy : MonoBehaviour
         _stateMachine.ChangeState(newState);
     }
 
-    public void MoveForward()
-    {
-        transform.Translate(Vector3.left * _moveSpeed * Time.deltaTime);
-    }
+    
+    
 
+    
     public bool IsTargetInRange()
     {
-        if (_target == null) return false;
-        return Vector3.Distance(transform.position, _target.position) <= _attackRange;
+        if (Vector3.Distance(transform.position, _destination.position) < 0.1f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
+    // 공격 수행 메서드 (상태 전환에 따라 호출)
     public void PerformAttack()
     {
-        Debug.Log($"[Enemy:{name}] 공격!");
-        
+        Debug.Log($"[{name}] 공격 수행!");
+        // 예시: 타겟에게 데미지 적용 등 추가 로직 구현
+        _skill.Activate(this);
     }
 
+    // 외부에서 데미지를 받을 때 호출
+    public void TakeDamage(int damage)
+    {
+        _hp -= damage;
+        Debug.Log("데미지 받음 ㅠㅠ ");
+        if (_hp <= 0)
+        {
+            _stateMachine.ChangeState(new EnemyDeadState());
+        }
+    }
+
+ 
     public void PerformDie()
     {
-        StartCoroutine(Die());
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.9f)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    private IEnumerator Die()
-    {
-        Debug.Log($"[Enemy:{name}] 사망");
-        yield return null;
+   
 
-        float animLength = _animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(animLength);
-        Destroy(gameObject, 0.6f);
-    }
-    private ISkill<Enemy> CreateSkillFromData(EnemySkillType skillType)
+    private ISkill<Enemy> CreateSkillFromData(EnemySkill skillType)
     {
         return skillType switch
         {
-            EnemySkillType.None => new None(),
-            EnemySkillType.AllyDisruptor => new AllyDisruptor(),
-            EnemySkillType.AllySupporter => new AllySupporter(),
-            EnemySkillType.PlayerDebuffer => new PlayerDebuffer(),
+            //EnemySkill.None => new NoneSkill<Enemy>(),
+            //EnemySkill.Basic3 => new Basic3Skill(),
             _ => null
         };
     }
 
+    // 스턴 효과 적용 (예시)
     public void ApplyStun(float duration)
     {
         ChangeState(new EnemyStunState(duration));
     }
 
-    public void SetTarget(Transform target)
+    public void ApplyDebuff(DebuffType type,float duration)
     {
-        _target = target;
+        switch (type)
+        {
+            case DebuffType.Slow:
+                _moveSpeed--;
+                break;
+            case DebuffType.DamageAmp:
+                _defense--;
+                break;
+            case DebuffType.Stun:
+                ApplyStun(duration);
+                break;
+        }
+    }
+  
+    /// <summary>
+    /// 적군에게 버프 혹은 디버프를 적용하는 함수
+    /// </summary>
+    /// <param name="times"></param>
+    /// <param name="duration"></param>
+    /// <param name="buffOrDebuff"> 버프인 경우라면 true, 디버프라면 false 값을 준다.</param>
+    public void ApplySpeedBuffDebuff(float times , float duration,bool buffOrDebuff)
+    {
+        
+        float originalSpeed = _enemyData.MoveSpeed;
+        if (buffOrDebuff)
+        {
+            _moveSpeed = originalSpeed * times;
+        }
+        else
+        {
+            _moveSpeed = originalSpeed / times;
+            Debug.Log("moveSpeed 감소 " + originalSpeed + " "+ _moveSpeed);
+        }
+        
+        StartCoroutine(RemoveSpeedBuffDebuffAfter(duration, originalSpeed));
+    }
+    private IEnumerator RemoveSpeedBuffDebuffAfter(float duration, float originalSpeed)
+    {
+        yield return new WaitForSeconds(duration);
+        _moveSpeed = originalSpeed;
     }
 
-    public void ApplyDebuff(DebuffType selectedDebuff)
+    public void ApplyDefenseBuffDebuff(float times, float duration, bool buffOrDebuff)
     {
-        throw new System.NotImplementedException();
+        float originalDefense = -_enemyData.Deffense;
+        if (buffOrDebuff)
+        {
+            _defense = originalDefense * times;
+        }
+        else
+        {
+            originalDefense = originalDefense / times;
+        }
+
+        StartCoroutine(RemoveDeffenseBuffDebuffAfter(duration, originalDefense));
+    }
+    
+    private IEnumerator RemoveDeffenseBuffDebuffAfter(float duration, float originalDefense)
+    {
+        yield return new WaitForSeconds(duration);
+        _defense = originalDefense;
     }
 
-    public void TakeDamage(int damage)
+    public void SetDestinationWhenSpawn()
     {
-        _hp -= damage;
+        if (transform == leftSpawnPosition)
+        {
+            _destination = GameObject.Find("LeftDestination").transform;
+        }
+        else
+        {
+            _destination = GameObject.Find("RightDestination").transform;
+        }
+        
     }
+    private void OnDrawGizmosSelected()
+    {
+        if (_destination != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, _destination.position);
+        }
+    }
+
+    public Transform GetDestination() => _destination;
+
+    
+    public Animator EnemyAnimatior => _animator;
+    public float MoveSpeed => _moveSpeed;
+    public bool Direction => _dir;
 }

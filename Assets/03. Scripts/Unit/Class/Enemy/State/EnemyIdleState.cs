@@ -7,7 +7,7 @@ public class EnemyIdleState : IState<Enemy>
     public void Enter(Enemy enemy)
     {
         enemy.Animator?.SetBool("1_Move", false); 
-        _attackTimer = 1f / enemy.UnitData.AttackSpeed;
+        _attackTimer = 1f / enemy.EnemyData.MoveSpeed;
     }
 
     public void Update(Enemy enemy)
@@ -20,11 +20,12 @@ public class EnemyIdleState : IState<Enemy>
             {
                 enemy.ChangeState(new EnemyAttackState());
             }
-            else 
+            else
             {
                 enemy.ChangeState(new EnemyWalkState());
             }
         }
+        
     }
 
     public void Exit(Enemy enemy)

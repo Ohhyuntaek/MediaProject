@@ -19,15 +19,7 @@ public class AllyBuffState : IState<Ally>
         //ally.StartCoroutine(BuffRoutineJandark(ally));
         ally.Animator.SetTrigger("3_Buff");
     }
-
-    private IEnumerator BuffRoutineJandark(Ally ally)
-    {
-       
-        ally.Animator.SetTrigger("3_Buff");
-        yield return new WaitForSeconds(0.5f); 
-        ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
-        ally.ChangeState(new AllyIdleState());
-    }
+    
 
     public void Update(Ally ally)
     {
@@ -39,8 +31,12 @@ public class AllyBuffState : IState<Ally>
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Buff") && !finished && stateInfo.normalizedTime > 0.9f)
         {
-            ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
-            ally.ChangeState(new AllyIdleState());
+            if (ally.UnitData.UnitName == "KnockbackWarrior")
+            {
+                ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
+                ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+            }
+           
         }
     }
 

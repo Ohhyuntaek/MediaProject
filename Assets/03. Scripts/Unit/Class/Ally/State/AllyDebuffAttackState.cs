@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AllyDebuffAttackState : IState<Ally>
 {
     private string _unitName;
     private bool finished = false;
-    private int rand;
+    private int index;
     public void Enter(Ally ally)
     {
         _unitName = ally.UnitData.UnitName;
-        rand = Random.Range(0, 3);
+         ally.SetSkillRandomNum(Random.Range(0, 3));
+         index = ally.GetSkillRandomNum();
         PlaySlamanderDebuffAnimation(ally);
         //ally.StartCoroutine(DebuffRoutine(ally));
     }
@@ -18,7 +20,7 @@ public class AllyDebuffAttackState : IState<Ally>
    
     private void  PlaySlamanderDebuffAnimation(Ally ally)
     {
-        string trigger = GetTriggerByIndex(rand);
+        string trigger = GetTriggerByIndex(index);
         Debug.Log($"{ally.UnitData.UnitName} 이 {trigger} 스킬 시전");
         
         ally.Animator.SetTrigger(trigger);
@@ -51,20 +53,33 @@ public class AllyDebuffAttackState : IState<Ally>
         if ((stateInfo.IsName("Debuff") || stateInfo.IsName("Debuff1") ||stateInfo.IsName("Debuff2"))  && !finished && stateInfo.normalizedTime > 0.9f)
         {
             finished = true;
-            ally.ChangeState(new AllyIdleState());
-            GameObject skillEffectPrefab = ally.UnitData.SkillEffect[rand];
+            SpawnEffect(ally);
+            ally.PerformSkill();
+            ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+          
+        }
+    }
 
+    private void SpawnEffect(Ally ally)
+    {   
         
-            Vector3 spawnPos = ally.transform.position + Vector3.up * 1.5f; //TODO : 적군 위치에 맞게 스폰시키기 
+        GameObject skillEffectPrefab = ally.UnitData.SkillEffect[index];
+        List<Enemy> _detectList = ally.DetectNearestEnemyTileEnemies();
+        if (_detectList.Count > 0)
+        {
+            Vector3 spawnPos = _detectList[0].gameObject.transform.position;
             Quaternion spawnRot = Quaternion.identity;
 
             if (skillEffectPrefab != null)
             {
                 GameObject effect = Object.Instantiate(skillEffectPrefab, spawnPos, spawnRot);
-                Object.Destroy(effect, 2f); 
+                Object.Destroy(effect, 2f);
             }
         }
     }
 
-    public void Exit(Ally ally) { }
+    public void Exit(Ally ally)
+    {
+        ally.SetFinalSkill(true);
+    }
 }

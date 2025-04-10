@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2142715393628007370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2605692786264072010}
+  - component: {fileID: 7633961941663406655}
+  m_Layer: 0
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2605692786264072010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142715393628007370}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.4, z: 0.68}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2413534910061748287}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7633961941663406655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142715393628007370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e550db00d1c164e871f559ce79d90a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 0}
+  rayDistance: 1
+  tileLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attackRange: 3
+  hitTileColor: {r: 1, g: 0, b: 0, a: 1}
+  rangeTileColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  rangeCells: []
 --- !u!1 &2675717128330614580
 GameObject:
   m_ObjectHideFlags: 0
@@ -18,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2413534910061748287
 Transform:
   m_ObjectHideFlags: 0
@@ -32,7 +85,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2605692786264072010}
+  - {fileID: 1229539915933710133}
   - {fileID: 8679822235001117941}
+
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2476700738207910907
@@ -81,7 +137,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -691099098, guid: 990702a125d44df4ba1c35c60c1aef72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.484375, y: 0.65625}
@@ -126,6 +182,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitData: {fileID: 11400000, guid: b08ee28ea7d5ed2478b9309cbb97b4d3, type: 2}
   _animator: {fileID: 6212176504898321087}
+  leftRaycaster: {fileID: 7633961941663406655}
+  rightRaycaster: {fileID: 4019604322646311845}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  tileWidth: 1
+  tileHeight: 1
+  _isDead: 0
+  _isOnTile: 1
+  allyType: 0
+--- !u!1 &8055772906484736890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229539915933710133}
+  - component: {fileID: 4019604322646311845}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1229539915933710133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055772906484736890}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.067, y: 0.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2413534910061748287}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4019604322646311845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055772906484736890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e550db00d1c164e871f559ce79d90a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 0}
+  rayDistance: 1
+  tileLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  attackRange: 3
+  hitTileColor: {r: 1, g: 0, b: 0, a: 1}
+  rangeTileColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  rangeCells: []
+=======
   _isDead: 0
   _isOnTile: 1
   _SpawnTimeSlider: {fileID: 1154826574589242812}
