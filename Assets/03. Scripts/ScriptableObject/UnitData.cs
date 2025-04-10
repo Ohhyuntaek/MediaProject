@@ -40,6 +40,7 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("공격력")] private int _baseAttack;
     [SerializeField, LabelText("공격 속도")] private float _attackSpeed;
     [SerializeField, LabelText("최대 체력")] private float _maxHP;
+    [SerializeField, LabelText("코스트")] private int cost;
 
     [Title("초상화")] [SerializeField, LabelText("초상화")] private Image _image;   
     
