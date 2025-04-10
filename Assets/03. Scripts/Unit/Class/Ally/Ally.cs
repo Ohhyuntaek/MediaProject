@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Android;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+
 
 public class Ally : MonoBehaviour
 {
@@ -32,14 +36,35 @@ public class Ally : MonoBehaviour
     public Animator Animator => _animator;
     public UnitData UnitData => _unitData;
     
+
     public AllyType allyType;
     private Vector3 occupiedTilePosition;
     private int skillNumByRandom = 0;
     public void Init(Vector3 tilePosition)
+    public Slider _SpawnTimeSlider;
+
+    private float _maxSpawnTime;
+    
+    [FormerlySerializedAs("allyType")] public AllyType _allyType;
+    
+    private AllyTile _occupiedTile;
+
+    public void Init(Vector3 position, AllyTile tile)
+
     {
-        occupiedTilePosition = tilePosition;
+        transform.position = position;
+        _occupiedTile = tile;
         _isOnTile = true;
         _isDead = false;
+
+        _maxSpawnTime = UnitData.Duration;
+        _SpawnTimeSlider.maxValue = _maxSpawnTime;
+        _SpawnTimeSlider.value = _maxSpawnTime;
+    }
+
+    public void ApplyTileBonus()
+    {
+        Debug.Log("ApplyTileBonus");
     }
    
     
@@ -85,10 +110,16 @@ public class Ally : MonoBehaviour
             return;
         }
         
+        if (_SpawnTimeSlider != null)
+        {
+            _SpawnTimeSlider.value = _lifeTimer;
+        }
+        
         if (!_isDead && _lifeTimer <= 0f)
         {
             _stateMachine.ChangeState(new AllyDeadState());
         }
+
         
     }
 
@@ -151,12 +182,15 @@ public class Ally : MonoBehaviour
             }
             Debug.Log($"[Ally:{name}] 사망 시작 및 반환 처리");
             _isDead = true;
-            
-            // 타일 반환
-            TileManager.Instance.FreeTile(occupiedTilePosition);
+
+            if (_occupiedTile != null)
+            {
+                _occupiedTile.isOccupied = false;
+                _occupiedTile = null;
+            }
             
             // 오브젝트 풀에 복귀
-            AllyPoolManager.Instance.ReturnAlly(allyType, this.gameObject);
+            AllyPoolManager.Instance.ReturnAlly(_allyType, this.gameObject);
         }
     }
 

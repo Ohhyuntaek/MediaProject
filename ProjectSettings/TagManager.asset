@@ -10,7 +10,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Target_Left
@@ -58,8 +58,8 @@ TagManager:
   - name: Allys
     uniqueID: 894252433
     locked: 0
-  - name: Effect
-    uniqueID: 3734843981
+  - name: AllyUI
+    uniqueID: 923540441
     locked: 0
   m_RenderingLayers:
   - Default

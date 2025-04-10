@@ -19,9 +19,9 @@ public class Card : MonoBehaviour
     
     public void OnButtonClick()
     {
-        GameObject spawned = AllyPoolManager.Instance.SpawnAlly(allyType, lineType);
+        GameObject ally = AllyPoolManager.Instance.SpawnAlly(allyType, lineType);
 
-        if (spawned != null)
+        if (ally != null)
         {
             Destroy(this.gameObject);
             GameManager.Instance.ShiftCardsLeft(slotIndex);   
