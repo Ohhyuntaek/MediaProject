@@ -40,7 +40,6 @@ public class Ally : MonoBehaviour
     public AllyType allyType;
     private Vector3 occupiedTilePosition;
     private int skillNumByRandom = 0;
-    public void Init(Vector3 tilePosition)
     public Slider _SpawnTimeSlider;
 
     private float _maxSpawnTime;
