@@ -71,4 +71,5 @@ public class UnitData : ScriptableObject
     public bool CanRevive => _canRevive;
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;
     private bool IsPlayer() => _unitFaction == UnitFaction.Player;
+    public int Cost => cost;
 }

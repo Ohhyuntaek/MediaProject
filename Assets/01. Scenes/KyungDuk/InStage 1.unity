@@ -2058,10 +2058,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allyPools:
   - allyType: 0
-    prefab: {fileID: 2675717128330614580, guid: 3eaa82fd8d69f5d4098a2a1f7d0cf2c4, type: 3}
+    prefab: {fileID: 4646388973794068357, guid: 8397d7cb6230d464792427b17e968930, type: 3}
     poolSize: 5
   - allyType: 1
-    prefab: {fileID: 2723865938899064004, guid: 0a5463a359590c64eb78f79f5c023040, type: 3}
+    prefab: {fileID: 4845290125158808619, guid: 0a5463a359590c64eb78f79f5c023040, type: 3}
     poolSize: 5
   - allyType: 5
     prefab: {fileID: 8626517506107298765, guid: c098ad4787c858145849db4efa763631, type: 3}
