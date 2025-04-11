@@ -38,7 +38,9 @@ public class Ally : MonoBehaviour
     
     private Vector3 occupiedTilePosition;
     private int skillNumByRandom = 0;
-    public Slider _SpawnTimeSlider;
+    
+    [SerializeField]
+    private Slider _SpawnTimeSlider;
 
     private float _maxSpawnTime;
     

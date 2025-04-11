@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Enemy : MonoBehaviour
     private float _hp;
     private float _defense;
 
+    [SerializeField] private Slider hpSlider;
+    
     public Animator Animator => _animator;
     public EnemyData EnemyData => _enemyData;
     public Transform Target => _target; // 타겟 접근용
@@ -56,12 +59,16 @@ public class Enemy : MonoBehaviour
         if (_destination.gameObject.name.Contains("Right")) _dir = true;
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
+
+        hpSlider.maxValue = _hp;
     }
 
     private void Update()
     {
         _stateMachine?.Update();
 
+        hpSlider.value = _hp;
+        
         if (_hp <= 0 && !_isDead)
         {
             _isDead = true;
