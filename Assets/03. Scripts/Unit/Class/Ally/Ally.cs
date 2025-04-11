@@ -36,8 +36,6 @@ public class Ally : MonoBehaviour
     public Animator Animator => _animator;
     public UnitData UnitData => _unitData;
     
-
-    public AllyType allyType;
     private Vector3 occupiedTilePosition;
     private int skillNumByRandom = 0;
     public Slider _SpawnTimeSlider;
@@ -46,10 +44,10 @@ public class Ally : MonoBehaviour
     
     [FormerlySerializedAs("allyType")] public AllyType _allyType;
     
-    private AllyTile _occupiedTile;
+    [SerializeField]
+    private AllyTile _occupiedTile; // Ally 오브젝트가 소환된 타일 이름
 
     public void Init(Vector3 position, AllyTile tile)
-
     {
         transform.position = position;
         _occupiedTile = tile;

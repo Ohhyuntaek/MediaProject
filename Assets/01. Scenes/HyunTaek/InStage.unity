@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 84183837}
   - component: {fileID: 84183838}
   m_Layer: 0
-  m_Name: RL_AllySpawnPoint3
+  m_Name: AllySpawnPoint_D5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +374,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 375500195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &84183838
 MonoBehaviour:
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 90978876}
   - component: {fileID: 90978877}
   m_Layer: 0
-  m_Name: RL_AllySpawnPoint4
+  m_Name: AllySpawnPoint_D6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 375500195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &90978877
 MonoBehaviour:
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 145300889}
   - component: {fileID: 145300890}
   m_Layer: 0
-  m_Name: ML_AllySpawnPoint2
+  m_Name: AllySpawnPoint_U4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +466,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 1550883774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &145300890
 MonoBehaviour:
@@ -990,18 +990,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1642708126}
-  - {fileID: 1341609101}
-  - {fileID: 267574584}
-  - {fileID: 637873582}
-  - {fileID: 1195192751}
-  - {fileID: 145300889}
-  - {fileID: 1611213553}
-  - {fileID: 1098122666}
-  - {fileID: 623730390}
-  - {fileID: 1775252235}
-  - {fileID: 84183837}
-  - {fileID: 90978876}
+  - {fileID: 1550883774}
+  - {fileID: 375500195}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267574583
@@ -1015,7 +1005,7 @@ GameObject:
   - component: {fileID: 267574584}
   - component: {fileID: 267574585}
   m_Layer: 0
-  m_Name: FL_AllySpawnPoint3
+  m_Name: AllySpawnPoint_D1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,7 +1024,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 375500195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &267574585
 MonoBehaviour:
@@ -1564,6 +1554,43 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &375500194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 375500195}
+  m_Layer: 0
+  m_Name: Down_Line_Tiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &375500195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375500194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 267574584}
+  - {fileID: 637873582}
+  - {fileID: 1611213553}
+  - {fileID: 1098122666}
+  - {fileID: 84183837}
+  - {fileID: 90978876}
+  m_Father: {fileID: 255357237}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,7 +1923,7 @@ GameObject:
   - component: {fileID: 623730390}
   - component: {fileID: 623730391}
   m_Layer: 0
-  m_Name: RL_AllySpawnPoint1
+  m_Name: AllySpawnPoint_U5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1915,7 +1942,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 1550883774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &623730391
 MonoBehaviour:
@@ -1942,7 +1969,7 @@ GameObject:
   - component: {fileID: 637873582}
   - component: {fileID: 637873583}
   m_Layer: 0
-  m_Name: FL_AllySpawnPoint4
+  m_Name: AllySpawnPoint_D2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1961,7 +1988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 375500195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &637873583
 MonoBehaviour:
@@ -2522,7 +2549,7 @@ GameObject:
   - component: {fileID: 1098122666}
   - component: {fileID: 1098122667}
   m_Layer: 0
-  m_Name: ML_AllySpawnPoint4
+  m_Name: AllySpawnPoint_D4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2541,7 +2568,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 375500195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1098122667
 MonoBehaviour:
@@ -2772,7 +2799,7 @@ GameObject:
   - component: {fileID: 1195192751}
   - component: {fileID: 1195192752}
   m_Layer: 0
-  m_Name: ML_AllySpawnPoint1
+  m_Name: AllySpawnPoint_U3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2791,7 +2818,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 1550883774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1195192752
 MonoBehaviour:
@@ -2880,7 +2907,7 @@ GameObject:
   - component: {fileID: 1341609101}
   - component: {fileID: 1341609102}
   m_Layer: 0
-  m_Name: FL_AllySpawnPoint2
+  m_Name: AllySpawnPoint_U2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2899,7 +2926,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 1550883774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1341609102
 MonoBehaviour:
@@ -3086,6 +3113,43 @@ MonoBehaviour:
   - {fileID: 490420221}
   - {fileID: 224238340}
   - {fileID: 838952261}
+--- !u!1 &1550883773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1550883774}
+  m_Layer: 0
+  m_Name: Up_Line_Tiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1550883774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550883773}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1642708126}
+  - {fileID: 1341609101}
+  - {fileID: 1195192751}
+  - {fileID: 145300889}
+  - {fileID: 623730390}
+  - {fileID: 1775252235}
+  m_Father: {fileID: 255357237}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587441397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,7 +3263,7 @@ GameObject:
   - component: {fileID: 1611213553}
   - component: {fileID: 1611213554}
   m_Layer: 0
-  m_Name: ML_AllySpawnPoint3
+  m_Name: AllySpawnPoint_D3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3218,7 +3282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 375500195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1611213554
 MonoBehaviour:
@@ -3245,7 +3309,7 @@ GameObject:
   - component: {fileID: 1642708126}
   - component: {fileID: 1642708127}
   m_Layer: 0
-  m_Name: FL_AllySpawnPoint1
+  m_Name: AllySpawnPoint_U1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3264,7 +3328,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 1550883774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1642708127
 MonoBehaviour:
@@ -3291,7 +3355,7 @@ GameObject:
   - component: {fileID: 1775252235}
   - component: {fileID: 1775252236}
   m_Layer: 0
-  m_Name: RL_AllySpawnPoint2
+  m_Name: AllySpawnPoint_U6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3310,7 +3374,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 255357237}
+  m_Father: {fileID: 1550883774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1775252236
 MonoBehaviour:
@@ -6879,8 +6943,8 @@ SceneRoots:
   - {fileID: 255357237}
   - {fileID: 1098474733}
   - {fileID: 1237773388}
-  - {fileID: 543949082}
   - {fileID: 901549857}
+  - {fileID: 543949082}
   - {fileID: 1313826266}
   - {fileID: 1465164161}
   - {fileID: 1918454865}
