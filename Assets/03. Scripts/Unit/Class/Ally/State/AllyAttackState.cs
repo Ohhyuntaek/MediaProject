@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 public class AllyAttackState : IState<Ally>
 {
     private bool finished = false;
+    private bool firstAttack = false;
     private List<Enemy> _detected;
     public void Enter(Ally ally)
     {
@@ -21,6 +22,11 @@ public class AllyAttackState : IState<Ally>
     private void TranstionTo(Ally ally)
     {
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Attack") && !firstAttack && stateInfo.normalizedTime > 0.5f && ally.UnitData.UnitName =="CentaurLady")
+        {
+            firstAttack = true;
+            ally.PerformAttack();
+        }
         if (stateInfo.IsName("Attack") && !finished && stateInfo.normalizedTime > 0.9f)
         {
             finished = true;
@@ -59,6 +65,9 @@ public class AllyAttackState : IState<Ally>
                     //TODO : 바운티 헌터 구현 
                     break;
                 case "NightLord" :
+                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+                    break;
+                case "CentaurLady" :
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
 

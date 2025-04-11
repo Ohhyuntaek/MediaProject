@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacdbdd950bb79f47bcfb029c181a17a, type: 3}
+  m_Name: Centaur Lady
+  m_EditorClassIdentifier: 
+  _unitName: CentaurLady
+  _unitFaction: 0
+  _unitType: 2
+  _damageType: 0
+  _unitTribe: 0
+  _canRevive: 0
+  _attackRange: 1
+  _skillCoolTime: 0
+  _skillname: 
+  _skilldescripter: 
+  _skillEffect: []
+  _targetingType: 0
+  _allySkillType: 0
+  _baseAttack: 2
+  _attackSpeed: 1
+  _maxHP: 0
+  cost: 4
+  _image: {fileID: 0}
+  _playerSkillType: 0
+  _duration: 0
