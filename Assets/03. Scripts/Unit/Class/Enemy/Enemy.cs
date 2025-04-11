@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour
 {
-    
     [SerializeField] private Animator _animator;
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private Transform _target;
@@ -24,6 +24,13 @@ public class Enemy : MonoBehaviour
     public Animator Animator => _animator;
     public EnemyData EnemyData => _enemyData;
     public Transform Target => _target; // 타겟 접근용
+
+    private void Awake()
+    {
+        leftSpawnPosition = GameObject.Find("LeftEnemySpawn").transform;
+        rightSpawnPosition = GameObject.Find("RightEnemySpawn").transform;
+        SetDestinationWhenSpawn();
+    }
 
     private void Start()
     {
@@ -49,7 +56,6 @@ public class Enemy : MonoBehaviour
         if (_destination.gameObject.name.Contains("Right")) _dir = true;
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
-        
     }
 
     private void Update()
@@ -67,10 +73,6 @@ public class Enemy : MonoBehaviour
     {
         _stateMachine.ChangeState(newState);
     }
-
-    
-    
-
     
     public bool IsTargetInRange()
     {

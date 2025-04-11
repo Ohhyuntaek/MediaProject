@@ -55,6 +55,9 @@ TagManager:
   - name: DecoObj
     uniqueID: 1355117705
     locked: 0
+  - name: Darks
+    uniqueID: 538184457
+    locked: 0
   - name: Allys
     uniqueID: 894252433
     locked: 0

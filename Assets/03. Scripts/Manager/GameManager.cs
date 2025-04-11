@@ -1,12 +1,33 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Transform[] cardSlots;
     
+    [SerializeField]
+    private List<StageData> stageList;
+    [SerializeField]
+    private DarkSpawner darkSpawner;
+
+    private int currentStageIndex = 0;
+    
     void Awake() => Instance = this;
 
+    void Start()
+    {
+        StartStage();
+    }
+
+    public void StartStage()
+    {
+        StageData stage = stageList[currentStageIndex];
+        darkSpawner.StartSpawning(stage);
+    }
+    
     public void ShiftCardsLeft(int slotIndex)
     {
         for (int i = slotIndex + 1; i < cardSlots.Length; i++)
