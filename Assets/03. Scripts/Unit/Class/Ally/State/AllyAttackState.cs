@@ -8,8 +8,10 @@ public class AllyAttackState : IState<Ally>
     private bool finished = false;
     private bool firstAttack = false;
     private List<Enemy> _detected;
+    private bool dir = false;
     public void Enter(Ally ally)
     {
+        dir = ally.Dircetion;
         ally.Animator.SetTrigger("2_Attack");
     }
     
@@ -68,7 +70,18 @@ public class AllyAttackState : IState<Ally>
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
                 case "CentaurLady" :
-                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+                    _detected = ally.DetectNearestEnemyTileEnemies();
+                    if (!ally.FinalSkill && _detected.Count>0)
+                    {
+                        
+                        ally.SetFinalSkill(true);
+                        ally.ChangeState(new AllySpecialAttackState(dir));
+                        
+                    }
+                    else
+                    {
+                        ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+                    }
                     break;
 
                 default:

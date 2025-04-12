@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementBlockSkill : ISkill<Ally>
+public class NoneSkill : ISkill<Ally>
 {
     public void Activate(Ally owner)
     {

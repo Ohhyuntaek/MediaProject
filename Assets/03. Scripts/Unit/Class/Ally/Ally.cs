@@ -43,6 +43,8 @@ public class Ally : MonoBehaviour
     private Slider _SpawnTimeSlider;
 
     private float _maxSpawnTime;
+
+    private bool _dir =false;
     
     [FormerlySerializedAs("allyType")] public AllyType _allyType;
     
@@ -198,11 +200,12 @@ public class Ally : MonoBehaviour
     {
         return skillType switch
         {
-            AllySkillType.MovementBlock => new MovementBlockSkill(),
-            AllySkillType.Debuff => new DebuffSkill(),
-            AllySkillType.DamageDealer => new DamageSkill(),
-            AllySkillType.KnockBack => new KnockbackSkill(),
+            AllySkillType.CentaurLady => new CentaurLadySkill(),
+            AllySkillType.BountyHunter => new BountyHunterSkill(),
+            AllySkillType.Salamender => new SalamenderSkill(),
+            AllySkillType.Jandark => new JandarkSkill(),
             AllySkillType.NightLord => new NightLordSkill(),
+            AllySkillType.None => new NoneSkill(),
             _ => null
         };
     }
@@ -223,14 +226,14 @@ public class Ally : MonoBehaviour
     public List<Enemy> DetectTargets(int range)
     {
         List<Enemy> targets = new List<Enemy>();
-        bool dir = false;// left면 flase true면 right
         // 자식에 있는 RaycastTileHighlighter2D를 가져옵니다.
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         RaycastTileHighlighter2D tileHighlighter = null;
+        
         if (spriteRenderer != null && spriteRenderer.flipX)
         {
             tileHighlighter = rightRaycaster;
-            dir = true;
+            _dir = true;
         }
         else
             tileHighlighter = leftRaycaster;
@@ -278,7 +281,7 @@ public class Ally : MonoBehaviour
                 {
                     Debug.Log($"{gameObject.name}이 셀 {cell}에서 {col.name} 을(를) 찾았다");
                     Enemy enemy = col.GetComponent<Enemy>();
-                    if (enemy != null && !targets.Contains(enemy) && dir == enemy.Direction)
+                    if (enemy != null && !targets.Contains(enemy) && _dir == enemy.Direction)
                         targets.Add(enemy);
                 }
             }
@@ -459,6 +462,7 @@ public class Ally : MonoBehaviour
     public int GetSkillRandomNum() => skillNumByRandom;
     public int BASEATTACK => _baseAttack;
     public void SetBaseAttack(int change) => _baseAttack = change;
+    public bool Dircetion => _dir;
 
 
 }

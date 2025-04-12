@@ -1,4 +1,5 @@
 using System.Collections;
+using Sirenix.Serialization;
 using UnityEngine;
 
 public class DarkSpawner : MonoBehaviour
@@ -36,12 +37,21 @@ public class DarkSpawner : MonoBehaviour
         {
             // 랜덤으로 왼쪽/오른쪽 중 하나 선택
             Transform spawnPoint = Random.value < 0.5f ? leftSpawnPoint : rightSpawnPoint;
-
-            // Darks 프리팹 중 랜덤 선택
             GameObject darkPrefab = currentStage.Darks[Random.Range(0, currentStage.Darks.Count)];
+            if (spawnPoint == leftSpawnPoint)
+            {
+                darkPrefab.GetComponent<Enemy>().SetDestinationWhenSpawn(false);
+            }
+            else
+            {
+                darkPrefab.GetComponent<Enemy>().SetDestinationWhenSpawn(true);
+            }
+            
+            
 
             // Dark 인스턴스 생성
             Instantiate(darkPrefab, spawnPoint.position, Quaternion.identity);
+            
 
             // 다음 Dark까지 대기
             yield return new WaitForSeconds(currentStage.SpawnTerm);

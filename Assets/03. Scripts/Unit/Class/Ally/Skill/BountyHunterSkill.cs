@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageSkill : ISkill<Ally>
+public class BountyHunterSkill : ISkill<Ally>
 {
     public void Activate(Ally owner)
     {

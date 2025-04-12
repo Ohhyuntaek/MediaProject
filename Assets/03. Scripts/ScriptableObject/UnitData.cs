@@ -8,7 +8,7 @@ public enum UnitFaction { Ally,Player }
 public enum UnitTribe{Person,}
 public enum UnitType { Front, Middle, Rear }
 public enum DamageType { Physical, Magical }
-public enum AllySkillType { None, MovementBlock, DamageDealer, Debuff, AllyBuff,KnockBack,NightLord }
+public enum AllySkillType { None, CentaurLady, BountyHunter,Salamender,Jandark,NightLord }
 public enum PlayerSkillType{Test1,Test2,Test3}
 public enum TargetingType { Single, Area }
 

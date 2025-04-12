@@ -22,7 +22,8 @@ MonoBehaviour:
   _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
-  _skillEffect: []
+  _skillEffect:
+  - {fileID: 8878024292147044905, guid: 45d1af4b5e5001f43a21d531bd77492c, type: 3}
   _targetingType: 0
   _allySkillType: 0
   _baseAttack: 2
@@ -31,4 +32,4 @@ MonoBehaviour:
   cost: 4
   _image: {fileID: 0}
   _playerSkillType: 0
-  _duration: 0
+  _duration: 30

@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     {
         leftSpawnPosition = GameObject.Find("LeftEnemySpawn").transform;
         rightSpawnPosition = GameObject.Find("RightEnemySpawn").transform;
-        SetDestinationWhenSpawn();
+        
     }
 
     private void Start()
@@ -205,9 +205,9 @@ public class Enemy : MonoBehaviour
         _defense = originalDefense;
     }
 
-    public void SetDestinationWhenSpawn()
+    public void SetDestinationWhenSpawn(bool dir)
     {
-        if (transform == leftSpawnPosition)
+        if (!dir)
         {
             _destination = GameObject.Find("LeftDestination").transform;
         }

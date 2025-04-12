@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class KnockbackSkill : ISkill<Ally>
+public class JandarkSkill : ISkill<Ally>
 {
     public void Activate(Ally ally)
     {
