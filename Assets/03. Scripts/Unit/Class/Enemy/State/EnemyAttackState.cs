@@ -16,10 +16,20 @@ public class EnemyAttackState : IState<Enemy>
         
         if (_attackTimer <= 0f) 
         {
-            if (enemy.IsTargetInRange()) // 사정거리 안인 경우
+            if (enemy.IsTargetInRange()) 
             {
-                enemy.PerformAttack();
-                _attackTimer = 1f / enemy.EnemyData.AtkSpeed;
+                switch (enemy.EnemyData.EnemyName)
+                {
+                    case "Basic3" :
+                        
+                        break;
+                    default: 
+                        enemy.PerformAttack();
+                        break;
+                        
+                }
+               
+                _attackTimer = 1f / enemy.AtkSpeed;
             }
             else
             {

@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     private StateMachine<Enemy> _stateMachine;
     private bool _isDead = false;
     private bool _dir=false;
-    private float _attackCooldown;
+    private float _atkSpeed;
     private float _moveSpeed;
     private float _attackRange;
     private float _hp;
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         _enemyData = data;
         _hp = _enemyData.MaxHp;
         _moveSpeed = _enemyData.MoveSpeed;
-        _attackCooldown = 1f / _enemyData.AtkSpeed;
+        _atkSpeed = _enemyData.AtkSpeed;
         _attackRange = _enemyData.ATKRange;
         _defense = _enemyData.Deffense; 
         _skill = CreateSkillFromData(_enemyData.Skill);
@@ -228,7 +228,7 @@ public class Enemy : MonoBehaviour
 
     public Transform GetDestination() => _destination;
 
-    
+    public float AtkSpeed => _atkSpeed;
     public Animator EnemyAnimatior => _animator;
     public float MoveSpeed => _moveSpeed;
     public bool Direction => _dir;

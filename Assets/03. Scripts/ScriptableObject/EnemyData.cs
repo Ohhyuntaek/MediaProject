@@ -16,7 +16,8 @@ public enum EnemyType
 [CreateAssetMenu(fileName = "NewEnemyData", menuName = "SO/Enemy Data")]
 public class EnemyData : ScriptableObject
 {
-    [Header("기본 능력치")]
+    [Header("기본 능력치")] 
+    [SerializeField] private string _enemyName;
     [SerializeField] private float _moveSpeed = 0.5f; 
     [SerializeField] private int _maxHp;
     [SerializeField] private float _atkSpeed;        
@@ -29,6 +30,7 @@ public class EnemyData : ScriptableObject
     [SerializeField] private EnemySkill _enemySkill;
     [SerializeField] private EnemyType _enemyType;
 
+    public string EnemyName => _enemyName;
     public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
     public int MaxHp { get => _maxHp; set => _maxHp = value; }
     public float AtkSpeed { get => _atkSpeed; set => _atkSpeed = value; }
