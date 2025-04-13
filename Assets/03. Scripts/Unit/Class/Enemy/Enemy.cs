@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     private float _attackRange;
     private float _hp;
     private float _defense;
+    private bool _hide = false;
 
     [SerializeField] private Slider hpSlider;
     
@@ -104,11 +106,14 @@ public class Enemy : MonoBehaviour
     // 외부에서 데미지를 받을 때 호출
     public void TakeDamage(int damage)
     {
-        _hp -= damage;
-        Debug.Log("데미지 받음 ㅠㅠ ");
-        if (_hp <= 0)
+        if (!_hide)
         {
-            _stateMachine.ChangeState(new EnemyDeadState());
+            _hp -= damage;
+            Debug.Log("데미지 받음 ㅠㅠ ");
+            if (_hp <= 0)
+            {
+                _stateMachine.ChangeState(new EnemyDeadState());
+            }
         }
     }
 
@@ -122,6 +127,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void PerformHide(float time)
+    {
+        StartCoroutine(Hide(time));
+    }
+    
+    public IEnumerator Hide(float time)
+    {
+        _hide = true;
+        yield return new WaitForSeconds(time);
+        _hide = false;
+    }
    
 
     private ISkill<Enemy> CreateSkillFromData(EnemySkill skillType)

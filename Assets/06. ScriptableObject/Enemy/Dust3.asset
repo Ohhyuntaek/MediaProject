@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa53806cb9555174f9cfd38814442e54, type: 3}
   m_Name: Dust3
   m_EditorClassIdentifier: 
+  _enemyName: Basic3
   _moveSpeed: 0.5
   _maxHp: 15
   _atkSpeed: 0.5
