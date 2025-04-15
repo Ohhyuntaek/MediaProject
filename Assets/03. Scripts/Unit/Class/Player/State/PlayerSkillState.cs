@@ -1,21 +1,23 @@
 using UnityEngine;
 
-public class PlayerSkillState : IState<Player>
+public class PlayerActiveSkillState : IState<Player>
 {
-    private float _duration;
+    private bool finished = false;
 
     public void Enter(Player player)
     {
-        player.Animator?.SetTrigger("3_Skill");
-        player.PerformSkill(); 
-        _duration = 1f; 
+        player.Animator?.SetTrigger("5_Active");
+        
+        
     }
 
     public void Update(Player player)
     {
-        _duration -= Time.deltaTime;
-        if (_duration <= 0f)
+        AnimatorStateInfo stateInfo = player.Animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("ActiveSkill") && stateInfo.normalizedTime > 0.9f &&!finished)
         {
+            player.PerformActiveSkill();
+            finished = true;
             player.ChangeState(new PlayerIdleState());
         }
     }

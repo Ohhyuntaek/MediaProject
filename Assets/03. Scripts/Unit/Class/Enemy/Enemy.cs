@@ -24,7 +24,8 @@ public class Enemy : MonoBehaviour
     private float _hp;
     private float _defense;
     private bool _hide = false;
-
+    private float _damage;
+    private Player _player;
     [SerializeField] private Slider hpSlider;
     
     public Animator Animator => _animator;
@@ -36,6 +37,7 @@ public class Enemy : MonoBehaviour
         leftSpawnPosition = GameObject.Find("LeftEnemySpawn").transform;
         rightSpawnPosition = GameObject.Find("RightEnemySpawn").transform;
         
+
     }
 
     private void Start()
@@ -57,12 +59,14 @@ public class Enemy : MonoBehaviour
         _moveSpeed = _enemyData.MoveSpeed;
         _atkSpeed = _enemyData.AtkSpeed;
         _attackRange = _enemyData.ATKRange;
-        _defense = _enemyData.Deffense; 
+        _damage = _enemyData.Damage;
+        _defense = _enemyData.Deffense;
+        _player = GameObject.FindFirstObjectByType<Player>();
         _skill = CreateSkillFromData(_enemyData.Skill);
         if (_destination.gameObject.name.Contains("Right")) _dir = true;
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
-
+        _target = _player.transform;
         hpSlider.maxValue = _hp;
     }
 
@@ -99,7 +103,10 @@ public class Enemy : MonoBehaviour
     // 공격 수행 메서드 (상태 전환에 따라 호출)
     public void PerformAttack()
     {
-      Debug.Log("적 공격");
+        if (IsTargetInRange())
+        {
+            _player.TakeDamage(_damage);
+        }
     }
 
     public void PerformSkill()
@@ -255,7 +262,7 @@ public class Enemy : MonoBehaviour
     }
 
     public Transform GetDestination() => _destination;
-
+    public float AttakcDamage => _damage;
     public float AtkSpeed => _atkSpeed;
     public Animator EnemyAnimatior => _animator;
     public float MoveSpeed => _moveSpeed;
