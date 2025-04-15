@@ -31,7 +31,7 @@ public class AllyBuffState : IState<Ally>
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Buff") && !finished && stateInfo.normalizedTime > 0.9f)
         {
-            if (ally.UnitData.UnitName == "KnockbackWarrior")
+            if (ally.UnitData.UnitName == "Jandark")
             {
                 ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
                 ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));

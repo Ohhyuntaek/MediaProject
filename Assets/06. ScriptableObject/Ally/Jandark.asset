@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eacdbdd950bb79f47bcfb029c181a17a, type: 3}
   m_Name: Jandark
   m_EditorClassIdentifier: 
-  _unitName: KnockbackWarrior
+  _unitName: Jandark
   _unitFaction: 0
   _unitType: 2
   _damageType: 1
@@ -25,10 +25,11 @@ MonoBehaviour:
   _skillEffect:
   - {fileID: 0}
   _targetingType: 1
-  _allySkillType: 5
+  _allySkillType: 4
   _baseAttack: 2
   _attackSpeed: 1
   _maxHP: 100
+  cost: 0
   _image: {fileID: 0}
   _playerSkillType: 0
   _duration: 5

@@ -21,3 +21,5 @@ MonoBehaviour:
   _defense: 0
   _enemySkill: 1
   _enemyType: 0
+  _skillEffets:
+  - {fileID: 3996385818474005294, guid: c55b397445111c540a83152a197d13e3, type: 3}

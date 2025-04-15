@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemySkill
@@ -29,6 +30,7 @@ public class EnemyData : ScriptableObject
     [Header("스킬 및 타입")]
     [SerializeField] private EnemySkill _enemySkill;
     [SerializeField] private EnemyType _enemyType;
+    [SerializeField] private List<GameObject> _skillEffets;
 
     public string EnemyName => _enemyName;
     public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
@@ -37,6 +39,7 @@ public class EnemyData : ScriptableObject
     public int Damage { get => _damage; set => _damage = value; }
     public int ATKRange{get => _range; set => _range = value; }
     public float Deffense { get => _defense; set => _defense = value; }
+    public List<GameObject> EnemyEffect => _skillEffets;
     public EnemySkill Skill { get => _enemySkill; set => _enemySkill = value; }
     public EnemyType Type { get => _enemyType; set => _enemyType = value; }
 }

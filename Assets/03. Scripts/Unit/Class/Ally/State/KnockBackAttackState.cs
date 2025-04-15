@@ -11,6 +11,7 @@ public class KnockbackAttackState : IState<Ally>
     {
         //ally.StartCoroutine(AttackRoutine(ally));
         ally.Animator.SetTrigger("2_1KnockBack");
+        Debug.Log("넉백 스테이트");
     }
 
     
@@ -31,7 +32,7 @@ public class KnockbackAttackState : IState<Ally>
            
             switch (_unitName)
             {
-                case "KnockbackWarrior":
+                case "Jandark":
                     
                     if (ally.OnTile)
                     { 

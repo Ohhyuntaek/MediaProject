@@ -311,8 +311,8 @@ public class Ally : MonoBehaviour
 
     public void ApplyKnockback(List<Enemy> targets)
     {
-        float knockbackDistance = 0.5f;
-        float knockbackDuration = 0.2f;
+        float knockbackDistance = 1f;
+        float knockbackDuration = 0.5f;
     
         foreach (Enemy enemy in targets)
         {

@@ -36,7 +36,7 @@ public class CentaurLadyProjectile : MonoBehaviour
        
         if (((1 << collision.gameObject.layer) & enemyLayer) != 0)
         {
-            // 충돌한 대상에 Enemy 컴포넌트가 있다면
+           
             Enemy enemy = collision.GetComponent<Enemy>();
             if (enemy != null)
             {
@@ -49,7 +49,7 @@ public class CentaurLadyProjectile : MonoBehaviour
                 }
                 else
                 {
-                    // ownerAlly 참조가 없으면, 직접 넉백 처리(여기선 간단히 위치를 변경)
+                    
                     Transform destination = enemy.GetDestination();
                     if (destination != null)
                     {

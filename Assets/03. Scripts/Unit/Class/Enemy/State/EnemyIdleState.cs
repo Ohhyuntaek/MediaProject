@@ -30,6 +30,6 @@ public class EnemyIdleState : IState<Enemy>
 
     public void Exit(Enemy enemy)
     {
-        //데미지 입히는 함수
+      
     }
 }

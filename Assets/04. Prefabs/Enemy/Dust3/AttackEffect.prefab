@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2855154123291629062}
   - component: {fileID: 5090939318348745119}
   - component: {fileID: 1163943694232741563}
+  - component: {fileID: 5322766756648241802}
   m_Layer: 0
   m_Name: AttackEffect
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3996385818474005294}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2641866, w: 0.96447164}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -74,12 +75,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 538184457
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1820023572244415798, guid: f4695d74a6c6f92419fc83f23d385f68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.234375, y: 0.078125}
@@ -98,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 3996385818474005294}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ba3e0aa837892d340b1ecedcdd79a9b1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 19491c1976616254b96ccde312a4dff3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -110,3 +111,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5322766756648241802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3996385818474005294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c366b321bc6d5b4ca7d58b3d7e19de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

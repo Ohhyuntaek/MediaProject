@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Sirenix.Serialization;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -85,7 +86,7 @@ public class Enemy : MonoBehaviour
     
     public bool IsTargetInRange()
     {
-        if (Vector3.Distance(transform.position, _destination.position) < 0.1f)
+        if (Vector3.Distance(transform.position, _destination.position) < 0.5f)
         {
             return true;
         }
@@ -98,10 +99,14 @@ public class Enemy : MonoBehaviour
     // 공격 수행 메서드 (상태 전환에 따라 호출)
     public void PerformAttack()
     {
-        Debug.Log($"[{name}] 공격 수행!");
-        // 예시: 타겟에게 데미지 적용 등 추가 로직 구현
+      Debug.Log("적 공격");
+    }
+
+    public void PerformSkill()
+    {
         _skill.Activate(this);
     }
+    
 
     // 외부에서 데미지를 받을 때 호출
     public void TakeDamage(int damage)
@@ -145,7 +150,7 @@ public class Enemy : MonoBehaviour
         return skillType switch
         {
             //EnemySkill.None => new NoneSkill<Enemy>(),
-            //EnemySkill.Basic3 => new Basic3Skill(),
+            EnemySkill.Basic3 => new Basic3(),
             _ => null
         };
     }
@@ -156,6 +161,13 @@ public class Enemy : MonoBehaviour
         ChangeState(new EnemyStunState(duration));
     }
 
+    public void SpawAttackEffect(Vector3 spawnPosition,int skullnum)
+    {
+        GameObject effectPrefeb = _enemyData.EnemyEffect[skullnum];
+        GameObject effectObject =Instantiate(effectPrefeb, spawnPosition, effectPrefeb.transform.rotation);
+        
+    }
+    
     public void ApplyDebuff(DebuffType type,float duration)
     {
         switch (type)

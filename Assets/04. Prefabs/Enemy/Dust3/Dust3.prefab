@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7119174467297996150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3689042775797319521}
+  m_Layer: 0
+  m_Name: EffectSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3689042775797319521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7119174467297996150}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.27053615, y: -0.9434712, z: 0.18408182, w: 0.052784644}
+  m_LocalPosition: {x: -0.29, y: -0.1609, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2853700429264222545}
+  m_LocalEulerAnglesHint: {x: 22.080696, y: 180, z: 328}
 --- !u!1 &7539539845320411546
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +63,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3689042775797319521}
   - {fileID: 370885780157115662}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -233,11 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5473745386314546658, guid: 02b145c3fe956ee44a9f000c7463d5d2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.88
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: 5473745386314546658, guid: 02b145c3fe956ee44a9f000c7463d5d2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.729
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5473745386314546658, guid: 02b145c3fe956ee44a9f000c7463d5d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
