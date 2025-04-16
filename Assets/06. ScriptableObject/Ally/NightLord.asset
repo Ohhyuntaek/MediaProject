@@ -28,6 +28,7 @@ MonoBehaviour:
   _baseAttack: 3
   _attackSpeed: 2
   _maxHP: 30
+  cost: 4
   _image: {fileID: 0}
   _playerSkillType: 0
   _duration: 5

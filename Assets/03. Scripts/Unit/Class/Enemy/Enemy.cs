@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
         if (!_hide)
         {
             _hp -= damage;
-            Debug.Log("데미지 받음 ㅠㅠ ");
+            //Debug.Log("데미지 받음 ㅠㅠ ");
             if (_hp <= 0)
             {
                 _stateMachine.ChangeState(new EnemyDeadState());

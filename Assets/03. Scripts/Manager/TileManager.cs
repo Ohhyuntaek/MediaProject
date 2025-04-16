@@ -38,6 +38,7 @@ public class TileManager : MonoBehaviour
             if (tile.transform.position == position)
             {   
                 tile.isOccupied = false;
+                tile.ally = null;
                 break;
             }
         }

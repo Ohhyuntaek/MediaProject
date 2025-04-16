@@ -32,4 +32,4 @@ MonoBehaviour:
   cost: 4
   _image: {fileID: 0}
   _playerSkillType: 0
-  _duration: 30
+  _duration: 5

@@ -20,7 +20,7 @@ public class AllyPoolManager : MonoBehaviour
 {
     public static AllyPoolManager Instance;
     public AllyPool[] allyPools;
-
+    private int _spawnCount = 0;
     // 현재 활성화 된 Ally 리스트
     [FormerlySerializedAs("activateAillies")] public List<GameObject> activateAllies = new();
     
@@ -60,8 +60,9 @@ public class AllyPoolManager : MonoBehaviour
             {
                 ally.ApplyTileBonus(); // 강화 효과 부여
             }
-
+            
             activateAllies.Add(obj);
+            _spawnCount++;
             return obj;
         }
 
@@ -94,5 +95,10 @@ public class AllyPoolManager : MonoBehaviour
         {
             Debug.Log($"활성 Ally: {ally.name} - 위치: {ally.transform.position}");
         }
+    }
+    public int SpawnCount
+    {
+        get => _spawnCount;
+        set => _spawnCount = value;
     }
 }

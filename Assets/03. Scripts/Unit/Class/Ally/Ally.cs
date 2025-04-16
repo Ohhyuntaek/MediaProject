@@ -25,6 +25,7 @@ public class Ally : MonoBehaviour
     private int _lastKnockbackEnemyCount = 0;
     private StateMachine<Ally> _stateMachine;
     private float _lifeTimer;
+    private bool _CanCC = true;
     private ISkill<Ally> _skill;
     [SerializeField] private bool _isDead=false;
     private int _baseAttack;
@@ -55,9 +56,9 @@ public class Ally : MonoBehaviour
     {
         transform.position = position;
         _occupiedTile = tile;
+        tile.ally = this;
         _isOnTile = true;
         _isDead = false;
-
         _maxSpawnTime = UnitData.Duration;
         _SpawnTimeSlider.maxValue = _maxSpawnTime;
         _SpawnTimeSlider.value = _maxSpawnTime;
@@ -187,7 +188,10 @@ public class Ally : MonoBehaviour
             if (_occupiedTile != null)
             {
                 _occupiedTile.isOccupied = false;
+                _occupiedTile.ally = null;
                 _occupiedTile = null;
+                
+                
             }
             
             // 오브젝트 풀에 복귀
@@ -222,6 +226,13 @@ public class Ally : MonoBehaviour
         // TODO: 가장 가까운 적 1명 탐지
         return null;
     }
+
+    public List<Ally> GetAroundAllies()
+    {
+        return _occupiedTile.GetAroundAlly();
+    }
+
+   
 
     public List<Enemy> DetectTargets(int range)
     {
@@ -279,7 +290,7 @@ public class Ally : MonoBehaviour
                 Collider2D[] cols = Physics2D.OverlapBoxAll(cellCenter, cellSize, 0f, _enemyLayer);
                 foreach (Collider2D col in cols)
                 {
-                    Debug.Log($"{gameObject.name}이 셀 {cell}에서 {col.name} 을(를) 찾았다");
+                    //Debug.Log($"{gameObject.name}이 셀 {cell}에서 {col.name} 을(를) 찾았다");
                     Enemy enemy = col.GetComponent<Enemy>();
                     if (enemy != null && !targets.Contains(enemy) && _dir == enemy.Direction)
                         targets.Add(enemy);
@@ -372,7 +383,7 @@ public class Ally : MonoBehaviour
         foreach (GameObject _ally in _spawnList)
         {
             _ally.GetComponent<Ally>().ApplySpeedBuffDebuff(_increaseSpd,2f,true);
-            Debug.Log("스피드 버프 적용 " + _ally.name);
+           
         }
 
     }
@@ -429,6 +440,18 @@ public class Ally : MonoBehaviour
         return nearestEnemies;
     }
 
+    public IEnumerator CanCCByDuration(float duration)
+    {
+        _CanCC = false;
+        yield return new WaitForSeconds(duration);
+        _CanCC = true;
+    }
+
+    public void SetCanCCByDuration(float duration)
+    {
+        StartCoroutine(CanCCByDuration(duration));
+    }
+    
     public void GetFlip()
     {
 

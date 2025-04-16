@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private int _chargeSpd;
     private int _currentEnergy;
     private int _MaxEnergy;
+    private bool _CanUpdatePassive = true;
     public Animator Animator => _animator;
     public PlayerData PlayerData => _playerData;
     public bool CanUseActiveSkill => _canUseActiveSkill;
@@ -53,22 +54,25 @@ public class Player : MonoBehaviour
     private void Update()
     {
         _stateMachine?.Update();
-
+        UpdatePassiveSkill();
         if(_hp <= 0 &&!_isDead)
         {
             _isDead = true;
             _stateMachine.ChangeState(new PlayerDeadState());
         }
-
-        
-        if(!_canUseActiveSkill)
-        {
-            _activeSkillCooldownTimer -= Time.deltaTime;
-            if(_activeSkillCooldownTimer <= 0f)
-                _canUseActiveSkill = true;
+        else
+        {   
+            UpdatePassiveSkill();
+            if(!_canUseActiveSkill)
+            {
+                _activeSkillCooldownTimer -= Time.deltaTime;
+                if(_activeSkillCooldownTimer <= 0f)
+                    _canUseActiveSkill = true;
+            }
+            _energyTimer += Time.deltaTime; 
+            ChargeMana();
         }
-
-        _energyTimer += Time.deltaTime; 
+        
 
     }
 
@@ -85,13 +89,14 @@ public class Player : MonoBehaviour
         _canUseActiveSkill = false;
         _activeSkillCooldownTimer = ActiveSkillCooldownTime;
     }
-
+    
    
     public void UpdatePassiveSkill()
     {
         if(_passiveSkill != null)
-        {
+        {   
             _passiveSkill.Activate(this);
+            
         }
     }
 
@@ -140,9 +145,10 @@ public class Player : MonoBehaviour
     {
         return skillType switch
         {
-            //AllySkillType.Jandark => new JanDarkPlayerActiveSkill()
-            _ => null
+            AllySkillType.Jandark => new JandarkPassiveSkill()
+           
         };
     }
     public int Energy {get => _currentEnergy; set => _currentEnergy = value;}
+    
 }
