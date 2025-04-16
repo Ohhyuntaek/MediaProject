@@ -147,5 +147,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotIndex: 0
   cardType: 2
-  allyType: 5
+  allyType: 4
   lineType: 2
