@@ -14,6 +14,8 @@ public class BookUISequence : MonoBehaviour
         buttonGroup.alpha = 0f;
         buttonGroup.interactable = false;
         buttonGroup.blocksRaycasts = false;
+
+        StartCoroutine(FadeInButtons());
     }
 
     IEnumerator FadeInButtons()
