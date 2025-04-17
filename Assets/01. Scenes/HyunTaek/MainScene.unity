@@ -215,7 +215,6 @@ RectTransform:
   m_Children:
   - {fileID: 1232717312}
   - {fileID: 808177660}
-  - {fileID: 1983398174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -769,7 +768,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1983398174}
   m_Father: {fileID: 19377679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -862,9 +862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8d7edfbfbfc9045a0e79a53c5104b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonGroup: {fileID: 1983398175}
+  firstLeftPageButtonGroup: {fileID: 1983398175}
   fadeDuration: 0.5
   delayAfterBook: 0.1
+  animator: {fileID: 0}
 --- !u!1 &846059757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,7 +1831,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1927249319}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 808177665}
+        m_TargetAssemblyTypeName: BookManager, Assembly-CSharp
+        m_MethodName: OnNewGameButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1927249319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1880,7 +1893,7 @@ GameObject:
   - component: {fileID: 1983398174}
   - component: {fileID: 1983398175}
   m_Layer: 5
-  m_Name: PageGroup
+  m_Name: FirstLeftPageGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1893,14 +1906,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983398173}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1202794141}
   - {fileID: 1120108137}
-  m_Father: {fileID: 19377679}
+  m_Father: {fileID: 808177660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
