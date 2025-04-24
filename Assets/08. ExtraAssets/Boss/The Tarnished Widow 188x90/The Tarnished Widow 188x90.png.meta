@@ -1,0 +1,2669 @@
+fileFormatVersion: 2
+guid: 68d02a380ff3a904eae73109e40fb882
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Idle1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 629
+        width: 65
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b9fb566ac2032d43be9020987f42f8b
+      internalID: -1443871640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 629
+        width: 64
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d308b594d50834d9d5d4b5e94feefd
+      internalID: 1572538417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 629
+        width: 64
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af008384dfd62a54095f9c2945258ed1
+      internalID: 1445588003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle4
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 629
+        width: 65
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d4de4881e47b224aaf7fd13f5e766eb
+      internalID: -1247669545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle5
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 629
+        width: 64
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5197382, y: -0.0000013268512}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8831f2e27698f414ab3790c34abadff5
+      internalID: 1392212481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle6
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 629
+        width: 65
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5233211, y: 0.019650608}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50660b99578876458c9932f225de1c4
+      internalID: 2098053600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle7
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 629
+        width: 64
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5138149, y: 0.005613878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613ed6c9dad42254da9ccdc81d239d5b
+      internalID: 1686080291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle8
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 629
+        width: 65
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5291523, y: 0.014035373}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2dc8bff5ddf8f14b97f0031f1e30efb
+      internalID: -532566508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle9
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 629
+        width: 64
+        height: 45
+      alignment: 9
+      pivot: {x: 0.45459366, y: 0.008420139}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 421dc356b6852ff4095c309584fe0ebf
+      internalID: 2031642255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 538
+        width: 65
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eadd560caaf6c845b443260cbc4713b
+      internalID: 1974569745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk2
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 538
+        width: 63
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7581b3f31d21a66458c66fda4f943270
+      internalID: -1117514625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk3
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 538
+        width: 64
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c2de8312c2511240a42895664bfe5db
+      internalID: 1252156071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk4
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 538
+        width: 67
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37095b3019fa7504c84ac06e44af399d
+      internalID: -1754711074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk5
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 538
+        width: 68
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b1c764fd9cf87a4eb3304f0d175eeaf
+      internalID: 1578069127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk6
+      rect:
+        serializedVersion: 2
+        x: 1001
+        y: 538
+        width: 68
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e45d2d995a58349857ef8ee9f7faf8
+      internalID: 1221026348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk7
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 538
+        width: 69
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68c0bf703d39a4e4cac4a306eafa02f8
+      internalID: -1186085761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk8
+      rect:
+        serializedVersion: 2
+        x: 1376
+        y: 538
+        width: 68
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a435f7a18075a0f46beb04f26cab99a4
+      internalID: 1359945122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk9
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 538
+        width: 70
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea76ddc5bd80bc42807184c05f2f7f2
+      internalID: -601097758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk10
+      rect:
+        serializedVersion: 2
+        x: 1748
+        y: 538
+        width: 65
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 550b9569a1c506f4393b102f36152258
+      internalID: -1738459697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk11
+      rect:
+        serializedVersion: 2
+        x: 1933
+        y: 538
+        width: 65
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d98a1609d298994f9e7ff59891845ab
+      internalID: -1400329492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 449
+        width: 65
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eacd66f988fd3d49ad98675f4035b67
+      internalID: -1615725527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 449
+        width: 71
+        height: 51
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48ff76350fd673641a22ad057d3ae5b1
+      internalID: -1973787514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 449
+        width: 69
+        height: 53
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae5aea17cf5123c419f7c4e62ed2f8c6
+      internalID: -164454583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack4
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 449
+        width: 68
+        height: 53
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e2586dc236d10a4ba1a9a9f99aeca23
+      internalID: 1406816073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack5
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 448
+        width: 114
+        height: 40
+      alignment: 9
+      pivot: {x: 0.3423644, y: 0.026235199}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07cb7eb0dbdbf0e4dbc5980eae65fb76
+      internalID: -821543058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack6
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 449
+        width: 121
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b8aaae9d9e954449a82380139983a5
+      internalID: -2061092198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack7
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 449
+        width: 122
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b859133cb4365fd4bb75ba718db4baa9
+      internalID: -1899723685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack8
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 449
+        width: 120
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 880a6d690038bbd4496c3834087df7f5
+      internalID: -889888980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack9
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 449
+        width: 122
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03aa8621292788446824c0af00690174
+      internalID: -1448746292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack10
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 449
+        width: 126
+        height: 40
+      alignment: 9
+      pivot: {x: 0.31423998, y: 0.0075019835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebc0bc319ca43c342af9be724e70dd1a
+      internalID: -799158039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack11
+      rect:
+        serializedVersion: 2
+        x: 1932
+        y: 449
+        width: 127
+        height: 40
+      alignment: 9
+      pivot: {x: 0.30388877, y: 0.015003967}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a52d41253f2b74696590c7626d066c
+      internalID: -1457854158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack12
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 448
+        width: 86
+        height: 40
+      alignment: 9
+      pivot: {x: 0.4371934, y: 0.02250595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88e902f2ccbdcd240861c9fbbe73a35b
+      internalID: -1121083985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack13
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 448
+        width: 85
+        height: 40
+      alignment: 9
+      pivot: {x: 0.4463178, y: 0.11407928}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2966dc2baecc4f74786594126d30de78
+      internalID: 1311464717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack14
+      rect:
+        serializedVersion: 2
+        x: 2495
+        y: 449
+        width: 83
+        height: 40
+      alignment: 9
+      pivot: {x: 0.4183482, y: 0.09991608}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 658555ef51f0cf541ae6da02679060c4
+      internalID: 1026754656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_38
+      rect:
+        serializedVersion: 2
+        x: 2683
+        y: 449
+        width: 75
+        height: 40
+      alignment: 9
+      pivot: {x: 0.4530371, y: 0.05635605}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2f1debdb2ce4ef47b108ca4ef12c487
+      internalID: -1973598953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_39
+      rect:
+        serializedVersion: 2
+        x: 2872
+        y: 449
+        width: 66
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e16f5fbe894e4438f97a54cfd5eba0
+      internalID: 1253584388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_40
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 449
+        width: 65
+        height: 43
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c593a92803a09c4d85a1fe9350b5f3a
+      internalID: -1734543950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_41
+      rect:
+        serializedVersion: 2
+        x: 3249
+        y: 449
+        width: 64
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 093b1c12390ad07428f31845cfc0a49c
+      internalID: -268405027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 358
+        width: 65
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e0218eb3e2204f4fbf92785ff1c56d7
+      internalID: -1507510448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 358
+        width: 64
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53c2093c7892a834a83e688689711bd5
+      internalID: -1851030852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit3
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 359
+        width: 64
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e66fc8cb03760942aa7d17b785f4886
+      internalID: 1677937965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit4
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 358
+        width: 116
+        height: 42
+      alignment: 9
+      pivot: {x: 0.3331246, y: 0.01707168}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7930afb996c50a64fa5633e0a2669f1d
+      internalID: -2119304229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit5
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 358
+        width: 126
+        height: 40
+      alignment: 9
+      pivot: {x: 0.30369303, y: 0.035848998}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19fbeb4b3a23bbc4584bfd317a4cd11f
+      internalID: -745598816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit6
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 358
+        width: 136
+        height: 40
+      alignment: 9
+      pivot: {x: 0.28649724, y: 0.017925262}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c5e068c61326743b3da0622933c5c8
+      internalID: 1326164591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit7
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 358
+        width: 135
+        height: 42
+      alignment: 9
+      pivot: {x: 0.28226092, y: 0.025607154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6467b53eb4ae3545b97df4984756657
+      internalID: -370551232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spit8
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 358
+        width: 137
+        height: 42
+      alignment: 9
+      pivot: {x: 0.27497274, y: 0.034141906}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717526be994a17e4c990fab892335e3c
+      internalID: -637934793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump9
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 273
+        width: 71
+        height: 127
+      alignment: 9
+      pivot: {x: 0.4940581, y: 0.016902173}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09532bb5106bbca4a988663302ef9237
+      internalID: -392728581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump10
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 274
+        width: 75
+        height: 126
+      alignment: 9
+      pivot: {x: 0.50429523, y: 0.014704387}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c055b9445d33f5943a68de46db91231c
+      internalID: 1669159459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump11
+      rect:
+        serializedVersion: 2
+        x: 1929
+        y: 271
+        width: 74
+        height: 129
+      alignment: 9
+      pivot: {x: 0.4971462, y: 0.007479172}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d49c3457ab3bd4ca424e58fa07102e
+      internalID: 1097237515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump13
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 275
+        width: 73
+        height: 125
+      alignment: 9
+      pivot: {x: 0.50219727, y: 0.019252686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ffbabe96bee82c49bc57319902c1cd5
+      internalID: 228624179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump14
+      rect:
+        serializedVersion: 2
+        x: 2495
+        y: 277
+        width: 74
+        height: 123
+      alignment: 9
+      pivot: {x: 0.5004091, y: 0.0050463174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 073b16337d51d0e4f93ff64c3e15826f
+      internalID: 449342263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump15
+      rect:
+        serializedVersion: 2
+        x: 2683
+        y: 278
+        width: 73
+        height: 122
+      alignment: 9
+      pivot: {x: 0.5001806, y: 0.010320194}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c26664fb8bf51b419cb7d2dad5b61e4
+      internalID: 9458899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump16
+      rect:
+        serializedVersion: 2
+        x: 2872
+        y: 279
+        width: 64
+        height: 122
+      alignment: 9
+      pivot: {x: 0.49890137, y: 0.017583378}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 778e88323cb732d40a2fe7d8095a8ec3
+      internalID: -618652168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump8
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 269
+        width: 53
+        height: 81
+      alignment: 9
+      pivot: {x: 0.47694254, y: 0.009862829}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12111c68aea410d44b58c397221b66df
+      internalID: 1696669377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 269
+        width: 64
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c6597621eb618f45af4bf15d667db86
+      internalID: 2087489059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump3
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 269
+        width: 64
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47cdb501fea14df4485407191a18c1fd
+      internalID: 275235630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 269
+        width: 65
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5e467271885df14182dd363ee7925b4
+      internalID: 403622069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump4
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 269
+        width: 65
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 183e7380748c0b64c97e7968614fd6f8
+      internalID: 1384957904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump5
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 270
+        width: 64
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc41b41c022efe54782beb4a4d773bdb
+      internalID: -1133617570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump6
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 269
+        width: 65
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1bfa3744fda464687680e39c125a08
+      internalID: -764355778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump7
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 269
+        width: 64
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83face174be27674e9addaa454d7e386
+      internalID: 467843903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 176
+        width: 53
+        height: 85
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97cecbc8bd7cdaf40b63ff4d565238ac
+      internalID: -300324421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land2
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 178
+        width: 139
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 001630e789a41f843a5858286d486ff0
+      internalID: -1237666807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land3
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 178
+        width: 142
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a731d17bf227b4fa175425a65d6a92
+      internalID: 1756395650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land4
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 178
+        width: 145
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67b79f8a738ae1e4cb44a4c54f5944b3
+      internalID: 1924834305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land5
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 178
+        width: 149
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75dc03c3fafcf2347b0adf844a59bada
+      internalID: 1819498179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land6
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 178
+        width: 146
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d867d4a376d42cb4a98bc908333f6927
+      internalID: 1440335567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land7
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 178
+        width: 148
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8140f25cd612f1847a653db0e7e2cd9c
+      internalID: 611430784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land8
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 178
+        width: 150
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99c3bd901fe1192409d9d58a74d0e56b
+      internalID: 1297422179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land9
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 178
+        width: 130
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5d7882c8cc1e1e4cb2a084246627c5d
+      internalID: 1586831375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land10
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 179
+        width: 75
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cdfca657659d504ca694bd332b24a73
+      internalID: -1591775467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_239
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 89
+        width: 68
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79d28dfc15bd8794c9337c6c6327714c
+      internalID: 1162394080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_246
+      rect:
+        serializedVersion: 2
+        x: 2495
+        y: 89
+        width: 64
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe207ee722fd74c47ac06bc3ef361ecf
+      internalID: 1802976604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_247
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 90
+        width: 76
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1516ca4e756e9d34d94a711dc79309ce
+      internalID: 804368303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_248
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 89
+        width: 68
+        height: 55
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f9bfe57f8bf0dc4aa1b80e3e93fea26
+      internalID: 892450584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_249
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 89
+        width: 64
+        height: 57
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34812ae87810bb84abe7deb2200425ab
+      internalID: 1646550928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_251
+      rect:
+        serializedVersion: 2
+        x: 1932
+        y: 89
+        width: 69
+        height: 55
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aa971894cd2ae94a8adebc9f7df1622
+      internalID: 1533572215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_252
+      rect:
+        serializedVersion: 2
+        x: 2120
+        y: 89
+        width: 68
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 111533a499f4c7046af550678fa571f3
+      internalID: 434073042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_256
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 89
+        width: 68
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbf7ffd455294124da4c53261fabb3a4
+      internalID: 360971468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_257
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 89
+        width: 70
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57505d274c59b8a4a9654c9b2e3c1d91
+      internalID: 2091234381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_260
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 89
+        width: 65
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f6bd6ecf0bbb4546807bd35f0739d19
+      internalID: -1801789691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_261
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 89
+        width: 65
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26573a9a64c9ff647af71ae2861cbdf3
+      internalID: -341312569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_262
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 89
+        width: 64
+        height: 35
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ba61a09b2ec4214481f8ffa97242d76
+      internalID: -576401881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_266
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 89
+        width: 64
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b0272183c414c1418dad5dd97c5adae
+      internalID: 348725036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: The Tarnished Widow 188x90_267
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 89
+        width: 65
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b37ec40891d9514f81ea4b42272db23
+      internalID: 1538254981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death2
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 86
+        height: 54
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9c17843c6d22e448a6abc4665a7168e
+      internalID: 794933984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 0
+        width: 65
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a7ce60369a64a4eb0d4203df0d6b7f
+      internalID: -1237911465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death3
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 0
+        width: 110
+        height: 60
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b99e30da96cfe624e9f250fb3550137e
+      internalID: -721430029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death4
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 0
+        width: 134
+        height: 67
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6362753a847ddd47919c8cdb778584f
+      internalID: -775089211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death5
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 0
+        width: 136
+        height: 63
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec0de420092851a449334b7f0748b477
+      internalID: -1379812478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death6
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 0
+        width: 152
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dcacb79d76cc0e4291839bfec9e93ed
+      internalID: -1335573294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death7
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 0
+        width: 158
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c55f34fb57fd4f840b53c052c7c24e4a
+      internalID: -459833523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death8
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 0
+        width: 162
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff44d5e2cec8fd7458a67b81aba8cddf
+      internalID: 490215332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death9
+      rect:
+        serializedVersion: 2
+        x: 1503
+        y: 0
+        width: 166
+        height: 58
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b7d91528d724b4eae32c4088d1d0b4
+      internalID: 1998102799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Death10
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 0
+        width: 86
+        height: 53
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2fb12177ac564d40a826ce0d8efcd2a
+      internalID: -1632261890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump12
+      rect:
+        serializedVersion: 2
+        x: 2121
+        y: 275
+        width: 73
+        height: 123
+      alignment: 9
+      pivot: {x: 0.50949806, y: 0.0034492307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec5baa13fe2151c428c60929d6fd9e31
+      internalID: -837116682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b5459726cb32b83409ff6504e082372f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Attack1: -1615725527
+      Attack10: -799158039
+      Attack11: -1457854158
+      Attack12: -1121083985
+      Attack13: 1311464717
+      Attack14: 1026754656
+      Attack2: -1973787514
+      Attack3: -164454583
+      Attack4: 1406816073
+      Attack5: -821543058
+      Attack6: -2061092198
+      Attack7: -1899723685
+      Attack8: -889888980
+      Attack9: -1448746292
+      Death1: -1237911465
+      Death10: -1632261890
+      Death2: 794933984
+      Death3: -721430029
+      Death4: -775089211
+      Death5: -1379812478
+      Death6: -1335573294
+      Death7: -459833523
+      Death8: 490215332
+      Death9: 1998102799
+      Idle1: -1443871640
+      Idle2: 1572538417
+      Idle3: 1445588003
+      Idle4: -1247669545
+      Idle5: 1392212481
+      Idle6: 2098053600
+      Idle7: 1686080291
+      Idle8: -532566508
+      Idle9: 2031642255
+      Spit1: -1507510448
+      Spit12: -1387931550
+      Spit2: -1851030852
+      Spit3: 1677937965
+      Spit4: -2119304229
+      Spit5: -745598816
+      Spit6: 1326164591
+      Spit7: -370551232
+      Spit8: -637934793
+      The Tarnished Widow 188x90_102: 279257721
+      The Tarnished Widow 188x90_103: -55716360
+      The Tarnished Widow 188x90_104: 1482788920
+      The Tarnished Widow 188x90_105: 1161437430
+      The Tarnished Widow 188x90_107: 676002245
+      The Tarnished Widow 188x90_108: -280134440
+      The Tarnished Widow 188x90_109: -542113190
+      The Tarnished Widow 188x90_110: 774004604
+      The Tarnished Widow 188x90_111: -377442865
+      The Tarnished Widow 188x90_112: -474525097
+      The Tarnished Widow 188x90_113: 94361580
+      The Tarnished Widow 188x90_114: 1598327734
+      The Tarnished Widow 188x90_115: -2038725566
+      The Tarnished Widow 188x90_117: 85814788
+      The Tarnished Widow 188x90_118: -1533389833
+      The Tarnished Widow 188x90_119: -1806037572
+      The Tarnished Widow 188x90_120: 1352752181
+      The Tarnished Widow 188x90_121: -127599920
+      The Tarnished Widow 188x90_122: -1199861211
+      The Tarnished Widow 188x90_126: -2094899803
+      The Tarnished Widow 188x90_127: 18303924
+      The Tarnished Widow 188x90_128: -1249494015
+      The Tarnished Widow 188x90_129: 179221652
+      The Tarnished Widow 188x90_130: -56816551
+      The Tarnished Widow 188x90_131: 1205678537
+      The Tarnished Widow 188x90_132: -1712732670
+      The Tarnished Widow 188x90_133: -1556916313
+      The Tarnished Widow 188x90_134: -298203275
+      The Tarnished Widow 188x90_135: 1369146517
+      The Tarnished Widow 188x90_136: -173829737
+      The Tarnished Widow 188x90_137: 270594417
+      The Tarnished Widow 188x90_138: -307504906
+      The Tarnished Widow 188x90_139: 744403968
+      The Tarnished Widow 188x90_140: -104836533
+      The Tarnished Widow 188x90_141: -75583104
+      The Tarnished Widow 188x90_142: -1563407715
+      The Tarnished Widow 188x90_143: -158255178
+      The Tarnished Widow 188x90_144: 2020696502
+      The Tarnished Widow 188x90_145: 1902298209
+      The Tarnished Widow 188x90_146: 1394379015
+      The Tarnished Widow 188x90_147: -1454848518
+      The Tarnished Widow 188x90_148: -1839592239
+      The Tarnished Widow 188x90_149: -193959224
+      The Tarnished Widow 188x90_150: 900452827
+      The Tarnished Widow 188x90_151: -598382854
+      The Tarnished Widow 188x90_152: 1937372658
+      The Tarnished Widow 188x90_153: -1295567122
+      The Tarnished Widow 188x90_154: -1509560812
+      The Tarnished Widow 188x90_155: 673243824
+      The Tarnished Widow 188x90_156: 1486886077
+      The Tarnished Widow 188x90_157: 317579758
+      The Tarnished Widow 188x90_158: 1300651309
+      The Tarnished Widow 188x90_159: -83430531
+      The Tarnished Widow 188x90_160: -181127109
+      The Tarnished Widow 188x90_161: -1707753057
+      The Tarnished Widow 188x90_162: -1145063024
+      The Tarnished Widow 188x90_163: -11888125
+      The Tarnished Widow 188x90_164: 841392476
+      The Tarnished Widow 188x90_165: -299100687
+      The Tarnished Widow 188x90_166: -1431052666
+      The Tarnished Widow 188x90_167: -1828129990
+      The Tarnished Widow 188x90_168: 880749484
+      The Tarnished Widow 188x90_169: 1557377101
+      The Tarnished Widow 188x90_170: -1168444067
+      The Tarnished Widow 188x90_171: 1197249689
+      The Tarnished Widow 188x90_172: -1696801105
+      The Tarnished Widow 188x90_183: 2124842820
+      The Tarnished Widow 188x90_184: -1758549351
+      The Tarnished Widow 188x90_185: 1242090125
+      The Tarnished Widow 188x90_186: 1072383400
+      The Tarnished Widow 188x90_187: 1704456671
+      The Tarnished Widow 188x90_188: -114099962
+      The Tarnished Widow 188x90_189: 2025769862
+      The Tarnished Widow 188x90_190: -1686705818
+      The Tarnished Widow 188x90_191: 1125161674
+      The Tarnished Widow 188x90_192: -1962775944
+      The Tarnished Widow 188x90_193: -77686360
+      The Tarnished Widow 188x90_194: -106170844
+      The Tarnished Widow 188x90_195: -998731324
+      The Tarnished Widow 188x90_196: 120937311
+      The Tarnished Widow 188x90_197: 1713232686
+      The Tarnished Widow 188x90_198: 898425717
+      The Tarnished Widow 188x90_199: 137340617
+      The Tarnished Widow 188x90_200: 149761906
+      The Tarnished Widow 188x90_201: -569898711
+      The Tarnished Widow 188x90_202: -276546356
+      The Tarnished Widow 188x90_203: 532767453
+      The Tarnished Widow 188x90_204: -1558443868
+      The Tarnished Widow 188x90_205: 698254804
+      The Tarnished Widow 188x90_206: 1858684277
+      The Tarnished Widow 188x90_207: 975315440
+      The Tarnished Widow 188x90_208: 692870293
+      The Tarnished Widow 188x90_209: -918433671
+      The Tarnished Widow 188x90_210: -585811970
+      The Tarnished Widow 188x90_211: -1632772884
+      The Tarnished Widow 188x90_212: 249606291
+      The Tarnished Widow 188x90_213: 2079757381
+      The Tarnished Widow 188x90_214: -1939484024
+      The Tarnished Widow 188x90_215: 854846669
+      The Tarnished Widow 188x90_216: -480489449
+      The Tarnished Widow 188x90_217: -1794301259
+      The Tarnished Widow 188x90_218: 619572845
+      The Tarnished Widow 188x90_219: 2089865941
+      The Tarnished Widow 188x90_220: 340562601
+      The Tarnished Widow 188x90_221: 1454972953
+      The Tarnished Widow 188x90_222: 313269790
+      The Tarnished Widow 188x90_223: -2094350072
+      The Tarnished Widow 188x90_224: -1673027973
+      The Tarnished Widow 188x90_225: 78843690
+      The Tarnished Widow 188x90_226: 1837517664
+      The Tarnished Widow 188x90_227: -1516112354
+      The Tarnished Widow 188x90_228: -2109172097
+      The Tarnished Widow 188x90_229: 1001141657
+      The Tarnished Widow 188x90_230: -567345176
+      The Tarnished Widow 188x90_231: -406001485
+      The Tarnished Widow 188x90_232: 953337619
+      The Tarnished Widow 188x90_233: 1779472293
+      The Tarnished Widow 188x90_234: -1982768234
+      The Tarnished Widow 188x90_235: 914713243
+      The Tarnished Widow 188x90_236: -1340878812
+      The Tarnished Widow 188x90_237: -1406604631
+      The Tarnished Widow 188x90_238: -826746955
+      The Tarnished Widow 188x90_239: 1162394080
+      The Tarnished Widow 188x90_240: 143473394
+      The Tarnished Widow 188x90_241: -150354644
+      The Tarnished Widow 188x90_242: 1669963040
+      The Tarnished Widow 188x90_243: 1422617187
+      The Tarnished Widow 188x90_244: 2122776610
+      The Tarnished Widow 188x90_245: 579603388
+      The Tarnished Widow 188x90_246: 1802976604
+      The Tarnished Widow 188x90_247: 804368303
+      The Tarnished Widow 188x90_248: 892450584
+      The Tarnished Widow 188x90_249: 1646550928
+      The Tarnished Widow 188x90_250: -487180954
+      The Tarnished Widow 188x90_251: 1533572215
+      The Tarnished Widow 188x90_252: 434073042
+      The Tarnished Widow 188x90_253: -980136218
+      The Tarnished Widow 188x90_254: -1107919271
+      The Tarnished Widow 188x90_255: -506038621
+      The Tarnished Widow 188x90_256: 360971468
+      The Tarnished Widow 188x90_257: 2091234381
+      The Tarnished Widow 188x90_258: -1272753466
+      The Tarnished Widow 188x90_259: -1883032593
+      The Tarnished Widow 188x90_260: -1801789691
+      The Tarnished Widow 188x90_261: -341312569
+      The Tarnished Widow 188x90_262: -576401881
+      The Tarnished Widow 188x90_263: 97381070
+      The Tarnished Widow 188x90_264: 580663912
+      The Tarnished Widow 188x90_265: -37282982
+      The Tarnished Widow 188x90_266: 348725036
+      The Tarnished Widow 188x90_267: 1538254981
+      The Tarnished Widow 188x90_268: 2061968940
+      The Tarnished Widow 188x90_269: 2019731224
+      The Tarnished Widow 188x90_270: -304471091
+      The Tarnished Widow 188x90_271: 324175666
+      The Tarnished Widow 188x90_272: -1874717681
+      The Tarnished Widow 188x90_273: -1193771837
+      The Tarnished Widow 188x90_274: -1140563158
+      The Tarnished Widow 188x90_275: 494135373
+      The Tarnished Widow 188x90_277: -1809111402
+      The Tarnished Widow 188x90_278: 1260204063
+      The Tarnished Widow 188x90_279: 1101582326
+      The Tarnished Widow 188x90_28: 1347823636
+      The Tarnished Widow 188x90_280: 1637843454
+      The Tarnished Widow 188x90_281: -1424079932
+      The Tarnished Widow 188x90_282: -1163678688
+      The Tarnished Widow 188x90_283: 242281803
+      The Tarnished Widow 188x90_284: 1665407323
+      The Tarnished Widow 188x90_285: 492324766
+      The Tarnished Widow 188x90_286: -1479146956
+      The Tarnished Widow 188x90_287: -1836950799
+      The Tarnished Widow 188x90_288: 1786808479
+      The Tarnished Widow 188x90_289: 369304157
+      The Tarnished Widow 188x90_290: -647649068
+      The Tarnished Widow 188x90_291: -971631491
+      The Tarnished Widow 188x90_292: 883409226
+      The Tarnished Widow 188x90_293: -1321720117
+      The Tarnished Widow 188x90_294: -126719769
+      The Tarnished Widow 188x90_295: -1657477946
+      The Tarnished Widow 188x90_296: 2045254539
+      The Tarnished Widow 188x90_297: 220334324
+      The Tarnished Widow 188x90_299: -1818271360
+      The Tarnished Widow 188x90_30: -603079356
+      The Tarnished Widow 188x90_300: 1775048284
+      The Tarnished Widow 188x90_301: -263618621
+      The Tarnished Widow 188x90_302: -753023153
+      The Tarnished Widow 188x90_303: 1297512304
+      The Tarnished Widow 188x90_304: 392809896
+      The Tarnished Widow 188x90_305: -2003825983
+      The Tarnished Widow 188x90_306: -121234795
+      The Tarnished Widow 188x90_307: -123511447
+      The Tarnished Widow 188x90_308: -2079370301
+      The Tarnished Widow 188x90_309: -1729241145
+      The Tarnished Widow 188x90_310: 1931404291
+      The Tarnished Widow 188x90_311: -1966713887
+      The Tarnished Widow 188x90_312: 1557314215
+      The Tarnished Widow 188x90_313: 1978437776
+      The Tarnished Widow 188x90_314: -334625278
+      The Tarnished Widow 188x90_315: 564311589
+      The Tarnished Widow 188x90_316: -394837101
+      The Tarnished Widow 188x90_317: 2117998725
+      The Tarnished Widow 188x90_318: 972698769
+      The Tarnished Widow 188x90_319: -875956410
+      The Tarnished Widow 188x90_32: -8533016
+      The Tarnished Widow 188x90_320: 506979249
+      The Tarnished Widow 188x90_321: -45641999
+      The Tarnished Widow 188x90_322: -966173053
+      The Tarnished Widow 188x90_323: 1758864311
+      The Tarnished Widow 188x90_324: 34783169
+      The Tarnished Widow 188x90_325: 455213048
+      The Tarnished Widow 188x90_326: -1065470122
+      The Tarnished Widow 188x90_327: 1487188813
+      The Tarnished Widow 188x90_328: 980667504
+      The Tarnished Widow 188x90_329: 1273452272
+      The Tarnished Widow 188x90_330: 652384798
+      The Tarnished Widow 188x90_331: 1149683479
+      The Tarnished Widow 188x90_332: 1580018149
+      The Tarnished Widow 188x90_333: -1112069697
+      The Tarnished Widow 188x90_334: 1231743480
+      The Tarnished Widow 188x90_335: -752507334
+      The Tarnished Widow 188x90_336: 1049883696
+      The Tarnished Widow 188x90_337: 517903671
+      The Tarnished Widow 188x90_338: -294916881
+      The Tarnished Widow 188x90_339: -1457777030
+      The Tarnished Widow 188x90_34: 425920155
+      The Tarnished Widow 188x90_340: -845194408
+      The Tarnished Widow 188x90_341: 186434551
+      The Tarnished Widow 188x90_342: -216536467
+      The Tarnished Widow 188x90_343: 273182012
+      The Tarnished Widow 188x90_344: -1958863688
+      The Tarnished Widow 188x90_345: 1823756376
+      The Tarnished Widow 188x90_346: -222928291
+      The Tarnished Widow 188x90_347: -577808741
+      The Tarnished Widow 188x90_348: -848542530
+      The Tarnished Widow 188x90_349: 183770733
+      The Tarnished Widow 188x90_350: -1035876503
+      The Tarnished Widow 188x90_351: -1763062298
+      The Tarnished Widow 188x90_352: -1358049016
+      The Tarnished Widow 188x90_353: 31738377
+      The Tarnished Widow 188x90_354: -474682204
+      The Tarnished Widow 188x90_355: -344172410
+      The Tarnished Widow 188x90_356: -993705907
+      The Tarnished Widow 188x90_357: 1654827283
+      The Tarnished Widow 188x90_358: 446039379
+      The Tarnished Widow 188x90_359: 302414221
+      The Tarnished Widow 188x90_360: -446616846
+      The Tarnished Widow 188x90_361: 1521079805
+      The Tarnished Widow 188x90_362: -849375239
+      The Tarnished Widow 188x90_363: -11827085
+      The Tarnished Widow 188x90_364: 147325983
+      The Tarnished Widow 188x90_365: -1319089724
+      The Tarnished Widow 188x90_366: 2100509238
+      The Tarnished Widow 188x90_367: -409244024
+      The Tarnished Widow 188x90_368: 1754041284
+      The Tarnished Widow 188x90_369: -2127476226
+      The Tarnished Widow 188x90_370: -992886498
+      The Tarnished Widow 188x90_371: 511950457
+      The Tarnished Widow 188x90_372: 1187457311
+      The Tarnished Widow 188x90_373: 2026764423
+      The Tarnished Widow 188x90_374: -1163173189
+      The Tarnished Widow 188x90_375: -2001470499
+      The Tarnished Widow 188x90_376: 804016855
+      The Tarnished Widow 188x90_377: -1258377418
+      The Tarnished Widow 188x90_378: -958848325
+      The Tarnished Widow 188x90_379: 511656916
+      The Tarnished Widow 188x90_38: -1973598953
+      The Tarnished Widow 188x90_380: -1285938344
+      The Tarnished Widow 188x90_381: -1517093197
+      The Tarnished Widow 188x90_382: -1155014126
+      The Tarnished Widow 188x90_383: 78541570
+      The Tarnished Widow 188x90_384: 1146590382
+      The Tarnished Widow 188x90_385: 306935408
+      The Tarnished Widow 188x90_386: 125595665
+      The Tarnished Widow 188x90_387: 1819334330
+      The Tarnished Widow 188x90_388: -1166426114
+      The Tarnished Widow 188x90_389: -864402699
+      The Tarnished Widow 188x90_39: 1253584388
+      The Tarnished Widow 188x90_390: 403977850
+      The Tarnished Widow 188x90_391: -751636358
+      The Tarnished Widow 188x90_392: -178258032
+      The Tarnished Widow 188x90_393: 962259888
+      The Tarnished Widow 188x90_394: 862681364
+      The Tarnished Widow 188x90_395: -1010033426
+      The Tarnished Widow 188x90_396: 2007637970
+      The Tarnished Widow 188x90_397: 915361961
+      The Tarnished Widow 188x90_398: -2028209910
+      The Tarnished Widow 188x90_399: 910869711
+      The Tarnished Widow 188x90_40: -1734543950
+      The Tarnished Widow 188x90_400: 629037172
+      The Tarnished Widow 188x90_401: -1861236990
+      The Tarnished Widow 188x90_402: 1155501370
+      The Tarnished Widow 188x90_403: 1561581214
+      The Tarnished Widow 188x90_404: 1195438852
+      The Tarnished Widow 188x90_405: 889614764
+      The Tarnished Widow 188x90_406: 1125010140
+      The Tarnished Widow 188x90_407: 832991261
+      The Tarnished Widow 188x90_408: 428182030
+      The Tarnished Widow 188x90_409: -882053381
+      The Tarnished Widow 188x90_41: -268405027
+      The Tarnished Widow 188x90_410: 298588638
+      The Tarnished Widow 188x90_411: -1143133083
+      The Tarnished Widow 188x90_412: -961523581
+      The Tarnished Widow 188x90_413: -28590880
+      The Tarnished Widow 188x90_414: 1796682678
+      The Tarnished Widow 188x90_415: 414683213
+      The Tarnished Widow 188x90_416: -740350394
+      The Tarnished Widow 188x90_42: 1714854148
+      The Tarnished Widow 188x90_43: -702540610
+      The Tarnished Widow 188x90_44: -1782654051
+      The Tarnished Widow 188x90_45: 1066055164
+      The Tarnished Widow 188x90_46: 64263298
+      The Tarnished Widow 188x90_47: 1995303292
+      The Tarnished Widow 188x90_48: -230270982
+      The Tarnished Widow 188x90_54: -1383836
+      The Tarnished Widow 188x90_55: 1400983275
+      The Tarnished Widow 188x90_56: -2036181371
+      The Tarnished Widow 188x90_58: -1520568222
+      The Tarnished Widow 188x90_59: -1972424922
+      The Tarnished Widow 188x90_60: -1747707011
+      The Tarnished Widow 188x90_62: -1905322559
+      The Tarnished Widow 188x90_63: 1698611819
+      The Tarnished Widow 188x90_73: 1045507357
+      The Tarnished Widow 188x90_74: -1996560856
+      The Tarnished Widow 188x90_75: 653029775
+      The Tarnished Widow 188x90_77: -655604014
+      The Tarnished Widow 188x90_78: 2138642110
+      The Tarnished Widow 188x90_79: 1183651773
+      The Tarnished Widow 188x90_8: 668748935
+      The Tarnished Widow 188x90_80: -1579520265
+      The Tarnished Widow 188x90_81: -1268546526
+      The Tarnished Widow 188x90_82: -1043341403
+      The Tarnished Widow 188x90_83: 213005387
+      The Tarnished Widow 188x90_84: -1813341626
+      The Tarnished Widow 188x90_85: -671232269
+      The Tarnished Widow 188x90_86: -1368032536
+      The Tarnished Widow 188x90_87: -2089237941
+      The Tarnished Widow 188x90_88: -638545598
+      The Tarnished Widow 188x90_89: -741958799
+      The Tarnished Widow 188x90_90: 970057204
+      The Tarnished Widow 188x90_91: -1866097265
+      The Tarnished Widow 188x90_92: 46747722
+      The Tarnished Widow 188x90_93: 1711017580
+      The Tarnished Widow 188x90_94: -1464101273
+      The Tarnished Widow 188x90_95: -449271073
+      The Tarnished Widow 188x90_96: 1936665447
+      The Tarnished Widow 188x90_97: 1154435073
+      The Tarnished Widow 188x90_98: -1285810730
+      The Tarnished Widow 188x90_99: -650049275
+      jump1: 403622069
+      jump10: 1669159459
+      jump11: 1097237515
+      jump12: -837116682
+      jump13: 228624179
+      jump14: 449342263
+      jump15: 9458899
+      jump16: -618652168
+      jump2: 2087489059
+      jump3: 275235630
+      jump4: 1384957904
+      jump5: -1133617570
+      jump6: -764355778
+      jump7: 467843903
+      jump8: 1696669377
+      jump9: -392728581
+      land1: -300324421
+      land10: -1591775467
+      land2: -1237666807
+      land3: 1756395650
+      land4: 1924834305
+      land5: 1819498179
+      land6: 1440335567
+      land7: 611430784
+      land8: 1297422179
+      land9: 1586831375
+      walk1: 1974569745
+      walk10: -1738459697
+      walk11: -1400329492
+      walk2: -1117514625
+      walk3: 1252156071
+      walk4: -1754711074
+      walk5: 1578069127
+      walk6: 1221026348
+      walk7: -1186085761
+      walk8: 1359945122
+      walk9: -601097758
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

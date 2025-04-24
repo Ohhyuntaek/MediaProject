@@ -87,6 +87,22 @@ public class AllyPoolManager : MonoBehaviour
         var pool = System.Array.Find(allyPools, p => p.allyType == type);
         pool.pool.Enqueue(ally);
     }
+
+    public List<Ally> GettLineObject_Spawned(LineType lineType)
+    {
+        List<Ally> allyLineList = new List<Ally>();
+        foreach (GameObject allyobject in activateAllies)
+        {
+            Ally ally = allyobject.GetComponent<Ally>(); 
+            AllyTile allytype = ally.OccupiedTile;
+            if (allytype.LineType == lineType)
+            {
+                allyLineList.Add(ally);
+            }
+        }
+
+        return allyLineList;
+    }
     
     public void PrintActivateAllies()
     {

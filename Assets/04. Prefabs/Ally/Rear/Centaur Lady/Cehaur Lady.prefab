@@ -132,7 +132,7 @@ MonoBehaviour:
   rightRaycaster: {fileID: 3211531631442751609}
   _enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   _isDead: 0
   _isOnTile: 0
   _SpawnTimeSlider: {fileID: 4243609350738103659}

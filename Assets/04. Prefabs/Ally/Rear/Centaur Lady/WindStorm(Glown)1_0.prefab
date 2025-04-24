@@ -128,7 +128,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   knockbackDistance: 0.5
   knockbackDuration: 0.2
   ownerAlly: {fileID: 6394792349039114835, guid: 71525ccfa206d7e429f3000eb400b1b0, type: 3}

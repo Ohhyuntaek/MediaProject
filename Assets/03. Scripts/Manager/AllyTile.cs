@@ -72,6 +72,8 @@ public class AllyTile : MonoBehaviour
         return allies;
     }
 
-    
-    
+    public LineType LineType => lineType;
+
+
+
 }

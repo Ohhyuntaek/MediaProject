@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jandark
   m_EditorClassIdentifier: 
   _playerName: Jandark
-  _maxHP: 5
+  _maxHP: 200
   _activeSkillCooldown: 30
   _activeSkillType: 4
   _unitTribe: 0

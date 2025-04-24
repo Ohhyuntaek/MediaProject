@@ -237,7 +237,6 @@ public class Ally : MonoBehaviour
     public List<Enemy> DetectTargets(int range)
     {
         List<Enemy> targets = new List<Enemy>();
-        // 자식에 있는 RaycastTileHighlighter2D를 가져옵니다.
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         RaycastTileHighlighter2D tileHighlighter = null;
         
@@ -260,7 +259,7 @@ public class Ally : MonoBehaviour
         // hitCellPos(레이로 맞춘 타일)가 있다면,
         if (tileHighlighter.hitCellPos.HasValue)
         {
-            // hitCellPos를 중심으로 맨해튼 다이아몬드 영역 내의 모든 셀을 구합니다.
+            
             Vector3Int centerTile = tileHighlighter.hitCellPos.Value;
             List<Vector3Int> cellsToCheck = new List<Vector3Int>();
 
@@ -278,13 +277,12 @@ public class Ally : MonoBehaviour
                 }
             }
 
-            // 각 셀의 영역 전체(OverlapBoxAll)를 검사합니다.
-            // 아이소메트릭 타일맵에서는 타일이 회전되어 보이므로, 회전값 45° (필요시 보정)로 OverlapBoxAll를 호출합니다.
+           
             
             foreach (Vector3Int cell in cellsToCheck)
             {
                 Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
-                // cellSize는 타일 하나의 크기입니다. 여유를 위해 약간 축소할 수 있습니다.
+               
                 Vector3 cellSize = tileHighlighter._tilemap.cellSize * 0.9f;
 
                 Collider2D[] cols = Physics2D.OverlapBoxAll(cellCenter, cellSize, 0f, _enemyLayer);
@@ -480,6 +478,8 @@ public class Ally : MonoBehaviour
     {
         _finalSkill = use;
     }
+
+    public AllyTile OccupiedTile => _occupiedTile;
 
     public void SetSkillRandomNum(int value) => skillNumByRandom = value;
     public int GetSkillRandomNum() => skillNumByRandom;
