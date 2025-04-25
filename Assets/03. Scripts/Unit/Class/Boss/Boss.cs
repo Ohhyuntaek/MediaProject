@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IDamageable
 {
     [Header("공유 컴포넌트")]
     [SerializeField] private Animator _animator;
@@ -25,6 +25,8 @@ public class Boss : MonoBehaviour
     private StateMachine<Boss> _stateMachine;
 
 
+
+    private bool _jump = false;
     private float _attacckTimer;
     private bool _canAttack=false;
     private void Start()
@@ -190,8 +192,11 @@ public class Boss : MonoBehaviour
     /// <summary>CC(스턴) 당했을 때 호출</summary>
     public void ApplyCC()
     {
-        
-        _skipNextMove = true;
+        if (_jump)
+        {
+            _skipNextMove = true;
+        }
+       
     }
 
     #endregion
@@ -244,7 +249,12 @@ public class Boss : MonoBehaviour
         _attacckTimer = attackInterval;
     }
 
-    
+
+    public bool Jumping
+    {
+        get => _jump;
+        set => _jump = value;
+    }
     
 
     public Vector3 Dircetion => _direction;

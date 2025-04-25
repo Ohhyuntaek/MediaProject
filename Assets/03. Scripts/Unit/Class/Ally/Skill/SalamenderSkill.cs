@@ -12,7 +12,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
     public void Activate(Ally owner)
     {
         
-        List<Enemy> targets = owner.DetectNearestEnemyTileEnemies(); 
+        List<IDamageable> targets = owner.DetectNearestTileTargets(); 
 
         if (targets.Count == 0)
         {

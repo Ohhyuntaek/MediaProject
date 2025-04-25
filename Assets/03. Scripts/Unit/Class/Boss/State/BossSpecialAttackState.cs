@@ -28,8 +28,7 @@ public class BossDropAttackState : IState<Boss>
         // CC 당한 경우 다음 이동 스킵
         if (boss.SkipNextMove)
         {
-            // SkipNextMove 프로퍼티가 true면 내부에서 클리어되므로,
-            // 그냥 밑의 로직만 지나갑니다.
+            
         }
 
         // 랜딩 시 전열 아군 체크

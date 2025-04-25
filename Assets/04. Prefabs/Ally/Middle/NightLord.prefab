@@ -189,7 +189,7 @@ MonoBehaviour:
   _isDead: 0
   _isOnTile: 0
   _SpawnTimeSlider: {fileID: 6850981516502749746}
-  _allyType: 0
+  _allyType: 1
   _occupiedTile: {fileID: 0}
 --- !u!1 &7515723496649595605
 GameObject:

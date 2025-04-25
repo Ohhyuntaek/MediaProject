@@ -24,7 +24,7 @@ MonoBehaviour:
   _skilldescripter: 
   _skillEffect: []
   _targetingType: 1
-  _allySkillType: 6
+  _allySkillType: 5
   _baseAttack: 3
   _attackSpeed: 2
   _maxHP: 30

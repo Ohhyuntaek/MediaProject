@@ -64,10 +64,11 @@ public class AllyDebuffAttackState : IState<Ally>
     {   
         
         GameObject skillEffectPrefab = ally.UnitData.SkillEffect[index];
-        List<Enemy> _detectList = ally.DetectNearestEnemyTileEnemies();
+        List<IDamageable> _detectList = ally.DetectNearestTileTargets();
         if (_detectList.Count > 0)
         {
-            Vector3 spawnPos = _detectList[0].gameObject.transform.position;
+            var _detectEnemy = _detectList[0] as MonoBehaviour;
+            Vector3 spawnPos = _detectEnemy.transform.position;
             Quaternion spawnRot = Quaternion.identity;
 
             if (skillEffectPrefab != null)

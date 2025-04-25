@@ -7,7 +7,7 @@ public class AllyAttackState : IState<Ally>
 {
     private bool finished = false;
     private bool firstAttack = false;
-    private List<Enemy> _detected;
+    private List<IDamageable> _detected;
     private bool dir = false;
     public void Enter(Ally ally)
     {
@@ -49,7 +49,7 @@ public class AllyAttackState : IState<Ally>
                     break;
 
                 case "Slamander":
-                    _detected = ally.DetectNearestEnemyTileEnemies();
+                    _detected = ally.DetectNearestTileTargets();
                     if (!ally.FinalSkill && _detected.Count>0)
                     {
                     
@@ -70,7 +70,7 @@ public class AllyAttackState : IState<Ally>
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
                 case "CentaurLady" :
-                    _detected = ally.DetectNearestEnemyTileEnemies();
+                    _detected = ally.DetectNearestTileTargets();
                     if (!ally.FinalSkill && _detected.Count>0)
                     {
                         

@@ -45,7 +45,7 @@ public class AllyIdleState : IState<Ally>
                     {
                         ally.ChangeState(new AllyAttackState());
                     }
-                    else if(_waitTimer>3f && ally.DetectNearestEnemyTileEnemies().Count>0 && !ally.FinalSkill)
+                    else if(_waitTimer>3f && ally.DetectNearestTileTargets().Count>0 && !ally.FinalSkill)
                     {
                         ally.ChangeState(new AllySpecialAttackState(ally.Dircetion));
                     }

@@ -32,35 +32,17 @@ public class CentaurLadyProjectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-       
-        if (((1 << collision.gameObject.layer) & enemyLayer) != 0)
-        {
-           
-            Enemy enemy = collision.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                
-                List<Enemy> hitEnemies = new List<Enemy> { enemy };
+    {   
+        var dmg = collision.GetComponent<IDamageable>();
+        if (dmg == null) 
+            return;
 
-                if(ownerAlly != null)
-                {
-                    ownerAlly.ApplyKnockback(hitEnemies);
-                }
-                else
-                {
-                    
-                    Transform destination = enemy.GetDestination();
-                    if (destination != null)
-                    {
-                        Vector3 knockDirection = (enemy.transform.position - destination.position).normalized;
-                        enemy.transform.position += knockDirection * knockbackDistance;
-                    }
-                }
-            }
-            
-            
-        }
+        // 리스트 생성
+        var hitEnemies = new List<IDamageable> { dmg };
+
+        // 넉백 실행 (ownerAlly 가 null 이 아니면)
+        ownerAlly?.ApplyKnockback(hitEnemies);
+        
     }
     public void  SetDestination(bool dir)
     {

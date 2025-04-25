@@ -170,7 +170,7 @@ public class RaycastTileHighlighter2D : MonoBehaviour
                     // 각 셀의 중심에 작은 초록색 구체를 그려 OverlapPointAll 검사 지점을 시각화합니다.
                     Vector3 cellCenter = _tilemap.GetCellCenterWorld(cell);
                     Gizmos.color = Color.green;
-                    Gizmos.DrawSphere(cellCenter, 0.1f);
+                    Gizmos.DrawSphere(cellCenter, 0.11f);
                 }
             }
         }

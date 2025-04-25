@@ -133,25 +133,26 @@ public class Ally : MonoBehaviour
 
     public void PerformAttack()
     {
-        List<Enemy> enemy = DetectTargets(_unitData.AttackRange);
-        if(enemy.Count==0) return;
-        if (enemy.Count > 0)
+        
+        List<IDamageable> targets = DetectTargets(_unitData.AttackRange);
+        if (targets.Count == 0) 
+            return;
+
+       
+        if (_unitData.TargetingType == TargetingType.Single)
         {
-            if (_unitData.TargetingType == TargetingType.Single)
+            targets[0].TakeDamage(_baseAttack);
+        }
+        else
+        {
+           
+            foreach (IDamageable t in targets)
             {
-
-                enemy[0].TakeDamage(_baseAttack);
-
-            }
-            else
-            {
-                foreach (Enemy target in enemy)
-                {
-                    target.TakeDamage(_baseAttack);
-                }
+                t.TakeDamage(_baseAttack);
             }
         }
     }
+
 
     public void PerformSkill()
     {
@@ -231,72 +232,77 @@ public class Ally : MonoBehaviour
     {
         return _occupiedTile.GetAroundAlly();
     }
-
-   
-
-    public List<Enemy> DetectTargets(int range)
+    
+    public List<IDamageable> DetectTargets(int range)
     {
-        List<Enemy> targets = new List<Enemy>();
+        var targets = new List<IDamageable>();
+
+        // 1) Raycaster 선택
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        RaycastTileHighlighter2D tileHighlighter = null;
-        
-        if (spriteRenderer != null && spriteRenderer.flipX)
-        {
-            tileHighlighter = rightRaycaster;
-            _dir = true;
-        }
-        else
-            tileHighlighter = leftRaycaster;
+        RaycastTileHighlighter2D tileHighlighter = (spriteRenderer != null && spriteRenderer.flipX)
+            ? rightRaycaster
+            : leftRaycaster;
+        _dir = spriteRenderer.flipX;
+
         if (tileHighlighter == null)
         {
             Debug.LogWarning("RaycastTileHighlighter2D 컴포넌트를 찾을 수 없습니다.");
             return targets;
         }
 
-        // 인자로 받은 range 값을 사용해 DetectTiles()를 호출하여 hitCellPos와 rangeCells 등 내부 데이터를 업데이트
+        // 2) 타일 감지
         tileHighlighter.DetectTiles(range);
+        if (!tileHighlighter.hitCellPos.HasValue)
+            return targets;
 
-        // hitCellPos(레이로 맞춘 타일)가 있다면,
-        if (tileHighlighter.hitCellPos.HasValue)
+        var center = tileHighlighter.hitCellPos.Value;
+        var cellsToCheck = new List<Vector3Int>();
+        for (int dx = -range; dx <= range; dx++)
         {
-            
-            Vector3Int centerTile = tileHighlighter.hitCellPos.Value;
-            List<Vector3Int> cellsToCheck = new List<Vector3Int>();
-
-            for (int dx = -range; dx <= range; dx++)
+            for (int dy = -range; dy <= range; dy++)
             {
-                for (int dy = -range; dy <= range; dy++)
+                if (Mathf.Abs(dx) + Mathf.Abs(dy) <= range)
                 {
-                    if (Mathf.Abs(dx) + Mathf.Abs(dy) <= range)
-                    {
-                        Vector3Int cell = new Vector3Int(centerTile.x + dx, centerTile.y + dy, centerTile.z);
-                        // 해당 셀에 타일이 존재하는 경우에만 검사 대상에 추가
-                        if (tileHighlighter._tilemap.HasTile(cell))
-                            cellsToCheck.Add(cell);
-                    }
-                }
-            }
-
-           
-            
-            foreach (Vector3Int cell in cellsToCheck)
-            {
-                Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
-               
-                Vector3 cellSize = tileHighlighter._tilemap.cellSize * 0.9f;
-
-                Collider2D[] cols = Physics2D.OverlapBoxAll(cellCenter, cellSize, 0f, _enemyLayer);
-                foreach (Collider2D col in cols)
-                {
-                    //Debug.Log($"{gameObject.name}이 셀 {cell}에서 {col.name} 을(를) 찾았다");
-                    Enemy enemy = col.GetComponent<Enemy>();
-                    if (enemy != null && !targets.Contains(enemy) && _dir == enemy.Direction)
-                        targets.Add(enemy);
+                    var cell = new Vector3Int(center.x + dx, center.y + dy, center.z);
+                    if (tileHighlighter._tilemap.HasTile(cell))
+                        cellsToCheck.Add(cell);
                 }
             }
         }
-            return targets;
+
+        // 3) 각 셀 영역에서 Enemy 또는 Boss 감지
+        foreach (var cell in cellsToCheck)
+        {
+            Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
+            Vector3 cellSize   = tileHighlighter._tilemap.cellSize * 1f;
+            var cols = Physics2D.OverlapBoxAll(cellCenter, cellSize, 0f, _enemyLayer);
+
+            foreach (var col in cols)
+            {
+                // Enemy 검사
+                if (col.TryGetComponent<Enemy>(out var e) && !targets.Contains(e))
+                {
+                    if (_dir == col.gameObject.GetComponent<Enemy>().Direction)
+                    {
+                        targets.Add(e);
+                    }
+                    
+                }
+                    
+
+                // Boss 검사
+                if (col.TryGetComponent<Boss>(out var b) && !targets.Contains(b))
+                    targets.Add(b);
+            }
+        }
+        
+        return targets;
     }
+
+
+   
+
+   
 
 
 
@@ -308,7 +314,7 @@ public class Ally : MonoBehaviour
 
     }
 
-    public void ApllyDamageMulti(List<Enemy> target)
+    public void ApllyDamageMulti(List<IDamageable> target)
     {
         _totalDamage = 0;
         foreach (Enemy enemy in target)
@@ -318,38 +324,52 @@ public class Ally : MonoBehaviour
         }
     }
 
-    public void ApplyKnockback(List<Enemy> targets)
+    public void ApplyKnockback(List<IDamageable> targets)
     {
         float knockbackDistance = 1f;
         float knockbackDuration = 0.5f;
-    
-        foreach (Enemy enemy in targets)
+
+        foreach (var dmg in targets)
         {
-            Transform destination = enemy.GetDestination();
-            if (destination == null)
+            // IDamageable이 실제로는 Enemy 또는 Boss이므로,
+            // MonoBehaviour로 캐스팅해서 transform과 StartCoroutine을 얻습니다.
+            var mb = dmg as MonoBehaviour;
+            if (mb == null) continue;
+
+            // Enemy/Boss 양쪽에서 제공하는 GetDestination() 호출
+            Transform destination = null;
+            if (dmg is Enemy e)      destination = e.GetDestination();
+            else if (dmg is Boss b)
             {
-                Debug.LogWarning($"{enemy.name}의 도착지 Transform이 없습니다.");
-                continue;
+                b.ApplyCC();
             }
             
-            Vector3 knockDirection = (enemy.transform.position - destination.position).normalized;
-            Vector3 displacement = knockDirection * knockbackDistance;
-        
-            enemy.StartCoroutine(SmoothKnockback(enemy, displacement, knockbackDuration));
+            
+            // 넉백 벡터 계산
+            
+
+            if (mb is Enemy)
+            {
+                Vector3 knockDir    = (mb.transform.position - destination.position).normalized;
+                Vector3 displacement = knockDir * knockbackDistance;
+                mb.StartCoroutine(SmoothKnockback(mb.transform, displacement, knockbackDuration));
+            }
+           
         }
     }
 
-    private IEnumerator SmoothKnockback(Enemy enemy, Vector3 displacement, float duration)
+    private IEnumerator SmoothKnockback(Transform target, Vector3 displacement, float duration)
     {
-        Vector3 startPos = enemy.transform.position;
-        float elapsed = 0f;
-        while (elapsed < duration)
+        Vector3 start = target.position;
+        float   t     = 0f;
+
+        while (t < duration)
         {
-            enemy.transform.position = Vector3.Lerp(startPos, startPos + displacement, elapsed / duration);
-            elapsed += Time.deltaTime;
+            target.position = Vector3.Lerp(start, start + displacement, t / duration);
+            t               += Time.deltaTime;
             yield return null;
         }
-        enemy.transform.position = startPos + displacement;
+        target.position = start + displacement;
     }
     public void ApplySpeedBuffDebuff(float times , float duration,bool buffOrDebuff)
     {
@@ -385,58 +405,73 @@ public class Ally : MonoBehaviour
         }
 
     }
-    public List<Enemy> DetectNearestEnemyTileEnemies()
+    public List<IDamageable> DetectNearestTileTargets()
     {
-        List<Enemy> nearestEnemies = new List<Enemy>();
-
-        // 씬에 존재하는 모든 Enemy 오브젝트들을 가져옵니다.
+        // 1) 모은 모든 Enemy와 Boss를 찾아서 가장 가까운 한 기를 찾습니다.
         Enemy[] allEnemies = FindObjectsOfType<Enemy>();
-        if (allEnemies.Length == 0)
-            return nearestEnemies;
+        Boss[]   allBosses  = FindObjectsOfType<Boss>();
 
-        // Ally 자신의 위치를 기준으로 가장 가까운 적을 찾습니다.
-        Vector3 allyPos = transform.position;
-        Enemy nearestEnemy = null;
-        float minDistSqr = Mathf.Infinity;
-        foreach (Enemy e in allEnemies)
+        Vector3   myPos       = transform.position;
+        float     minDistSqr  = float.MaxValue;
+        MonoBehaviour nearestMB      = null;
+        IDamageable        nearestDmg = null;
+
+        // Enemy 중에서
+        foreach (var e in allEnemies)
         {
-            float distSqr = (e.transform.position - allyPos).sqrMagnitude;
-            if (distSqr < minDistSqr)
+            float d = (e.transform.position - myPos).sqrMagnitude;
+            if (d < minDistSqr)
             {
-                minDistSqr = distSqr;
-                nearestEnemy = e;
+                minDistSqr  = d;
+                nearestMB   = e;
+                nearestDmg  = e;
             }
         }
 
-        // 가장 가까운 적의 타일을 찾기 위해, rayHighcaster가 사용하는 타일맵을 참조합니다.
-        // (왼쪽 혹은 오른쪽 rayHighcaster 중 하나의 타일맵을 사용합니다.)
-        Tilemap tm = null;
-        if (leftRaycaster != null && leftRaycaster._tilemap != null)
-            tm = leftRaycaster._tilemap;
-        else if (rightRaycaster != null && rightRaycaster._tilemap != null)
-            tm = rightRaycaster._tilemap;
-    
+        // Boss 중에서
+        foreach (var b in allBosses)
+        {
+            float d = (b.transform.position - myPos).sqrMagnitude;
+            if (d < minDistSqr)
+            {
+                minDistSqr  = d;
+                nearestMB   = b;
+                nearestDmg  = b;
+            }
+        }
+
+       
+        RaycastTileHighlighter2D tileHighlighter = null;
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr != null && sr.flipX) tileHighlighter = rightRaycaster;
+        else                         tileHighlighter = leftRaycaster;
+
+        if (tileHighlighter == null || nearestMB == null)
+            return new List<IDamageable>();
+
+        Tilemap tm = tileHighlighter._tilemap;
         if (tm == null)
+            return new List<IDamageable>();
+
+      
+        Vector3Int targetCell = tm.WorldToCell(nearestMB.transform.position);
+
+      
+        List<IDamageable> results = new List<IDamageable>();
+        foreach (var e in allEnemies)
         {
-            Debug.LogWarning("적군 타일맵을 찾을 수 없습니다.");
-            return nearestEnemies;
+            if (tm.WorldToCell(e.transform.position) == targetCell)
+                results.Add(e);
+        }
+        foreach (var b in allBosses)
+        {
+            if (tm.WorldToCell(b.transform.position) == targetCell)
+                results.Add(b);
         }
 
-        // 가장 가까운 적의 위치를 타일 좌표로 변환합니다.
-        Vector3Int targetCell = tm.WorldToCell(nearestEnemy.transform.position);
-
-        // 모든 적들 중에서, 해당 타일(Cell)에 위치한 적들을 반환합니다.
-        foreach (Enemy e in allEnemies)
-        {
-            Vector3Int cell = tm.WorldToCell(e.transform.position);
-            if (cell == targetCell && !nearestEnemies.Contains(e))
-            {
-                nearestEnemies.Add(e);
-            }
-        }
-
-        return nearestEnemies;
+        return results;
     }
+
 
     public IEnumerator CanCCByDuration(float duration)
     {
