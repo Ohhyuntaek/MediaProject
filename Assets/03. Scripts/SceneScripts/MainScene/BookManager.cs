@@ -8,12 +8,16 @@ public class BookManager : MonoBehaviour
     public CanvasGroup newGamePageGroup;
     public float fadeDuration = 0.5f;
     public float delayAfterBook = 0.1f;
-
-    public Animator animator;
+    public AudioClip pageFlipSound;
+    
+    private Animator animator;
+    private AudioSource audioSource;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        
         SetCanvasGroupActive(titlePageGroup, false);
         SetCanvasGroupActive(newGamePageGroup, false);
     }
@@ -23,8 +27,19 @@ public class BookManager : MonoBehaviour
     {
         SetCanvasGroupActive(titlePageGroup, false);
         
+        // 책 넘기기 소리 재생
+        PlayPageFlipSound();
+        
         // 책 넘기기 애니메이션 진행
         animator.SetTrigger("isFlipped");
+    }
+    
+    void PlayPageFlipSound()
+    {
+        if (audioSource != null && pageFlipSound != null)
+        {
+            audioSource.PlayOneShot(pageFlipSound);
+        }
     }
 
     public IEnumerator FadeInTitleGroup()
