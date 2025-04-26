@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 822507760414148561}
   - component: {fileID: 9046736505335899351}
   m_Layer: 0
-  m_Name: SpawnTimerCanvas
+  m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
