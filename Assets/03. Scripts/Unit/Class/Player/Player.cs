@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -21,10 +23,14 @@ public class Player : MonoBehaviour
     private int _currentEnergy;
     private int _MaxEnergy;
     private bool _CanUpdatePassive = true;
+    [FormerlySerializedAs("hpSlider")] [SerializeField] private Slider _hpSlider;
+    [FormerlySerializedAs("energySlider")] [SerializeField] private Slider _energySlider;
+
     public Animator Animator => _animator;
     public PlayerData PlayerData => _playerData;
     public bool CanUseActiveSkill => _canUseActiveSkill;
-    public float ActiveSkillCooldownTime => _playerData.ActiveSkillCooldown; 
+    public float ActiveSkillCooldownTime => _playerData.ActiveSkillCooldown;
+    
 
     private void Start()
     {
@@ -40,6 +46,9 @@ public class Player : MonoBehaviour
 
     public void Initialize(PlayerData data)
     {
+        _hpSlider.maxValue = _playerData.MaxHP;
+        _energySlider.maxValue = _playerData.MaxEnergy;
+        
         _playerData = data;
         _hp = _playerData.MaxHP;
         _activeSkill = CreateActiveSkillFromData(_playerData.ActiveSkillType);
@@ -55,6 +64,7 @@ public class Player : MonoBehaviour
     {
         _stateMachine?.Update();
         UpdatePassiveSkill();
+        
         if(_hp <= 0 &&!_isDead)
         {
             _isDead = true;
@@ -73,6 +83,15 @@ public class Player : MonoBehaviour
             ChargeMana();
         }
         
+        if (_hpSlider != null)
+        {
+            _hpSlider.value = _hp;
+        }
+
+        if (_energySlider != null)
+        {
+            _energySlider.value = _energyTimer;
+        }
 
     }
 

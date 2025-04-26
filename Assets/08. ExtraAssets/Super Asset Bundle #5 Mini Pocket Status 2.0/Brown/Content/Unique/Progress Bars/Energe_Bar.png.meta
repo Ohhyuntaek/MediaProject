@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1247424bdeb60d346b07e510ff84f179
+guid: 8c27841d06050b04597cf0f927f229ad
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -110,23 +110,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 10_0
+      name: Energe_Bar_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 4
-        width: 8
-        height: 7
+        x: 1
+        y: 1
+        width: 47
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28cc18ed2e4e9514897a75c400ed62aa
-      internalID: 1501182080
+      spriteID: 958ae6c6ac545694ca9d32faec2da4c1
+      internalID: 665637549
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6880ee64fbe2d3c4188c5433c7bf615e
+    spriteID: 544ad2b5d0e391e48a7cefb31fe4363c
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      10_0: 1501182080
+      Energe_Bar_0: 665637549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
