@@ -57,7 +57,7 @@ public class DarkSpawner : MonoBehaviour
             }
 
             // Dark 하나 스폰 알림
-            InGameManager.Instance.OnDarkSpawned();
+            InStageManager.Instance.OnDarkSpawned();
             
             // 다음 Dark까지 대기
             yield return new WaitForSeconds(currentStage.SpawnTerm);

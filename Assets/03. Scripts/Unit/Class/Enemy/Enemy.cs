@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour, IDamageable
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.9f)
         {
-            InGameManager.Instance.OnDarkKilled();
+            InStageManager.Instance.OnDarkKilled();
             gameObject.SetActive(false);
         }
     }

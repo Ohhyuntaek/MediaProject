@@ -4,21 +4,62 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class InGameManager : MonoBehaviour
+[System.Serializable]
+public class AllyUnitDataLink
 {
-    public static InGameManager Instance;
+    public AllyType allyType;
+    public UnitData unitData;
+}
+
+public class InStageManager : MonoBehaviour
+{
+    public static InStageManager Instance;
+    
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private List<StageData> stageList;
     [SerializeField] private List<Sprite> playerImages;
     [SerializeField] private TMPro.TMP_Text stageText;
     [SerializeField] private DarkSpawner darkSpawner;
     [SerializeField] private Image playerImage;
+    [SerializeField] private TMPro.TMP_Text costText;
+    [SerializeField] private float costUpMultiplier = 1.0f; // 코스트 상승 속도 (외부 조정 가능)
+    [SerializeField] private List<AllyUnitDataLink> allyUnitDataLinks;
 
+    private Dictionary<AllyType, UnitData> allyUnitDataDict = new();
+    private int cost = 0;                    // 현재 코스트
+    private float costTimer = 0f;             // 코스트 상승 타이머
+    private float costUpInterval => 1.0f / costUpMultiplier; // 실제 코스트 증가 주기 (초)
     private GameObject player;
     private int currentStageIndex = 0;
     private int aliveDarkCount = 0;
     
-    void Awake() => Instance = this;
+    private void Awake()
+    {
+        Instance = this;
+
+        foreach (var link in allyUnitDataLinks)
+        {
+            if (!allyUnitDataDict.ContainsKey(link.allyType))
+            {
+                allyUnitDataDict.Add(link.allyType, link.unitData);
+            }
+            else
+            {
+                Debug.LogWarning($"Duplicate AllyType: {link.allyType} in allyUnitDataLinks!");
+            }
+        }
+    }
+    
+    public UnitData GetUnitDataByAllyType(AllyType type)
+    {
+        if (allyUnitDataDict.TryGetValue(type, out var unitData))
+        {
+            return unitData;
+        }
+    
+        Debug.LogError($"AllyType {type}에 해당하는 UnitData를 찾을 수 없습니다.");
+        return null;
+    }
 
     void Start()
     {
@@ -50,7 +91,46 @@ public class InGameManager : MonoBehaviour
                 break;
             }
         }
+        
         StartStage();
+    }
+    
+    void Update()
+    {
+        // 매 프레임 cost 타이머 누적
+        costTimer += Time.deltaTime;
+
+        if (costTimer >= costUpInterval)
+        {
+            TryIncreaseCost();
+            costTimer = 0f; // 타이머 리셋
+        }
+    }
+    
+    private void TryIncreaseCost()
+    {
+        if (cost < 99)
+        {
+            cost++;
+            UpdateCostText();
+        }
+    }
+    
+    private void UpdateCostText()
+    {
+        if (costText != null)
+            costText.text = cost.ToString();
+    }
+
+    public int GetCost()
+    {
+        return cost;
+    }
+    
+    public void DecreaseCost(int amount)
+    {
+        cost = Mathf.Max(0, cost - amount); // cost는 0 미만으로 내려가지 않음
+        UpdateCostText();
     }
     
     // Dark 하나 스폰될 때마다 호출
@@ -99,6 +179,10 @@ public class InGameManager : MonoBehaviour
 
     public void StartStage()
     {
+        // 코스트 초기화
+        cost = 0;
+        UpdateCostText(); // 코스트 텍스트도 바로 갱신
+        
         stageText.text = stageList[currentStageIndex].StageName;
         StageData stage = stageList[currentStageIndex];
         darkSpawner.StartSpawning(stage);

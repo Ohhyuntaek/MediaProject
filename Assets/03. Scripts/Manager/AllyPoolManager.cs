@@ -63,6 +63,18 @@ public class AllyPoolManager : MonoBehaviour
             
             activateAllies.Add(obj);
             _spawnCount++;
+            
+            // cost 차감
+            UnitData unitData = InStageManager.Instance.GetUnitDataByAllyType(type);
+            if (unitData != null)
+            {
+                InStageManager.Instance.DecreaseCost(unitData.Cost);
+            }
+            else
+            {
+                Debug.LogError($"AllyType {type}에 대한 UnitData를 찾을 수 없습니다.");
+            }
+            
             return obj;
         }
 
