@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BookManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class BookManager : MonoBehaviour
     public float fadeDuration = 0.5f;
     public float delayAfterBook = 0.1f;
     public AudioClip pageFlipSound;
-    
+
     private Animator animator;
     private AudioSource audioSource;
 
@@ -21,7 +22,9 @@ public class BookManager : MonoBehaviour
         SetCanvasGroupActive(newGamePageGroup, false);
     }
 
+    /// <summary>
     /// titlePage - new game 버튼 클릭 시
+    /// </summary>
     public void OnNewGameButtonClick()
     {
         SetCanvasGroupActive(titlePageGroup, false);
@@ -33,7 +36,9 @@ public class BookManager : MonoBehaviour
         animator.SetTrigger("isFlipped");
     }
     
-    /// newGamePage - back버튼 클릭 시
+    /// <summary>
+    /// newGamePage - Back버튼 클릭 시
+    /// </summary>
     public void OnBackButtonClick()
     {
         SetCanvasGroupActive(newGamePageGroup, false);
@@ -43,6 +48,14 @@ public class BookManager : MonoBehaviour
         
         // 책 반대로 넘기기 애니메이션 진행
         animator.SetTrigger("isBackFlipped");
+    }
+
+    /// <summary>
+    /// newGamePage - Start 버튼 클릭 시
+    /// </summary>
+    public void OnStartButtonClick()
+    {
+        SceneManager.LoadScene("InStage");
     }
     
     void PlayPageFlipSound()
