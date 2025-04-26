@@ -221,7 +221,7 @@ public class Ally : MonoBehaviour
             AllySkillType.CentaurLady => new CentaurLadySkill(),
             AllySkillType.BountyHunter => new BountyHunterSkill(),
             AllySkillType.Salamender => new SalamenderSkill(),
-            AllySkillType.Jandark => new JandarkSkill(),
+            AllySkillType.Joandarc => new JandarkSkill(),
             AllySkillType.NightLord => new NightLordSkill(),
             AllySkillType.None => new NoneSkill(),
             _ => null

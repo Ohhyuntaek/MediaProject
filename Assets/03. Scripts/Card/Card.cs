@@ -24,7 +24,7 @@ public class Card : MonoBehaviour
         if (ally != null)
         {
             Destroy(this.gameObject);
-            GameManager.Instance.ShiftCardsLeft(slotIndex);   
+            InGameManager.Instance.ShiftCardsLeft(slotIndex);   
         }
         else
         {

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0a0ae8679564494a9cfeed89e0b2c84, type: 3}
-  m_Name: Jandark
+  m_Name: JoanDarc
   m_EditorClassIdentifier: 
-  _playerName: Jandark
+  _playerName: JoanDarc
   _maxHP: 200
   _activeSkillCooldown: 30
   _activeSkillType: 4

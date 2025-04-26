@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 523459849710580622}
   - component: {fileID: 2164910166956106845}
   m_Layer: 0
-  m_Name: jandark(Player)
-  m_TagString: Untagged
+  m_Name: joandarc(Player)
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
   _animator: {fileID: 2164910166956106845}
+  _hpSlider: {fileID: 0}
+  _energySlider: {fileID: 0}
 --- !u!95 &2164910166956106845
 Animator:
   serializedVersion: 7

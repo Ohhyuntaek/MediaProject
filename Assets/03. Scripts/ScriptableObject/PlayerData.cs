@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlayerData", menuName = "SO/Player Data")]
@@ -9,7 +10,6 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float _activeSkillCooldown;
     [SerializeField] private AllySkillType _activeSkillType;
     [SerializeField] private UnitTribe _unitTribe;
-
     
     
     [SerializeField] private int _maxEnergy;    

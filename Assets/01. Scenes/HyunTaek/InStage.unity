@@ -4374,7 +4374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -824969317, guid: a07db537bc13db741a8e462a3053c958, type: 3}
+  m_Sprite: {fileID: -1292439875, guid: 5bdaa8422451f674a93b3963f8737153, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6264,7 +6264,7 @@ GameObject:
   - component: {fileID: 1548949825}
   - component: {fileID: 1548949826}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: InGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6307,9 +6307,20 @@ MonoBehaviour:
   - {fileID: 1405099364}
   - {fileID: 313160516}
   stageList:
+  - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
+  - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
+  - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
   - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
+  playerImages:
+  - {fileID: -903937239, guid: a07db537bc13db741a8e462a3053c958, type: 3}
+  - {fileID: -833971407, guid: 083430ea3b459aa4083511c4007d0556, type: 3}
+  - {fileID: 121734609, guid: 1737c18c3919a124d8faeff16fb5fc60, type: 3}
+  - {fileID: 1170413532, guid: 29f07a00b2dd83d4f88eb3f1b58e8968, type: 3}
+  - {fileID: 501205929, guid: 03ad10307a8f5de46a7b13be566aca00, type: 3}
+  - {fileID: -1292439875, guid: 5bdaa8422451f674a93b3963f8737153, type: 3}
   stageText: {fileID: 445447681}
   darkSpawner: {fileID: 409470820}
+  playerImage: {fileID: 728749133}
 --- !u!1 &1550883773
 GameObject:
   m_ObjectHideFlags: 0
@@ -6605,8 +6616,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 403450179}
   - {fileID: 183312420}
+  - {fileID: 403450179}
   - {fileID: 1936329286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9313,37 +9324,9 @@ PrefabInstance:
       propertyPath: _energySlider
       value: 
       objectReference: {fileID: 1579949352}
-    - target: {fileID: 2823103742449211810, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2823103742449211810, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
       propertyPath: m_Name
-      value: jandark(Player)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7605254547598016667, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7848961133005411518, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7848961133005411518, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8238059572693514603, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8238059572693514603, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      value: joandarc(Player)
       objectReference: {fileID: 0}
     - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9383,10 +9366,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9159341488439183985, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

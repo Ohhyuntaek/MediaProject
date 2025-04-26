@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Joandarc_0
+      name: JoanDarc_0
       rect:
         serializedVersion: 2
         x: 4
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83a970f4799c6fb4da3bf6d7dccf44a8
-      internalID: -824969317
+      spriteID: ecff269247385e44a8a6b9fb972425e2
+      internalID: -903937239
       vertices: []
       indices: 
       edges: []
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Joandarc_0: -824969317
+      JoanDarc_0: -903937239
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

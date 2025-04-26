@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Slider _hpSlider;
+    [SerializeField] private Slider _energySlider;
     
     private StateMachine<Player> _stateMachine;
     private bool _canUseActiveSkill = true;
@@ -23,8 +25,6 @@ public class Player : MonoBehaviour
     private int _currentEnergy;
     private int _MaxEnergy;
     private bool _CanUpdatePassive = true;
-    [FormerlySerializedAs("hpSlider")] [SerializeField] private Slider _hpSlider;
-    [FormerlySerializedAs("energySlider")] [SerializeField] private Slider _energySlider;
 
     public Animator Animator => _animator;
     public PlayerData PlayerData => _playerData;
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
     {
         return skillType switch
         {
-            AllySkillType.Jandark => new JanDarkPlayerActiveSkill()
+            AllySkillType.Joandarc => new JanDarkPlayerActiveSkill()
         };
     }
     
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
     {
         return skillType switch
         {
-            AllySkillType.Jandark => new JandarkPassiveSkill()
+            AllySkillType.Joandarc => new JandarkPassiveSkill()
            
         };
     }

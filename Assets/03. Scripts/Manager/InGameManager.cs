@@ -2,15 +2,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class InGameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static InGameManager Instance;
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private List<StageData> stageList;
+    [SerializeField] private List<Sprite> playerImages;
     [SerializeField] private TMPro.TMP_Text stageText;
     [SerializeField] private DarkSpawner darkSpawner;
+    [SerializeField] private Image playerImage;
 
+    private GameObject player;
     private int currentStageIndex = 0;
     private int aliveDarkCount = 0;
     
@@ -18,6 +22,34 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // 1. Player 태그를 가진 오브젝트를 찾아 player 변수에 저장
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다.");
+            return;
+        }
+
+        // 2. player의 _playerData.PlayerName을 가져옴
+        Player playerController = player.GetComponent<Player>();
+        if (playerController == null)
+        {
+            Debug.LogError("Player 오브젝트에 Player 컴포넌트가 없습니다.");
+            return;
+        }
+
+        string playerName = playerController.PlayerData.PlayerName;
+
+        // 3. playerImages 리스트에서 이름이 매칭되는 스프라이트 찾기
+        foreach (var sprite in playerImages)
+        {
+            if (sprite.name.Contains(playerName))
+            {
+                playerImage.sprite = sprite;
+                break;
+            }
+        }
         StartStage();
     }
     
