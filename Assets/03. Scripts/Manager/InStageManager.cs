@@ -7,6 +7,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class AllyUnitDataLink
 {
+    // AllyType과 UnitData를 연결
     public AllyType allyType;
     public UnitData unitData;
 }
@@ -36,7 +37,8 @@ public class InStageManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
+        
+        // AllyType으로 UnitData의 cost를 받아오기 위해 작성한 코드
         foreach (var link in allyUnitDataLinks)
         {
             if (!allyUnitDataDict.ContainsKey(link.allyType))
@@ -49,7 +51,11 @@ public class InStageManager : MonoBehaviour
             }
         }
     }
-    
+    /// <summary>
+    /// AllyType에 맞는 UnitData를 get함
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public UnitData GetUnitDataByAllyType(AllyType type)
     {
         if (allyUnitDataDict.TryGetValue(type, out var unitData))
