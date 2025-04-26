@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageName: Boss Stage
   _stageType: 1
-  _startSpawnDelay: 3
+  _startSpawnDelay: 5
   _spawnTerm: 1
   _darks:
   - {fileID: 8283446157625006365, guid: c8eab2dc808f0e7498b999820a961e94, type: 3}

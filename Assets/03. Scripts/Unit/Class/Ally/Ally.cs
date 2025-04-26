@@ -59,6 +59,7 @@ public class Ally : MonoBehaviour
         tile.ally = this;
         _isOnTile = true;
         _isDead = false;
+        _revived = false;
         _maxDuration = UnitData.Duration;
         _DurationSlider.maxValue = _maxDuration;
         _DurationSlider.value = _maxDuration;
@@ -121,7 +122,7 @@ public class Ally : MonoBehaviour
 
         _duration -= Time.deltaTime;
         _totallifeTime += Time.deltaTime;
-        if (_unitData.UnitName == "NightLord" && !_revived && _duration<=0f)
+        if (_unitData.UnitName == "NightLord" && !_revived && _duration<=0f && !_isDead)
         {
             _revived = true;
             _duration = 8f;
@@ -193,12 +194,8 @@ public class Ally : MonoBehaviour
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.9f)
         {
-            if (_isDead)
-            {
-                Debug.Log("[Ally] 이미 사망 상태입니다.");
-                return;
-            }
-            Debug.Log($"[Ally:{name}] 사망 시작 및 반환 처리");
+            Debug.Log($"[Ally:{name}] 사망 애니메이션 완료 → 풀로 반환");
+
             _isDead = true;
 
             if (_occupiedTile != null)
@@ -211,6 +208,14 @@ public class Ally : MonoBehaviour
             // 오브젝트 풀에 복귀
             AllyPoolManager.Instance.ReturnAlly(_allyType, this.gameObject);
         }
+    }
+
+    public void ForceDie()
+    {
+        _revived = true; // 부활 막기
+        _duration = 0f;
+        _isDead = true;
+        _stateMachine.ChangeState(new AllyDeadState());
     }
 
     [CanBeNull]

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageName: Normal Stage 3
   _stageType: 0
-  _startSpawnDelay: 3
+  _startSpawnDelay: 5
   _spawnTerm: 1
   _darks:
   - {fileID: 5760704821043082606, guid: 75d16aa4c077f1e41a04af79ffd1f7e5, type: 3}

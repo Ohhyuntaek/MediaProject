@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,12 +20,13 @@ public class InStageManager : MonoBehaviour
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private List<StageData> stageList;
     [SerializeField] private List<Sprite> playerImages;
+    [SerializeField] private List<AllyUnitDataLink> allyUnitDataLinks;
     [SerializeField] private TMPro.TMP_Text stageText;
+    [SerializeField] private TMPro.TMP_Text stageClearText;
     [SerializeField] private DarkSpawner darkSpawner;
     [SerializeField] private Image playerImage;
     [SerializeField] private TMPro.TMP_Text costText;
     [SerializeField] private float costUpMultiplier = 1.0f; // 코스트 상승 속도 (외부 조정 가능)
-    [SerializeField] private List<AllyUnitDataLink> allyUnitDataLinks;
 
     private Dictionary<AllyType, UnitData> allyUnitDataDict = new();
     private int cost = 0;                    // 현재 코스트
@@ -139,13 +141,17 @@ public class InStageManager : MonoBehaviour
         UpdateCostText();
     }
     
-    // Dark 하나 스폰될 때마다 호출
+    /// <summary>
+    /// Dark 하나 스폰될 때마다 호출
+    /// </summary>
     public void OnDarkSpawned()
     {
         aliveDarkCount++;
     }
     
-    // Dark 하나 죽을 때마다 호출
+    /// <summary>
+    /// Dark 하나 죽을 때마다 호출
+    /// </summary>
     public void OnDarkKilled()
     {
         aliveDarkCount--;
@@ -161,10 +167,46 @@ public class InStageManager : MonoBehaviour
     {
         StageData currentStage = stageList[currentStageIndex];
 
-        if (currentStage.StageType == StageType.Boss)
+        // 1. 현재 활성화된 모든 Ally들의 duration을 0으로
+        foreach (var allyObj in AllyPoolManager.Instance.activateAllies)
+        {
+            if (allyObj != null)
+            {
+                Ally ally = allyObj.GetComponent<Ally>();
+                if (ally != null)
+                {
+                    ally.ForceDie(); // 부활 없이 즉시 사망
+                }
+            }
+        }
+
+        // 2. Stage Clear 문구 띄우기
+        StartCoroutine(HandleStageClearSequence(currentStage.StageType));
+    }
+    
+    private IEnumerator HandleStageClearSequence(StageType stageType)
+    {
+        // Stage Clear 텍스트 활성화
+        if (stageClearText != null)
+        {
+            stageClearText.gameObject.SetActive(true);
+            stageClearText.text = "Stage Clear!";
+        }
+
+        // 2초 동안 대기
+        yield return new WaitForSeconds(2f);
+
+        // Stage Clear 텍스트 비활성화
+        if (stageClearText != null)
+        {
+            stageClearText.gameObject.SetActive(false);
+        }
+
+        // 다음 스테이지로 이동
+        if (stageType == StageType.Boss)
         {
             Debug.Log("보스 스테이지 클리어! 게임 종료!");
-            // 게임 종료 처리 (타이틀 화면 이동 등 추가 가능)
+            // 게임 종료 처리 추가
         }
         else
         {
@@ -178,7 +220,7 @@ public class InStageManager : MonoBehaviour
             else
             {
                 Debug.Log("모든 스테이지 완료! 게임 끝!");
-                // 추가적인 게임 완료 처리
+                // 게임 완료 처리 추가
             }
         }
     }
