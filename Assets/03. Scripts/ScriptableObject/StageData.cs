@@ -18,6 +18,7 @@ public class StageData : ScriptableObject
     [SerializeField, LabelText("스폰할 Darks 목록")] private List<GameObject> _darks;
     [SerializeField, LabelText("스폰되는 Dark의 수")] private int _darksCount;
     
+    public string StageName => _stageName;
     public StageType StageType => _stageType;
     public float StartSpawnDelay => _startSpawnDelay;
     public float SpawnTerm => _spawnTerm;

@@ -5,8 +5,10 @@ public class CardSpawner : MonoBehaviour
 {
     public Card[] defenderCards;
     public Transform[] cardSlots;
-    private float timer = 0f;
     public float spawnInterval = 2f;
+
+    [SerializeField] private int cardSlotNumber = 8;
+    private float timer = 0f;
     
     // Update is called once per frame
     void Update()
@@ -23,7 +25,7 @@ public class CardSpawner : MonoBehaviour
     void TrySpawnCard()
     {
         // 덱이 가득 찼는지 확인
-        if (cardSlots[5].childCount > 0) return;
+        if (cardSlots[cardSlotNumber-1].childCount > 0) return;
 
         // 현재 카드 타입 개수 계산
         Dictionary<CardType, int> typeCounts = new Dictionary<CardType, int>();

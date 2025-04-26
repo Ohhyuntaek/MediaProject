@@ -24,7 +24,7 @@ public class Ally : MonoBehaviour
 
     private int _lastKnockbackEnemyCount = 0;
     private StateMachine<Ally> _stateMachine;
-    private float _lifeTimer;
+    private float _duration;
     private bool _CanCC = true;
     private ISkill<Ally> _skill;
     [SerializeField] private bool _isDead=false;
@@ -40,10 +40,10 @@ public class Ally : MonoBehaviour
     private Vector3 occupiedTilePosition;
     private int skillNumByRandom = 0;
     
-    [SerializeField]
-    private Slider _SpawnTimeSlider;
+    [FormerlySerializedAs("_SpawnTimeSlider")] [SerializeField]
+    private Slider _DurationSlider;
 
-    private float _maxSpawnTime;
+    private float _maxDuration;
 
     private bool _dir =false;
     
@@ -59,9 +59,27 @@ public class Ally : MonoBehaviour
         tile.ally = this;
         _isOnTile = true;
         _isDead = false;
-        _maxSpawnTime = UnitData.Duration;
-        _SpawnTimeSlider.maxValue = _maxSpawnTime;
-        _SpawnTimeSlider.value = _maxSpawnTime;
+        _maxDuration = UnitData.Duration;
+        _DurationSlider.maxValue = _maxDuration;
+        _DurationSlider.value = _maxDuration;
+        
+        // 추가: Duration 초기화
+        if (_unitData != null)
+        {
+            _duration = _unitData.Duration;
+            _maxDuration = _unitData.Duration;
+        }
+        else
+        {
+            Debug.LogWarning($"[{name}] UnitData가 설정되어 있지 않아서 Duration을 초기화할 수 없습니다.");
+        }
+
+        // Duration UI 슬라이더 초기화
+        if (_DurationSlider != null)
+        {
+            _DurationSlider.maxValue = _maxDuration;
+            _DurationSlider.value = _maxDuration;
+        }
     }
 
     public void ApplyTileBonus()
@@ -88,7 +106,7 @@ public class Ally : MonoBehaviour
     public void Initialize(UnitData data)
     {
         _unitData = data;
-        _lifeTimer = _unitData.Duration;
+        _duration = _unitData.Duration;
         _skill = CreateSkillFromData(_unitData.AllySkillType);
         _atkSpd = _unitData.AttackSpeed;
         _baseAttack = _unitData.BaseAttack;
@@ -99,30 +117,27 @@ public class Ally : MonoBehaviour
 
     private void Update()
     {
-        
         _stateMachine?.Update();
 
-        _lifeTimer -= Time.deltaTime;
+        _duration -= Time.deltaTime;
         _totallifeTime += Time.deltaTime;
-        if (_unitData.UnitName == "NightLord" && !_revived && _lifeTimer<=0f)
+        if (_unitData.UnitName == "NightLord" && !_revived && _duration<=0f)
         {
             _revived = true;
-            _lifeTimer = 8f;
+            _duration = 8f;
             _stateMachine.ChangeState(new AllyReviveState());
             return;
         }
         
-        if (_SpawnTimeSlider != null)
+        if (_DurationSlider != null)
         {
-            _SpawnTimeSlider.value = _lifeTimer;
+            _DurationSlider.value = _duration;
         }
         
-        if (!_isDead && _lifeTimer <= 0f)
+        if (!_isDead && _duration <= 0f)
         {
             _stateMachine.ChangeState(new AllyDeadState());
         }
-
-        
     }
 
     public void ChangeState(IState<Ally> newState)
@@ -191,8 +206,6 @@ public class Ally : MonoBehaviour
                 _occupiedTile.isOccupied = false;
                 _occupiedTile.ally = null;
                 _occupiedTile = null;
-                
-                
             }
             
             // 오브젝트 풀에 복귀
@@ -504,7 +517,7 @@ public class Ally : MonoBehaviour
     public void SetLastKnockbackEnemyCount(int count) => _lastKnockbackEnemyCount = count;
     public int GetLastKnockbackEnemyCount() => _lastKnockbackEnemyCount;
     public bool FinalSkill => _finalSkill;
-    public void SetLifetime(float time) => _lifeTimer += time;
+    public void SetLifetime(float time) => _duration += time;
     public int GetTotalDamage => _totalDamage;
     public void SetTotalDamage(int damage) => _totalDamage = damage;
     public bool GetRevive() => _revived;

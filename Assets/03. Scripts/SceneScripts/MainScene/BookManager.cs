@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class BookManager : MonoBehaviour
@@ -22,7 +21,7 @@ public class BookManager : MonoBehaviour
         SetCanvasGroupActive(newGamePageGroup, false);
     }
 
-    /// new game 버튼 클릭 시
+    /// titlePage - new game 버튼 클릭 시
     public void OnNewGameButtonClick()
     {
         SetCanvasGroupActive(titlePageGroup, false);
@@ -32,6 +31,18 @@ public class BookManager : MonoBehaviour
         
         // 책 넘기기 애니메이션 진행
         animator.SetTrigger("isFlipped");
+    }
+    
+    /// newGamePage - back버튼 클릭 시
+    public void OnBackButtonClick()
+    {
+        SetCanvasGroupActive(newGamePageGroup, false);
+        
+        // 책 넘기기 소리 재생
+        PlayPageFlipSound();
+        
+        // 책 반대로 넘기기 애니메이션 진행
+        animator.SetTrigger("isBackFlipped");
     }
     
     void PlayPageFlipSound()

@@ -113,7 +113,6 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         _skill.Activate(this);
     }
-    
 
     // 외부에서 데미지를 받을 때 호출
     public void TakeDamage(int damage)
@@ -128,13 +127,13 @@ public class Enemy : MonoBehaviour, IDamageable
             }
         }
     }
-
  
     public void PerformDie()
     {
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.9f)
         {
+            GameManager.Instance.OnDarkKilled();
             gameObject.SetActive(false);
         }
     }

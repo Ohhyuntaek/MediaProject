@@ -38,21 +38,27 @@ public class DarkSpawner : MonoBehaviour
             // 랜덤으로 왼쪽/오른쪽 중 하나 선택
             Transform spawnPoint = Random.value < 0.5f ? leftSpawnPoint : rightSpawnPoint;
             GameObject darkPrefab = currentStage.Darks[Random.Range(0, currentStage.Darks.Count)];
-            if (spawnPoint == leftSpawnPoint)
+            
+            // Dark 인스턴스 생성
+            GameObject darkInstance = Instantiate(darkPrefab, spawnPoint.position, Quaternion.identity);
+
+            // 인스턴스에 대해 SetDestinationWhenSpawn 호출
+            Enemy enemy = darkInstance.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                darkPrefab.GetComponent<Enemy>().SetDestinationWhenSpawn(false);
+                if (spawnPoint == leftSpawnPoint)
+                    enemy.SetDestinationWhenSpawn(false);
+                else
+                    enemy.SetDestinationWhenSpawn(true);
             }
             else
             {
-                darkPrefab.GetComponent<Enemy>().SetDestinationWhenSpawn(true);
+                Debug.LogWarning("DarkPrefab에 Enemy 컴포넌트가 없습니다!");
             }
-            
-            
 
-            // Dark 인스턴스 생성
-            Instantiate(darkPrefab, spawnPoint.position, Quaternion.identity);
+            // Dark 하나 스폰 알림
+            GameManager.Instance.OnDarkSpawned();
             
-
             // 다음 Dark까지 대기
             yield return new WaitForSeconds(currentStage.SpawnTerm);
         }

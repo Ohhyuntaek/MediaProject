@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2cefdba06df8040b17350f549e6704, type: 3}
   m_Name: BossStage
   m_EditorClassIdentifier: 
-  _stageName: BossStage
+  _stageName: Boss Stage
   _stageType: 1
-  _startSpawnDelay: 0
-  _spawnTerm: 0
-  _darks: []
-  _darksCount: 0
+  _startSpawnDelay: 3
+  _spawnTerm: 1
+  _darks:
+  - {fileID: 8283446157625006365, guid: c8eab2dc808f0e7498b999820a961e94, type: 3}
+  _darksCount: 1
