@@ -82,7 +82,7 @@ public class Boss : MonoBehaviour, IDamageable
     public void DealDamageToPlayer(int dmg)
     {
        
-        _player.GetComponent<Player>().TakeDamage(dmg);
+        _player.GetComponent<Dawn>().TakeDamage(dmg);
     }
 
     public void TakeDamage(int damage)

@@ -6,13 +6,16 @@ public class CardSpawner : MonoBehaviour
     public Card[] defenderCards;
     public Transform[] cardSlots;
     public float spawnInterval = 2f;
-
+    public bool canSpawnCards = true;
+    
     [SerializeField] private int cardSlotNumber = 8;
     private float timer = 0f;
     
     // Update is called once per frame
     void Update()
     {
+        if (!canSpawnCards) return; // 스폰 금지 상태면 리턴
+        
         timer += Time.deltaTime;
         
         if (timer >= spawnInterval)

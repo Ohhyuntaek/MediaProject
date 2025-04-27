@@ -18,6 +18,7 @@ MonoBehaviour:
   _activeSkillCooldown: 30
   _activeSkillType: 4
   _unitTribe: 0
+  _prefab: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
   _maxEnergy: 10
   _initialEnergy: 2
   _chargespeed: 0

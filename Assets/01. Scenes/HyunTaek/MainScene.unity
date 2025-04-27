@@ -2959,7 +2959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpMaxValue: 300
-  energyMaxValue: 100
+  energyMaxValue: 50
   dawnPortraitImage: {fileID: 2056859492}
   dawnHpSlider: {fileID: 622858924}
   dawnEnergySlider: {fileID: 110042012}

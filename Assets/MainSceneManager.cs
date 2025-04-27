@@ -70,6 +70,6 @@ public class MainSceneManager : MonoBehaviour
         }
 
         GameManager.Instance.SetSelectedDawn(selectedDawnData);
-        SceneManager.LoadScene("InStageScene");
+        SceneManager.LoadScene("InStage");
     }
 }

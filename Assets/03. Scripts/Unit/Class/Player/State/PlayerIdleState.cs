@@ -1,29 +1,29 @@
 using UnityEngine;
 
-public class PlayerIdleState : IState<Player>
+public class PlayerIdleState : IState<Dawn>
 {
     
-    public void Enter(Player player)
+    public void Enter(Dawn dawn)
     {
     }
 
-    public void Update(Player player)
+    public void Update(Dawn dawn)
     {
        
-        TransionTo(player);
+        TransionTo(dawn);
         
     }
 
-    public void TransionTo(Player player)
+    public void TransionTo(Dawn dawn)
     {
-        if (Input.GetKeyUp(KeyCode.Space) && player.CanUseActiveSkill)
+        if (Input.GetKeyUp(KeyCode.Space) && dawn.CanUseActiveSkill)
         {
-            player.ChangeState(new PlayerActiveSkillState() );
+            dawn.ChangeState(new PlayerActiveSkillState() );
         }
         
     } 
 
-    public void Exit(Player player)
+    public void Exit(Dawn dawn)
     {
        
     }

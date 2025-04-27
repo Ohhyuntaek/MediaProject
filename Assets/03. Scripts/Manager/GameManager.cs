@@ -4,10 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    private DawnData selectedDawnData;
-
-    // 선택된 플레이어 데이터 (MainScene에서 설정 -> InStageScene에서 사용)
-    public DawnData SelectedDawnData { get; private set; }
+    private DawnData selectedDawn;
 
     void Awake()
     {
@@ -24,13 +21,13 @@ public class GameManager : MonoBehaviour
     }
     
     // 플레이어 선택할 때 호출
-    public void SetSelectedDawn(DawnData playerData)
+    public void SetSelectedDawn(DawnData dawn)
     {
-        SelectedDawnData = playerData;
+        selectedDawn = dawn;
     }
     
     public DawnData GetSelectedDawn()
     {
-        return selectedDawnData;
+        return selectedDawn;
     }
 }

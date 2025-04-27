@@ -6,18 +6,16 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Dawn : MonoBehaviour
 {
     [FormerlySerializedAs("_playerData")] [SerializeField] private DawnData dawnData;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Slider _hpSlider;
-    [SerializeField] private Slider _energySlider;
     
-    private StateMachine<Player> _stateMachine;
+    private StateMachine<Dawn> _stateMachine;
     private bool _canUseActiveSkill = true;
     private float _activeSkillCooldownTimer;
-    private ISkill<Player> _activeSkill;
-    private ISkill<Player> _passiveSkill;
+    private ISkill<Dawn> _activeSkill;
+    private ISkill<Dawn> _passiveSkill;
     private float _hp;
     private bool _isDead = false;
     private float _energyTimer = 0f;
@@ -30,6 +28,7 @@ public class Player : MonoBehaviour
     public DawnData DawnData => dawnData;
     public bool CanUseActiveSkill => _canUseActiveSkill;
     public float ActiveSkillCooldownTime => dawnData.ActiveSkillCooldown;
+    public float CurrentHP => _hp;
     
 
     private void Start()
@@ -46,9 +45,6 @@ public class Player : MonoBehaviour
 
     public void Initialize(DawnData data)
     {
-        _hpSlider.maxValue = dawnData.MaxHP;
-        _energySlider.maxValue = dawnData.MaxEnergy;
-        
         dawnData = data;
         _hp = dawnData.MaxHP;
         _activeSkill = CreateActiveSkillFromData(dawnData.ActiveSkillType);
@@ -56,7 +52,7 @@ public class Player : MonoBehaviour
         _chargeSpd = dawnData.ChargingSpd;
         _MaxEnergy = dawnData.MaxEnergy;
         _currentEnergy = dawnData.InitialEnergy;
-        _stateMachine = new StateMachine<Player>(this);
+        _stateMachine = new StateMachine<Dawn>(this);
         _stateMachine.ChangeState(new PlayerIdleState());
     }
 
@@ -82,20 +78,9 @@ public class Player : MonoBehaviour
             _energyTimer += Time.deltaTime; 
             ChargeMana();
         }
-        
-        if (_hpSlider != null)
-        {
-            _hpSlider.value = _hp;
-        }
-
-        if (_energySlider != null)
-        {
-            _energySlider.value = _energyTimer;
-        }
-
     }
 
-    public void ChangeState(IState<Player> newState)
+    public void ChangeState(IState<Dawn> newState)
     {
         _stateMachine.ChangeState(newState);
     }
@@ -152,7 +137,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private ISkill<Player> CreateActiveSkillFromData(AllySkillType skillType)
+    private ISkill<Dawn> CreateActiveSkillFromData(AllySkillType skillType)
     {
         return skillType switch
         {
@@ -160,7 +145,7 @@ public class Player : MonoBehaviour
         };
     }
     
-    private ISkill<Player> CreatePassiveSkillFromData(AllySkillType skillType)
+    private ISkill<Dawn> CreatePassiveSkillFromData(AllySkillType skillType)
     {
         return skillType switch
         {

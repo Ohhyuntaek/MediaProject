@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public class PlayerDeadState : IState<Player>
+public class PlayerDeadState : IState<Dawn>
 {
     
-    public void Enter(Player player)
+    public void Enter(Dawn dawn)
     {
-        player.Animator?.SetTrigger("4_Death");
+        dawn.Animator?.SetTrigger("4_Death");
        
     }
 
-    public void Update(Player player)
+    public void Update(Dawn dawn)
     {
-        player.PerformDie();
+        dawn.PerformDie();
     }
 
-    public void Exit(Player player)
+    public void Exit(Dawn dawn)
     {
        
     }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JandarkPassiveSkill : ISkill<Player>
+public class JandarkPassiveSkill : ISkill<Dawn>
 {
     private int lastcount = 0;
-    public void Activate(Player owner)
+    public void Activate(Dawn owner)
     {   
         
         if (CheckActivationCondition())

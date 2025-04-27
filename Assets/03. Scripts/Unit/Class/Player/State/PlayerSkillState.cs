@@ -1,28 +1,28 @@
 using UnityEngine;
 
-public class PlayerActiveSkillState : IState<Player>
+public class PlayerActiveSkillState : IState<Dawn>
 {
     private bool finished = false;
 
-    public void Enter(Player player)
+    public void Enter(Dawn dawn)
     {
-        player.Animator?.SetTrigger("5_Active");
+        dawn.Animator?.SetTrigger("5_Active");
         
         
     }
 
-    public void Update(Player player)
+    public void Update(Dawn dawn)
     {
-        AnimatorStateInfo stateInfo = player.Animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = dawn.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("ActiveSkill") && stateInfo.normalizedTime > 0.9f &&!finished)
         {
-            player.PerformActiveSkill();
+            dawn.PerformActiveSkill();
             finished = true;
-            player.ChangeState(new PlayerIdleState());
+            dawn.ChangeState(new PlayerIdleState());
         }
     }
 
-    public void Exit(Player player)
+    public void Exit(Dawn dawn)
     {
         // 아무 처리 없음
     }

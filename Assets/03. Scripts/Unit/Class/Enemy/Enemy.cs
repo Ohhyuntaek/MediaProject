@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private float _defense;
     private bool _hide = false;
     private float _damage;
-    private Player _player;
+    private Dawn _dawn;
     [SerializeField] private Slider hpSlider;
     
     public Animator Animator => _animator;
@@ -61,12 +61,12 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackRange = _enemyData.ATKRange;
         _damage = _enemyData.Damage;
         _defense = _enemyData.Deffense;
-        _player = GameObject.FindFirstObjectByType<Player>();
+        _dawn = GameObject.FindFirstObjectByType<Dawn>();
         _skill = CreateSkillFromData(_enemyData.Skill);
         if (_destination.gameObject.name.Contains("Right")) _dir = true;
         _stateMachine = new StateMachine<Enemy>(this);
         _stateMachine.ChangeState(new EnemyWalkState());
-        _target = _player.transform;
+        _target = _dawn.transform;
         hpSlider.maxValue = _hp;
     }
 
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (IsTargetInRange())
         {
-            _player.TakeDamage(_damage);
+            _dawn.TakeDamage(_damage);
         }
     }
 

@@ -1118,7 +1118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 183312420}
   m_Layer: 5
-  m_Name: PlayerProfile
+  m_Name: DawnProfile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3554,7 +3554,7 @@ GameObject:
   - component: {fileID: 451494906}
   - component: {fileID: 451494907}
   m_Layer: 5
-  m_Name: PlayerProfileBackground
+  m_Name: DawnProfileBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4711,7 +4711,7 @@ GameObject:
   - component: {fileID: 728749134}
   - component: {fileID: 728749133}
   m_Layer: 5
-  m_Name: PlayerImage
+  m_Name: DawnImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4756,7 +4756,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1292439875, guid: 5bdaa8422451f674a93b3963f8737153, type: 3}
+  m_Sprite: {fileID: 1918872779, guid: 1a2327c8435f0454db2bacb718ace659, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6506,6 +6506,7 @@ MonoBehaviour:
   - {fileID: 1405099364}
   - {fileID: 313160516}
   spawnInterval: 2
+  canSpawnCards: 1
   cardSlotNumber: 8
 --- !u!4 &1442016962
 Transform:
@@ -6805,13 +6806,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
   - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
   - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
-  playerImages:
-  - {fileID: -903937239, guid: a07db537bc13db741a8e462a3053c958, type: 3}
-  - {fileID: -833971407, guid: 083430ea3b459aa4083511c4007d0556, type: 3}
-  - {fileID: 121734609, guid: 1737c18c3919a124d8faeff16fb5fc60, type: 3}
-  - {fileID: 1170413532, guid: 29f07a00b2dd83d4f88eb3f1b58e8968, type: 3}
-  - {fileID: 501205929, guid: 03ad10307a8f5de46a7b13be566aca00, type: 3}
-  - {fileID: -1292439875, guid: 5bdaa8422451f674a93b3963f8737153, type: 3}
+  dawnImages: []
   allyUnitDataLinks:
   - allyType: 0
     unitData: {fileID: 11400000, guid: b08ee28ea7d5ed2478b9309cbb97b4d3, type: 2}
@@ -6824,9 +6819,13 @@ MonoBehaviour:
   stageText: {fileID: 445447681}
   stageClearText: {fileID: 1854291016}
   darkSpawner: {fileID: 409470820}
-  playerImage: {fileID: 728749133}
+  dawnImage: {fileID: 728749133}
   costText: {fileID: 247546856}
+  cardSpawner: {fileID: 1442016961}
   costUpMultiplier: 1
+  dawnSpawnPoint: {fileID: 123849105}
+  hpSlider: {fileID: 399508629}
+  energySlider: {fileID: 1579949352}
 --- !u!1 &1550883773
 GameObject:
   m_ObjectHideFlags: 0
@@ -9877,71 +9876,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790451060}
   m_CullTransparentMesh: 1
---- !u!1001 &1821946598
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 523459849710580622, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: _hpSlider
-      value: 
-      objectReference: {fileID: 399508629}
-    - target: {fileID: 523459849710580622, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: _energySlider
-      value: 
-      objectReference: {fileID: 1579949352}
-    - target: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_Name
-      value: joandarc(Player)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8942942104371038162, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
 --- !u!1 &1828955997
 GameObject:
   m_ObjectHideFlags: 0
@@ -11637,10 +11571,9 @@ SceneRoots:
   - {fileID: 1587441401}
   - {fileID: 740283024}
   - {fileID: 255357237}
+  - {fileID: 123849105}
   - {fileID: 1098474733}
   - {fileID: 1237773388}
   - {fileID: 901549857}
   - {fileID: 543949082}
   - {fileID: 1313826266}
-  - {fileID: 1821946598}
-  - {fileID: 123849105}

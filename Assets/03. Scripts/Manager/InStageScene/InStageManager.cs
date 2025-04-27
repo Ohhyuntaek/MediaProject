@@ -13,28 +13,40 @@ public class AllyUnitDataLink
     public UnitData unitData;
 }
 
+public enum StageState
+{
+    Playing,
+    Cleared
+}
+
 public class InStageManager : MonoBehaviour
 {
     public static InStageManager Instance;
     
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private List<StageData> stageList;
-    [SerializeField] private List<Sprite> playerImages;
+    [SerializeField] private List<Sprite> dawnImages;
     [SerializeField] private List<AllyUnitDataLink> allyUnitDataLinks;
     [SerializeField] private TMPro.TMP_Text stageText;
     [SerializeField] private TMPro.TMP_Text stageClearText;
     [SerializeField] private DarkSpawner darkSpawner;
-    [SerializeField] private Image playerImage;
+    [FormerlySerializedAs("playerImage")] [SerializeField] private Image dawnImage;
     [SerializeField] private TMPro.TMP_Text costText;
+    [SerializeField] private CardSpawner cardSpawner;
     [SerializeField] private float costUpMultiplier = 1.0f; // 코스트 상승 속도 (외부 조정 가능)
-
+    [SerializeField] private Transform dawnSpawnPoint; // Dawn이 스폰될 위치
+    [SerializeField] private Slider hpSlider;        // Dawn 체력 표시용
+    [SerializeField] private Slider energySlider;    // Dawn 에너지 표시용
+    
     private Dictionary<AllyType, UnitData> allyUnitDataDict = new();
-    private int cost = 0;                    // 현재 코스트
-    private float costTimer = 0f;             // 코스트 상승 타이머
+    private int cost = 0;          // 현재 코스트
+    private float costTimer = 0f;  // 코스트 상승 타이머
     private float costUpInterval => 1.0f / costUpMultiplier; // 실제 코스트 증가 주기 (초)
     private GameObject player;
     private int currentStageIndex = 0;
     private int aliveDarkCount = 0;
+    private Dawn spawnedDawn; // 소환된 Dawn을 저장할 변수
+    private StageState currentStageState = StageState.Playing;
     
     private void Awake()
     {
@@ -71,40 +83,31 @@ public class InStageManager : MonoBehaviour
 
     void Start()
     {
-        // 1. Player 태그를 가진 오브젝트를 찾아 player 변수에 저장
-        player = GameObject.FindGameObjectWithTag("Player");
+        // GameManager에서 선택한 Dawn 정보를 가져옴
+        DawnData selectedDawn = GameManager.Instance.GetSelectedDawn();
 
-        if (player == null)
+        if (selectedDawn == null)
         {
-            Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다.");
+            Debug.LogError("GameManager에 저장된 DawnData가 없습니다!");
             return;
         }
 
-        // 2. player의 _playerData.PlayerName을 가져옴
-        Player playerController = player.GetComponent<Player>();
-        if (playerController == null)
+        // Dawn 이미지 직접 세팅
+        if (dawnImage != null)
         {
-            Debug.LogError("Player 오브젝트에 Player 컴포넌트가 없습니다.");
-            return;
+            dawnImage.sprite = selectedDawn.Portrait;
         }
-
-        string playerName = playerController.DawnData.PlayerName;
-
-        // 3. playerImages 리스트에서 이름이 매칭되는 스프라이트 찾기
-        foreach (var sprite in playerImages)
-        {
-            if (sprite.name.Contains(playerName))
-            {
-                playerImage.sprite = sprite;
-                break;
-            }
-        }
-        
+    
         StartStage();
+        // Dawn 소환
+        SpawnDawn();
     }
     
     void Update()
     {
+        if (currentStageState != StageState.Playing)
+            return; // 클리어 상태면 코스트 증가/슬라이더 업데이트 금지
+        
         // 매 프레임 cost 타이머 누적
         costTimer += Time.deltaTime;
 
@@ -113,6 +116,20 @@ public class InStageManager : MonoBehaviour
             TryIncreaseCost();
             costTimer = 0f; // 타이머 리셋
         }
+        
+        // Dawn 체력/에너지 UI 업데이트
+        UpdateDawnUI();
+    }
+    
+    private void UpdateDawnUI()
+    {
+        if (spawnedDawn == null) return;
+
+        if (hpSlider != null)
+            hpSlider.value = spawnedDawn.DawnData.MaxHP > 0 ? spawnedDawn.CurrentHP / spawnedDawn.DawnData.MaxHP : 0f;
+    
+        if (energySlider != null)
+            energySlider.value = spawnedDawn.DawnData.MaxEnergy > 0 ? (float)spawnedDawn.Energy / spawnedDawn.DawnData.MaxEnergy : 0f;
     }
     
     private void TryIncreaseCost()
@@ -165,7 +182,13 @@ public class InStageManager : MonoBehaviour
 
     private void OnStageClear()
     {
-        StageData currentStage = stageList[currentStageIndex];
+        currentStageState = StageState.Cleared; // 상태를 Cleared로 변경
+        
+        // 카드 스폰 정지
+        cardSpawner.canSpawnCards = false;
+    
+        // 덱에 남은 카드 삭제
+        ClearDeckCards();
 
         // 1. 현재 활성화된 모든 Ally들의 duration을 0으로
         foreach (var allyObj in AllyPoolManager.Instance.activateAllies)
@@ -181,7 +204,7 @@ public class InStageManager : MonoBehaviour
         }
 
         // 2. Stage Clear 문구 띄우기
-        StartCoroutine(HandleStageClearSequence(currentStage.StageType));
+        StartCoroutine(HandleStageClearSequence(stageList[currentStageIndex].StageType));
     }
     
     private IEnumerator HandleStageClearSequence(StageType stageType)
@@ -224,9 +247,24 @@ public class InStageManager : MonoBehaviour
             }
         }
     }
+    
+    private void ClearDeckCards()
+    {
+        foreach (var slot in cardSlots)
+        {
+            if (slot.childCount > 0)
+            {
+                Destroy(slot.GetChild(0).gameObject);
+            }
+        }
+    }
 
     public void StartStage()
     {
+        currentStageState = StageState.Playing; // 다시 Playing 상태로 전환
+        
+        cardSpawner.canSpawnCards = true; // 카드 스폰 재허용
+        
         // 코스트 초기화
         cost = 0;
         UpdateCostText(); // 코스트 텍스트도 바로 갱신
@@ -234,6 +272,38 @@ public class InStageManager : MonoBehaviour
         stageText.text = stageList[currentStageIndex].StageName;
         StageData stage = stageList[currentStageIndex];
         darkSpawner.StartSpawning(stage);
+    }
+    
+    private void SpawnDawn()
+    {
+        DawnData dawnData = GameManager.Instance.GetSelectedDawn();
+
+        if (dawnData == null)
+        {
+            Debug.LogError("선택된 DawnData가 없습니다!");
+            return;
+        }
+
+        if (dawnData.Prefab == null)
+        {
+            Debug.LogError("DawnData에 연결된 Prefab이 없습니다!");
+            return;
+        }
+
+        // Instantiate DawnPrefab at Spawn Point
+        GameObject dawnObj = Instantiate(dawnData.Prefab, dawnSpawnPoint.position, Quaternion.identity);
+
+        // Initialize Dawn 컴포넌트
+        Dawn dawn = dawnObj.GetComponent<Dawn>();
+        if (dawn != null)
+        {
+            dawn.Initialize(dawnData);
+            spawnedDawn = dawn; // 소환된 Dawn 저장
+        }
+        else
+        {
+            Debug.LogWarning("Dawn 컴포넌트를 찾을 수 없습니다.");
+        }
     }
     
     public void ShiftCardsLeft(int slotIndex)

@@ -12,6 +12,8 @@ public class DawnData : ScriptableObject
     [SerializeField] private AllySkillType _activeSkillType;
     [SerializeField] private UnitTribe _unitTribe;
     
+    [Header("Prefab 정보 추가")] 
+    [SerializeField] private GameObject _prefab;
     
     [SerializeField] private int _maxEnergy;    
     [SerializeField] private int _initialEnergy;
@@ -27,4 +29,5 @@ public class DawnData : ScriptableObject
     public int InitialEnergy { get => _initialEnergy; set => _initialEnergy = value; }
     public int ChargingSpd { get => _chargespeed; set => _chargespeed = value; }
     public UnitTribe Tribe { get => _unitTribe; set => _unitTribe = value; }
+    public GameObject Prefab => _prefab;
 }
