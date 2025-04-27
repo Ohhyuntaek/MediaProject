@@ -217,7 +217,7 @@ public class InStageManager : MonoBehaviour
         }
 
         // 2초 동안 대기
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         // Stage Clear 텍스트 비활성화
         if (stageClearText != null)
