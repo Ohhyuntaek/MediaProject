@@ -2,10 +2,11 @@ using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlayerData", menuName = "SO/Player Data")]
-public class PlayerData : ScriptableObject
+public class DawnData : ScriptableObject
 {
     [Header("기본 정보")]
     [SerializeField] private string _playerName;
+    [SerializeField] private Sprite _portrait;
     [SerializeField] private float _maxHP;
     [SerializeField] private float _activeSkillCooldown;
     [SerializeField] private AllySkillType _activeSkillType;
@@ -18,6 +19,7 @@ public class PlayerData : ScriptableObject
     
 
     public string PlayerName { get => _playerName; set => _playerName = value; }
+    public Sprite Portrait { get => _portrait; set => _portrait = value; }
     public float MaxHP { get => _maxHP; set => _maxHP = value; }
     public float ActiveSkillCooldown { get => _activeSkillCooldown; set => _activeSkillCooldown = value; }
     public AllySkillType ActiveSkillType { get => _activeSkillType; set => _activeSkillType = value; }

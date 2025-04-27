@@ -88,7 +88,7 @@ public class InStageManager : MonoBehaviour
             return;
         }
 
-        string playerName = playerController.PlayerData.PlayerName;
+        string playerName = playerController.DawnData.PlayerName;
 
         // 3. playerImages 리스트에서 이름이 매칭되는 스프라이트 찾기
         foreach (var sprite in playerImages)

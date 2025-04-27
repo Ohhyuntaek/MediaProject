@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerData _playerData;
+    [FormerlySerializedAs("_playerData")] [SerializeField] private DawnData dawnData;
     [SerializeField] private Animator _animator;
     [SerializeField] private Slider _hpSlider;
     [SerializeField] private Slider _energySlider;
@@ -27,16 +27,16 @@ public class Player : MonoBehaviour
     private bool _CanUpdatePassive = true;
 
     public Animator Animator => _animator;
-    public PlayerData PlayerData => _playerData;
+    public DawnData DawnData => dawnData;
     public bool CanUseActiveSkill => _canUseActiveSkill;
-    public float ActiveSkillCooldownTime => _playerData.ActiveSkillCooldown;
+    public float ActiveSkillCooldownTime => dawnData.ActiveSkillCooldown;
     
 
     private void Start()
     {
-        if(_playerData != null)
+        if(dawnData != null)
         {
-            Initialize(_playerData);
+            Initialize(dawnData);
         }
         else
         {
@@ -44,18 +44,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Initialize(PlayerData data)
+    public void Initialize(DawnData data)
     {
-        _hpSlider.maxValue = _playerData.MaxHP;
-        _energySlider.maxValue = _playerData.MaxEnergy;
+        _hpSlider.maxValue = dawnData.MaxHP;
+        _energySlider.maxValue = dawnData.MaxEnergy;
         
-        _playerData = data;
-        _hp = _playerData.MaxHP;
-        _activeSkill = CreateActiveSkillFromData(_playerData.ActiveSkillType);
-        _passiveSkill = CreatePassiveSkillFromData(_playerData.ActiveSkillType);
-        _chargeSpd = _playerData.ChargingSpd;
-        _MaxEnergy = _playerData.MaxEnergy;
-        _currentEnergy = _playerData.InitialEnergy;
+        dawnData = data;
+        _hp = dawnData.MaxHP;
+        _activeSkill = CreateActiveSkillFromData(dawnData.ActiveSkillType);
+        _passiveSkill = CreatePassiveSkillFromData(dawnData.ActiveSkillType);
+        _chargeSpd = dawnData.ChargingSpd;
+        _MaxEnergy = dawnData.MaxEnergy;
+        _currentEnergy = dawnData.InitialEnergy;
         _stateMachine = new StateMachine<Player>(this);
         _stateMachine.ChangeState(new PlayerIdleState());
     }
