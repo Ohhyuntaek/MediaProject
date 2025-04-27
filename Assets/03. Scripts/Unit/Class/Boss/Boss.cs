@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -9,6 +10,7 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _player;            // 플레이어 Transform
     [SerializeField] private EnemyData _bossData;
+    [SerializeField] private TextMeshProUGUI stunText;
 
     [Header("이동 설정")]
     public float moveInterval = 10f; // 10초마다 이동
@@ -33,7 +35,6 @@ public class Boss : MonoBehaviour, IDamageable
     {
         _initialPosition = transform.position;
         _stateMachine = new StateMachine<Boss>(this);
-        _direction = (_player.position - transform.position).normalized;
         Initialize();
         _stateMachine.ChangeState(new BossIdleState());
     }
@@ -44,7 +45,20 @@ public class Boss : MonoBehaviour, IDamageable
         _mopveSpd = _bossData.MoveSpeed;
         _damage = _bossData.Damage;
         _attacckTimer = attackInterval;
+        _player = GameObject.FindFirstObjectByType<Dawn>().transform;
+        _direction = (_player.position - transform.position).normalized;
 
+    }
+    private void OnDrawGizmos()
+    {
+        if (_player == null) 
+            return;
+
+        // 씬 뷰에 보스와 플레이어를 잇는 선을 그립니다.
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, _player.position);
+
+       
     }
 
     private void PerformDie()
@@ -54,6 +68,10 @@ public class Boss : MonoBehaviour, IDamageable
     
     private void Update()
     {
+        if (Input.GetKey(KeyCode.A))
+        {
+            _skipNextMove = true;
+        }
         if (!_canAttack)
         {
             _attacckTimer -= Time.deltaTime;
@@ -88,6 +106,7 @@ public class Boss : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         _hp -= damage;
+        Debug.Log("남은 hp" + _hp);
         if (_hp <= 0 && !_isDead)
         {
             _isDead = true;
@@ -196,7 +215,23 @@ public class Boss : MonoBehaviour, IDamageable
         {
             _skipNextMove = true;
         }
-       
+
+    }
+
+    public bool CheckDistance()
+    {
+        float distance = Vector3.Distance(transform.position, _player.position);
+        Debug.Log("너와 나의 거리 " + distance);
+        if (distance<0.5f)
+        {
+            Debug.Log("너무 가까워");
+            return true;
+        }
+        else
+        {   
+            Debug.Log("너무 멀어");
+            return false;
+        }
     }
 
     #endregion
@@ -255,10 +290,16 @@ public class Boss : MonoBehaviour, IDamageable
         get => _jump;
         set => _jump = value;
     }
+    public bool SkipNextMove
+    {
+        get => _skipNextMove;
+        set => _skipNextMove = value;
+    }
+
+    public TextMeshProUGUI StunText => stunText;
     
 
     public Vector3 Dircetion => _direction;
-    public bool SkipNextMove => _skipNextMove;
     public Animator Animator => _animator;
 
 

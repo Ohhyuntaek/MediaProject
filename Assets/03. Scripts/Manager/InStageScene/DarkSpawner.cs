@@ -7,6 +7,7 @@ public class DarkSpawner : MonoBehaviour
     [Header("스폰 지점")]
     [SerializeField] private Transform leftSpawnPoint;
     [SerializeField] private Transform rightSpawnPoint;
+    [SerializeField] private Transform bossSpawnPoint;
     
     [Header("현재 스테이지 데이터")]
     [SerializeField] private StageData currentStage;
@@ -34,27 +35,37 @@ public class DarkSpawner : MonoBehaviour
 
         // 2. 설정된 수 만큼 Dark 순차 스폰
         for (int i = 0; i < currentStage.DarksCount; i++)
-        {
-            // 랜덤으로 왼쪽/오른쪽 중 하나 선택
-            Transform spawnPoint = Random.value < 0.5f ? leftSpawnPoint : rightSpawnPoint;
-            GameObject darkPrefab = currentStage.Darks[Random.Range(0, currentStage.Darks.Count)];
+        {   
             
-            // Dark 인스턴스 생성
-            GameObject darkInstance = Instantiate(darkPrefab, spawnPoint.position, Quaternion.identity);
-
-            // 인스턴스에 대해 SetDestinationWhenSpawn 호출
-            Enemy enemy = darkInstance.GetComponent<Enemy>();
-            if (enemy != null)
+            
+            GameObject darkPrefab = currentStage.Darks[Random.Range(0, currentStage.Darks.Count)];
+            if (darkPrefab.TryGetComponent<Boss>(out var boss))
             {
-                if (spawnPoint == leftSpawnPoint)
-                    enemy.SetDestinationWhenSpawn(false);
-                else
-                    enemy.SetDestinationWhenSpawn(true);
+                GameObject bossInstance = Instantiate(darkPrefab, bossSpawnPoint.position, Quaternion.identity);
             }
             else
             {
-                Debug.LogWarning("DarkPrefab에 Enemy 컴포넌트가 없습니다!");
+                Transform spawnPoint = Random.value < 0.5f ? leftSpawnPoint : rightSpawnPoint;
+           
+            
+                // Dark 인스턴스 생성
+                GameObject darkInstance = Instantiate(darkPrefab, spawnPoint.position, Quaternion.identity);
+
+                // 인스턴스에 대해 SetDestinationWhenSpawn 호출
+                Enemy enemy = darkInstance.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    if (spawnPoint == leftSpawnPoint)
+                        enemy.SetDestinationWhenSpawn(false);
+                    else
+                        enemy.SetDestinationWhenSpawn(true);
+                }
+                else
+                {
+                    Debug.LogWarning("DarkPrefab에 Enemy 컴포넌트가 없습니다!");
+                }
             }
+           
 
             // Dark 하나 스폰 알림
             InStageManager.Instance.OnDarkSpawned();

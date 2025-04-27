@@ -1,19 +1,59 @@
+using System.Collections;
+using UnityEngine;
+using TMPro;
 
-
-public class BossStunState :IState<Boss>
+public class BossStunState : IState<Boss>
 {
-    public void Enter(Boss owner)
+    private float _duration =5F;
+    
+   
+
+    public void Enter(Boss boss)
     {
-        throw new System.NotImplementedException();
+        // 이동 애니메이션 끄기
+        boss.Animator.SetBool("1_Move", false);
+
+        // StunText 활성화
+        boss.StunText.gameObject.SetActive(true);
+        boss.StunText.enabled = true;
+        Debug.Log("왜 안켜지지");
+        // 카운트다운 코루틴 실행
+        boss.StartCoroutine(StunCountdown(boss));
     }
 
-    public void Update(Boss owner)
+    private IEnumerator StunCountdown(Boss boss)
     {
-        throw new System.NotImplementedException();
+      
+        int remaining = Mathf.CeilToInt(_duration);
+
+        while (remaining > 0)
+        {
+            
+            boss.StunText.text = remaining.ToString();
+
+            
+            yield return new WaitForSeconds(1f);
+            remaining--;
+        }
+
+        
+        boss.StunText.gameObject.SetActive(false);
+
+       
+        boss.InitializeAttack();
+
+        
+        boss.ChangeState(new BossIdleState());
     }
 
-    public void Exit(Boss owner)
+    public void Update(Boss boss)
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    public void Exit(Boss boss)
+    {
+       
+       
     }
 }

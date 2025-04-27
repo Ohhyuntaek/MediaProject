@@ -137,6 +137,7 @@ public class Ally : MonoBehaviour
         
         if (!_isDead && _duration <= 0f)
         {
+            
             _stateMachine.ChangeState(new AllyDeadState());
         }
     }
@@ -349,12 +350,11 @@ public class Ally : MonoBehaviour
 
         foreach (var dmg in targets)
         {
-            // IDamageable이 실제로는 Enemy 또는 Boss이므로,
-            // MonoBehaviour로 캐스팅해서 transform과 StartCoroutine을 얻습니다.
+           
             var mb = dmg as MonoBehaviour;
             if (mb == null) continue;
 
-            // Enemy/Boss 양쪽에서 제공하는 GetDestination() 호출
+           
             Transform destination = null;
             if (dmg is Enemy e)      destination = e.GetDestination();
             else if (dmg is Boss b)
@@ -372,6 +372,8 @@ public class Ally : MonoBehaviour
                 Vector3 displacement = knockDir * knockbackDistance;
                 mb.StartCoroutine(SmoothKnockback(mb.transform, displacement, knockbackDuration));
             }
+
+            
            
         }
     }

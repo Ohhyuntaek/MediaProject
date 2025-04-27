@@ -20,30 +20,33 @@ public class BossDropAttackState : IState<Boss>
     private IEnumerator JumpAndLand(Boss boss)
     {
         _started = true;
-        yield return new WaitForSeconds(1f); // 1초 대기
+        boss.Jumping = true;
+        yield return new WaitForSeconds(1f);
+        if (boss.SkipNextMove)
+        {
+            boss.ChangeState(new BossStunState());
+            boss.Jumping = false;
+            Debug.Log("너 스킵");
+        } 
+        boss.Jumping = false;
 
         // 랜딩 애니메이션
         boss.Animator.SetTrigger("Land");
-
-        // CC 당한 경우 다음 이동 스킵
-        if (boss.SkipNextMove)
-        {
-            
-        }
+        
 
         // 랜딩 시 전열 아군 체크
         List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
-        if (front.Count < 2)
+        if (front.Count < 2 &&!boss.SkipNextMove)
         {
             boss.DestroyAllAllies();
             boss.DealDamageToPlayer(30); // 30 데미지
         }
-        else
+        else if(front.Count >= 2 && !boss.SkipNextMove)
         {
             boss.DespawnRandomFrontAllies(front, 2);
         }
 
-        // 끝나면 버프 스테이트로
+        
         boss.ChangeState(new BossIdleState());
     }
 
@@ -54,6 +57,7 @@ public class BossDropAttackState : IState<Boss>
 
     public void Exit(Boss boss)
     {
-        
+        boss.Jumping = false;
+        boss.SkipNextMove = false;
     }
 }

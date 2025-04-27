@@ -3210,6 +3210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftSpawnPoint: {fileID: 1237773388}
   rightSpawnPoint: {fileID: 901549857}
+  bossSpawnPoint: {fileID: 1338188536}
   currentStage: {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
 --- !u!1 &410087039
 GameObject:
@@ -6337,6 +6338,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1338188535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338188536}
+  m_Layer: 0
+  m_Name: BossSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1338188536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338188535}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9, y: 1.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1341609100
 GameObject:
   m_ObjectHideFlags: 0
@@ -6802,7 +6834,7 @@ MonoBehaviour:
   - {fileID: 1405099364}
   - {fileID: 313160516}
   stageList:
-  - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
+  - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
   - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
   - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
   - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
@@ -11577,3 +11609,4 @@ SceneRoots:
   - {fileID: 901549857}
   - {fileID: 543949082}
   - {fileID: 1313826266}
+  - {fileID: 1338188536}

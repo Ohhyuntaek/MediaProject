@@ -20,7 +20,7 @@ public class BossIdleState : IState<Boss>
         if (_timer <= 0f)
         {
            
-            if (boss.MoveCount!=0 && boss.MoveCount%2==0)
+            if (boss.MoveCount!=0 && boss.MoveCount%2==0 )
             {   
                 
                 _finished = true;
