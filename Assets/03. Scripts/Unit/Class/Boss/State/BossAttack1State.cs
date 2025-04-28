@@ -4,9 +4,10 @@ using UnityEngine;
 public class BossAttack1State : IState<Boss>
 {
     private bool _finished = false;
-    public void Enter(Boss owner)
+    public void Enter(Boss boss)
     {
-        owner.Animator.SetTrigger("2_Attack1");
+        boss.Animator.SetTrigger("2_Attack1");
+        //SoundManager.Instance.PlaySfx(boss.BossData.AttackSound,boss.transform.position,false);
     }
 
     public void Update(Boss owner)
@@ -18,7 +19,8 @@ public class BossAttack1State : IState<Boss>
     {
         AnimatorStateInfo stateInfo = boss.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Attack1") && stateInfo.normalizedTime > 0.9f && !_finished )
-        {
+        {   
+            
             _finished = true;
             Ally closeAlly = boss.GetClosestAlly(boss.transform.position);
             if (closeAlly != null)
@@ -35,5 +37,6 @@ public class BossAttack1State : IState<Boss>
     public void Exit(Boss boss)
     {
         boss.InitializeAttack();
+        boss.LastSpecialAttack = false;
     }
 }

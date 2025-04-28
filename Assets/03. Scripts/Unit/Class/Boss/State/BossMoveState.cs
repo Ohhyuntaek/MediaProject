@@ -47,7 +47,7 @@ public class BossMoveState : IState<Boss>
             _finished = true;
             boss.UpMoveCount();
             boss.Animator.SetBool("1_Move", false);
-
+            
             
             boss.ChangeState(new BossIdleState());
         }

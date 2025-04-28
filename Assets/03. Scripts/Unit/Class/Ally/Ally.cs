@@ -155,7 +155,7 @@ public class Ally : MonoBehaviour
         if (targets.Count == 0) 
             return;
 
-       
+        SoundManager.Instance.PlaySfx(_unitData.SkillSound,transform.position,false);
         if (_unitData.TargetingType == TargetingType.Single)
         {
             targets[0].TakeDamage(_baseAttack);
@@ -184,7 +184,7 @@ public class Ally : MonoBehaviour
             Debug.LogWarning($"[Ally:{name}] 스킬이 null");
             return;
         }
-
+        SoundManager.Instance.PlaySfx(_unitData.SkillSound,transform.position,false);
         _skill.Activate(this);
     }
     
@@ -198,7 +198,7 @@ public class Ally : MonoBehaviour
             Debug.Log($"[Ally:{name}] 사망 애니메이션 완료 → 풀로 반환");
 
             _isDead = true;
-
+            SoundManager.Instance.PlaySfx(_unitData.DeathSound,transform.position,false);
             if (_occupiedTile != null)
             {
                 _occupiedTile.isOccupied = false;
@@ -361,7 +361,7 @@ public class Ally : MonoBehaviour
             {
                 b.ApplyCC();
             }
-            
+            SoundManager.Instance.PlaySfx(_unitData.AttackSound,transform.position,false);
             
             // 넉백 벡터 계산
             
@@ -519,6 +519,10 @@ public class Ally : MonoBehaviour
 
     }
 
+    public void ToDestroy()
+    {
+        _duration = 0;
+    }
     
     public float ATKSPD => _atkSpd;
     public void SetLastKnockbackEnemyCount(int count) => _lastKnockbackEnemyCount = count;

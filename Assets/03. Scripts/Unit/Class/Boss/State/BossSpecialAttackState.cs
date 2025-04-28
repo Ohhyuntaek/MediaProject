@@ -5,58 +5,71 @@ using UnityEngine;
 
 public class BossDropAttackState : IState<Boss>
 {
-    private bool _started = false;
-
     public void Enter(Boss boss)
     {
-        // 점프 애니메이션
+        // 1) Jump 애니메이션
+        Debug.Log(boss.MoveCount +"현재 움직인 횟수");
         boss.Animator.SetTrigger("Jump");
-        // 점프하는 동안 다른 공격을 하지 못하게
-        boss.InitializeAttack();   
-        // 코루틴으로 1초 뒤 랜딩 처리
+        // 2) 이 상태 동안 스킬·공격 불가
+        boss.InitializeAttack();
+        // 3) 코루틴으로 1초 뒤 랜드 및 후처리
         boss.StartCoroutine(JumpAndLand(boss));
     }
 
     private IEnumerator JumpAndLand(Boss boss)
     {
-        _started = true;
+        // 점프 중 플래그
         boss.Jumping = true;
+
+        // 1초 대기 (Jump 애니 길이에 맞춰 조정)
         yield return new WaitForSeconds(1f);
+
+        // CC 당했다면 스턴 상태로
+       
+
+        // Land 애니
+        boss.Animator.SetTrigger("Land");
         if (boss.SkipNextMove)
         {
-            boss.ChangeState(new BossStunState());
             boss.Jumping = false;
-            Debug.Log("너 스킵");
-        } 
+            boss.ChangeState(new BossStunState()); 
+            yield break;
+        }
+
+      
+        if (boss.MoveCount == 5)
+        {
+            boss.transform.position = boss.InitialPosition;
+            boss.MoveCount = 0;
+        }
+        else
+        {
+            // 기존 랜딩 후 아군 처리
+            List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
+            if (front.Count < 2)
+            {
+                boss.DestroyAllAllies();
+                boss.DealDamageToPlayer(30);
+            }
+            else
+            {
+                boss.DespawnRandomFrontAllies(front, 2);
+            }
+        }
+        
         boss.Jumping = false;
-
-        // 랜딩 애니메이션
-        boss.Animator.SetTrigger("Land");
-        
-
-        // 랜딩 시 전열 아군 체크
-        List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
-        if (front.Count < 2 &&!boss.SkipNextMove)
-        {
-            boss.DestroyAllAllies();
-            boss.DealDamageToPlayer(30); // 30 데미지
-        }
-        else if(front.Count >= 2 && !boss.SkipNextMove)
-        {
-            boss.DespawnRandomFrontAllies(front, 2);
-        }
-
-        
+        // 다음은 Idle 상태로 복귀
         boss.ChangeState(new BossIdleState());
     }
 
     public void Update(Boss boss)
     {
-        // 아무것도 안 함. Enter에서 코루틴이 로직을 모두 수행
+        // 모든 로직이 코루틴 안에서 처리되므로 아무것도 안 해도 됩니다.
     }
 
     public void Exit(Boss boss)
     {
+        // 혹시 남아 있는 플래그 클리어
         boss.Jumping = false;
         boss.SkipNextMove = false;
     }

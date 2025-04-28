@@ -44,7 +44,10 @@ public class UnitData : ScriptableObject
 
     [Title("초상화")] [SerializeField, LabelText("초상화")] private Image _image;   
     
-
+    [Title("사운드")]
+    [SerializeField, LabelText("공격사운드")] private AudioClip attackSfx;
+    [SerializeField, LabelText("죽을때 나는 소리")] private AudioClip deathSfx;
+    [SerializeField, LabelText("스킬을 쓸때 나는 소리")] private AudioClip skillSfx;
     [Title("플레이어 전용 스탯"), ShowIf(nameof(IsPlayer))] 
     [SerializeField, LabelText("플레이어 스킬 타입")] private PlayerSkillType _playerSkillType;
 
@@ -72,4 +75,8 @@ public class UnitData : ScriptableObject
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;
     private bool IsPlayer() => _unitFaction == UnitFaction.Player;
     public int Cost => cost;
+    public AudioClip AttackSound => attackSfx;
+    public AudioClip DeathSound => deathSfx;
+    public AudioClip SkillSound => skillSfx;
+    
 }

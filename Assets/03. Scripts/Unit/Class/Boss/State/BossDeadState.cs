@@ -4,9 +4,10 @@ using UnityEngine;
 public class BossDeadState : IState<Boss>
 {
     private bool _finished = false;
-    public void Enter(Boss owner)
+    public void Enter(Boss boss)
     {
-        owner.Animator.SetTrigger("4_Death");
+        boss.Animator.SetTrigger("4_Death");
+        SoundManager.Instance.PlaySfx(boss.BossData.DeathSound,boss.transform.position,false);
     }
 
     public void Update(Boss owner)
@@ -21,6 +22,6 @@ public class BossDeadState : IState<Boss>
 
     public void Exit(Boss owner)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

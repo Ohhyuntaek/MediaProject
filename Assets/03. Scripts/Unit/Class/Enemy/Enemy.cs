@@ -102,9 +102,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     // 공격 수행 메서드 (상태 전환에 따라 호출)
     public void PerformAttack()
-    {
+    {   
+        
         if (IsTargetInRange())
-        {
+        {   
+             SoundManager.Instance.PlaySfx(_enemyData.AttackSound,transform.position,false);
             _dawn.TakeDamage(_damage);
         }
     }

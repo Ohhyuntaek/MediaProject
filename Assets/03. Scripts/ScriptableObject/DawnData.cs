@@ -1,4 +1,5 @@
 using Microsoft.Unity.VisualStudio.Editor;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlayerData", menuName = "SO/Player Data")]
@@ -15,6 +16,11 @@ public class DawnData : ScriptableObject
     [Header("Prefab 정보 추가")] 
     [SerializeField] private GameObject _prefab;
     
+    [Title("사운드")]
+    [SerializeField, LabelText("공격사운드")] private AudioClip attackSfx;
+    [SerializeField, LabelText("죽을때 나는 소리")] private AudioClip deathSfx;
+    [SerializeField, LabelText("스킬을 쓸때 나는 소리")] private AudioClip skillSfx;
+    
     [SerializeField] private int _maxEnergy;    
     [SerializeField] private int _initialEnergy;
     [SerializeField] private int _chargespeed; 
@@ -30,4 +36,7 @@ public class DawnData : ScriptableObject
     public int ChargingSpd { get => _chargespeed; set => _chargespeed = value; }
     public UnitTribe Tribe { get => _unitTribe; set => _unitTribe = value; }
     public GameObject Prefab => _prefab;
+    public AudioClip AttackSound => attackSfx;
+    public AudioClip DeathSound => deathSfx;
+    public AudioClip SkillSound => skillSfx;
 }

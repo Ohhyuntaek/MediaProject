@@ -25,7 +25,7 @@ public class Boss : MonoBehaviour, IDamageable
     private bool _isDead;
     private Vector3 _direction;
     private StateMachine<Boss> _stateMachine;
-
+    private bool _lastspecial = false;
 
 
     private bool _jump = false;
@@ -120,7 +120,7 @@ public class Boss : MonoBehaviour, IDamageable
         List<Ally> _frontList = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
         if (_frontList.Count > 0)
         {
-            _frontList[0].ChangeState(new AllyDeadState());
+            _frontList[0].ToDestroy();
         }
     }
 
@@ -130,7 +130,7 @@ public class Boss : MonoBehaviour, IDamageable
         List<Ally> _reartList = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Rear);
         if (_reartList.Count > 0)
         {
-            _reartList[0].ChangeState(new AllyDeadState());
+            _reartList[0].ToDestroy();
         }
     }
 
@@ -155,7 +155,7 @@ public class Boss : MonoBehaviour, IDamageable
         {
             for (int i = 0; i < n; i++)
             {
-                list[i].ChangeState(new AllyDeadState());
+                list[i].ToDestroy();
             }
             
         }
@@ -163,7 +163,7 @@ public class Boss : MonoBehaviour, IDamageable
         {
             for (int i = 0; i < list.Count; i++)
             {
-                list[i].ChangeState(new AllyDeadState());
+                list[i].ToDestroy();
             }
         }
     }
@@ -175,7 +175,8 @@ public class Boss : MonoBehaviour, IDamageable
         foreach (GameObject allyobject in list)
         {
             Ally ally = allyobject.GetComponent<Ally>();
-            ally.ChangeState(new AllyDeadState());
+            
+            ally.ToDestroy();
         }
     }
     public Ally GetClosestAlly(Vector3 origin)
@@ -222,7 +223,7 @@ public class Boss : MonoBehaviour, IDamageable
     {
         float distance = Vector3.Distance(transform.position, _player.position);
         Debug.Log("너와 나의 거리 " + distance);
-        if (distance<0.5f)
+        if (distance<=1f)
         {
             Debug.Log("너무 가까워");
             return true;
@@ -296,12 +297,18 @@ public class Boss : MonoBehaviour, IDamageable
         set => _skipNextMove = value;
     }
 
-    public TextMeshProUGUI StunText => stunText;
-    
+    public bool LastSpecialAttack
+    {
+        get => _lastspecial;
+        set => _lastspecial = value;
+    }
 
+    public TextMeshProUGUI StunText => stunText;
+
+    public Vector3 InitialPosition => _initialPosition;
     public Vector3 Dircetion => _direction;
     public Animator Animator => _animator;
-
+    public EnemyData BossData => _bossData;
 
     #endregion
 }
