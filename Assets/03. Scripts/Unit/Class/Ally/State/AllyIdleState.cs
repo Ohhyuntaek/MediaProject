@@ -31,7 +31,7 @@ public class AllyIdleState : IState<Ally>
             switch (ally.UnitData.UnitName)
             {
                 case "Slamander":
-                    if (ally.DetectTargets(ally.UnitData.AttackRange).Count > 0)
+                    if (ally.DetectTargets().Count > 0)
                     {
                         ally.ChangeState(new AllyAttackState());
                     }
@@ -41,7 +41,7 @@ public class AllyIdleState : IState<Ally>
                     }
                     break;
                 case "CentaurLady":
-                    if (ally.DetectTargets(ally.UnitData.AttackRange).Count > 0)
+                    if (ally.DetectTargets().Count > 0)
                     {
                         ally.ChangeState(new AllyAttackState());
                     }
@@ -51,7 +51,7 @@ public class AllyIdleState : IState<Ally>
                     }
                     break;
                 default:
-                    if (ally.DetectTargets(ally.UnitData.AttackRange).Count > 0)
+                    if (ally.DetectTargets().Count > 0)
                     {
                         ally.ChangeState(new AllyAttackState());
                     }

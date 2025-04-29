@@ -6,7 +6,7 @@ public class JandarkSkill : ISkill<Ally>
 {
     public void Activate(Ally ally)
     {
-        List<IDamageable> targets = ally.DetectTargets(ally.UnitData.AttackRange);
+        List<IDamageable> targets = ally.DetectTargets();
 
         if (targets.Count == 0)
         {

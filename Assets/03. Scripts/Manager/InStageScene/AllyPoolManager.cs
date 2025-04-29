@@ -54,6 +54,7 @@ public class AllyPoolManager : MonoBehaviour
 
             Ally ally = obj.GetComponent<Ally>();
             ally.Init(tile.transform.position, tile);
+            ally.InitPatternColliders();
 
             // 발판 강화 조건 확인
             if (tile.lineType == cardLine)
@@ -111,6 +112,7 @@ public class AllyPoolManager : MonoBehaviour
             {
                 allyLineList.Add(ally);
             }
+            
         }
 
         return allyLineList;

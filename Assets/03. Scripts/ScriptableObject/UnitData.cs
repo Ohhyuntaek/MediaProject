@@ -23,6 +23,7 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("유닛 종족")] private UnitTribe _unitTribe;
     [SerializeField, LabelText("부활 가능 여부")] private bool _canRevive;
     [SerializeField, LabelText("스킬/공격 사정거리 ")] private int _attackRange;
+    [SerializeField] private DetectionPatternSO _detectionPattern;
 
     
     [FormerlySerializedAs("_skillCooltime")]
@@ -75,6 +76,7 @@ public class UnitData : ScriptableObject
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;
     private bool IsPlayer() => _unitFaction == UnitFaction.Player;
     public int Cost => cost;
+    public DetectionPatternSO DetectionPatternSo => _detectionPattern;
     public AudioClip AttackSound => attackSfx;
     public AudioClip DeathSound => deathSfx;
     public AudioClip SkillSound => skillSfx;

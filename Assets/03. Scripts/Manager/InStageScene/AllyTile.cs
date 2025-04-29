@@ -10,6 +10,7 @@ public class AllyTile : MonoBehaviour
     public bool isOccupied = false;
     public bool dir;//false면 up true면 down
     public Ally ally;
+    public PolygonCollider2D _hitCollider;
 
     public void Start()
     {

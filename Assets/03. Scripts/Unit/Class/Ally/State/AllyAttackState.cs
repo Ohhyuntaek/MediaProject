@@ -37,7 +37,7 @@ public class AllyAttackState : IState<Ally>
             switch (ally.UnitData.UnitName)
             {
                 case "Jandark":
-                    _detected = ally.DetectTargets(2);
+                    _detected = ally.DetectTargets();
                     if (_detected.Count > 0)
                     {
                         ally.ChangeState(new KnockbackAttackState());

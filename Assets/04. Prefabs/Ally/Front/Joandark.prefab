@@ -48,11 +48,9 @@ MonoBehaviour:
   rayDistance: 1
   tileLayerMask:
     serializedVersion: 2
-    m_Bits: 256
-  attackRange: 3
+    m_Bits: 1024
   hitTileColor: {r: 1, g: 0, b: 0, a: 1}
   rangeTileColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  rangeCells: []
 --- !u!1 &4646388973794068357
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,9 +184,10 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 640
+  _patternColliders: []
   _isDead: 0
   _isOnTile: 0
-  _SpawnTimeSlider: {fileID: 3005882767398941539}
+  _DurationSlider: {fileID: 3005882767398941539}
   _allyType: 0
   _occupiedTile: {fileID: 0}
 --- !u!1 &7100805632411020907
@@ -239,11 +238,9 @@ MonoBehaviour:
   rayDistance: 1
   tileLayerMask:
     serializedVersion: 2
-    m_Bits: 64
-  attackRange: 3
+    m_Bits: 1024
   hitTileColor: {r: 1, g: 0, b: 0, a: 1}
   rangeTileColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  rangeCells: []
 --- !u!1001 &735077319381352392
 PrefabInstance:
   m_ObjectHideFlags: 0
