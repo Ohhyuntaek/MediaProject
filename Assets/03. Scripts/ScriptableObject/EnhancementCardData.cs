@@ -1,0 +1,28 @@
+using UnityEngine;
+
+public enum EnhancementType
+{
+    CostUp,        // 코스트 증가 속도 향상
+    SpawnSpeedUp   // 카드 생성 속도 향상
+}
+
+[CreateAssetMenu(fileName = "NewEnhancementCardData", menuName = "SO/Enhancement Card Data")]
+public class EnhancementCardData : ScriptableObject
+{
+    [Header("기본 정보")]
+    [SerializeField] private string _enhancementCardName;
+    [SerializeField] private string _description;
+    [SerializeField] private Sprite _cardImage;
+    
+    [Header("강화 효과")]
+    [SerializeField] private EnhancementType _enhancementType;
+    [SerializeField] private float _minMultiplier = 1.2f;
+    [SerializeField] private float _maxMultiplier = 1.5f;
+    
+    public string EnhancementCardName => _enhancementCardName;
+    public string Description => _description;
+    public Sprite CardImage => _cardImage;
+    public EnhancementType EnhancementType => _enhancementType;
+    public float MinMultiplier => _minMultiplier;
+    public float MaxMultiplier => _maxMultiplier;
+}
