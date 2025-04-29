@@ -13,11 +13,23 @@ public class DarkSpawner : MonoBehaviour
     [SerializeField] private StageData currentStage;
     
     private bool _spawning = false;
+    private Coroutine spawnRoutine;
 
     public void StartSpawning(StageData stage)
     {
+        StopSpawning(); // 기존 스폰 중단 먼저
+        
         currentStage = stage;
-        StartCoroutine(SpawnRoutine());
+        spawnRoutine = StartCoroutine(SpawnRoutine());
+    }
+    
+    public void StopSpawning()
+    {
+        if (spawnRoutine != null)
+        {
+            StopCoroutine(spawnRoutine);
+            spawnRoutine = null;
+        }
     }
 
     private IEnumerator SpawnRoutine()
@@ -36,8 +48,6 @@ public class DarkSpawner : MonoBehaviour
         // 2. 설정된 수 만큼 Dark 순차 스폰
         for (int i = 0; i < currentStage.DarksCount; i++)
         {   
-            
-            
             GameObject darkPrefab = currentStage.Darks[Random.Range(0, currentStage.Darks.Count)];
             if (darkPrefab.TryGetComponent<Boss>(out var boss))
             {
@@ -65,10 +75,6 @@ public class DarkSpawner : MonoBehaviour
                     Debug.LogWarning("DarkPrefab에 Enemy 컴포넌트가 없습니다!");
                 }
             }
-           
-
-            // Dark 하나 스폰 알림
-            InStageManager.Instance.OnDarkSpawned();
             
             // 다음 Dark까지 대기
             yield return new WaitForSeconds(currentStage.SpawnTerm);

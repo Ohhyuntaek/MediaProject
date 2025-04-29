@@ -10,11 +10,12 @@ public class EnhancementCard : MonoBehaviour
     [SerializeField] private TMP_Text enhancementDescriptionText;
     [SerializeField] private Button cardButton;
     [SerializeField] private float darkenAmount = 0.6f;
-    
+
     private EnhancementCardData data;
     private float chosenMultiplier;
-    private EnhancementCardData cardData;
     private Dictionary<Image, Color> originalColors = new();
+
+    private bool isClicked = false; // 클릭 중복 방지용
 
     void Awake()
     {
@@ -26,20 +27,28 @@ public class EnhancementCard : MonoBehaviour
 
         cardButton.onClick.AddListener(OnCardSelected);
     }
-    
+
     public void Setup(EnhancementCardData cardData)
     {
         data = cardData;
         chosenMultiplier = Random.Range(data.MinMultiplier, data.MaxMultiplier);
         enhancementNameText.text = data.EnhancementCardName;
-        enhancementDescriptionText.text = $"{data.Description}\n<size=80%><color=#888>배수: {chosenMultiplier:F2}x</color>";
+        enhancementDescriptionText.text = $"{data.Description}\n<size=100%><color=#888>배수: {chosenMultiplier:F2}x</color>";
     }
 
     public void OnCardSelected()
     {
-        // 클릭 연출
-        StartCoroutine(ClickFlashEffect());
-        
+        if (isClicked) return; // 이미 클릭했으면 무시
+        isClicked = true;
+
+        StartCoroutine(ClickFlashEffectAndProceed());
+    }
+
+    private IEnumerator ClickFlashEffectAndProceed()
+    {
+        DarkenImages();
+
+        // 강화 효과 적용
         switch (data.EnhancementType)
         {
             case EnhancementType.CostUp:
@@ -50,15 +59,15 @@ public class EnhancementCard : MonoBehaviour
                 break;
         }
 
-        InStageManager.Instance.HideEnhancementCardsAndProceed();
-    }
-    
-    private IEnumerator ClickFlashEffect()
-    {
-        DarkenImages();
+        // 클릭 후 0.1초 기다렸다 복구
         yield return new WaitForSeconds(0.1f);
         RestoreImages();
-        yield return new WaitForSeconds(1f);
+
+        // 추가로 1초 정도 연출 시간 주기
+        yield return new WaitForSeconds(0.3f);
+
+        // 이제 진짜 강화 카드 숨기고 다음 스테이지로 넘어가기
+        InStageManager.Instance.HideEnhancementCardsAndProceed();
     }
 
     private void DarkenImages()

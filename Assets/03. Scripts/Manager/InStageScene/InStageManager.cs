@@ -1,156 +1,187 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// AllyType과 UnitData를 연결하는 데이터 클래스
+/// </summary>
 [System.Serializable]
 public class AllyUnitDataLink
 {
-    // AllyType과 UnitData를 연결
     public AllyType allyType;
     public UnitData unitData;
 }
 
+/// <summary>
+/// 스테이지 상태 (플레이 중, 클리어)
+/// </summary>
 public enum StageState
 {
     Playing,
     Cleared
 }
 
+/// <summary>
+/// 인게임 스테이지 전체를 관리하는 매니저
+/// </summary>
 public class InStageManager : MonoBehaviour
 {
     public static InStageManager Instance;
-    
+
+    [Header("카드 슬롯 관련")]
     [SerializeField] private Transform[] cardSlots;
+
+    [Header("스테이지 데이터")]
     [SerializeField] private List<StageData> stageList;
     [SerializeField] private List<AllyUnitDataLink> allyUnitDataLinks;
-    [SerializeField] private TMPro.TMP_Text stageText;
-    [SerializeField] private TMPro.TMP_Text stageClearText;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text stageText;
+    [SerializeField] private TMP_Text stageClearText;
+    [SerializeField] private TMP_Text costText;
+    [SerializeField] private Image dawnImage;
+    [SerializeField] private Slider hpSlider;
+    [SerializeField] private Slider energySlider;
+
+    [Header("게임 오브젝트")]
     [SerializeField] private DarkSpawner darkSpawner;
-    [FormerlySerializedAs("playerImage")] [SerializeField] private Image dawnImage;
-    [SerializeField] private TMPro.TMP_Text costText;
     [SerializeField] private CardSpawner cardSpawner;
-    [SerializeField] private float costUpMultiplier = 1.0f; // 코스트 상승 속도 (외부 조정 가능)
-    [SerializeField] private Transform dawnSpawnPoint; // Dawn이 스폰될 위치
-    [SerializeField] private Slider hpSlider;        // Dawn 체력 표시용
-    [SerializeField] private Slider energySlider;    // Dawn 에너지 표시용
+    [SerializeField] private Transform dawnSpawnPoint;
     [SerializeField] private Animator clearMedalAnimator;
+
+    [Header("강화 카드 관련")]
     [SerializeField] private List<EnhancementCardData> enhancementCardDataList;
-    [SerializeField] private List<GameObject> enhancementCardPrefabs; // 여러 종류의 EnhancementCard 프리팹 리스트
-    [SerializeField] private List<Transform> enhancementCardSlots; // EnhancementCard 슬롯 리스트
-    private List<GameObject> spawnedEnhancementCards = new();
-    
-    private Dictionary<AllyType, UnitData> allyUnitDataDict = new();
-    private int cost = 0;          // 현재 코스트
-    private float costTimer = 0f;  // 코스트 상승 타이머
-    private float costUpInterval => 1.0f / costUpMultiplier; // 실제 코스트 증가 주기 (초)
-    private GameObject player;
-    private int currentStageIndex = 0;
-    private int aliveDarkCount = 0;
-    private Dawn spawnedDawn; // 소환된 Dawn을 저장할 변수
-    [SerializeField]
-    private StageState currentStageState = StageState.Playing;
-    
+    [SerializeField] private List<GameObject> enhancementCardPrefabs;
+    [SerializeField] private List<Transform> enhancementCardSlots;
+
+    [Header("기타 테스트 변수")] 
+    [SerializeField] private bool stageClearProcessed = false;
+    [SerializeField] private StageState currentStageState = StageState.Playing;
+    [SerializeField] private int currentStageIndex = 0;   // 현재 스테이지 번호
+    [SerializeField] private int stageDarksCount = 0;     // 현재 스테이지에서 남은 Dark 수
+    [SerializeField] private float clearMedalAndTextTerm = 3f;
+
+    private List<GameObject> spawnedEnhancementCards = new(); // 생성된 강화 카드 리스트
+    private Dictionary<AllyType, UnitData> allyUnitDataDict = new(); // AllyType과 UnitData 매칭
+
+    private int cost = 0;               // 현재 코스트
+    private float costTimer = 0f;        // 코스트 타이머
+    private float costUpMultiplier = 1.0f; // 코스트 증가 배율
+    private float costUpInterval => 1.0f / costUpMultiplier; // 코스트 증가 주기 계산식
+
+    private Dawn spawnedDawn;            // 생성된 Dawn 캐릭터
+
+
+    // ===========================================================
+    // 초기화
+    // ===========================================================
+
     private void Awake()
     {
         Instance = this;
-        
-        // AllyType으로 UnitData의 cost를 받아오기 위해 작성한 코드
+
+        // AllyType - UnitData 연결 매핑
         foreach (var link in allyUnitDataLinks)
         {
             if (!allyUnitDataDict.ContainsKey(link.allyType))
-            {
                 allyUnitDataDict.Add(link.allyType, link.unitData);
-            }
             else
-            {
-                Debug.LogWarning($"Duplicate AllyType: {link.allyType} in allyUnitDataLinks!");
-            }
+                Debug.LogWarning($"중복된 AllyType 존재: {link.allyType}");
         }
     }
 
-    /// <summary>
-    /// AllyType에 맞는 UnitData를 get함
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    public UnitData GetUnitDataByAllyType(AllyType type)
-    {
-        if (allyUnitDataDict.TryGetValue(type, out var unitData))
-        {
-            return unitData;
-        }
-    
-        Debug.LogError($"AllyType {type}에 해당하는 UnitData를 찾을 수 없습니다.");
-        return null;
-    }
-
-    void Start()
+    private void Start()
     {
         stageClearText.gameObject.SetActive(false);
-        
-        // GameManager에서 선택한 Dawn 정보를 가져옴
-        DawnData selectedDawn = GameManager.Instance.GetSelectedDawn();
 
+        var selectedDawn = GameManager.Instance.GetSelectedDawn();
         if (selectedDawn == null)
         {
-            Debug.LogError("GameManager에 저장된 DawnData가 없습니다!");
+            Debug.LogError("GameManager에서 DawnData를 가져올 수 없습니다!");
             return;
         }
 
-        // Dawn 이미지 직접 세팅
         if (dawnImage != null)
-        {
             dawnImage.sprite = selectedDawn.Portrait;
-        }
-    
-        StartStage();
-        // Dawn 소환
+        
         SpawnDawn();
+
+        StartStage();
     }
-    
-    void Update()
+
+    private void Update()
     {
 #if UNITY_EDITOR
+        // 에디터용 테스트: F1 누르면 스테이지 강제 클리어
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("강제 스테이지 클리어 (에디터 모드 전용)");
-            aliveDarkCount = 0;
+            Debug.Log("강제 스테이지 클리어 트리거");
+            stageDarksCount = 0;
             currentStageState = StageState.Cleared;
             OnStageClear();
             return;
         }
 #endif
-        
-        if (currentStageState != StageState.Playing)
-            return; // 클리어 상태면 코스트 증가 및 슬라이더 업데이트 금지
-        
-        // 매 프레임 cost 타이머 누적
-        costTimer += Time.deltaTime;
 
+        if (currentStageState != StageState.Playing)
+            return;
+
+        // 코스트 증가 관리
+        costTimer += Time.deltaTime;
         if (costTimer >= costUpInterval)
         {
             TryIncreaseCost();
-            costTimer = 0f; // 타이머 리셋
+            costTimer = 0f;
         }
-        
-        // Dawn 체력/에너지 UI 업데이트
+
         UpdateDawnUI();
     }
-    
+
+    // ===========================================================
+    // Dawn 관련
+    // ===========================================================
+
+    private void SpawnDawn()
+    {
+        var dawnData = GameManager.Instance.GetSelectedDawn();
+        if (dawnData == null || dawnData.Prefab == null)
+        {
+            Debug.LogError("DawnData 또는 Prefab이 비어있습니다.");
+            return;
+        }
+
+        // Dawn 생성 및 초기화
+        GameObject dawnObj = Instantiate(dawnData.Prefab, dawnSpawnPoint.position, Quaternion.identity);
+        var dawn = dawnObj.GetComponent<Dawn>();
+        if (dawn != null)
+        {
+            dawn.Initialize(dawnData);
+            spawnedDawn = dawn;
+        }
+        else
+        {
+            Debug.LogWarning("Dawn 컴포넌트를 찾을 수 없습니다.");
+        }
+    }
+
     private void UpdateDawnUI()
     {
         if (spawnedDawn == null) return;
 
         if (hpSlider != null)
             hpSlider.value = spawnedDawn.DawnData.MaxHP > 0 ? spawnedDawn.CurrentHP / spawnedDawn.DawnData.MaxHP : 0f;
-    
+
         if (energySlider != null)
             energySlider.value = spawnedDawn.DawnData.MaxEnergy > 0 ? (float)spawnedDawn.Energy / spawnedDawn.DawnData.MaxEnergy : 0f;
     }
-    
+
+    // ===========================================================
+    // Cost 관련
+    // ===========================================================
+
     private void TryIncreaseCost()
     {
         if (cost < 99)
@@ -159,221 +190,188 @@ public class InStageManager : MonoBehaviour
             UpdateCostText();
         }
     }
-    
+
     private void UpdateCostText()
     {
         if (costText != null)
             costText.text = cost.ToString();
     }
 
-    public int GetCost()
-    {
-        return cost;
-    }
-    
+    public int GetCost() => cost;
+
     public void DecreaseCost(int amount)
     {
-        cost = Mathf.Max(0, cost - amount); // cost는 0 미만으로 내려가지 않음
+        cost = Mathf.Max(0, cost - amount);
         UpdateCostText();
     }
-    
-    /// <summary>
-    /// Dark 하나 스폰될 때마다 호출
-    /// </summary>
-    public void OnDarkSpawned()
-    {
-        aliveDarkCount++;
-    }
-    
-    /// <summary>
-    /// Dark 하나 죽을 때마다 호출
-    /// </summary>
+
+    // ===========================================================
+    // Dark 관련
+    // ===========================================================
+
     public void OnDarkKilled()
     {
-        aliveDarkCount--;
+        stageDarksCount--;
 
-        if (aliveDarkCount <= 0)
+        if (stageDarksCount <= 0)
         {
             Debug.Log("스테이지 클리어!");
-            currentStageState = StageState.Cleared; // 상태를 Cleared로 변경
-            
-            if (currentStageState == StageState.Cleared)
-                OnStageClear();
+            currentStageState = StageState.Cleared;
+            OnStageClear();
         }
     }
-    
+
+    // ===========================================================
+    // 스테이지 클리어 처리
+    // ===========================================================
+
     private void OnStageClear()
     {
+        // 강화카드가 선택 중이면 클리어 처리 금지
+        if (spawnedEnhancementCards.Count > 0)
+        {
+            Debug.LogWarning("강화 카드 선택 중에 스테이지 클리어 호출됨 - 무시");
+            return;
+        }
+        
+        if (stageClearProcessed) return; // 이미 클리어 처리했으면 리턴
+        stageClearProcessed = true;
+        
         // 카드 스폰 정지
         cardSpawner.canSpawnCards = false;
-    
-        // 덱에 남은 카드 삭제
+
+        // 덱 카드 삭제
         ClearDeckCards();
 
-        // 1. 현재 활성화된 모든 Ally들의 duration을 0으로
+        // 모든 Ally 제거
         foreach (var allyObj in AllyPoolManager.Instance.activateAllies)
         {
             if (allyObj != null)
             {
-                Ally ally = allyObj.GetComponent<Ally>();
+                var ally = allyObj.GetComponent<Ally>();
                 if (ally != null)
-                {
-                    ally.ForceDie(); // 부활 없이 즉시 사망
-                }
+                    ally.ForceDie();
             }
         }
 
-        // 2. Stage Clear 문구 띄우기
         StartCoroutine(HandleStageClearSequence(stageList[currentStageIndex].StageType));
     }
-    
+
     private IEnumerator HandleStageClearSequence(StageType stageType)
     {
         if (clearMedalAnimator != null)
         {
             clearMedalAnimator.SetTrigger("isCleared");
-
-            // 애니메이션 상태가 실제로 전환될 때까지 대기
-            yield return new WaitUntil(() =>
-                clearMedalAnimator.GetCurrentAnimatorStateInfo(0).IsName("ClearMedalDown"));
+            yield return new WaitUntil(() => clearMedalAnimator.GetCurrentAnimatorStateInfo(0).IsName("ClearMedalDown"));
         }
 
-        // 텍스트 활성화 (즉시)
         if (stageClearText != null)
         {
             stageClearText.gameObject.SetActive(true);
             stageClearText.text = "Stage Clear!";
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(clearMedalAndTextTerm);
 
-        // 텍스트 비활성화
         stageClearText.gameObject.SetActive(false);
+
+        if (stageType == StageType.Normal)
+        {
+            ShowEnhancementCardChoices();    
+        }
+        else if (stageType == StageType.Boss)
+        {
+            SceneManager.LoadScene("MainScene");
+        }
         
-        // 강화 카드 UI 띄우기
-        ShowEnhancementCardChoices();
     }
-    
-    
+
     private void ShowEnhancementCardChoices()
     {
         List<EnhancementCardData> candidates = new(enhancementCardDataList);
 
         for (int i = 0; i < 3; i++)
         {
-            // 1. EnhancementCardData 랜덤 선택
             int dataIndex = Random.Range(0, candidates.Count);
             EnhancementCardData selectedData = candidates[dataIndex];
             candidates.RemoveAt(dataIndex);
 
-            // 2. EnhancementCardPrefab 랜덤 선택
             int prefabIndex = Random.Range(0, enhancementCardPrefabs.Count);
             GameObject selectedPrefab = enhancementCardPrefabs[prefabIndex];
 
-            // 3. Instantiate 후 슬롯에 붙이기
             GameObject cardObj = Instantiate(selectedPrefab, enhancementCardSlots[i]);
-            cardObj.transform.localPosition = Vector3.zero; // 슬롯 안에서 위치 초기화
-            cardObj.transform.localScale = Vector3.one;     // 크기도 초기화
+            cardObj.transform.localPosition = Vector3.zero;
+            cardObj.transform.localScale = Vector3.one;
 
-            // 4. 데이터 세팅
             EnhancementCard card = cardObj.GetComponent<EnhancementCard>();
             if (card != null)
-            {
                 card.Setup(selectedData);
-            }
-            else
-            {
-                Debug.LogError("EnhancementCard 컴포넌트가 프리팹에 없습니다!");
-            }
 
             spawnedEnhancementCards.Add(cardObj);
         }
     }
-    
+
     public void HideEnhancementCardsAndProceed()
     {
         foreach (var card in spawnedEnhancementCards)
             Destroy(card);
-        spawnedEnhancementCards.Clear();
 
+        spawnedEnhancementCards.Clear();
+        
+        currentStageIndex++; // 스테이지 인덱스 미리 증가
         StartCoroutine(ProceedToNextStageAfterDelay());
     }
 
     private IEnumerator ProceedToNextStageAfterDelay()
     {
-        stageClearText.gameObject.SetActive(false);
         clearMedalAnimator.SetTrigger("isPlaying");
-        
-        yield return new WaitForSeconds(3f); // 약간의 연출 시간
+        yield return new WaitForSeconds(3f);
 
-        if (stageList[currentStageIndex].StageType == StageType.Boss)
+        if (currentStageIndex >= stageList.Count)
         {
-            Debug.Log("게임 종료");
+            Debug.Log("모든 스테이지 완료! 게임 종료");
+            // 게임 종료 처리
+            yield break;
         }
-        else
-        {
-            currentStageIndex++;
-            StartStage();
-        }
+
+        StartStage();
     }
-    
+
+    // ===========================================================
+    // 스테이지 시작
+    // ===========================================================
+
+    public void StartStage()
+    {
+        currentStageState = StageState.Playing;
+        stageClearProcessed = false;
+        cost = 0;
+        costTimer = 0f;
+        UpdateCostText();
+
+        cardSpawner.canSpawnCards = true;
+
+        StageData stage = stageList[currentStageIndex];
+        stageDarksCount = stage.DarksCount; // 매 스테이지마다 초기화
+        stageText.text = stage.StageName;
+
+        darkSpawner.StopSpawning(); // 이전 스폰 루틴 중지
+        darkSpawner.StartSpawning(stage);
+    }
+
     private void ClearDeckCards()
     {
         foreach (var slot in cardSlots)
         {
             if (slot.childCount > 0)
-            {
                 Destroy(slot.GetChild(0).gameObject);
-            }
         }
     }
 
-    public void StartStage()
-    {
-        currentStageState = StageState.Playing; // 다시 Playing 상태로 전환
-        aliveDarkCount = 0; // Dark 초기화
-        
-        cardSpawner.canSpawnCards = true; // 카드 스폰 재허용
-        cost = 0; // 코스트 초기화
-        UpdateCostText(); // 코스트 텍스트도 바로 갱신
-        
-        stageText.text = stageList[currentStageIndex].StageName;
-        StageData stage = stageList[currentStageIndex];
-        darkSpawner.StartSpawning(stage);
-    }
-    
-    private void SpawnDawn()
-    {
-        DawnData dawnData = GameManager.Instance.GetSelectedDawn();
+    // ===========================================================
+    // 외부 호출용
+    // ===========================================================
 
-        if (dawnData == null)
-        {
-            Debug.LogError("선택된 DawnData가 없습니다!");
-            return;
-        }
-
-        if (dawnData.Prefab == null)
-        {
-            Debug.LogError("DawnData에 연결된 Prefab이 없습니다!");
-            return;
-        }
-
-        // Instantiate DawnPrefab at Spawn Point
-        GameObject dawnObj = Instantiate(dawnData.Prefab, dawnSpawnPoint.position, Quaternion.identity);
-
-        // Initialize Dawn 컴포넌트
-        Dawn dawn = dawnObj.GetComponent<Dawn>();
-        if (dawn != null)
-        {
-            dawn.Initialize(dawnData);
-            spawnedDawn = dawn; // 소환된 Dawn 저장
-        }
-        else
-        {
-            Debug.LogWarning("Dawn 컴포넌트를 찾을 수 없습니다.");
-        }
-    }
-    
     public void ShiftCardsLeft(int slotIndex)
     {
         for (int i = slotIndex + 1; i < cardSlots.Length; i++)
@@ -398,7 +396,15 @@ public class InStageManager : MonoBehaviour
 
     public void MultiplyCardSpawnSpeed(float multiplier)
     {
-        cardSpawner.spawnInterval /= multiplier; // 간격은 반비례
+        cardSpawner.spawnInterval /= multiplier;
     }
 
+    public UnitData GetUnitDataByAllyType(AllyType type)
+    {
+        if (allyUnitDataDict.TryGetValue(type, out var unitData))
+            return unitData;
+
+        Debug.LogError($"AllyType {type}에 해당하는 UnitData를 찾을 수 없습니다.");
+        return null;
+    }
 }
