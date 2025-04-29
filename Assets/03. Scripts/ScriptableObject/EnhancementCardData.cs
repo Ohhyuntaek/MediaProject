@@ -12,7 +12,6 @@ public class EnhancementCardData : ScriptableObject
     [Header("기본 정보")]
     [SerializeField] private string _enhancementCardName;
     [SerializeField] private string _description;
-    [SerializeField] private Sprite _cardImage;
     
     [Header("강화 효과")]
     [SerializeField] private EnhancementType _enhancementType;
@@ -21,7 +20,6 @@ public class EnhancementCardData : ScriptableObject
     
     public string EnhancementCardName => _enhancementCardName;
     public string Description => _description;
-    public Sprite CardImage => _cardImage;
     public EnhancementType EnhancementType => _enhancementType;
     public float MinMultiplier => _minMultiplier;
     public float MaxMultiplier => _maxMultiplier;

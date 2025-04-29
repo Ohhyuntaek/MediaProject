@@ -25,7 +25,6 @@ public class InStageManager : MonoBehaviour
     
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private List<StageData> stageList;
-    [SerializeField] private List<Sprite> dawnImages;
     [SerializeField] private List<AllyUnitDataLink> allyUnitDataLinks;
     [SerializeField] private TMPro.TMP_Text stageText;
     [SerializeField] private TMPro.TMP_Text stageClearText;
@@ -38,6 +37,10 @@ public class InStageManager : MonoBehaviour
     [SerializeField] private Slider hpSlider;        // Dawn 체력 표시용
     [SerializeField] private Slider energySlider;    // Dawn 에너지 표시용
     [SerializeField] private Animator clearMedalAnimator;
+    [SerializeField] private List<EnhancementCardData> enhancementCardDataList;
+    [SerializeField] private List<GameObject> enhancementCardPrefabs; // 여러 종류의 EnhancementCard 프리팹 리스트
+    [SerializeField] private List<Transform> enhancementCardSlots; // EnhancementCard 슬롯 리스트
+    private List<GameObject> spawnedEnhancementCards = new();
     
     private Dictionary<AllyType, UnitData> allyUnitDataDict = new();
     private int cost = 0;          // 현재 코스트
@@ -198,7 +201,7 @@ public class InStageManager : MonoBehaviour
                 OnStageClear();
         }
     }
-
+    
     private void OnStageClear()
     {
         // 카드 스폰 정지
@@ -246,27 +249,71 @@ public class InStageManager : MonoBehaviour
 
         // 텍스트 비활성화
         stageClearText.gameObject.SetActive(false);
+        
+        // 강화 카드 UI 띄우기
+        ShowEnhancementCardChoices();
+    }
+    
+    
+    private void ShowEnhancementCardChoices()
+    {
+        List<EnhancementCardData> candidates = new(enhancementCardDataList);
 
-        // 다음 스테이지로 이동
-        if (stageType == StageType.Boss)
+        for (int i = 0; i < 3; i++)
         {
-            Debug.Log("보스 스테이지 클리어! 게임 종료!");
-            // 게임 종료 처리 추가
-        }
-        else
-        {
-            Debug.Log("다음 스테이지로 이동!");
-            currentStageIndex++;
+            // 1. EnhancementCardData 랜덤 선택
+            int dataIndex = Random.Range(0, candidates.Count);
+            EnhancementCardData selectedData = candidates[dataIndex];
+            candidates.RemoveAt(dataIndex);
 
-            if (currentStageIndex < stageList.Count)
+            // 2. EnhancementCardPrefab 랜덤 선택
+            int prefabIndex = Random.Range(0, enhancementCardPrefabs.Count);
+            GameObject selectedPrefab = enhancementCardPrefabs[prefabIndex];
+
+            // 3. Instantiate 후 슬롯에 붙이기
+            GameObject cardObj = Instantiate(selectedPrefab, enhancementCardSlots[i]);
+            cardObj.transform.localPosition = Vector3.zero; // 슬롯 안에서 위치 초기화
+            cardObj.transform.localScale = Vector3.one;     // 크기도 초기화
+
+            // 4. 데이터 세팅
+            EnhancementCard card = cardObj.GetComponent<EnhancementCard>();
+            if (card != null)
             {
-                StartStage();
+                card.Setup(selectedData);
             }
             else
             {
-                Debug.Log("모든 스테이지 완료! 게임 끝!");
-                // 게임 완료 처리 추가
+                Debug.LogError("EnhancementCard 컴포넌트가 프리팹에 없습니다!");
             }
+
+            spawnedEnhancementCards.Add(cardObj);
+        }
+    }
+    
+    public void HideEnhancementCardsAndProceed()
+    {
+        foreach (var card in spawnedEnhancementCards)
+            Destroy(card);
+        spawnedEnhancementCards.Clear();
+
+        StartCoroutine(ProceedToNextStageAfterDelay());
+    }
+
+    private IEnumerator ProceedToNextStageAfterDelay()
+    {
+        stageClearText.gameObject.SetActive(false);
+        clearMedalAnimator.SetTrigger("isPlaying");
+        
+        yield return new WaitForSeconds(3f); // 약간의 연출 시간
+
+        if (stageList[currentStageIndex].StageType == StageType.Boss)
+        {
+            Debug.Log("게임 종료");
+        }
+        else
+        {
+            currentStageIndex++;
+            StartStage();
         }
     }
     
@@ -284,11 +331,10 @@ public class InStageManager : MonoBehaviour
     public void StartStage()
     {
         currentStageState = StageState.Playing; // 다시 Playing 상태로 전환
+        aliveDarkCount = 0; // Dark 초기화
         
         cardSpawner.canSpawnCards = true; // 카드 스폰 재허용
-        
-        // 코스트 초기화
-        cost = 0;
+        cost = 0; // 코스트 초기화
         UpdateCostText(); // 코스트 텍스트도 바로 갱신
         
         stageText.text = stageList[currentStageIndex].StageName;
@@ -344,4 +390,15 @@ public class InStageManager : MonoBehaviour
             else break;
         }
     }
+    
+    public void MultiplyCostUp(float multiplier)
+    {
+        costUpMultiplier *= multiplier;
+    }
+
+    public void MultiplyCardSpawnSpeed(float multiplier)
+    {
+        cardSpawner.spawnInterval /= multiplier; // 간격은 반비례
+    }
+
 }
