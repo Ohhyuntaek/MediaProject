@@ -37,6 +37,7 @@ public class InStageManager : MonoBehaviour
     [SerializeField] private Transform dawnSpawnPoint; // Dawn이 스폰될 위치
     [SerializeField] private Slider hpSlider;        // Dawn 체력 표시용
     [SerializeField] private Slider energySlider;    // Dawn 에너지 표시용
+    [SerializeField] private Animator clearMedalAnimator;
     
     private Dictionary<AllyType, UnitData> allyUnitDataDict = new();
     private int cost = 0;          // 현재 코스트
@@ -46,6 +47,7 @@ public class InStageManager : MonoBehaviour
     private int currentStageIndex = 0;
     private int aliveDarkCount = 0;
     private Dawn spawnedDawn; // 소환된 Dawn을 저장할 변수
+    [SerializeField]
     private StageState currentStageState = StageState.Playing;
     
     private void Awake()
@@ -65,6 +67,7 @@ public class InStageManager : MonoBehaviour
             }
         }
     }
+
     /// <summary>
     /// AllyType에 맞는 UnitData를 get함
     /// </summary>
@@ -83,6 +86,8 @@ public class InStageManager : MonoBehaviour
 
     void Start()
     {
+        stageClearText.gameObject.SetActive(false);
+        
         // GameManager에서 선택한 Dawn 정보를 가져옴
         DawnData selectedDawn = GameManager.Instance.GetSelectedDawn();
 
@@ -105,8 +110,19 @@ public class InStageManager : MonoBehaviour
     
     void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Debug.Log("강제 스테이지 클리어 (에디터 모드 전용)");
+            aliveDarkCount = 0;
+            currentStageState = StageState.Cleared;
+            OnStageClear();
+            return;
+        }
+#endif
+        
         if (currentStageState != StageState.Playing)
-            return; // 클리어 상태면 코스트 증가/슬라이더 업데이트 금지
+            return; // 클리어 상태면 코스트 증가 및 슬라이더 업데이트 금지
         
         // 매 프레임 cost 타이머 누적
         costTimer += Time.deltaTime;
@@ -176,14 +192,15 @@ public class InStageManager : MonoBehaviour
         if (aliveDarkCount <= 0)
         {
             Debug.Log("스테이지 클리어!");
-            OnStageClear();
+            currentStageState = StageState.Cleared; // 상태를 Cleared로 변경
+            
+            if (currentStageState == StageState.Cleared)
+                OnStageClear();
         }
     }
 
     private void OnStageClear()
     {
-        currentStageState = StageState.Cleared; // 상태를 Cleared로 변경
-        
         // 카드 스폰 정지
         cardSpawner.canSpawnCards = false;
     
@@ -209,21 +226,26 @@ public class InStageManager : MonoBehaviour
     
     private IEnumerator HandleStageClearSequence(StageType stageType)
     {
-        // Stage Clear 텍스트 활성화
+        if (clearMedalAnimator != null)
+        {
+            clearMedalAnimator.SetTrigger("isCleared");
+
+            // 애니메이션 상태가 실제로 전환될 때까지 대기
+            yield return new WaitUntil(() =>
+                clearMedalAnimator.GetCurrentAnimatorStateInfo(0).IsName("ClearMedalDown"));
+        }
+
+        // 텍스트 활성화 (즉시)
         if (stageClearText != null)
         {
             stageClearText.gameObject.SetActive(true);
             stageClearText.text = "Stage Clear!";
         }
 
-        // 2초 동안 대기
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
 
-        // Stage Clear 텍스트 비활성화
-        if (stageClearText != null)
-        {
-            stageClearText.gameObject.SetActive(false);
-        }
+        // 텍스트 비활성화
+        stageClearText.gameObject.SetActive(false);
 
         // 다음 스테이지로 이동
         if (stageType == StageType.Boss)
