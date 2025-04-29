@@ -19,7 +19,7 @@ public class Ally : MonoBehaviour
     [SerializeField] private LayerMask _enemyLayer;
      private float tileWidth = 0.9f;
     private float tileHeight =  0.9f;
-
+    [SerializeField]private List<PolygonCollider2D> _patternColliders;
     private float _atkSpd;
 
     private int _lastKnockbackEnemyCount = 0;
@@ -95,6 +95,8 @@ public class Ally : MonoBehaviour
         if (_unitData != null)
         {
             Initialize(_unitData);
+            
+           
         }
         else
         {
@@ -115,7 +117,7 @@ public class Ally : MonoBehaviour
         _stateMachine.ChangeState(new AllyIdleState(1/_atkSpd));
         GetFlip();
     }
-
+   
     private void Update()
     {
         _stateMachine?.Update();
@@ -141,6 +143,48 @@ public class Ally : MonoBehaviour
             _stateMachine.ChangeState(new AllyDeadState());
         }
     }
+    public void InitPatternColliders()
+    {
+        // 1) 초기화
+        _patternColliders = new List<PolygonCollider2D>();
+        if (_occupiedTile == null || _occupiedTile._hitCollider == null)
+        {
+              return;
+        } 
+        
+
+        // 2) 소환된 타일(히트셀) 콜라이더 가져오기
+        PolygonCollider2D hitCellCollider = _occupiedTile._hitCollider;
+
+        // 3) GridTargetManager 에서 해당 콜라이더의 행·열 인덱스 얻기
+        if (!GridTargetManager.Instance.TryGetGridIndex(hitCellCollider, out int baseRow, out int baseCol))
+            return;
+        Debug.Log("히트셀 위치 인덱스 " + baseRow +" "+baseCol);
+
+        // 4) DetectionPattern 만큼 오프셋 순회
+        var pattern = UnitData.DetectionPatternSo.cellOffsets;
+        foreach (var ofs in pattern)
+        {
+            // 4-1) 좌우 반전 고려
+            var applied = (_occupiedTile.dir)  // dir=false → up, dir=true → down (flip 여부에 따라)
+                ? new Vector2Int(ofs.x, -ofs.y)    // 아래 행이면 그대로
+                : new Vector2Int(ofs.x, ofs.y);  // 위 행이면 X 반전
+
+            int row = baseRow + applied.y;
+            int col = baseCol + applied.x;
+
+            // 4-2) 범위 검사
+            if (row < 0 || row >= GridTargetManager.Instance.coliderMat.Length) 
+                continue;
+            if (col < 0 || col >= GridTargetManager.Instance.coliderMat[row].arr_row.Length) 
+                continue;
+
+            // 4-3) 해당 슬롯의 PolygonCollider2D 추가
+            var poly = GridTargetManager.Instance.coliderMat[row].arr_row[col];
+            if (poly != null)
+                _patternColliders.Add(poly);
+        }
+    }
 
     public void ChangeState(IState<Ally> newState)
     {
@@ -151,7 +195,7 @@ public class Ally : MonoBehaviour
     public void PerformAttack()
     {
         
-        List<IDamageable> targets = DetectTargets(_unitData.AttackRange);
+        List<IDamageable> targets = DetectTargets();
         if (targets.Count == 0) 
             return;
 
@@ -170,6 +214,7 @@ public class Ally : MonoBehaviour
         }
     }
 
+   
 
     public void PerformSkill()
     {
@@ -209,6 +254,11 @@ public class Ally : MonoBehaviour
             // 오브젝트 풀에 복귀
             AllyPoolManager.Instance.ReturnAlly(_allyType, this.gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        InitPatternColliders();
     }
 
     public void ForceDie()
@@ -252,79 +302,39 @@ public class Ally : MonoBehaviour
         return _occupiedTile.GetAroundAlly();
     }
     
-    public List<IDamageable> DetectTargets(int range)
+    public List<IDamageable> DetectTargets()
     {
         var targets = new List<IDamageable>();
-
-        // 1) Raycaster 선택
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        RaycastTileHighlighter2D tileHighlighter = (spriteRenderer != null && spriteRenderer.flipX)
-            ? rightRaycaster
-            : leftRaycaster;
-        _dir = spriteRenderer.flipX;
-
-        if (tileHighlighter == null)
-        {
-            Debug.LogWarning("RaycastTileHighlighter2D 컴포넌트를 찾을 수 없습니다.");
-            return targets;
-        }
-
-        // 2) 타일 감지
-        tileHighlighter.DetectTiles(range);
-        if (!tileHighlighter.hitCellPos.HasValue)
+        if (_patternColliders == null) 
             return targets;
 
-        var center = tileHighlighter.hitCellPos.Value;
-        var cellsToCheck = new List<Vector3Int>();
-        for (int dx = -range; dx <= range; dx++)
+        // 중복 방지용 임시 버퍼
+        var buffer = new Collider2D[16];
+        var filter = new ContactFilter2D();
+        filter.SetLayerMask(_enemyLayer);
+        filter.useTriggers = true;
+
+        // 1) 미리 계산해둔 패턴 콜라이더 리스트 순회
+        foreach (var poly in _patternColliders)
         {
-            for (int dy = -range; dy <= range; dy++)
+            // 해당 폴리곤 안에 있는 모든 콜라이더를 가져옴
+            int count = poly.Overlap(filter, buffer);
+            for (int i = 0; i < count; i++)
             {
-                if (Mathf.Abs(dx) + Mathf.Abs(dy) <= range)
+                var col = buffer[i];
+                if (col == null) continue;
+
+                // 2) IDamageable 인터페이스를 구현한 몬스터(Enemy, Boss 등)만 추가
+                if (col.TryGetComponent<IDamageable>(out var dmg) 
+                    && !targets.Contains(dmg))
                 {
-                    var cell = new Vector3Int(center.x + dx, center.y + dy, center.z);
-                    if (tileHighlighter._tilemap.HasTile(cell))
-                        cellsToCheck.Add(cell);
+                    targets.Add(dmg);
                 }
             }
         }
 
-        // 3) 각 셀 영역에서 Enemy 또는 Boss 감지
-        foreach (var cell in cellsToCheck)
-        {
-            Vector3 cellCenter = tileHighlighter._tilemap.GetCellCenterWorld(cell);
-            Vector3 cellSize   = tileHighlighter._tilemap.cellSize * 1f;
-            var cols = Physics2D.OverlapBoxAll(cellCenter, cellSize, 0f, _enemyLayer);
-
-            foreach (var col in cols)
-            {
-                // Enemy 검사
-                if (col.TryGetComponent<Enemy>(out var e) && !targets.Contains(e))
-                {
-                    if (_dir == col.gameObject.GetComponent<Enemy>().Direction)
-                    {
-                        targets.Add(e);
-                    }
-                    
-                }
-                    
-
-                // Boss 검사
-                if (col.TryGetComponent<Boss>(out var b) && !targets.Contains(b))
-                    targets.Add(b);
-            }
-        }
-        
         return targets;
     }
-
-
-   
-
-   
-
-
-
 
     public void ApllyDamageSingle(Enemy target)
     {
@@ -412,7 +422,7 @@ public class Ally : MonoBehaviour
         _atkSpd = originalSpeed;
     }
 
-
+    
     public void ApplyBuffByEnemyCount(int enemyCount, BuffType buffType)
     {
         //TODO : 넉백된 수 만큼 혹은 공격한 수만큼 버프 효과 적용

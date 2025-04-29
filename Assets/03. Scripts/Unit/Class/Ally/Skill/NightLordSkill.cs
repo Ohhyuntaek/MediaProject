@@ -9,7 +9,7 @@ public class NightLordSkill : ISkill<Ally>
     public void Activate(Ally owner)
     {
         //1.적탐지
-        List<IDamageable> detectList = owner.DetectTargets(owner.UnitData.AttackRange);
+        List<IDamageable> detectList = owner.DetectTargets();
         //2.데미지 적용
         owner.ApllyDamageMulti(detectList);
         //3. 조건검사

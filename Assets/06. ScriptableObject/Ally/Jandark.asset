@@ -19,6 +19,7 @@ MonoBehaviour:
   _unitTribe: 0
   _canRevive: 0
   _attackRange: 1
+  _detectionPattern: {fileID: 11400000, guid: 08f3b88792b8c2940b2d6608911b0520, type: 2}
   _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
