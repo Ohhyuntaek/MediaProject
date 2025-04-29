@@ -605,6 +605,7 @@ MonoBehaviour:
   enhancementDescriptionText: {fileID: 7279839422023036882}
   cardButton: {fileID: -578188714847307143}
   darkenAmount: 0.6
+  selectSound: {fileID: 8300000, guid: 25d8339afcdf2514eac5d73a893b72a8, type: 3}
 --- !u!114 &-578188714847307143
 MonoBehaviour:
   m_ObjectHideFlags: 0

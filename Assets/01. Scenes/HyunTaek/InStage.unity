@@ -7378,9 +7378,6 @@ MonoBehaviour:
   - {fileID: 1405099364}
   - {fileID: 313160516}
   stageList:
-  - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
-  - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
-  - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
   - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
   allyUnitDataLinks:
   - allyType: 0
@@ -7393,14 +7390,13 @@ MonoBehaviour:
     unitData: {fileID: 11400000, guid: aa46a597562b64943930d0f0a73e85c3, type: 2}
   stageText: {fileID: 445447681}
   stageClearText: {fileID: 1854291016}
-  darkSpawner: {fileID: 409470820}
-  dawnImage: {fileID: 728749133}
   costText: {fileID: 247546856}
-  cardSpawner: {fileID: 1442016961}
-  costUpMultiplier: 1
-  dawnSpawnPoint: {fileID: 123849105}
+  dawnImage: {fileID: 728749133}
   hpSlider: {fileID: 399508629}
   energySlider: {fileID: 1579949352}
+  darkSpawner: {fileID: 409470820}
+  cardSpawner: {fileID: 1442016961}
+  dawnSpawnPoint: {fileID: 123849105}
   clearMedalAnimator: {fileID: 485362843}
   enhancementCardDataList:
   - {fileID: 11400000, guid: d9728ced63d7ead488b1b327e26644a2, type: 2}
@@ -7414,7 +7410,11 @@ MonoBehaviour:
   - {fileID: 1237933289}
   - {fileID: 320622474}
   - {fileID: 392300009}
+  stageClearProcessed: 0
   currentStageState: 0
+  currentStageIndex: 0
+  stageDarksCount: 0
+  clearMedalAndTextTerm: 3
 --- !u!1 &1550883773
 GameObject:
   m_ObjectHideFlags: 0

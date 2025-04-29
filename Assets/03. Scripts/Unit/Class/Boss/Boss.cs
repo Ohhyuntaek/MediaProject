@@ -63,6 +63,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void PerformDie()
     {
+        InStageManager.Instance.OnDarkKilled();
         ChangeState(new BossDeadState());
     }
     

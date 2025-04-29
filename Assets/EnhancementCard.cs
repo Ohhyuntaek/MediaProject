@@ -10,6 +10,7 @@ public class EnhancementCard : MonoBehaviour
     [SerializeField] private TMP_Text enhancementDescriptionText;
     [SerializeField] private Button cardButton;
     [SerializeField] private float darkenAmount = 0.6f;
+    [SerializeField] private AudioClip selectSound;
 
     private EnhancementCardData data;
     private float chosenMultiplier;
@@ -40,6 +41,9 @@ public class EnhancementCard : MonoBehaviour
     {
         if (isClicked) return; // 이미 클릭했으면 무시
         isClicked = true;
+        
+        // 카드 선택 시 소리 재생
+        SoundManager.Instance.PlaySfx(selectSound, transform.position, false);
 
         StartCoroutine(ClickFlashEffectAndProceed());
     }

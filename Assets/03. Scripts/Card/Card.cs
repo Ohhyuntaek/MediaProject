@@ -22,6 +22,7 @@ public class Card : MonoBehaviour
     
     [SerializeField] private Button cardButton; // 카드 클릭용 버튼
     [SerializeField] private TMP_Text costText; // 카드에 표시할 cost 텍스트
+    [SerializeField] private AudioClip selectSound;
 
     private UnitData unitData;
     private Dictionary<Image, Color> originalColors = new(); // 자식 이미지와 원래 색 저장
@@ -98,6 +99,8 @@ public class Card : MonoBehaviour
     
     public void OnButtonClick()
     {
+        SoundManager.Instance.PlaySfx(selectSound, transform.position, false);
+        
         // UnitData를 allyType으로 가져오기
         UnitData unitData = InStageManager.Instance.GetUnitDataByAllyType(allyType);
 

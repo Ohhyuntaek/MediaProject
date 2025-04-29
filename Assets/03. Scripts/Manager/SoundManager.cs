@@ -58,7 +58,6 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource GetOrCreateSource()
     {
-        
         foreach (var src in _pool)
         {
             if (!src.isPlaying)

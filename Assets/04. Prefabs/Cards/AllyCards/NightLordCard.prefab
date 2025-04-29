@@ -198,6 +198,8 @@ MonoBehaviour:
   lineType: 1
   cardButton: {fileID: 6959115647413270161}
   costText: {fileID: 3749142782450384633}
+  selectSound: {fileID: 8300000, guid: d02b362c09ec6fb499e204d2eb1d16b0, type: 3}
+  darkenMultiplier: 0.6
 --- !u!1 &7521736893897282842
 GameObject:
   m_ObjectHideFlags: 0
