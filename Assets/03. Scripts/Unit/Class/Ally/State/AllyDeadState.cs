@@ -5,6 +5,7 @@ public class AllyDeadState : IState<Ally>
     public void Enter(Ally ally)
     {
         ally.Animator?.SetTrigger("4_Death");
+        
     }
 
     public void Update(Ally ally)

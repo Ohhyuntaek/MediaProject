@@ -5,7 +5,7 @@ public class EnemyDeadState : IState<Enemy>
     public void Enter(Enemy enemy)
     {
         enemy.Animator?.SetTrigger("4_Death");
-        SoundManager.Instance.PlaySfx(enemy.EnemyData.DeathSound,enemy.transform.position,false);
+        SoundManager.Instance.PlaySfx(enemy.EnemyData.DeathSound[0],enemy.transform.position,false);
         
     }
 

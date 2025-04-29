@@ -28,9 +28,9 @@ public class EnemyData : ScriptableObject
     [SerializeField] private float _defense;          
     
     [Title("사운드")]
-    [SerializeField, LabelText("공격사운드")] private AudioClip attackSfx;
-    [SerializeField, LabelText("죽을때 나는 소리")] private AudioClip deathSfx;
-    [SerializeField, LabelText("스킬을 쓸때 나는 소리")] private AudioClip skillSfx;
+    [SerializeField, LabelText("공격사운드")] private AudioClip[] attackSfx;
+    [SerializeField, LabelText("죽을때 나는 소리")] private AudioClip[] deathSfx;
+    [SerializeField, LabelText("스킬을 쓸때 나는 소리")] private AudioClip[] skillSfx;
 
     [Header("스킬 및 타입")]
     [SerializeField] private EnemySkill _enemySkill;
@@ -47,7 +47,7 @@ public class EnemyData : ScriptableObject
     public List<GameObject> EnemyEffect => _skillEffets;
     public EnemySkill Skill { get => _enemySkill; set => _enemySkill = value; }
     public EnemyType Type { get => _enemyType; set => _enemyType = value; }
-    public AudioClip AttackSound => attackSfx;
-    public AudioClip DeathSound => deathSfx;
-    public AudioClip SkillSound => skillSfx;
+    public AudioClip[] AttackSound => attackSfx;
+    public AudioClip[] DeathSound => deathSfx;
+    public AudioClip[] SkillSound => skillSfx;
 }

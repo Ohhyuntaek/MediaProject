@@ -74,6 +74,7 @@ public class AllyDebuffAttackState : IState<Ally>
             if (skillEffectPrefab != null)
             {
                 GameObject effect = Object.Instantiate(skillEffectPrefab, spawnPos, spawnRot);
+                SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[index],ally.transform.position);
                 Object.Destroy(effect, 2f);
             }
         }

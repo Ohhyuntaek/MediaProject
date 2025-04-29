@@ -18,6 +18,7 @@ public class AllyBuffState : IState<Ally>
     {
         //ally.StartCoroutine(BuffRoutineJandark(ally));
         ally.Animator.SetTrigger("3_Buff");
+        SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[1],ally.transform.position);
     }
     
 
@@ -29,10 +30,12 @@ public class AllyBuffState : IState<Ally>
     private void TranstionTo(Ally ally)
     {
         AnimatorStateInfo stateInfo = ally.Animator.GetCurrentAnimatorStateInfo(0);
+        
         if (stateInfo.IsName("Buff") && !finished && stateInfo.normalizedTime > 0.9f)
         {
             if (ally.UnitData.UnitName == "Jandark")
-            {
+            {   
+                
                 ally.ApplyBuffByEnemyCount(_enemyCount,BuffType.ATKSPEED );
                 ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
             }

@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable
         
         if (IsTargetInRange())
         {   
-             SoundManager.Instance.PlaySfx(_enemyData.AttackSound,transform.position,false);
+             //SoundManager.Instance.PlaySfx(_enemyData.AttackSound,transform.position,false);
             _dawn.TakeDamage(_damage);
         }
     }

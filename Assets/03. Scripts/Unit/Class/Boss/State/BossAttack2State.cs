@@ -8,7 +8,7 @@ public class BossAttack2State : IState<Boss>
     public void Enter(Boss boss)
     {
         boss.Animator.SetTrigger("2_Attack2");
-        //SoundManager.Instance.PlaySfx(boss.BossData.AttackSound,boss.transform.position,false);
+        SoundManager.Instance.PlaySfx(boss.BossData.AttackSound[1],boss.transform.position,false);
     }
 
     public void Update(Boss owner)
@@ -21,7 +21,7 @@ public class BossAttack2State : IState<Boss>
         AnimatorStateInfo stateInfo = boss.Animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName("Attack2") && stateInfo.normalizedTime > 0.9f && !_finished)
         {
-            SoundManager.Instance.PlaySfx(boss.BossData.AttackSound,boss.transform.position,false);
+            //SoundManager.Instance.PlaySfx(boss.BossData.AttackSound,boss.transform.position,false);
             _finished = true;
             List<Ally> list = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Rear);
             if (list.Count > 0)

@@ -29,11 +29,12 @@ public class KnockbackAttackState : IState<Ally>
             string _unitName = ally.UnitData.UnitName;
             finished = true;
             ally.PerformSkill();
-           
+            
             switch (_unitName)
             {
                 case "Jandark":
                     
+                    SoundManager.Instance.PlaySfx(ally.UnitData.AttackSound[1],ally.transform.position);
                     if (ally.OnTile)
                     { 
                         ally.ChangeState(new AllyBuffState(ally.GetLastKnockbackEnemyCount()));
