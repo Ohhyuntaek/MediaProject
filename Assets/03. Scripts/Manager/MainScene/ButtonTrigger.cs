@@ -7,10 +7,15 @@ public class ButtonTrigger : MonoBehaviour
 {
     private Dictionary<TMP_Text, Vector3> buttonTextOriginalPositions = new();
     private Dictionary<Image, Vector3> buttonImageOriginalPositions = new();
-
+    
+    [SerializeField]
+    private AudioClip buttonClickSound;
+    
     // 텍스트만 이동 (눌렀을 때)
     public void OnTextButtonPress(TMP_Text text)
     {
+        SoundManager.Instance.PlaySfx(buttonClickSound,transform.position,false);
+        
         if (text == null) return;
 
         if (!buttonTextOriginalPositions.ContainsKey(text))
@@ -34,6 +39,8 @@ public class ButtonTrigger : MonoBehaviour
     // 이미지만 이동 (눌렀을 때)
     public void OnImageButtonPress(Image image)
     {
+        SoundManager.Instance.PlaySfx(buttonClickSound,transform.position,false);
+        
         if (image == null) return;
 
         if (!buttonImageOriginalPositions.ContainsKey(image))
