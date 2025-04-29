@@ -63,13 +63,13 @@ public class InStageManager : MonoBehaviour
     [SerializeField] private int currentStageIndex = 0;   // 현재 스테이지 번호
     [SerializeField] private int stageDarksCount = 0;     // 현재 스테이지에서 남은 Dark 수
     [SerializeField] private float clearMedalAndTextTerm = 3f;
+    [SerializeField] private float costUpMultiplier = 1.0f; // 코스트 증가 배율
 
     private List<GameObject> spawnedEnhancementCards = new(); // 생성된 강화 카드 리스트
     private Dictionary<AllyType, UnitData> allyUnitDataDict = new(); // AllyType과 UnitData 매칭
 
     private int cost = 0;               // 현재 코스트
     private float costTimer = 0f;        // 코스트 타이머
-    private float costUpMultiplier = 1.0f; // 코스트 증가 배율
     private float costUpInterval => 1.0f / costUpMultiplier; // 코스트 증가 주기 계산식
 
     private Dawn spawnedDawn;            // 생성된 Dawn 캐릭터

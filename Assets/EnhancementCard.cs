@@ -58,7 +58,7 @@ public class EnhancementCard : MonoBehaviour
             case EnhancementType.CostUp:
                 InStageManager.Instance.MultiplyCostUp(chosenMultiplier);
                 break;
-            case EnhancementType.SpawnSpeedUp:
+            case EnhancementType.CardSpawnSpeedUp:
                 InStageManager.Instance.MultiplyCardSpawnSpeed(chosenMultiplier);
                 break;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 public enum EnhancementType
 {
     CostUp,        // 코스트 증가 속도 향상
-    SpawnSpeedUp   // 카드 생성 속도 향상
+    CardSpawnSpeedUp   // 카드 생성 속도 향상
 }
 
 [CreateAssetMenu(fileName = "NewEnhancementCardData", menuName = "SO/Enhancement Card Data")]

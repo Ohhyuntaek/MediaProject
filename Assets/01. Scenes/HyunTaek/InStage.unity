@@ -7378,6 +7378,9 @@ MonoBehaviour:
   - {fileID: 1405099364}
   - {fileID: 313160516}
   stageList:
+  - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
+  - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
+  - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
   - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
   allyUnitDataLinks:
   - allyType: 0
@@ -7415,6 +7418,7 @@ MonoBehaviour:
   currentStageIndex: 0
   stageDarksCount: 0
   clearMedalAndTextTerm: 3
+  costUpMultiplier: 1
 --- !u!1 &1550883773
 GameObject:
   m_ObjectHideFlags: 0
