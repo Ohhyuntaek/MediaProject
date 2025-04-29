@@ -10,7 +10,8 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _player;            // 플레이어 Transform
     [SerializeField] private EnemyData _bossData;
-    [SerializeField] private TextMeshProUGUI stunText;
+    [SerializeField] private Transform _bossDestination;
+    
 
     [Header("이동 설정")]
     public float moveInterval = 10f; // 10초마다 이동
@@ -26,7 +27,7 @@ public class Boss : MonoBehaviour, IDamageable
     private Vector3 _direction;
     private StateMachine<Boss> _stateMachine;
     private bool _lastspecial = false;
-
+    [SerializeField] private GameObject _stunEffect;
 
     private bool _jump = false;
     private float _attacckTimer;
@@ -45,8 +46,11 @@ public class Boss : MonoBehaviour, IDamageable
         _mopveSpd = _bossData.MoveSpeed;
         _damage = _bossData.Damage;
         _attacckTimer = attackInterval;
+        _bossDestination = GameObject.Find("BossDestination").transform;
+        _stunEffect = transform.GetChild(0).gameObject;
+        _stunEffect.SetActive(false);
         _player = GameObject.FindFirstObjectByType<Dawn>().transform;
-        _direction = (_player.position - transform.position).normalized;
+        _direction = (_bossDestination.position - transform.position).normalized;
 
     }
     private void OnDrawGizmos()
@@ -56,7 +60,7 @@ public class Boss : MonoBehaviour, IDamageable
 
         // 씬 뷰에 보스와 플레이어를 잇는 선을 그립니다.
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, _player.position);
+        Gizmos.DrawLine(transform.position, _bossDestination.position);
 
        
     }
@@ -222,9 +226,9 @@ public class Boss : MonoBehaviour, IDamageable
 
     public bool CheckDistance()
     {
-        float distance = Vector3.Distance(transform.position, _player.position);
+        float distance = Vector3.Distance(transform.position, _bossDestination.position);
         Debug.Log("너와 나의 거리 " + distance);
-        if (distance<=1f)
+        if (distance<=0.01f)
         {
             Debug.Log("너무 가까워");
             return true;
@@ -304,8 +308,8 @@ public class Boss : MonoBehaviour, IDamageable
         set => _lastspecial = value;
     }
 
-    public TextMeshProUGUI StunText => stunText;
-
+    public GameObject StunEffect => _stunEffect;
+    public Transform BossDestiNation => _bossDestination;
     public Vector3 InitialPosition => _initialPosition;
     public Vector3 Dircetion => _direction;
     public Animator Animator => _animator;

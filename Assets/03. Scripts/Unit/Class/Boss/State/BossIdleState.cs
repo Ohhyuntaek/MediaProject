@@ -19,7 +19,14 @@ public class BossIdleState : IState<Boss>
         if (_finished) return;
 
         if (_timer <= 0f)
-        {
+        {   
+            
+            if (boss.CheckDistance() || boss.MoveCount>=5)
+            {
+                _finished = true;
+                boss.ChangeState(new BossDropAttackState());
+                return;
+            }
            
             if (boss.MoveCount!=0 && boss.MoveCount%2==0 && !boss.LastSpecialAttack )
             {   
@@ -30,14 +37,7 @@ public class BossIdleState : IState<Boss>
                 return;
             }
 
-            if (boss.CheckDistance())
-            {
-                _finished = true;
-                boss.ChangeState(new BossDropAttackState());
-                return;
-            }
             
-
             
             if (boss.CanAttack)
             {

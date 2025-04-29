@@ -6531,7 +6531,7 @@ Transform:
   m_GameObject: {fileID: 1338188535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 1.72, z: 0}
+  m_LocalPosition: {x: 3.4, y: 1.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7083,10 +7083,10 @@ MonoBehaviour:
   - {fileID: 1405099364}
   - {fileID: 313160516}
   stageList:
+  - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
   - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
   - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
   - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
-  - {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
   allyUnitDataLinks:
   - allyType: 0
     unitData: {fileID: 11400000, guid: b08ee28ea7d5ed2478b9309cbb97b4d3, type: 2}
@@ -9995,6 +9995,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790451060}
   m_CullTransparentMesh: 1
+--- !u!1 &1820399250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820399251}
+  m_Layer: 0
+  m_Name: BossDestination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820399251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820399250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.23, y: -0.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828955997
 GameObject:
   m_ObjectHideFlags: 0
@@ -11698,3 +11729,4 @@ SceneRoots:
   - {fileID: 740283024}
   - {fileID: 421666718}
   - {fileID: 771058548}
+  - {fileID: 1820399251}

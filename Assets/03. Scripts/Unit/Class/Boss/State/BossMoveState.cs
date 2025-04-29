@@ -32,7 +32,7 @@ public class BossMoveState : IState<Boss>
     public void Update(Boss boss)
     {
         if (_finished) return;
-
+        
        
         float step = boss.BossMoveSpeed * Time.deltaTime;
         boss.transform.position = Vector3.MoveTowards(
@@ -41,6 +41,15 @@ public class BossMoveState : IState<Boss>
             step
         );
 
+        if (boss.CheckDistance())
+        {
+            _finished = true;
+            boss.UpMoveCount();
+            boss.Animator.SetBool("1_Move", false);
+            
+            
+            boss.ChangeState(new BossIdleState());
+        }
       
         if (Vector3.Distance(boss.transform.position, _targetPosition) < 0.01f)
         {

@@ -20,15 +20,25 @@ public class BossDropAttackState : IState<Boss>
     {
         // 점프 중 플래그
         boss.Jumping = true;
-
+        
+        
+       
         // 1초 대기 (Jump 애니 길이에 맞춰 조정)
         yield return new WaitForSeconds(1f);
+        if (boss.MoveCount >= 5)
+        {
+            boss.transform.position = boss.InitialPosition;
+            boss.MoveCount = 0;
+        }
 
         // CC 당했다면 스턴 상태로
        
 
         // Land 애니
         boss.Animator.SetTrigger("Land");
+        yield return new WaitForSeconds(1f);
+        
+        
         if (boss.SkipNextMove)
         {
             boss.Jumping = false;
@@ -37,25 +47,19 @@ public class BossDropAttackState : IState<Boss>
         }
 
       
-        if (boss.MoveCount == 5)
+        
+        // 기존 랜딩 후 아군 처리
+        List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
+        if (front.Count < 2)
         {
-            boss.transform.position = boss.InitialPosition;
-            boss.MoveCount = 0;
+            boss.DestroyAllAllies();
+            boss.DealDamageToPlayer(30);
         }
         else
         {
-            // 기존 랜딩 후 아군 처리
-            List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
-            if (front.Count < 2)
-            {
-                boss.DestroyAllAllies();
-                boss.DealDamageToPlayer(30);
-            }
-            else
-            {
-                boss.DespawnRandomFrontAllies(front, 2);
-            }
+            boss.DespawnRandomFrontAllies(front, 2);
         }
+        
         
         boss.Jumping = false;
         // 다음은 Idle 상태로 복귀
