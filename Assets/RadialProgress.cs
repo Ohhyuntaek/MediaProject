@@ -9,13 +9,12 @@ public class RadialProgress : MonoBehaviour
 
     private Dawn targetDawn;
 
-    private void Start()
+    /// <summary>
+    /// 외부에서 Dawn 객체를 지정할 수 있게 해주는 Setter
+    /// </summary>
+    public void SetTargetDawn(Dawn dawn)
     {
-        targetDawn = FindObjectOfType<Dawn>();  // Dawn 객체 찾기 (씬에 하나만 있을 경우)
-        if (targetDawn == null)
-        {
-            Debug.LogError("Dawn을 찾을 수 없습니다!");
-        }
+        targetDawn = dawn;
     }
 
     private void Update()
@@ -33,7 +32,7 @@ public class RadialProgress : MonoBehaviour
         }
         else
         {
-            ProgressIndicator.text = "Ready!";
+            ProgressIndicator.text = "준비!";
         }
     }
 }

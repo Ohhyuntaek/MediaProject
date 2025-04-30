@@ -161,6 +161,13 @@ public class InStageManager : MonoBehaviour
         {
             dawn.Initialize(dawnData);
             spawnedDawn = dawn;
+            
+            // RadialProgress에 Dawn 연결
+            var radialUI = FindObjectOfType<RadialProgress>();
+            if (radialUI != null)
+            {
+                radialUI.SetTargetDawn(dawn);
+            }
         }
         else
         {
