@@ -18,7 +18,7 @@ public class AllyBuffState : IState<Ally>
     {
         //ally.StartCoroutine(BuffRoutineJandark(ally));
         ally.Animator.SetTrigger("3_Buff");
-        SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[1],ally.transform.position);
+        SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[0],ally.transform.position);
     }
     
 

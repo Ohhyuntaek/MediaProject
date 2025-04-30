@@ -8,7 +8,7 @@ public class AllyReviveState :IState<Ally>
     public void Enter(Ally owner)
     {
        owner.Animator.SetTrigger("4_Revive");
-       
+      
     }
 
     public void Update(Ally owner)
@@ -31,6 +31,7 @@ public class AllyReviveState :IState<Ally>
             switch (_unitName)
             {
                 case "NightLord":
+                        SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[0],ally.transform.position);
                         Debug.Log("부활 후 idle 상태 진입");
                         ally.SetBaseAttack(5);
                         ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));

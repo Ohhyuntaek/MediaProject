@@ -36,7 +36,8 @@ public class BossDropAttackState : IState<Boss>
 
         // Land 애니
         boss.Animator.SetTrigger("Land");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
+        SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
         
         
         if (boss.SkipNextMove)
@@ -59,7 +60,7 @@ public class BossDropAttackState : IState<Boss>
         else
         {
             boss.DespawnRandomFrontAllies(front, 2);
-            SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
+           
         }
         
         

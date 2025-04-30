@@ -4161,9 +4161,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 771058552}
     - target: {fileID: 1952251884844382582, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
+      propertyPath: dir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952251884844382582, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
       objectReference: {fileID: 433030955}
+    - target: {fileID: 2319270957907395987, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
+      propertyPath: dir
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2319270957907395987, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
@@ -4221,17 +4229,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4539314066063869902, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
+      propertyPath: dir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539314066063869902, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
       objectReference: {fileID: 771058552}
+    - target: {fileID: 6308916383618491029, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
+      propertyPath: dir
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6308916383618491029, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
       objectReference: {fileID: 586801509}
     - target: {fileID: 7202223208597758904, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
+      propertyPath: dir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202223208597758904, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
       objectReference: {fileID: 771058553}
+    - target: {fileID: 8135051436619290857, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
+      propertyPath: dir
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8135051436619290857, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 

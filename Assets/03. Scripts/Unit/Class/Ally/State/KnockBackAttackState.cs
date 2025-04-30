@@ -12,6 +12,7 @@ public class KnockbackAttackState : IState<Ally>
         //ally.StartCoroutine(AttackRoutine(ally));
         ally.Animator.SetTrigger("2_1KnockBack");
         Debug.Log("넉백 스테이트");
+        SoundManager.Instance.PlaySfx(ally.UnitData.AttackSound[1],ally.transform.position);
     }
 
     

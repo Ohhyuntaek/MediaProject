@@ -20,7 +20,8 @@ MonoBehaviour:
   _range: 0
   _defense: 0
   attackSfx:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: def34d5e0e6ba674e814087dc1daebe8, type: 3}
+  - {fileID: 8300000, guid: 36c9a17c7115ef04f8ad81ba3878c457, type: 3}
   deathSfx:
   - {fileID: 0}
   skillSfx:

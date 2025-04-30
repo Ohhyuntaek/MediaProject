@@ -28,7 +28,7 @@ public class AllySpecialAttackState : IState<Ally>
         if (stateInfo.IsName("SpecialAttack") && stateInfo.normalizedTime >= 0.9f &&!finished)
         {
             finished = true;
-            SoundManager.Instance.PlaySfx(owner.UnitData.SkillSound[0],owner.transform.position);
+           
             owner.StartCoroutine(SpawnProjectileAfterDelay(owner, 0.3f,dir));
             owner.ChangeState(new AllyIdleState(1 / owner.UnitData.AttackSpeed));
             
@@ -67,6 +67,7 @@ public class AllySpecialAttackState : IState<Ally>
             
             
             GameObject projectileInstance = GameObject.Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+            SoundManager.Instance.PlaySfx(owner.UnitData.SkillSound[0],owner.transform.position);
           
             projectileInstance.GetComponent<CentaurLadyProjectile>().SetDestination(dir);
             

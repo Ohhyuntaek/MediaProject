@@ -13,6 +13,7 @@ public class AllyAttackState : IState<Ally>
     {
         dir = ally.Dircetion;
         ally.Animator.SetTrigger("2_Attack");
+        SoundManager.Instance.PlaySfx(ally.UnitData.AttackSound[0],ally.transform.position);
     }
     
 

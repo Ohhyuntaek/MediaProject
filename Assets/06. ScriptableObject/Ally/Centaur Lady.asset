@@ -32,8 +32,11 @@ MonoBehaviour:
   _maxHP: 0
   cost: 4
   _image: {fileID: 0}
-  attackSfx: {fileID: 0}
-  deathSfx: {fileID: 0}
-  skillSfx: {fileID: 0}
+  attackSfx:
+  - {fileID: 8300000, guid: ca04511f6f748f34ebe59bfc3ba8039d, type: 3}
+  deathSfx:
+  - {fileID: 0}
+  skillSfx:
+  - {fileID: 8300000, guid: f492bc80b0e903e458d772bf6659ca28, type: 3}
   _playerSkillType: 0
   _duration: 5

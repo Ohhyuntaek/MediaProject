@@ -25,4 +25,4 @@ MonoBehaviour:
   _prefab: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
   attackSfx: {fileID: 0}
   deathSfx: {fileID: 0}
-  skillSfx: {fileID: 0}
+  skillSfx: {fileID: 8300000, guid: a203483de18ff954ea79cd23074c2a7d, type: 3}

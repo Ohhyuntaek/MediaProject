@@ -14,15 +14,7 @@ public class AllyTile : MonoBehaviour
 
     public void Start()
     {
-        if (gameObject.name.Contains("_U"))
-        {
-            dir = false;
-        }
-        else
-        {   
-            
-            dir = true;
-        }
+       
         
     }
 

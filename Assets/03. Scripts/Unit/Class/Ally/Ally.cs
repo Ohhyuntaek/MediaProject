@@ -63,7 +63,7 @@ public class Ally : MonoBehaviour
         _maxDuration = UnitData.Duration;
         _DurationSlider.maxValue = _maxDuration;
         _DurationSlider.value = _maxDuration;
-        
+        GetFlip();
         // 추가: Duration 초기화
         if (_unitData != null)
         {
@@ -115,7 +115,7 @@ public class Ally : MonoBehaviour
         _baseAttack = _unitData.BaseAttack;
         _stateMachine = new StateMachine<Ally>(this);
         _stateMachine.ChangeState(new AllyIdleState(1/_atkSpd));
-        GetFlip();
+        
     }
    
     private void Update()
@@ -199,7 +199,7 @@ public class Ally : MonoBehaviour
         if (targets.Count == 0) 
             return;
 
-        SoundManager.Instance.PlaySfx(_unitData.AttackSound[0],transform.position,false);
+        
         if (_unitData.TargetingType == TargetingType.Single)
         {
             targets[0].TakeDamage(_baseAttack);
@@ -242,7 +242,7 @@ public class Ally : MonoBehaviour
             Debug.Log($"[Ally:{name}] 사망 애니메이션 완료 → 풀로 반환");
 
             _isDead = true;
-            SoundManager.Instance.PlaySfx(_unitData.DeathSound[0],transform.position,false);
+            
             if (_occupiedTile != null)
             {
                 _occupiedTile.isOccupied = false;
@@ -258,6 +258,7 @@ public class Ally : MonoBehaviour
     private void OnEnable()
     {
         InitPatternColliders();
+        
     }
 
     public void ForceDie()
@@ -517,7 +518,7 @@ public class Ally : MonoBehaviour
     public void GetFlip()
     {
 
-        if (leftRaycaster.GetTargetTileTag() == null)
+        if (_occupiedTile.dir)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }

@@ -33,12 +33,11 @@ MonoBehaviour:
   cost: 3
   _image: {fileID: 0}
   attackSfx:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 25543195ce1f54c46b7c00569dcef5a6, type: 3}
+  - {fileID: 8300000, guid: 3a126156519caa84885d8fa330e55958, type: 3}
   deathSfx:
   - {fileID: 0}
   skillSfx:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: a203483de18ff954ea79cd23074c2a7d, type: 3}
   _playerSkillType: 0
   _duration: 5
