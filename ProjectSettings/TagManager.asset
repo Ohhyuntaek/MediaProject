@@ -52,11 +52,20 @@ TagManager:
   - name: DefenderTiles
     uniqueID: 1388045687
     locked: 0
-  - name: DecoObj
+  - name: DecorateTiles1F
     uniqueID: 1355117705
+    locked: 0
+  - name: DecorateTiles2F
+    uniqueID: 3201700139
     locked: 0
   - name: Darks
     uniqueID: 538184457
+    locked: 0
+  - name: DecorateTiles1FRightSide
+    uniqueID: 2146239935
+    locked: 0
+  - name: DecorateTiles2FRightSide
+    uniqueID: 3082676539
     locked: 0
   - name: Allys
     uniqueID: 894252433
