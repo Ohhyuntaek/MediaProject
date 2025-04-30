@@ -12,7 +12,11 @@ public class DawnData : ScriptableObject
     [SerializeField] private float _activeSkillCooldown;
     [SerializeField] private AllySkillType _activeSkillType;
     [SerializeField] private UnitTribe _unitTribe;
-    
+    [SerializeField] private int _maxEnergy;    
+    [SerializeField] private int _initialEnergy;
+    [SerializeField] private int _energyUseValue;
+    [SerializeField] private int _chargespeed; 
+        
     [Header("Prefab 정보 추가")] 
     [SerializeField] private GameObject _prefab;
     
@@ -21,9 +25,7 @@ public class DawnData : ScriptableObject
     [SerializeField, LabelText("죽을때 나는 소리")] private AudioClip deathSfx;
     [SerializeField, LabelText("스킬을 쓸때 나는 소리")] private AudioClip skillSfx;
     
-    [SerializeField] private int _maxEnergy;    
-    [SerializeField] private int _initialEnergy;
-    [SerializeField] private int _chargespeed; 
+    
     
 
     public string PlayerName { get => _playerName; set => _playerName = value; }
@@ -39,4 +41,5 @@ public class DawnData : ScriptableObject
     public AudioClip AttackSound => attackSfx;
     public AudioClip DeathSound => deathSfx;
     public AudioClip SkillSound => skillSfx;
+    public int energyUseValue => _energyUseValue;
 }

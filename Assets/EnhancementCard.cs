@@ -17,7 +17,8 @@ public class EnhancementCard : MonoBehaviour
     private Dictionary<Image, Color> originalColors = new();
 
     private bool isClicked = false; // 클릭 중복 방지용
-
+    private Dawn playerDawn;
+    
     void Awake()
     {
         foreach (var img in GetComponentsInChildren<Image>())
@@ -27,6 +28,8 @@ public class EnhancementCard : MonoBehaviour
         }
 
         cardButton.onClick.AddListener(OnCardSelected);
+        
+        playerDawn = FindObjectOfType<Dawn>(); // Dawn 객체 참조 저장
     }
 
     public void Setup(EnhancementCardData cardData)
@@ -60,6 +63,14 @@ public class EnhancementCard : MonoBehaviour
                 break;
             case EnhancementType.CardSpawnSpeedUp:
                 InStageManager.Instance.MultiplyCardSpawnSpeed(chosenMultiplier);
+                break;
+            case EnhancementType.CooldownSpeedUp:
+                if (playerDawn != null)
+                    playerDawn.CooldownMultiplier *= chosenMultiplier;
+                break;
+            case EnhancementType.EnergyChargeSpeedUp:
+                if (playerDawn != null)
+                    playerDawn.EnergyChargeMultiplier *= chosenMultiplier;
                 break;
         }
 

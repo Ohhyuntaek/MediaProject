@@ -20,17 +20,22 @@ public class Dawn : MonoBehaviour
     private bool _isDead = false;
     private float _energyTimer = 0f;
     private int _chargeSpd;
-    private int _currentEnergy;
+    private float _currentEnergy;
     private int _MaxEnergy;
     private bool _CanUpdatePassive = true;
-
+    
+    [SerializeField]
+    private float cooldownMultiplier = 1f;  // 쿨다운 속도에 적용될 배수 (1보다 작을수록 빠름)
+    [SerializeField]
+    private float energyChargeMultiplier = 1f; // 에너지 회복 배수 (1보다 클수록 빠름)
+    
     public Animator Animator => _animator;
     public DawnData DawnData => dawnData;
     public bool CanUseActiveSkill => _canUseActiveSkill;
     public float ActiveSkillCooldownTime => dawnData.ActiveSkillCooldown;
     public float CurrentHP => _hp;
+    public float currentEnergyUpSpeed = 0.5f;
     
-
     private void Start()
     {
         if(dawnData != null)
@@ -54,6 +59,9 @@ public class Dawn : MonoBehaviour
         _currentEnergy = dawnData.InitialEnergy;
         _stateMachine = new StateMachine<Dawn>(this);
         _stateMachine.ChangeState(new PlayerIdleState());
+
+        cooldownMultiplier = 1f;
+        energyChargeMultiplier = 1f;
     }
 
     private void Update()
@@ -69,10 +77,11 @@ public class Dawn : MonoBehaviour
         else
         {   
             UpdatePassiveSkill();
-            if(!_canUseActiveSkill)
+            // 쿨다운 감소 속도에 배수 적용
+            if (!_canUseActiveSkill)
             {
-                _activeSkillCooldownTimer -= Time.deltaTime;
-                if(_activeSkillCooldownTimer <= 0f)
+                _activeSkillCooldownTimer -= Time.deltaTime * cooldownMultiplier;
+                if (_activeSkillCooldownTimer <= 0f)
                     _canUseActiveSkill = true;
             }
             _energyTimer += Time.deltaTime; 
@@ -85,6 +94,33 @@ public class Dawn : MonoBehaviour
         _stateMachine.ChangeState(newState);
     }
 
+    public void useEnerge()
+    {
+        _currentEnergy -= dawnData.energyUseValue;
+    }
+    
+    // 외부에서 접근할 수 있도록 프로퍼티
+    public float CooldownMultiplier
+    {
+        get => cooldownMultiplier;
+        set => cooldownMultiplier = Mathf.Clamp(value, 0.1f, 10f); // 0.1x ~ 10x 제한
+    }
+
+    public float EnergyChargeMultiplier
+    {
+        get => energyChargeMultiplier;
+        set => energyChargeMultiplier = Mathf.Clamp(value, 0.1f, 10f);
+    }
+
+    public float ActiveCooldownRatio
+    {
+        get
+        {
+            if (!_canUseActiveSkill)
+                return 1f - (_activeSkillCooldownTimer / ActiveSkillCooldownTime);  // 0 → 1 진행
+            return 1f;  // 쿨다운 끝났으면 100%
+        }
+    }
     
     public void PerformActiveSkill()
     {
@@ -100,7 +136,6 @@ public class Dawn : MonoBehaviour
         if(_passiveSkill != null)
         {   
             _passiveSkill.Activate(this);
-            
         }
     }
 
@@ -110,9 +145,8 @@ public class Dawn : MonoBehaviour
         {
             if (_currentEnergy < _MaxEnergy)
             {
-                _currentEnergy = Mathf.Min(_currentEnergy+2, _MaxEnergy);
-                _energyTimer = 0f;
-
+                // 에너지 회복 배수 적용
+                _currentEnergy = Mathf.Min(_currentEnergy + (currentEnergyUpSpeed * energyChargeMultiplier), _MaxEnergy);
             }
         }
     }
@@ -153,6 +187,6 @@ public class Dawn : MonoBehaviour
            
         };
     }
-    public int Energy {get => _currentEnergy; set => _currentEnergy = value;}
+    public float currentEnergy {get => _currentEnergy; set => _currentEnergy = value;}
     
 }

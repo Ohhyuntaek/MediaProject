@@ -72,6 +72,7 @@ public class InStageManager : MonoBehaviour
     private float costTimer = 0f;        // 코스트 타이머
     private float costUpInterval => 1.0f / costUpMultiplier; // 코스트 증가 주기 계산식
 
+    [SerializeField]
     private Dawn spawnedDawn;            // 생성된 Dawn 캐릭터
 
 
@@ -175,7 +176,7 @@ public class InStageManager : MonoBehaviour
             hpSlider.value = spawnedDawn.DawnData.MaxHP > 0 ? spawnedDawn.CurrentHP / spawnedDawn.DawnData.MaxHP : 0f;
 
         if (energySlider != null)
-            energySlider.value = spawnedDawn.DawnData.MaxEnergy > 0 ? (float)spawnedDawn.Energy / spawnedDawn.DawnData.MaxEnergy : 0f;
+            energySlider.value = spawnedDawn.DawnData.MaxEnergy > 0 ? (float)spawnedDawn.currentEnergy / spawnedDawn.DawnData.MaxEnergy : 0f;
     }
 
     // ===========================================================

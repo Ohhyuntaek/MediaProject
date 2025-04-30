@@ -51,6 +51,21 @@ public class AllyPoolManager : MonoBehaviour
             obj.transform.position = tile.transform.position;
             obj.SetActive(true);
             tile.isOccupied = true;
+            
+            // 부모 이름에 따라 SortingLayer 설정
+            Transform parent = tile.transform.parent;
+            SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+            if (parent != null && sr != null)
+            {
+                if (parent.name == "Up_Line_Tiles")
+                {
+                    sr.sortingLayerName = "AllysUpLine";
+                }
+                else if (parent.name == "Down_Line_Tiles")
+                {
+                    sr.sortingLayerName = "AllysDownLine";
+                }
+            }
 
             Ally ally = obj.GetComponent<Ally>();
             ally.Init(tile.transform.position, tile);

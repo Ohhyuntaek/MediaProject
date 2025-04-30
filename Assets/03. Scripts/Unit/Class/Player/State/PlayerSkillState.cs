@@ -7,8 +7,7 @@ public class PlayerActiveSkillState : IState<Dawn>
     public void Enter(Dawn dawn)
     {
         dawn.Animator?.SetTrigger("5_Active");
-        
-        
+        dawn.useEnerge();
     }
 
     public void Update(Dawn dawn)

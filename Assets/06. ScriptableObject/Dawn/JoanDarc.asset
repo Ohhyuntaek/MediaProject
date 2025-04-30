@@ -18,7 +18,11 @@ MonoBehaviour:
   _activeSkillCooldown: 30
   _activeSkillType: 4
   _unitTribe: 0
-  _prefab: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
-  _maxEnergy: 10
-  _initialEnergy: 2
+  _maxEnergy: 100
+  _initialEnergy: 20
+  _energyUseValue: 30
   _chargespeed: 0
+  _prefab: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
+  attackSfx: {fileID: 0}
+  deathSfx: {fileID: 0}
+  skillSfx: {fileID: 0}
