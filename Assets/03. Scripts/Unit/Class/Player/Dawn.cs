@@ -13,6 +13,7 @@ public class Dawn : MonoBehaviour
     
     private StateMachine<Dawn> _stateMachine;
     private bool _canUseActiveSkill = true;
+    [SerializeField]
     private float _activeSkillCooldownTimer;
     private ISkill<Dawn> _activeSkill;
     private ISkill<Dawn> _passiveSkill;
@@ -62,6 +63,8 @@ public class Dawn : MonoBehaviour
 
         cooldownMultiplier = 1f;
         energyChargeMultiplier = 1f;
+
+        ResetActiveCooldown();
     }
 
     private void Update()
@@ -77,12 +80,16 @@ public class Dawn : MonoBehaviour
         else
         {   
             UpdatePassiveSkill();
-            // 쿨다운 감소 속도에 배수 적용
-            if (!_canUseActiveSkill)
+            // 쿨다운 감소: 스테이지가 진행 중일 때만
+            if (!_canUseActiveSkill && InStageManager.Instance.IsStagePlaying())
             {
-                _activeSkillCooldownTimer -= Time.deltaTime * cooldownMultiplier;
-                if (_activeSkillCooldownTimer <= 0f)
+                _activeSkillCooldownTimer += Time.deltaTime * cooldownMultiplier;
+
+                if (_activeSkillCooldownTimer >= ActiveSkillCooldownTime)
+                {
+                    _activeSkillCooldownTimer = ActiveSkillCooldownTime;
                     _canUseActiveSkill = true;
+                }
             }
             _energyTimer += Time.deltaTime; 
             ChargeMana();
@@ -105,6 +112,12 @@ public class Dawn : MonoBehaviour
         get => cooldownMultiplier;
         set => cooldownMultiplier = Mathf.Clamp(value, 0.1f, 10f); // 0.1x ~ 10x 제한
     }
+    
+    public void ResetActiveCooldown()
+    {
+        _canUseActiveSkill = false;
+        _activeSkillCooldownTimer = 0f;
+    }
 
     public float EnergyChargeMultiplier
     {
@@ -116,18 +129,23 @@ public class Dawn : MonoBehaviour
     {
         get
         {
-            if (!_canUseActiveSkill)
-                return 1f - (_activeSkillCooldownTimer / ActiveSkillCooldownTime);  // 0 → 1 진행
-            return 1f;  // 쿨다운 끝났으면 100%
+            // 쿨다운이 진행 중이면 0 ~ 1 사이 비율 반환
+            return Mathf.Clamp01(_activeSkillCooldownTimer / ActiveSkillCooldownTime);
+            
+            // 쿨다운 완료 상태면 항상 1
+            // return 1f;
         }
     }
     
     public void PerformActiveSkill()
     {
+        if (!_canUseActiveSkill) return;
+
         Debug.Log($"[Player:{name}] 액티브 스킬 발동!");
         _activeSkill.Activate(this);
+
         _canUseActiveSkill = false;
-        _activeSkillCooldownTimer = ActiveSkillCooldownTime;
+        _activeSkillCooldownTimer = 0f;  // 쿨다운 진행을 0부터 시작
     }
     
    

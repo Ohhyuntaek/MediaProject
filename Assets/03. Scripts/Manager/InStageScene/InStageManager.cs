@@ -349,8 +349,17 @@ public class InStageManager : MonoBehaviour
     // 스테이지 시작
     // ===========================================================
 
+    public bool IsStagePlaying()
+    {
+        return currentStageState == StageState.Playing;
+    }
+    
     public void StartStage()
     {
+        // 여기서 쿨다운 초기화
+        if (spawnedDawn != null)
+            spawnedDawn.ResetActiveCooldown();
+        
         currentStageState = StageState.Playing;
         stageClearProcessed = false;
         cost = 0;
