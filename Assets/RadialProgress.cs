@@ -17,6 +17,11 @@ public class RadialProgress : MonoBehaviour
         targetDawn = dawn;
     }
 
+    private void Start()
+    {
+        float cooldownRatio = 0;
+    }
+    
     private void Update()
     {
         if (targetDawn == null) return;
