@@ -495,8 +495,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: << Press Any Keys >>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 70a05cb597db39748ad19eb3699ee3a3, type: 2}
-  m_sharedMaterial: {fileID: 6214272282763280507, guid: 70a05cb597db39748ad19eb3699ee3a3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91065633200169d4d962360b39dc4432, type: 2}
+  m_sharedMaterial: {fileID: -822308255797264653, guid: 91065633200169d4d962360b39dc4432, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 582430565, guid: 597791a83d23ed445afadd39ec4b818a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d2c4f13704270f244a72091d35f56cba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
