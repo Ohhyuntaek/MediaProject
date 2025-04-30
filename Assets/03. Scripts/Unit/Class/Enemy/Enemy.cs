@@ -173,6 +173,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         GameObject effectPrefeb = _enemyData.EnemyEffect[skullnum];
         GameObject effectObject =Instantiate(effectPrefeb, spawnPosition, effectPrefeb.transform.rotation);
+        effectObject.GetComponent<Basic3Projectie>().SetCaster(this);
         
     }
     
@@ -240,6 +241,12 @@ public class Enemy : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(duration);
         _defense = originalDefense;
     }
+
+    public void DealToPlayer()
+    {
+        _dawn.TakeDamage(_damage);
+    }
+    
 
     public void SetDestinationWhenSpawn(bool dir)
     {

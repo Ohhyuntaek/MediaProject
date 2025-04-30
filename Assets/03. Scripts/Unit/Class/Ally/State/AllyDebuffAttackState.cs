@@ -13,6 +13,7 @@ public class AllyDebuffAttackState : IState<Ally>
          ally.SetSkillRandomNum(Random.Range(0, 3));
          index = ally.GetSkillRandomNum();
         PlaySlamanderDebuffAnimation(ally);
+        SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[index],ally.transform.position);
         //ally.StartCoroutine(DebuffRoutine(ally));
     }
 
@@ -74,7 +75,6 @@ public class AllyDebuffAttackState : IState<Ally>
             if (skillEffectPrefab != null)
             {
                 GameObject effect = Object.Instantiate(skillEffectPrefab, spawnPos, spawnRot);
-                SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[index],ally.transform.position);
                 Object.Destroy(effect, 2f);
             }
         }

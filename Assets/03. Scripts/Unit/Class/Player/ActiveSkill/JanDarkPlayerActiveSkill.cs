@@ -8,7 +8,15 @@ public class JanDarkPlayerActiveSkill : ISkill<Dawn>
         List<GameObject> allyList = AllyPoolManager.Instance.activateAllies;
         foreach (GameObject ally  in allyList)
         {
-            ally.GetComponent<Ally>().SetLifetime(5f);
+            if (ally.GetComponent<Ally>().Dead)
+            {
+                continue;
+            }
+            else
+            {
+                ally.GetComponent<Ally>().SetLifetime(5f);
+            }
+            
         }
     }
 }

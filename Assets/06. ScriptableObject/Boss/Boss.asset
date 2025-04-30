@@ -19,9 +19,12 @@ MonoBehaviour:
   _damage: 0
   _range: 0
   _defense: 0
-  attackSfx: {fileID: 0}
-  deathSfx: {fileID: 0}
-  skillSfx: {fileID: 0}
+  attackSfx:
+  - {fileID: 0}
+  deathSfx:
+  - {fileID: 0}
+  skillSfx:
+  - {fileID: 8300000, guid: 705e2dafa58c0da498a77d3dffaae90e, type: 3}
   _enemySkill: 0
   _enemyType: 0
   _skillEffets: []

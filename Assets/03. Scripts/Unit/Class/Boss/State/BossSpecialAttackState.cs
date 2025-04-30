@@ -23,7 +23,7 @@ public class BossDropAttackState : IState<Boss>
         
         
        
-        // 1초 대기 (Jump 애니 길이에 맞춰 조정)
+        
         yield return new WaitForSeconds(1f);
         if (boss.MoveCount >= 5)
         {
@@ -31,7 +31,7 @@ public class BossDropAttackState : IState<Boss>
             boss.MoveCount = 0;
         }
 
-        // CC 당했다면 스턴 상태로
+      
        
 
         // Land 애니
@@ -47,17 +47,19 @@ public class BossDropAttackState : IState<Boss>
         }
 
       
-        
+        SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
         // 기존 랜딩 후 아군 처리
         List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
         if (front.Count < 2)
         {
             boss.DestroyAllAllies();
             boss.DealDamageToPlayer(30);
+           
         }
         else
         {
             boss.DespawnRandomFrontAllies(front, 2);
+            SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
         }
         
         

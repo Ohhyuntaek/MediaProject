@@ -9,7 +9,8 @@ public class Basic3Projectie : MonoBehaviour
     private bool _finished = false;
 
     private void Awake()
-    {
+    {   
+        
         _target = GameObject.FindFirstObjectByType<Dawn>();
         _animator = GetComponent<Animator>();
     }
@@ -21,8 +22,13 @@ public class Basic3Projectie : MonoBehaviour
         if (stateInfo.normalizedTime > 0.9f &&!_finished)
         {
             _finished = true;
-            _target.TakeDamage(_caster.AttakcDamage);
+            _caster.DealToPlayer();
             Destroy(gameObject);
         }
+    }
+
+    public void SetCaster(Enemy enemy)
+    {
+        _caster = enemy;
     }
 }

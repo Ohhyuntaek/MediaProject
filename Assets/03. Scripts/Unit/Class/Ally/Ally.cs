@@ -532,7 +532,8 @@ public class Ally : MonoBehaviour
     {
         _duration = 0;
     }
-    
+
+    public bool Dead => _isDead;
     public float ATKSPD => _atkSpd;
     public void SetLastKnockbackEnemyCount(int count) => _lastKnockbackEnemyCount = count;
     public int GetLastKnockbackEnemyCount() => _lastKnockbackEnemyCount;
