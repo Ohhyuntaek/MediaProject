@@ -6727,7 +6727,6 @@ MonoBehaviour:
   darkSpawner: {fileID: 409470820}
   cardSpawner: {fileID: 1442016961}
   tileManager: {fileID: 20820152}
-  spawnedDawn: {fileID: 0}
 --- !u!1 &1107409250
 GameObject:
   m_ObjectHideFlags: 0
