@@ -16,7 +16,7 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] private Button startButton;
 
     [Header("Dawn 선택")]
-    private DawnData selectedDawnData;
+    private Dawn selectedDawn;
     private DawnSelector currentSelectedButton; // 현재 선택된 버튼 기억
 
     void Awake()
@@ -28,9 +28,9 @@ public class MainSceneManager : MonoBehaviour
     /// <summary>
     /// 버튼이 호출하는 함수
     /// </summary>
-    public void OnSelectDawn(DawnData dawnData, DawnSelector button)
+    public void OnSelectDawn(Dawn dawn, DawnSelector button)
     {
-        selectedDawnData = dawnData;
+        selectedDawn = dawn;
         UpdateDawnUI();
 
         // 버튼 테두리 갱신
@@ -46,30 +46,30 @@ public class MainSceneManager : MonoBehaviour
     private void UpdateDawnUI()
     {
         if (dawnPortraitImage != null)
-            dawnPortraitImage.sprite = selectedDawnData.Portrait;
+            dawnPortraitImage.sprite = selectedDawn.DawnData.Portrait;
 
         if (dawnHpSlider != null)
         {
             dawnHpSlider.maxValue = hpMaxValue;
-            dawnHpSlider.value = selectedDawnData.MaxHP;
+            dawnHpSlider.value = selectedDawn.DawnData.MaxHP;
         }
 
         if (dawnEnergySlider != null)
         {
             dawnEnergySlider.maxValue = energyMaxValue;
-            dawnEnergySlider.value = selectedDawnData.InitialEnergy;
+            dawnEnergySlider.value = selectedDawn.DawnData.InitialEnergy;
         }
     }
 
     public void OnStartButtonClick()
     {
-        if (selectedDawnData == null)
+        if (selectedDawn == null)
         {
             Debug.LogWarning("Dawn을 선택하지 않았습니다!");
             return;
         }
 
-        GameManager.Instance.SetSelectedDawn(selectedDawnData);
+        GameManager.Instance.SetSelectedDawn(selectedDawn);
         SceneManager.LoadScene("InStage");
     }
 }

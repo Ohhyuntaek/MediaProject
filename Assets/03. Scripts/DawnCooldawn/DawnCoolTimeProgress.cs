@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RadialProgress : MonoBehaviour
+public class DawnCoolTimeProgress : MonoBehaviour
 {
     public TMP_Text ProgressIndicator;
     public Image LoadingBar;

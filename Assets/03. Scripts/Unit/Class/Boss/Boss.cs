@@ -67,7 +67,7 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void PerformDie()
     {
-        InStageManager.Instance.OnDarkKilled();
+        InGameSceneManager.Instance.darkSpawner.DecreaseDarkCount();
         ChangeState(new BossDeadState());
     }
     
@@ -122,7 +122,7 @@ public class Boss : MonoBehaviour, IDamageable
     /// <summary>앞줄 아군 하나 즉시 소환해제</summary>
     public void DespawnFrontAlly()
     {
-        List<Ally> _frontList = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
+        List<Ally> _frontList = InGameSceneManager.Instance.allyPoolManager.GetLineObject_Spawned(LineType.Front);
         if (_frontList.Count > 0)
         {
             _frontList[0].ToDestroy();
@@ -132,7 +132,7 @@ public class Boss : MonoBehaviour, IDamageable
     /// <summary>뒤줄 아군 하나 즉시 소환해제</summary>
     public void DespawnBackAlly()
     {
-        List<Ally> _reartList = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Rear);
+        List<Ally> _reartList = InGameSceneManager.Instance.allyPoolManager.GetLineObject_Spawned(LineType.Rear);
         if (_reartList.Count > 0)
         {
             _reartList[0].ToDestroy();
@@ -142,7 +142,7 @@ public class Boss : MonoBehaviour, IDamageable
     /// <summary>전열 아군이 2기 이상인지</summary>
     public bool HasAtLeastFrontAllies(int count)
     {   
-        List<Ally> _frontList = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
+        List<Ally> _frontList = InGameSceneManager.Instance.allyPoolManager.GetLineObject_Spawned(LineType.Front);
         if (_frontList.Count >=2)
         {
             return true;
@@ -176,7 +176,7 @@ public class Boss : MonoBehaviour, IDamageable
     /// <summary>필드 위 모든 아군 파괴</summary>
     public void DestroyAllAllies()
     {
-        List<GameObject> list = AllyPoolManager.Instance.activateAllies;
+        List<GameObject> list = InGameSceneManager.Instance.allyPoolManager.activateAllies;
         foreach (GameObject allyobject in list)
         {
             Ally ally = allyobject.GetComponent<Ally>();
@@ -186,7 +186,7 @@ public class Boss : MonoBehaviour, IDamageable
     }
     public Ally GetClosestAlly(Vector3 origin)
     {
-        List<GameObject> list = AllyPoolManager.Instance.activateAllies;
+        List<GameObject> list = InGameSceneManager.Instance.allyPoolManager.activateAllies;
         if (list.Count == 0)
         {
             return null;

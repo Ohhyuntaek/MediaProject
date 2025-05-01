@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    public static TileManager Instance;
-
     private List<AllyTile> allTiles = new();
 
     void Awake()
     {
-        Instance = this;
-
         foreach (AllyTile tile in FindObjectsOfType<AllyTile>())
         {
             allTiles.Add(tile);

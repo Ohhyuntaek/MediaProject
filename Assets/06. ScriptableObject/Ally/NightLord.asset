@@ -15,6 +15,7 @@ MonoBehaviour:
   _unitName: NightLord
   _unitFaction: 0
   _unitType: 1
+  _allyType: 0
   _damageType: 0
   _unitTribe: 0
   _canRevive: 1
@@ -30,7 +31,7 @@ MonoBehaviour:
   _attackSpeed: 2
   _maxHP: 30
   cost: 4
-  _image: {fileID: 0}
+  _sprite: {fileID: -833971407, guid: 083430ea3b459aa4083511c4007d0556, type: 3}
   attackSfx:
   - {fileID: 8300000, guid: 12ea2e45fd5d85741935be3ce7fdb2fd, type: 3}
   deathSfx: []

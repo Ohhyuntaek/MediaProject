@@ -10,8 +10,8 @@ public class JandarkPassiveSkill : ISkill<Dawn>
         
         if (CheckActivationCondition())
         {   
-            int aliveallyCount = AllyPoolManager.Instance.activateAllies.Count;
-            Ally spawnAlly = AllyPoolManager.Instance.activateAllies[aliveallyCount - 1].GetComponent<Ally>();
+            int aliveallyCount = InGameSceneManager.Instance.allyPoolManager.activateAllies.Count;
+            Ally spawnAlly = InGameSceneManager.Instance.allyPoolManager.activateAllies[aliveallyCount - 1].GetComponent<Ally>();
             List<Ally> aroundAllies = spawnAlly.GetAroundAllies();
             Debug.Log(spawnAlly.UnitData.UnitName);
             if (aroundAllies.Count != 0)
@@ -22,19 +22,15 @@ public class JandarkPassiveSkill : ISkill<Dawn>
                     {
                         aroundally.SetCanCCByDuration(1f);
                     }
-                    
                 }
-               
             }
-            
-            
         }
     }
     
      
     public bool CheckActivationCondition()
     {
-        int count = AllyPoolManager.Instance.SpawnCount;
+        int count = InGameSceneManager.Instance.allyPoolManager.SpawnCount;
         if (lastcount != count &&count % 3 == 0 && count != 0)
         {
             lastcount = count;

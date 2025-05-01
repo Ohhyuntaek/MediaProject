@@ -15,6 +15,7 @@ MonoBehaviour:
   _unitName: Slamander
   _unitFaction: 0
   _unitType: 2
+  _allyType: 0
   _damageType: 1
   _unitTribe: 0
   _canRevive: 0
@@ -33,7 +34,7 @@ MonoBehaviour:
   _attackSpeed: 1
   _maxHP: 100
   cost: 3
-  _image: {fileID: 0}
+  _sprite: {fileID: 501205929, guid: 03ad10307a8f5de46a7b13be566aca00, type: 3}
   attackSfx:
   - {fileID: 0}
   deathSfx:

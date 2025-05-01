@@ -23,7 +23,7 @@ public class BossAttack2State : IState<Boss>
         {
             //SoundManager.Instance.PlaySfx(boss.BossData.AttackSound,boss.transform.position,false);
             _finished = true;
-            List<Ally> list = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Rear);
+            List<Ally> list = InGameSceneManager.Instance.allyPoolManager.GetLineObject_Spawned(LineType.Rear);
             if (list.Count > 0)
             {
                 list[0].ChangeState(new AllyDeadState());

@@ -2,23 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public enum UnitFaction { Ally,Player }
 public enum UnitTribe{Person,}
 public enum UnitType { Front, Middle, Rear }
+public enum AllyType { JoanDarc, NightLord, BountyHunter, Rogue, CentaurLady, Salamander }
 public enum DamageType { Physical, Magical }
-public enum AllySkillType { None, CentaurLady, BountyHunter, Salamender, Joandarc, NightLord }
+public enum AllySkillType { None, CentaurLadySkill, BountyHunterSkill, SalamenderSkill, JoanDarcSkill, NightLordSkill }
 public enum PlayerSkillType{Test1,Test2,Test3}
 public enum TargetingType { Single, Area }
 
-[CreateAssetMenu(fileName = "NewUnitData", menuName = "SO/Unit Data")]
+[CreateAssetMenu(fileName = "NewAllyData", menuName = "SO/Ally Data")]
 public class UnitData : ScriptableObject
 {
     [Title("기본 유닛 정보")]
     [SerializeField, LabelText("유닛 이름")] private string _unitName;
     [SerializeField, LabelText("소속")] private UnitFaction _unitFaction;
     [SerializeField, LabelText("배치 타입")] private UnitType _unitType;
+    [SerializeField, LabelText("Ally 타입")] private AllyType _allyType;
     [SerializeField, LabelText("피해 타입")] private DamageType _damageType;
     [SerializeField, LabelText("유닛 종족")] private UnitTribe _unitTribe;
     [SerializeField, LabelText("부활 가능 여부")] private bool _canRevive;
@@ -43,7 +44,9 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("최대 체력")] private float _maxHP;
     [SerializeField, LabelText("코스트")] private int cost;
 
-    [Title("초상화")] [SerializeField, LabelText("초상화")] private Image _image;   
+    [FormerlySerializedAs("_image")]
+    [Title("초상화")] 
+    [SerializeField, LabelText("초상화")] private Sprite _sprite;   
     
     [Title("사운드")]
     [SerializeField, LabelText("공격사운드")] private AudioClip[] attackSfx;
@@ -58,6 +61,7 @@ public class UnitData : ScriptableObject
     public string UnitName => _unitName;
     public UnitFaction UnitFaction => _unitFaction;
     public UnitType UnitType => _unitType;
+    public AllyType AllyType => _allyType;
     public DamageType DamageType => _damageType;
     public AllySkillType AllySkillType => _allySkillType;
     public PlayerSkillType PlayerSkillType => _playerSkillType;
@@ -76,6 +80,7 @@ public class UnitData : ScriptableObject
     private bool IsAlly() => _unitFaction == UnitFaction.Ally;
     private bool IsPlayer() => _unitFaction == UnitFaction.Player;
     public int Cost => cost;
+    public Sprite Sprite => _sprite;
     public DetectionPatternSO DetectionPatternSo => _detectionPattern;
     public AudioClip[] AttackSound => attackSfx;
     public AudioClip[] DeathSound => deathSfx;

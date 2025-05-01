@@ -251,7 +251,7 @@ public class Ally : MonoBehaviour
             }
             
             // 오브젝트 풀에 복귀
-            AllyPoolManager.Instance.ReturnAlly(_allyType, this.gameObject);
+            InGameSceneManager.Instance.allyPoolManager.ReturnAlly(_allyType, gameObject);
         }
     }
 
@@ -274,11 +274,11 @@ public class Ally : MonoBehaviour
     {
         return skillType switch
         {
-            AllySkillType.CentaurLady => new CentaurLadySkill(),
-            AllySkillType.BountyHunter => new BountyHunterSkill(),
-            AllySkillType.Salamender => new SalamenderSkill(),
-            AllySkillType.Joandarc => new JandarkSkill(),
-            AllySkillType.NightLord => new NightLordSkill(),
+            AllySkillType.CentaurLadySkill => new CentaurLadySkill(),
+            AllySkillType.BountyHunterSkill => new BountyHunterSkill(),
+            AllySkillType.SalamenderSkill => new SalamenderSkill(),
+            AllySkillType.JoanDarcSkill => new JandarkSkill(),
+            AllySkillType.NightLordSkill => new NightLordSkill(),
             AllySkillType.None => new NoneSkill(),
             _ => null
         };
@@ -426,7 +426,7 @@ public class Ally : MonoBehaviour
     public void ApplyBuffByEnemyCount(int enemyCount, BuffType buffType)
     {
         //TODO : 넉백된 수 만큼 혹은 공격한 수만큼 버프 효과 적용
-        List<GameObject> _spawnList = AllyPoolManager.Instance.activateAllies;
+        List<GameObject> _spawnList = InGameSceneManager.Instance.allyPoolManager.activateAllies;
         float _increaseSpd = enemyCount * 0.05f + 1;
         foreach (GameObject _ally in _spawnList)
         {

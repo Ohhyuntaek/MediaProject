@@ -50,7 +50,7 @@ public class BossDropAttackState : IState<Boss>
       
         SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
         // 기존 랜딩 후 아군 처리
-        List<Ally> front = AllyPoolManager.Instance.GettLineObject_Spawned(LineType.Front);
+        List<Ally> front = InGameSceneManager.Instance.allyPoolManager.GetLineObject_Spawned(LineType.Front);
         if (front.Count < 2)
         {
             boss.DestroyAllAllies();

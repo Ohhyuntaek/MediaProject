@@ -5,7 +5,7 @@ public class JanDarkPlayerActiveSkill : ISkill<Dawn>
 {
     public void Activate(Dawn owner)
     {
-        List<GameObject> allyList = AllyPoolManager.Instance.activateAllies;
+        List<GameObject> allyList = InGameSceneManager.Instance.allyPoolManager.activateAllies;
         foreach (GameObject ally  in allyList)
         {
             if (ally.GetComponent<Ally>().Dead)

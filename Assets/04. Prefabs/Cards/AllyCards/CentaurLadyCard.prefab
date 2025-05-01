@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1292439875, guid: 5bdaa8422451f674a93b3963f8737153, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -335,6 +335,7 @@ MonoBehaviour:
   cardButton: {fileID: 6959115647413270161}
   costText: {fileID: 8409117908633720299}
   selectSound: {fileID: 8300000, guid: d02b362c09ec6fb499e204d2eb1d16b0, type: 3}
+  unitImage: {fileID: 2415692700783219305}
   darkenMultiplier: 0.6
 --- !u!1001 &9023786348740242844
 PrefabInstance:

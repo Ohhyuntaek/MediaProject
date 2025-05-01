@@ -4,11 +4,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    private DawnData selectedDawn;
+    [SerializeField] private Dawn selectedDawn;
 
     void Awake()
     {
-        // 싱글톤 패턴
         if (Instance == null)
         {
             Instance = this;
@@ -21,12 +20,12 @@ public class GameManager : MonoBehaviour
     }
     
     // 플레이어 선택할 때 호출
-    public void SetSelectedDawn(DawnData dawn)
+    public void SetSelectedDawn(Dawn dawn)
     {
         selectedDawn = dawn;
     }
     
-    public DawnData GetSelectedDawn()
+    public Dawn GetSelectedDawn()
     {
         return selectedDawn;
     }

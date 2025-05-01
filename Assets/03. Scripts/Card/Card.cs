@@ -23,6 +23,7 @@ public class Card : MonoBehaviour
     [SerializeField] private Button cardButton; // 카드 클릭용 버튼
     [SerializeField] private TMP_Text costText; // 카드에 표시할 cost 텍스트
     [SerializeField] private AudioClip selectSound;
+    [SerializeField] private Image unitImage; 
 
     private UnitData unitData;
     private Dictionary<Image, Color> originalColors = new(); // 자식 이미지와 원래 색 저장
@@ -32,9 +33,6 @@ public class Card : MonoBehaviour
     
     void Start()
     {
-        // 생성 시 unitData 가져오기
-        unitData = InStageManager.Instance.GetUnitDataByAllyType(allyType);
-
         if (unitData == null)
         {
             Debug.LogError($"Card에 대한 UnitData를 찾을 수 없습니다. AllyType: {allyType}");
@@ -60,7 +58,7 @@ public class Card : MonoBehaviour
     {
         if (unitData == null) return;
 
-        bool shouldEnable = InStageManager.Instance.GetCost() >= unitData.Cost;
+        bool shouldEnable = InGameSceneManager.Instance.costManager.TotalCost >= unitData.Cost;
 
         if (cardButton.interactable != shouldEnable)
         {
@@ -72,7 +70,58 @@ public class Card : MonoBehaviour
                 DarkenImages();
         }
     }
+    
+    public void Setup(UnitData data, int slotIndex, LineType lineType)
+    {
+        this.unitData = data;
+        this.slotIndex = slotIndex;
+        this.lineType = lineType;
+        this.allyType = data.AllyType;
+        this.cardType = (CardType)data.UnitType; // enum 간 매핑
 
+        // cost 텍스트 표시
+        if (costText != null)
+            costText.text = unitData.Cost.ToString();
+        
+        // 이미지 설정
+        if (unitImage != null && unitData.Sprite != null)
+        {
+            unitImage.sprite = unitData.Sprite;
+        }
+    }
+
+    public void OnButtonClick()
+    {
+        SoundManager.Instance.PlaySfx(selectSound, transform.position, false);
+        
+        if (unitData == null)
+        {
+            Debug.LogError($"Card에 대한 UnitData를 찾을 수 없습니다. AllyType: {allyType}");
+            return;
+        }
+
+        if (InGameSceneManager.Instance.costManager.TotalCost < unitData.Cost)
+        {
+            Debug.Log("코스트가 부족합니다! 소환할 수 없습니다.");
+            return;
+        }
+        
+        GameObject ally = InGameSceneManager.Instance.allyPoolManager.SpawnAlly(unitData, lineType);
+
+        if (ally != null)
+        {
+            Destroy(this.gameObject);
+            InGameSceneManager.Instance.cardSpawner.ShiftCardsLeft(slotIndex);   
+        }
+        else
+        {
+            Debug.Log("No available tile or ally in pool");
+        }
+    }
+    
+    /// <summary>
+    /// 이미지를 어둡게 만드는 함수
+    /// </summary>
     private void DarkenImages()
     {
         foreach (var pair in originalColors)
@@ -86,6 +135,9 @@ public class Card : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 이미지를 원래의 색으로 만드는 함수
+    /// </summary>
     private void RestoreImages()
     {
         foreach (var pair in originalColors)
@@ -96,36 +148,5 @@ public class Card : MonoBehaviour
             }
         }
     }
-    
-    public void OnButtonClick()
-    {
-        SoundManager.Instance.PlaySfx(selectSound, transform.position, false);
-        
-        // UnitData를 allyType으로 가져오기
-        UnitData unitData = InStageManager.Instance.GetUnitDataByAllyType(allyType);
 
-        if (unitData == null)
-        {
-            Debug.LogError($"Card에 대한 UnitData를 찾을 수 없습니다. AllyType: {allyType}");
-            return;
-        }
-
-        if (InStageManager.Instance.GetCost() < unitData.Cost)
-        {
-            Debug.Log("코스트가 부족합니다! 소환할 수 없습니다.");
-            return;
-        }
-        
-        GameObject ally = AllyPoolManager.Instance.SpawnAlly(allyType, lineType);
-
-        if (ally != null)
-        {
-            Destroy(this.gameObject);
-            InStageManager.Instance.ShiftCardsLeft(slotIndex);   
-        }
-        else
-        {
-            Debug.Log("No available tile or ally in pool");
-        }
-    }
 }

@@ -13,7 +13,7 @@ public class EnhancementCard : MonoBehaviour
     [SerializeField] private AudioClip selectSound;
 
     private EnhancementCardData data;
-    private float chosenMultiplier;
+    private float defferenceRandomValue;
     private Dictionary<Image, Color> originalColors = new();
 
     private bool isClicked = false; // 클릭 중복 방지용
@@ -35,9 +35,9 @@ public class EnhancementCard : MonoBehaviour
     public void Setup(EnhancementCardData cardData)
     {
         data = cardData;
-        chosenMultiplier = Random.Range(data.MinMultiplier, data.MaxMultiplier);
+        defferenceRandomValue = Random.Range(data.MinRangeValue, data.MaxRangeValue);
         enhancementNameText.text = data.EnhancementCardName;
-        enhancementDescriptionText.text = $"{data.Description}\n<size=100%><color=#888>배수: {chosenMultiplier:F2}x</color>";
+        enhancementDescriptionText.text = $"{data.Description}\n<size=100%><color=#888>배수: {defferenceRandomValue:F2}x</color>";
     }
 
     public void OnCardSelected()
@@ -59,18 +59,18 @@ public class EnhancementCard : MonoBehaviour
         switch (data.EnhancementType)
         {
             case EnhancementType.CostUp:
-                InStageManager.Instance.MultiplyCostUp(chosenMultiplier);
+                InGameSceneManager.Instance.costManager.CostSpeedUp(defferenceRandomValue);
                 break;
             case EnhancementType.CardSpawnSpeedUp:
-                InStageManager.Instance.MultiplyCardSpawnSpeed(chosenMultiplier);
+                InGameSceneManager.Instance.cardSpawner.CardSpawnSpeedUP(defferenceRandomValue);
                 break;
             case EnhancementType.CooldownSpeedUp:
                 if (playerDawn != null)
-                    playerDawn.CooldownMultiplier *= chosenMultiplier;
+                    playerDawn.CooldownMultiplier *= defferenceRandomValue;
                 break;
             case EnhancementType.EnergyChargeSpeedUp:
                 if (playerDawn != null)
-                    playerDawn.EnergyChargeMultiplier *= chosenMultiplier;
+                    playerDawn.EnergyChargeMultiplier *= defferenceRandomValue;
                 break;
         }
 
@@ -81,8 +81,8 @@ public class EnhancementCard : MonoBehaviour
         // 추가로 1초 정도 연출 시간 주기
         yield return new WaitForSeconds(0.3f);
 
-        // 이제 진짜 강화 카드 숨기고 다음 스테이지로 넘어가기
-        InStageManager.Instance.HideEnhancementCardsAndProceed();
+        // 강화 카드 숨기고 다음 스테이지로 넘어가기
+        InGameSceneManager.Instance.clearUIManager.HideEnhancementCardsAndProceed();
     }
 
     private void DarkenImages()

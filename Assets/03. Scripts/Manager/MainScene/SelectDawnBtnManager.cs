@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SelectDawnBtnManager : MonoBehaviour
 {
-    [SerializeField] private DawnData dawnData;
+    [SerializeField] private Dawn dawn;
 
     [SerializeField] private int hpMaxValue;
     [SerializeField] private int energyMaxValue;
@@ -15,22 +15,22 @@ public class SelectDawnBtnManager : MonoBehaviour
     public void OnSelect()
     {
         // 1. GameManager에 저장
-        GameManager.Instance.SetSelectedDawn(dawnData);
+        GameManager.Instance.SetSelectedDawn(dawn);
 
         // 2. UI 갱신
         if (dawnImage != null)
-            dawnImage.sprite = dawnData.Portrait;
+            dawnImage.sprite = dawn.DawnData.Portrait;
 
         if (hpSlider != null)
         {
             hpSlider.maxValue = hpMaxValue;
-            hpSlider.value = dawnData.MaxHP;
+            hpSlider.value = dawn.DawnData.MaxHP;
         }
 
         if (energySlider != null)
         {
             energySlider.maxValue = energyMaxValue;
-            energySlider.value = dawnData.MaxEnergy;
+            energySlider.value = dawn.DawnData.MaxEnergy;
         }
     }
 }

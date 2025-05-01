@@ -81,7 +81,7 @@ public class Dawn : MonoBehaviour
         {   
             UpdatePassiveSkill();
             // 쿨다운 감소: 스테이지가 진행 중일 때만
-            if (!_canUseActiveSkill && InStageManager.Instance.IsStagePlaying())
+            if (!_canUseActiveSkill && InGameSceneManager.Instance.stageManager.CurrentStageState == StageState.Playing)
             {
                 _activeSkillCooldownTimer += Time.deltaTime * cooldownMultiplier;
 
@@ -193,7 +193,7 @@ public class Dawn : MonoBehaviour
     {
         return skillType switch
         {
-            AllySkillType.Joandarc => new JanDarkPlayerActiveSkill()
+            AllySkillType.JoanDarcSkill => new JanDarkPlayerActiveSkill()
         };
     }
     
@@ -201,7 +201,7 @@ public class Dawn : MonoBehaviour
     {
         return skillType switch
         {
-            AllySkillType.Joandarc => new JandarkPassiveSkill()
+            AllySkillType.JoanDarcSkill => new JandarkPassiveSkill()
            
         };
     }

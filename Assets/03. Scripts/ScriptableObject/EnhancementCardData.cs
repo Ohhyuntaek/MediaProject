@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum EnhancementType
 {
@@ -17,12 +18,12 @@ public class EnhancementCardData : ScriptableObject
     
     [Header("강화 효과")]
     [SerializeField] private EnhancementType _enhancementType;
-    [SerializeField] private float _minMultiplier = 1.2f;
-    [SerializeField] private float _maxMultiplier = 1.5f;
+    [SerializeField] private float _minRangeValue = 1.2f;
+    [SerializeField] private float _maxRangeValue = 1.5f;
     
     public string EnhancementCardName => _enhancementCardName;
     public string Description => _description;
     public EnhancementType EnhancementType => _enhancementType;
-    public float MinMultiplier => _minMultiplier;
-    public float MaxMultiplier => _maxMultiplier;
+    public float MinRangeValue => _minRangeValue;
+    public float MaxRangeValue => _maxRangeValue;
 }
