@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -34,27 +34,27 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,14 +93,247 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Rogue-Death_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 37
+        height: 37
+      alignment: 9
+      pivot: {x: 0.6297817, y: -0.000000040382744}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a742962a81ea1e74594ee24014fd765f
+      internalID: -753453942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_1
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 34
+        height: 37
+      alignment: 9
+      pivot: {x: 0.65244156, y: 0.0041200034}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de89013cebd5d4b4d87440b68b2ee191
+      internalID: 1801523638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_2
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 0
+        width: 35
+        height: 37
+      alignment: 9
+      pivot: {x: 0.6350198, y: 0.0061800256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb15508509d0ab468e4dc07585efc4c
+      internalID: -1700491771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_3
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 0
+        width: 46
+        height: 25
+      alignment: 9
+      pivot: {x: 0.3359594, y: 0.0030487725}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 690b88d9224b9f846bca37c37ab7396e
+      internalID: 1568475989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_4
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 0
+        width: 45
+        height: 27
+      alignment: 9
+      pivot: {x: 0.349252, y: 0.0056459308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d44b6bed354aa19459da8978c0409cf7
+      internalID: -65386313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 47
+        height: 27
+      alignment: 9
+      pivot: {x: 0.3394496, y: 0.0028229374}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5d600a61f1f5254f88bc1d21a6a2071
+      internalID: -1297612599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_6
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 0
+        width: 48
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d08387298963b4bb519e516b511383
+      internalID: -1228274157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_7
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 0
+        width: 47
+        height: 22
+      alignment: 9
+      pivot: {x: 0.3929677, y: -0.00000006791643}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff02d832433f6eb45949a5819e8e2b7b
+      internalID: -1142567201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_8
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 0
+        width: 52
+        height: 12
+      alignment: 9
+      pivot: {x: 0.27720055, y: 0.012703344}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 303fcff5bf090574499c64edbecd9a84
+      internalID: -101939661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rogue-Death_9
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 0
+        width: 51
+        height: 11
+      alignment: 9
+      pivot: {x: 0.26386455, y: -0.00000013583286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0425bab2ab0089c4e992f0cf5207b32d
+      internalID: -1994230503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6e5585e37492c08478bea484d35ce096
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +342,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rogue-Death_0: -753453942
+      Rogue-Death_1: 1801523638
+      Rogue-Death_2: -1700491771
+      Rogue-Death_3: 1568475989
+      Rogue-Death_4: -65386313
+      Rogue-Death_5: -1297612599
+      Rogue-Death_6: -1228274157
+      Rogue-Death_7: -1142567201
+      Rogue-Death_8: -101939661
+      Rogue-Death_9: -1994230503
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
