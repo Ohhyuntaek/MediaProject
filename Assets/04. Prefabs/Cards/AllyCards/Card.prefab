@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -903937239, guid: a07db537bc13db741a8e462a3053c958, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7154582254295162171
+--- !u!1 &6001692319617773940
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,9 +83,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3430111789792838278}
-  - component: {fileID: 6950867835837436424}
-  - component: {fileID: 6161103250220627335}
+  - component: {fileID: 505611405942813545}
+  - component: {fileID: 1444180091763755904}
+  - component: {fileID: 8409117908633720299}
   m_Layer: 5
   m_Name: CostText
   m_TagString: Untagged
@@ -93,14 +93,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3430111789792838278
+--- !u!224 &505611405942813545
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7154582254295162171}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 6001692319617773940}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -112,21 +112,21 @@ RectTransform:
   m_AnchoredPosition: {x: 44, y: 45}
   m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &6950867835837436424
+--- !u!222 &1444180091763755904
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7154582254295162171}
+  m_GameObject: {fileID: 6001692319617773940}
   m_CullTransparentMesh: 1
---- !u!114 &6161103250220627335
+--- !u!114 &8409117908633720299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7154582254295162171}
+  m_GameObject: {fileID: 6001692319617773940}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 6959115647413270161}
   - component: {fileID: 4100903904130682105}
   m_Layer: 5
-  m_Name: JoanDarcCard
+  m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +244,7 @@ RectTransform:
   m_Children:
   - {fileID: 1342611534182981937}
   - {fileID: 9072860385895608009}
-  - {fileID: 3430111789792838278}
+  - {fileID: 505611405942813545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -329,12 +329,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotIndex: 0
-  cardType: 0
-  allyType: 0
-  lineType: 0
+  cardType: 2
+  allyType: 4
+  lineType: 2
   cardButton: {fileID: 6959115647413270161}
-  costText: {fileID: 6161103250220627335}
+  costText: {fileID: 8409117908633720299}
   selectSound: {fileID: 8300000, guid: d02b362c09ec6fb499e204d2eb1d16b0, type: 3}
+  unitImage: {fileID: 2415692700783219305}
   darkenMultiplier: 0.6
 --- !u!1001 &9023786348740242844
 PrefabInstance:
