@@ -76,4 +76,40 @@ public class GridTargetManager : MonoBehaviour
         col = -1;
         return false;
     }
+    
+    /// <summary>
+    /// 주어진 월드 좌표가 속한 PolygonCollider2D를 찾아 반환합니다.
+    /// </summary>
+    public bool TryGetColliderAtPosition(Vector3 worldPos, out PolygonCollider2D outCollider)
+    {
+        for (int r = 0; r < coliderMat.Length; r++)
+        {
+            var rowArr = coliderMat[r].arr_row;
+            if (rowArr == null) continue;
+
+            for (int c = 0; c < rowArr.Length; c++)
+            {
+                var poly = rowArr[c];
+                if (poly == null) continue;
+
+                if (poly.OverlapPoint(worldPos))
+                {
+                    outCollider = poly;
+                    return true;
+                }
+            }
+        }
+
+        outCollider = null;
+        return false;
+    }
+
+    /// <summary>
+    /// 주어진 Transform의 위치가 속한 PolygonCollider2D를 찾아 반환합니다.
+    /// </summary>
+    public bool TryGetColliderForTransform(Transform t, out PolygonCollider2D outCollider)
+    {
+       
+        return TryGetColliderAtPosition((Vector3)t.position, out outCollider);
+    }
 }

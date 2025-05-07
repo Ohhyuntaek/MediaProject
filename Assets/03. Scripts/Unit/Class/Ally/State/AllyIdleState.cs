@@ -5,7 +5,7 @@ using UnityEngine;
 public class AllyIdleState : IState<Ally>
 {
     private float _attackTimer;
-    private List<Enemy> _detected;
+    private List<IDamageable> _detected;
     private string unitName;
     private float _waitTimer; 
     
@@ -51,11 +51,12 @@ public class AllyIdleState : IState<Ally>
                     }
                     break;
                 case "BountyHunter":
-                    if (ally.DetectTargets().Count > 0)
+                    _detected = ally.DetectTargets();
+                    if (_detected.Count > 0)
                     {
                         if (ally.OnTile == true)
                         {
-                            ally.ChangeState(new BountyHunterSpecialAttackState());
+                            //ally.ChangeState(new BountyHunterSpecialAttackState());
                         }
                         else
                         {

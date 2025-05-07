@@ -58,7 +58,7 @@ public class Ally : MonoBehaviour
         transform.position = position;
         _occupiedTile = tile;
         tile.ally = this;
-        _isOnTile = true;
+        _isOnTile = false;
         _isDead = false;
         _revived = false;
         _isSpawnEnd = false;
@@ -532,6 +532,20 @@ public class Ally : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
 
+        SetOntile();
+
+    }
+
+    public void SetOntile()
+    {
+        if (_occupiedTile.lineType.ToString() == _unitData.UnitType.ToString())
+        {
+            _isOnTile = true;
+        }
+        else
+        {
+            _isOnTile = false;
+        }
     }
 
     public void ToDestroy()
