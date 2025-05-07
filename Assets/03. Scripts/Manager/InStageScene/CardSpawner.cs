@@ -143,7 +143,7 @@ public class CardSpawner : MonoBehaviour
         return type switch
         {
             UnitType.Front => CardType.FrontLine,
-            UnitType.Middle => CardType.MidLine,
+            UnitType.Mid => CardType.MidLine,
             UnitType.Rear => CardType.RearLine,
             _ => CardType.MidLine
         };
@@ -154,7 +154,7 @@ public class CardSpawner : MonoBehaviour
         return type switch
         {
             UnitType.Front => LineType.Front,
-            UnitType.Middle => LineType.Mid,
+            UnitType.Mid => LineType.Mid,
             UnitType.Rear => LineType.Rear,
             _ => LineType.Mid
         };

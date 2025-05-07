@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitName: BountyHunter
   _unitFaction: 0
-  _unitType: 0
+  _unitType: 1
   _allyType: 2
   _damageType: 0
   _unitTribe: 0
@@ -24,8 +24,9 @@ MonoBehaviour:
   _skillCoolTime: 0
   _skillname: 
   _skilldescripter: 
-  _skillEffect: []
-  _targetingType: 1
+  _skillEffect:
+  - {fileID: 6667844496462446706, guid: 230b5ddf4e79cf942920c1ce248421fc, type: 3}
+  _targetingType: 0
   _allySkillType: 0
   _baseAttack: 5
   _attackSpeed: 2

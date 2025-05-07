@@ -18,7 +18,7 @@ public class AllySpawnState : IState<Ally>
     public void TransitionTo(Ally ally)
     {
         
-        //if( TODO : 2. 파티클 시간 끝났는지 검사)
+      
 
         if (!finished)
         {

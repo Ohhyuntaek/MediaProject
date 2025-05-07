@@ -54,9 +54,10 @@ public class AllyIdleState : IState<Ally>
                     _detected = ally.DetectTargets();
                     if (_detected.Count > 0)
                     {
-                        if (ally.OnTile == true)
+                        if (ally.OnTile)
                         {
-                            //ally.ChangeState(new BountyHunterSpecialAttackState());
+                            Transform transform = (_detected[0] as MonoBehaviour)?.transform;
+                            ally.ChangeState(new BountyHunterSpecialAttackState(transform));
                         }
                         else
                         {

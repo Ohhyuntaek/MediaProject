@@ -11,7 +11,7 @@ public class BountyHunterBomb : MonoBehaviour
     private DetectionPatternSO _pattern;
     private Transform _spawnPosition;
 
-    private const float FuseDuration = 1.5f;
+    
 
     /// <summary>
     /// 외부에서 초기화할 때 호출하세요.
@@ -36,16 +36,7 @@ public class BountyHunterBomb : MonoBehaviour
 
     private IEnumerator FuseAndExplodeRoutine()
     {
-        // 1) 도화선 점화 애니메이션
-        _animator.SetTrigger("Fuse");
-
-        // 2) FuseDuration 동안 대기
-        yield return new WaitForSeconds(FuseDuration);
-
-        // 3) EXPLOSION 트리거
-        _animator.SetTrigger("Explode");
-
-        // 4) 폭발 애니메이션이 90% 이상 재생될 때까지 대기
+        
         while (true)
         {
             var state = _animator.GetCurrentAnimatorStateInfo(0);

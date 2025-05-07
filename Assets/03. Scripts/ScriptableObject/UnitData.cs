@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public enum UnitFaction { Ally,Player }
 public enum UnitTribe{Person,}
-public enum UnitType { Front, Middle, Rear }
+public enum UnitType { Front, Mid, Rear }
 public enum AllyType { JoanDarc, NightLord, BountyHunter, Rogue, CentaurLady, Salamander }
 public enum DamageType { Physical, Magical }
 public enum AllySkillType { None, CentaurLadySkill, BountyHunterSkill, SalamenderSkill, JoanDarcSkill, NightLordSkill }

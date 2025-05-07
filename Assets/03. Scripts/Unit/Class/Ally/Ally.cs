@@ -559,7 +559,7 @@ public class Ally : MonoBehaviour
     }
     public IEnumerator JustWaitForTest()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         _isSpawnEnd = true;
         Debug.Log("1초 대기후 스폰 상태 끝 아이들로 전환");
         ChangeState(new  AllyIdleState(1/_atkSpd));
