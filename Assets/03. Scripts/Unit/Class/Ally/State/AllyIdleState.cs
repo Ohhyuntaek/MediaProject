@@ -50,6 +50,20 @@ public class AllyIdleState : IState<Ally>
                         ally.ChangeState(new AllySpecialAttackState(ally.Dircetion));
                     }
                     break;
+                case "BountyHunter":
+                    if (ally.DetectTargets().Count > 0)
+                    {
+                        if (ally.OnTile == true)
+                        {
+                            ally.ChangeState(new BountyHunterSpecialAttackState());
+                        }
+                        else
+                        {
+                            ally.ChangeState(new AllyAttackState());
+                        }
+                    }
+                    break;
+                    
                 default:
                     if (ally.DetectTargets().Count > 0)
                     {

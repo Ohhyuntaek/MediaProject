@@ -39,6 +39,7 @@ public class Ally : MonoBehaviour
     
     private Vector3 occupiedTilePosition;
     private int skillNumByRandom = 0;
+    private bool _isSpawnEnd = false;
     
     [FormerlySerializedAs("_SpawnTimeSlider")] [SerializeField]
     private Slider _DurationSlider;
@@ -60,6 +61,7 @@ public class Ally : MonoBehaviour
         _isOnTile = true;
         _isDead = false;
         _revived = false;
+        _isSpawnEnd = false;
         _maxDuration = UnitData.Duration;
         _DurationSlider.maxValue = _maxDuration;
         _DurationSlider.value = _maxDuration;
@@ -114,34 +116,37 @@ public class Ally : MonoBehaviour
         _atkSpd = _unitData.AttackSpeed;
         _baseAttack = _unitData.BaseAttack;
         _stateMachine = new StateMachine<Ally>(this);
-        _stateMachine.ChangeState(new AllyIdleState(1/_atkSpd));
+        _stateMachine.ChangeState(new AllySpawnState());
         
     }
    
     private void Update()
     {
         _stateMachine?.Update();
-
-        _duration -= Time.deltaTime;
-        _totallifeTime += Time.deltaTime;
-        if (_unitData.UnitName == "NightLord" && !_revived && _duration<=0f && !_isDead)
+        if (_isSpawnEnd)
         {
-            _revived = true;
-            _duration = 8f;
-            _stateMachine.ChangeState(new AllyReviveState());
-            return;
-        }
+            _duration -= Time.deltaTime;
+            _totallifeTime += Time.deltaTime;
+            if (_unitData.UnitName == "NightLord" && !_revived && _duration<=0f && !_isDead)
+            {
+                _revived = true;
+                _duration = 8f;
+                _stateMachine.ChangeState(new AllyReviveState());
+                return;
+            }
         
-        if (_DurationSlider != null)
-        {
-            _DurationSlider.value = _duration;
-        }
+            if (_DurationSlider != null)
+            {
+                _DurationSlider.value = _duration;
+            }
         
-        if (!_isDead && _duration <= 0f)
-        {
+            if (!_isDead && _duration <= 0f)
+            {
             
-            _stateMachine.ChangeState(new AllyDeadState());
+                _stateMachine.ChangeState(new AllyDeadState());
+            }   
         }
+        
     }
     public void InitPatternColliders()
     {
@@ -534,6 +539,18 @@ public class Ally : MonoBehaviour
         _duration = 0;
     }
 
+    public void ForTest()
+    {
+        StartCoroutine(JustWaitForTest());
+    }
+    public IEnumerator JustWaitForTest()
+    {
+        yield return new WaitForSeconds(1f);
+        _isSpawnEnd = true;
+        Debug.Log("1초 대기후 스폰 상태 끝 아이들로 전환");
+        ChangeState(new  AllyIdleState(1/_atkSpd));
+    }
+
     public bool Dead => _isDead;
     public float ATKSPD => _atkSpd;
     public void SetLastKnockbackEnemyCount(int count) => _lastKnockbackEnemyCount = count;
@@ -551,6 +568,11 @@ public class Ally : MonoBehaviour
 
     public AllyTile OccupiedTile => _occupiedTile;
 
+    public bool SpawnEnd
+    {
+        get => _isSpawnEnd;
+        set => _isSpawnEnd = value;
+    }
     public void SetSkillRandomNum(int value) => skillNumByRandom = value;
     public int GetSkillRandomNum() => skillNumByRandom;
     public int BASEATTACK => _baseAttack;

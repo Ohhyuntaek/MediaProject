@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacdbdd950bb79f47bcfb029c181a17a, type: 3}
+  m_Name: BountyHunter
+  m_EditorClassIdentifier: 
+  _unitName: BountyHunter
+  _unitFaction: 0
+  _unitType: 0
+  _allyType: 2
+  _damageType: 0
+  _unitTribe: 0
+  _canRevive: 0
+  _attackRange: 0
+  _detectionPattern: {fileID: 11400000, guid: 6d078b66795bebb47b18c598e4dd7af2, type: 2}
+  _skillCoolTime: 0
+  _skillname: 
+  _skilldescripter: 
+  _skillEffect: []
+  _targetingType: 1
+  _allySkillType: 0
+  _baseAttack: 5
+  _attackSpeed: 2
+  _maxHP: 0
+  cost: 2
+  _sprite: {fileID: 121734609, guid: 1737c18c3919a124d8faeff16fb5fc60, type: 3}
+  attackSfx:
+  - {fileID: 8300000, guid: 9a7ae10fa6ff94b4f91a78b49c0c2224, type: 3}
+  deathSfx:
+  - {fileID: 8300000, guid: 4bb72f72e43014b4d95389e7d424b9c9, type: 3}
+  skillSfx:
+  - {fileID: 8300000, guid: a3647bf58c14b374b897be5cb9f4f05e, type: 3}
+  _playerSkillType: 0
+  _duration: 5

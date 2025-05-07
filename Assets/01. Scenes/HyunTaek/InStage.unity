@@ -6380,6 +6380,9 @@ MonoBehaviour:
   - allyType: 4
     prefab: {fileID: 4428222100674180596, guid: 71525ccfa206d7e429f3000eb400b1b0, type: 3}
     poolSize: 15
+  - allyType: 2
+    prefab: {fileID: 1347605904753383595, guid: d6445faf838e8944f91154f019e74a6b, type: 3}
+    poolSize: 15
   spawnCount: 0
   unitDataList: []
 --- !u!114 &856503113 stripped
@@ -7909,6 +7912,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b08ee28ea7d5ed2478b9309cbb97b4d3, type: 2}
   - {fileID: 11400000, guid: 36402a99e88bce94f9a956f7fbe0f9d2, type: 2}
   - {fileID: 11400000, guid: aa46a597562b64943930d0f0a73e85c3, type: 2}
+  - {fileID: 11400000, guid: a9e752fac4920e44e9d46895bf16c8ed, type: 2}
   cardSlots:
   - {fileID: 1964729884}
   - {fileID: 647200317}

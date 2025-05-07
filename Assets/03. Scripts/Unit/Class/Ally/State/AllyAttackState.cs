@@ -63,9 +63,7 @@ public class AllyAttackState : IState<Ally>
                     }
                     break;
                 case "BountyHunter" :
-                    //if(발판을 밝고 있을 시))//TODO : 범위공격
-                    //else(발판 미적용 시) //TODO : 단일공격
-                    //TODO : 바운티 헌터 구현 
+                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
                 case "NightLord" :
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
