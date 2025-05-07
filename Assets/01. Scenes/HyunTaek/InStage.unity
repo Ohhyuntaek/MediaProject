@@ -6385,6 +6385,7 @@ MonoBehaviour:
     poolSize: 15
   spawnCount: 0
   unitDataList: []
+  spawnEffectPrefab: {fileID: 9103110211496808784, guid: 33a12d5dc29734b49aeb83c7111e6cec, type: 3}
 --- !u!114 &856503113 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 523459849710580622, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
@@ -7735,7 +7736,7 @@ GameObject:
   - component: {fileID: 1321596951}
   - component: {fileID: 1321596950}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager(Ex)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

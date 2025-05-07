@@ -20,8 +20,8 @@ public class AllyPoolManager : MonoBehaviour
     
     [SerializeField] private AllyPool[] allyPools;
     [SerializeField] private int spawnCount = 0;
-
     [SerializeField] private List<UnitData> unitDataList;
+    [SerializeField] private GameObject spawnEffectPrefab;
     
     public int SpawnCount
     {
@@ -61,10 +61,18 @@ public class AllyPoolManager : MonoBehaviour
             return null;
         }
 
+        // 오브젝트를 타일 위치에 스폰
         GameObject obj = pool.pool.Dequeue();
         obj.transform.position = tile.transform.position;
         obj.SetActive(true);
         tile.isOccupied = true;
+        
+        // 스폰 이펙트 재생
+        if (spawnEffectPrefab != null)
+        {
+            GameObject effect = Instantiate(spawnEffectPrefab, tile.transform.position, Quaternion.identity);
+            Destroy(effect, 1f); // 애니메이션 종료 후 자동 파괴
+        }
 
         // Sorting Layer 설정
         Transform parent = tile.transform.parent;

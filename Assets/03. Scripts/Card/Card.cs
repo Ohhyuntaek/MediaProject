@@ -17,14 +17,14 @@ public class Card : MonoBehaviour
 {
     public int slotIndex;
     public CardType cardType;
-    public AllyType allyType;
-    public LineType lineType;
     
     [SerializeField] private Button cardButton; // 카드 클릭용 버튼
     [SerializeField] private TMP_Text costText; // 카드에 표시할 cost 텍스트
     [SerializeField] private AudioClip selectSound;
     [SerializeField] private Image unitImage; 
 
+    private AllyType allyType;
+    private LineType lineType;
     private UnitData unitData;
     private Dictionary<Image, Color> originalColors = new(); // 자식 이미지와 원래 색 저장
 
