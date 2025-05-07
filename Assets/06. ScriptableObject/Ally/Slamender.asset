@@ -15,7 +15,7 @@ MonoBehaviour:
   _unitName: Slamander
   _unitFaction: 0
   _unitType: 2
-  _allyType: 0
+  _allyType: 5
   _damageType: 1
   _unitTribe: 0
   _canRevive: 0

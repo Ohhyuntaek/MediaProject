@@ -15,7 +15,7 @@ MonoBehaviour:
   _unitName: NightLord
   _unitFaction: 0
   _unitType: 1
-  _allyType: 0
+  _allyType: 1
   _damageType: 0
   _unitTribe: 0
   _canRevive: 1
