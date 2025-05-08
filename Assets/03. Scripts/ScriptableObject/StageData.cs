@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public enum StageType { Normal, Boss }
+public enum StageType { Normal, Boss, Shop }
 
 [CreateAssetMenu(fileName = "NewStageData", menuName = "SO/Stage Data")]
 
