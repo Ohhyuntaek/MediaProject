@@ -28,6 +28,19 @@ public class StageTreeGenerator : MonoBehaviour
     public RectTransform nodeRoot; // 노드들이 위치할 UI 부모
     public GameObject linePrefab; // 노드 간 연결선을 나타낼 UI 프리팹
 
+    [Header("스테이지 타입별 스프라이트")]
+    public Sprite normalSprite;
+    public Sprite shopSprite;
+    public Sprite bossSprite;
+
+    [Header("Path Sprite 설정")]
+    public Sprite defaultPathSprite;
+    public Sprite highlightedPathSprite;
+    
+    [Header("Path 설정")]
+    public float nodeRadius = 50f; // 노드 테두리에서 선이 시작되도록 반지름 설정
+    public float pathThickness = 30f; // 선의 두께 설정
+    
     [Header("그래프 높이 설정")]
     public float totalHeight = 1000f; // 전체 그래프 높이 (ySpacing 계산용)
 
@@ -37,6 +50,7 @@ public class StageTreeGenerator : MonoBehaviour
     private int idCounter = 0; // 고유 ID 부여용 카운터
     private StageNode currentNode; // 현재 선택된 노드
     private StageNode bossNode; // 마지막 보스 노드 참조
+    private Dictionary<(StageNode parent, StageNode child), Image> pathMap = new();
 
     // 게임 시작 시 실행되는 초기화 함수
     void Start()
@@ -220,8 +234,14 @@ public class StageTreeGenerator : MonoBehaviour
             var text = go.GetComponentInChildren<TextMeshProUGUI>();
             if (text != null) text.text = node.stageType.ToString();
 
+            // 수정: 스프라이트로 구분
             var img = go.GetComponentInChildren<Image>();
-            img.color = GetVisualColor(node);
+            img.sprite = GetSpriteByStageType(node.stageType);
+
+            // Highlight 비활성화 기본값
+            var highlight = go.transform.Find("Highlighter")?.gameObject;
+            if (highlight != null)
+                highlight.SetActive(node.isCurrent);
 
             nodeMap[node] = go;
 
@@ -248,7 +268,7 @@ public class StageTreeGenerator : MonoBehaviour
             {
                 Vector2 start = parentGO.GetComponent<RectTransform>().anchoredPosition;
                 Vector2 end = nodeMap[child].GetComponent<RectTransform>().anchoredPosition;
-                DrawLine(start, end);
+                DrawLine(start, end, parentNode, child);
             }
         }
     }
@@ -268,45 +288,65 @@ public class StageTreeGenerator : MonoBehaviour
         currentNode = clickedNode;
         currentNode.isCurrent = true;
 
+        // 모든 노드 UI 갱신
         foreach (var node in allNodes)
         {
-            var img = nodeMap[node].GetComponentInChildren<Image>();
-            img.color = GetVisualColor(node);
+            var go = nodeMap[node];
+            var highlight = go.transform.Find("Highlighter")?.gameObject;
+            if (highlight != null)
+                highlight.SetActive(node == currentNode);
+
+            var img = go.GetComponentInChildren<Image>();
+            img.sprite = GetSpriteByStageType(node.stageType);
+        }
+
+        // 모든 Path Sprite 갱신
+        foreach (var kvp in pathMap)
+        {
+            var (parent, child) = kvp.Key;
+            var img = kvp.Value;
+
+            img.sprite = (currentNode == parent) ? highlightedPathSprite : defaultPathSprite;
         }
 
         Debug.Log($"이동: {clickedNode.id}, 타입: {clickedNode.stageType}");
     }
 
     // 두 노드를 선으로 연결하는 함수
-    void DrawLine(Vector2 start, Vector2 end)
+    void DrawLine(Vector2 start, Vector2 end, StageNode parent, StageNode child)
     {
         var line = Instantiate(linePrefab, nodeRoot);
         RectTransform rt = line.GetComponent<RectTransform>();
+
         Vector2 direction = end - start;
-        float length = direction.magnitude;
-        rt.sizeDelta = new Vector2(length, 5f);
-        rt.anchoredPosition = start + direction / 2f;
-        rt.rotation = Quaternion.FromToRotation(Vector3.right, direction);
-    }
+        Vector2 offset = direction.normalized * nodeRadius;
+        Vector2 trimmedStart = start + offset;
+        Vector2 trimmedEnd = end - offset;
+        Vector2 trimmedDirection = trimmedEnd - trimmedStart;
+        float trimmedLength = trimmedDirection.magnitude;
 
-    // 노드의 색상 결정: 현재 노드, 다음 가능 노드, 기본 색상 구분
-    Color GetVisualColor(StageNode node)
-    {
-        if (node.isCurrent) return Color.green;
-        if (currentNode == null && node.depth == 0) return Color.magenta;
-        if (currentNode != null && currentNode.children.Contains(node)) return Color.magenta;
-        return GetColor(node.stageType);
-    }
+        rt.sizeDelta = new Vector2(trimmedLength, pathThickness);
+        rt.anchoredPosition = trimmedStart + trimmedDirection / 2f;
+        rt.rotation = Quaternion.FromToRotation(Vector3.right, trimmedDirection);
 
+        var img = line.GetComponent<Image>();
+        if (img != null)
+        {
+            img.preserveAspect = true;
+            img.sprite = defaultPathSprite;
+            pathMap[(parent, child)] = img;
+        }
+    }
+    
     // 스테이지 타입별 색상 반환
-    Color GetColor(StageType type)
+    Sprite GetSpriteByStageType(StageType type)
     {
         return type switch
         {
-            StageType.Normal => Color.cyan,
-            StageType.Shop => Color.yellow,
-            StageType.Boss => Color.red,
-            _ => Color.white,
+            StageType.Normal => normalSprite,
+            StageType.Shop => shopSprite,
+            StageType.Boss => bossSprite,
+            _ => null
         };
     }
 }
