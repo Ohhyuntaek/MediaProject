@@ -32,8 +32,11 @@ MonoBehaviour:
   _maxHP: 0
   cost: 3
   _sprite: {fileID: 1170413532, guid: 29f07a00b2dd83d4f88eb3f1b58e8968, type: 3}
-  attackSfx: []
-  deathSfx: []
-  skillSfx: []
+  attackSfx:
+  - {fileID: 8300000, guid: 26d34a8e0e0868342a087af3d4b4181e, type: 3}
+  deathSfx:
+  - {fileID: 8300000, guid: fbc404c79eb95ba449544a5c567bf343, type: 3}
+  skillSfx:
+  - {fileID: 8300000, guid: 16613a5a8bf9ce74bbd75ece646426ee, type: 3}
   _playerSkillType: 0
   _duration: 5
