@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacdbdd950bb79f47bcfb029c181a17a, type: 3}
+  m_Name: Rogue
+  m_EditorClassIdentifier: 
+  _unitName: Rogue
+  _unitFaction: 0
+  _unitType: 0
+  _allyType: 3
+  _damageType: 0
+  _unitTribe: 0
+  _canRevive: 0
+  _attackRange: 0
+  _detectionPattern: {fileID: 11400000, guid: ddd9fcadb4701964d94d1ef388ae8577, type: 2}
+  _skillCoolTime: 0
+  _skillname: 
+  _skilldescripter: 
+  _skillEffect: []
+  _targetingType: 0
+  _allySkillType: 0
+  _baseAttack: 2
+  _attackSpeed: 0.5
+  _maxHP: 0
+  cost: 3
+  _sprite: {fileID: 1170413532, guid: 29f07a00b2dd83d4f88eb3f1b58e8968, type: 3}
+  attackSfx: []
+  deathSfx: []
+  skillSfx: []
+  _playerSkillType: 0
+  _duration: 5

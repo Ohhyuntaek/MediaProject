@@ -65,6 +65,9 @@ public class AllyAttackState : IState<Ally>
                 case "BountyHunter" :
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;
+                case "Rogue":
+                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+                    break;
                 case "NightLord" :
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     break;

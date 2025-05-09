@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -314,7 +315,7 @@ public class Ally : MonoBehaviour
             return targets;
 
         // 중복 방지용 임시 버퍼
-        var buffer = new Collider2D[16];
+        var buffer = new Collider2D[30];
         var filter = new ContactFilter2D();
         filter.SetLayerMask(_enemyLayer);
         filter.useTriggers = true;
@@ -357,6 +358,84 @@ public class Ally : MonoBehaviour
             _totalDamage += _baseAttack;
         }
     }
+
+   
+  public void GrabEnemies(List<IDamageable> targets)
+{
+    // 1) 내 소환 타일(히트셀) 인덱스 구하기
+    if (_occupiedTile == null || _occupiedTile._hitCollider == null) 
+        return;
+    if (!GridTargetManager.Instance.TryGetGridIndex(
+            _occupiedTile._hitCollider,
+            out int baseRow,
+            out int baseCol))
+        return;
+
+    // 2) 미리 “같은 행”과 “다른 행”용 destPoly 두 개 계산
+    var mat = GridTargetManager.Instance.coliderMat;
+    int destColIndex = baseCol + 1;  // 언제나 X+1 열
+    if (destColIndex < 0 || destColIndex >= mat[0].arr_row.Length)
+        return;
+
+    // 같은 행용
+    PolygonCollider2D sameRowPoly = null;
+    if (baseRow >= 0 && baseRow < mat.Length)
+        sameRowPoly = mat[baseRow].arr_row[destColIndex];
+
+    // 다른 행용 (위/아래 반대)
+    // _occupiedTile.dir == false 면 “up”행 → otherRow = baseRow+1
+    // _occupiedTile.dir == true  면 “down”행 → otherRow = baseRow-1
+    int otherRow = _occupiedTile.dir ? baseRow - 1 : baseRow + 1;
+    PolygonCollider2D otherRowPoly = null;
+    if (otherRow >= 0 && otherRow < mat.Length)
+        otherRowPoly = mat[otherRow].arr_row[destColIndex];
+
+    // 3) 반복문 안에서는 대상이 속한 행(enemyRow)에 따라
+    //    미리 구한 sameRowPoly or otherRowPoly 로 이동
+    foreach (var dmg in targets)
+    {
+        // 보스면 CC만
+        if (dmg is Boss b)
+        {
+            b.TakeDamage(_baseAttack);
+            b.ApplyCC();
+            continue;
+        }
+
+        if (!(dmg is Enemy enemy)) 
+            continue;
+
+        // 데미지, 스턴
+        enemy.TakeDamage(_baseAttack);
+        enemy.ApplyStun(1.5f);
+
+        // IDamageable → MonoBehaviour 캐스트
+        var mb = (MonoBehaviour)dmg;
+
+        // 4) 적이 속한 타일의 행 인덱스 (enemyRow) 얻기
+        if (!GridTargetManager.Instance.TryGetColliderAtPosition(
+                (Vector2)mb.transform.position,
+                out var srcPoly))
+            continue;
+        if (!GridTargetManager.Instance.TryGetGridIndex(
+                srcPoly,
+                out int enemyRow,
+                out _))
+            continue;
+
+        // 5) 적이 같은 행이라면 sameRowPoly, 아니면 otherRowPoly
+        var destPoly = (enemyRow == baseRow) 
+            ? sameRowPoly 
+            : otherRowPoly;
+        if (destPoly == null) 
+            continue;
+
+        // 6) 순간이동
+        mb.transform.position = destPoly.bounds.center;
+    }
+}
+
+   
 
     public void ApplyKnockback(List<IDamageable> targets)
     {

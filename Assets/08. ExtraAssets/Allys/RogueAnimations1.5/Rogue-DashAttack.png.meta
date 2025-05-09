@@ -176,10 +176,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rogue-DashAttack_5
+      name: Rogue-DashAttack_3
       rect:
         serializedVersion: 2
-        x: 332
+        x: 333
         y: 0
         width: 80
         height: 35
@@ -198,7 +198,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rogue-DashAttack_9
+      name: Rogue-DashAttack_4
       rect:
         serializedVersion: 2
         x: 430
@@ -307,13 +307,11 @@ TextureImporter:
       Rogue-DashAttack_13: -513666787
       Rogue-DashAttack_14: 1848999158
       Rogue-DashAttack_2: 58132898
-      Rogue-DashAttack_3: 1542528773
-      Rogue-DashAttack_4: -38764518
-      Rogue-DashAttack_5: -285692795
+      Rogue-DashAttack_3: -285692795
+      Rogue-DashAttack_4: -1276453055
       Rogue-DashAttack_6: -1118999436
       Rogue-DashAttack_7: 934760051
       Rogue-DashAttack_8: -1611398708
-      Rogue-DashAttack_9: -1276453055
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

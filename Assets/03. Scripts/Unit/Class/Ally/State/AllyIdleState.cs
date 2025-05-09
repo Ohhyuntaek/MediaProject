@@ -65,6 +65,21 @@ public class AllyIdleState : IState<Ally>
                         }
                     }
                     break;
+                case "Rogue":
+                    _detected = ally.DetectTargets();
+                    if (_detected.Count > 0)
+                    {
+                        if (ally.OnTile)
+                        {
+                            ally.ChangeState(new RogueSpecialAttackState());
+                        }
+                        else
+                        {
+                            ally.ChangeState(new AllyAttackState());
+                        }
+                    }
+                    break;
+                
                     
                 default:
                     if (ally.DetectTargets().Count > 0)

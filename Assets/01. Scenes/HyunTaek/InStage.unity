@@ -6383,6 +6383,9 @@ MonoBehaviour:
   - allyType: 2
     prefab: {fileID: 1347605904753383595, guid: d6445faf838e8944f91154f019e74a6b, type: 3}
     poolSize: 15
+  - allyType: 3
+    prefab: {fileID: 1106985534920828246, guid: c0733725a429de646bb25f74d5b5f77b, type: 3}
+    poolSize: 15
   spawnCount: 0
   unitDataList: []
   spawnEffectPrefab: {fileID: 9103110211496808784, guid: 33a12d5dc29734b49aeb83c7111e6cec, type: 3}
@@ -7914,6 +7917,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 36402a99e88bce94f9a956f7fbe0f9d2, type: 2}
   - {fileID: 11400000, guid: aa46a597562b64943930d0f0a73e85c3, type: 2}
   - {fileID: 11400000, guid: a9e752fac4920e44e9d46895bf16c8ed, type: 2}
+  - {fileID: 11400000, guid: 6c0d6ae515cf6614c910bf9c2c979468, type: 2}
   cardSlots:
   - {fileID: 1964729884}
   - {fileID: 647200317}

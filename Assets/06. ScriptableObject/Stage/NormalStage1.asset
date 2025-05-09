@@ -19,4 +19,4 @@ MonoBehaviour:
   _darks:
   - {fileID: 5760704821043082606, guid: 75d16aa4c077f1e41a04af79ffd1f7e5, type: 3}
   - {fileID: 3218703246109134191, guid: c8a4ec50a6f4ed749a1652e530dd055e, type: 3}
-  _darksCount: 2
+  _darksCount: 5
