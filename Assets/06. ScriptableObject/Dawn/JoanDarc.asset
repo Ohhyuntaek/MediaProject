@@ -26,3 +26,5 @@ MonoBehaviour:
   attackSfx: {fileID: 0}
   deathSfx: {fileID: 0}
   skillSfx: {fileID: 8300000, guid: a203483de18ff954ea79cd23074c2a7d, type: 3}
+  passiveSkillInfo: "\uC794\uB2E4\uB974\uD06C \uD328\uC2DC\uBE0C \uC2A4\uD0AC"
+  aciveSkillInfo: "\uC794\uB2E4\uB974\uD06C \uC561\uD2F0\uBE0C \uC2A4\uD0AC"

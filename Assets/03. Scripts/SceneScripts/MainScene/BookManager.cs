@@ -82,11 +82,13 @@ public class BookManager : MonoBehaviour
     }
 
     /// <summary>
-    /// newGamePage - Start 버튼 클릭 시
+    /// 책 덮기 애니메이션 진행
     /// </summary>
-    public void OnStartButtonClick()
+    public void CloseBook()
     {
-        SceneManager.LoadScene("InStage");
+        SetCanvasGroupActive(newGamePageGroup, false);
+        
+        animator.SetTrigger("isClosed");
     }
     
     public IEnumerator FadeInTitleGroup()
@@ -105,7 +107,11 @@ public class BookManager : MonoBehaviour
         yield return StartCoroutine(FadeCanvasGroup(newGamePageGroup, fadeDuration, true));
     }
     
+    /// <summary>
     /// 해당되는 Canvas Group의 상호작용 및 보이기 제거
+    /// </summary>
+    /// <param name="group"> 캔버스 그룹 </param>
+    /// <param name="active"></param>
     void SetCanvasGroupActive(CanvasGroup group, bool active)
     {
         group.alpha = active ? 1f : 0f;
@@ -113,7 +119,14 @@ public class BookManager : MonoBehaviour
         group.blocksRaycasts = active;
     }
     
+    /// <summary>
     /// Canvas Group의 색이 Fade out/in으로 점차 사라지게끔 만드는 코루틴 
+    /// </summary>
+    /// <param name="group"></param>
+    /// <param name="duration"></param>
+    /// <param name="fadeIn"></param>
+    /// <param name="onComplete"></param>
+    /// <returns></returns>
     IEnumerator FadeCanvasGroup(CanvasGroup group, float duration, bool fadeIn, System.Action onComplete = null)
     {
         float startAlpha = fadeIn ? 0f : 1f;
