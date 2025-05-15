@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d60e1cd064174844298d7a78c38fa0a6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206665
+  packageName: All In 1 Vfx Toolkit
+  packageVersion: 2.1
+  assetPath: Assets/Plugins/AllIn1VfxToolkit/Demo & Assets/Demo/Materials/CrackLighting3.mat
+  uploadId: 701632
