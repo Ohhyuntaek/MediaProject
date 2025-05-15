@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4171112584e5c674bbdf4d6196c9b5a9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206665
+  packageName: All In 1 Vfx Toolkit
+  packageVersion: 2.1
+  assetPath: Assets/Plugins/AllIn1VfxToolkit/Demo & Assets/Demo/Scripts/All1DemoSceneColor.cs
+  uploadId: 701632

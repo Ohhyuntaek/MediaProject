@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b8ae5576a3ef1a74da6992ed2ec0c9a0
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206665
+  packageName: All In 1 Vfx Toolkit
+  packageVersion: 2.1
+  assetPath: Assets/Plugins/AllIn1VfxToolkit/Shaders/LitShaders/AllIn1VfxLit_BetterShader_URP2021.txt
+  uploadId: 701632

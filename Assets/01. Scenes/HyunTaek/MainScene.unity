@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588f212a5bb2e8745b139c35862523fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
+  dawn: {fileID: 523459849710580622, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
   highlightFrame: {fileID: 11001854}
 --- !u!1 &11001854
 GameObject:
@@ -1772,6 +1772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26908f50872fba4fb71aa8721ebc7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedDawn: {fileID: 0}
 --- !u!4 &247833266
 Transform:
   m_ObjectHideFlags: 0
@@ -2889,7 +2890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588f212a5bb2e8745b139c35862523fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
+  dawn: {fileID: 0}
   highlightFrame: {fileID: 2137126622}
 --- !u!1 &408363980
 GameObject:
@@ -3459,6 +3460,9 @@ MonoBehaviour:
   dawnHpSlider: {fileID: 622858924}
   dawnEnergySlider: {fileID: 110042012}
   startButton: {fileID: 304626064}
+  passiveSkillInfoText: {fileID: 1268023005}
+  aciveSkillInfoText: {fileID: 1540424206}
+  bookManager: {fileID: 808177665}
 --- !u!4 &526959275
 Transform:
   m_ObjectHideFlags: 0
@@ -3953,7 +3957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588f212a5bb2e8745b139c35862523fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
+  dawn: {fileID: 0}
   highlightFrame: {fileID: 75357059}
 --- !u!1 &622858922
 GameObject:
@@ -6816,7 +6820,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204639129}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -7013,7 +7017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588f212a5bb2e8745b139c35862523fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
+  dawn: {fileID: 0}
   highlightFrame: {fileID: 1909889920}
 --- !u!1 &1232717311
 GameObject:
@@ -7101,6 +7105,7 @@ GameObject:
   - component: {fileID: 1260273754}
   - component: {fileID: 1260273753}
   - component: {fileID: 1260273752}
+  - component: {fileID: 1260273755}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7182,6 +7187,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260273755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260273751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1268023003
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,8 +7292,8 @@ MonoBehaviour:
 
     we need to change this text'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 70a05cb597db39748ad19eb3699ee3a3, type: 2}
-  m_sharedMaterial: {fileID: 6214272282763280507, guid: 70a05cb597db39748ad19eb3699ee3a3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91065633200169d4d962360b39dc4432, type: 2}
+  m_sharedMaterial: {fileID: -822308255797264653, guid: 91065633200169d4d962360b39dc4432, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7268,13 +7317,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.2
+  m_fontSize: 39.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 50
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8387,8 +8436,8 @@ MonoBehaviour:
 
     we need to change this text'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 70a05cb597db39748ad19eb3699ee3a3, type: 2}
-  m_sharedMaterial: {fileID: 6214272282763280507, guid: 70a05cb597db39748ad19eb3699ee3a3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91065633200169d4d962360b39dc4432, type: 2}
+  m_sharedMaterial: {fileID: -822308255797264653, guid: 91065633200169d4d962360b39dc4432, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8412,13 +8461,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.2
+  m_fontSize: 39.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 50
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9100,7 +9149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588f212a5bb2e8745b139c35862523fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
+  dawn: {fileID: 0}
   highlightFrame: {fileID: 1010934352}
 --- !u!1 &1661231522
 GameObject:
@@ -11509,8 +11558,8 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983398173}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
+  m_Alpha: 0
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &1983398176
@@ -12129,7 +12178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588f212a5bb2e8745b139c35862523fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
+  dawn: {fileID: 0}
   highlightFrame: {fileID: 1493378045}
 --- !u!1 &2025043722
 GameObject:

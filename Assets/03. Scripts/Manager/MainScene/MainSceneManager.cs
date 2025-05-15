@@ -14,8 +14,13 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField] private Slider dawnHpSlider;
     [SerializeField] private Slider dawnEnergySlider;
     [SerializeField] private Button startButton;
+    [SerializeField] private TMP_Text passiveSkillInfoText;
+    [SerializeField] private TMP_Text aciveSkillInfoText;
 
-    [Header("Dawn 선택")]
+    [Header("Book Manager 연결")]
+    [SerializeField] private BookManager bookManager;
+    
+    
     private Dawn selectedDawn;
     private DawnSelector currentSelectedButton; // 현재 선택된 버튼 기억
 
@@ -37,6 +42,9 @@ public class MainSceneManager : MonoBehaviour
         if (currentSelectedButton != null)
             currentSelectedButton.SetHighlight(false);
 
+        passiveSkillInfoText.text = dawn.DawnData.PassiveSkillInfo;
+        aciveSkillInfoText.text = dawn.DawnData.AciveSkillInfo;
+        
         currentSelectedButton = button;
         currentSelectedButton.SetHighlight(true);
 
@@ -70,6 +78,7 @@ public class MainSceneManager : MonoBehaviour
         }
 
         GameManager.Instance.SetSelectedDawn(selectedDawn);
-        SceneManager.LoadScene("InStage");
+        bookManager.CloseBook();
+        // SceneManager.LoadScene("InStage");
     }
 }

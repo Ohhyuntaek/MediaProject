@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Unity.VisualStudio.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -24,7 +25,10 @@ public class DawnData : ScriptableObject
     [SerializeField, LabelText("공격사운드")] private AudioClip attackSfx;
     [SerializeField, LabelText("죽을때 나는 소리")] private AudioClip deathSfx;
     [SerializeField, LabelText("스킬을 쓸때 나는 소리")] private AudioClip skillSfx;
-    
+
+    [Title("패시브 & 액티브 스킬 설명")] 
+    [SerializeField, LabelText("패시브 스킬")] private String passiveSkillInfo;
+    [SerializeField, LabelText("액티브 스킬")] private String aciveSkillInfo;
     
     
 
@@ -37,6 +41,8 @@ public class DawnData : ScriptableObject
     public int InitialEnergy { get => _initialEnergy; set => _initialEnergy = value; }
     public int ChargingSpd { get => _chargespeed; set => _chargespeed = value; }
     public UnitTribe Tribe { get => _unitTribe; set => _unitTribe = value; }
+    public String PassiveSkillInfo { get => passiveSkillInfo; set => passiveSkillInfo = value; }
+    public String AciveSkillInfo { get => aciveSkillInfo; set => aciveSkillInfo = value; }
     public GameObject Prefab => _prefab;
     public AudioClip AttackSound => attackSfx;
     public AudioClip DeathSound => deathSfx;
