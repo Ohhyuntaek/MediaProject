@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 // 각 스테이지 노드를 표현하는 클래스
 public class StageNode
@@ -62,7 +63,20 @@ public class StageTreeGenerator : MonoBehaviour
     void Start()
     {
         StageNode root = GenerateStageGraph();  // 그래프 생성
-        currentNode = null;  // 초기엔 루트 클릭 필요
+        
+        int storedId = GameManager.Instance.currentStageNodeId;
+
+        if (storedId != -1)  // 저장된 위치가 있으면 복원
+        {
+            currentNode = allNodes.FirstOrDefault(n => n.id == storedId);
+            if (currentNode != null)
+                currentNode.isCurrent = true;
+        }
+        else
+        {
+            currentNode = null;
+        }
+        
         CalculateNodePositions();  // 노드 위치 계산
         InstantiateNodes();  // 노드 및 경로 UI 생성
     }
@@ -258,6 +272,8 @@ public class StageTreeGenerator : MonoBehaviour
         currentNode.isCurrent = true;
 
         GameManager.Instance.currentStageData = clickedNode.dataAsset;
+        GameManager.Instance.currentStageNodeId = clickedNode.id;  // 현재 노드 ID 저장
+
 
         foreach (var node in allNodes)
         {
@@ -272,6 +288,9 @@ public class StageTreeGenerator : MonoBehaviour
         }
 
         Debug.Log($"이동: {clickedNode.id}, 타입: {clickedNode.stageType}");
+        
+        // 씬 전환
+        SceneManager.LoadScene("InStage");
     }
 
     // 두 노드 간 선 그리기

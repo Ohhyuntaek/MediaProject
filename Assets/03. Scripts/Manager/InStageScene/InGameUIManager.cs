@@ -10,7 +10,6 @@ public class InGameUIManager : MonoBehaviour
     
     [Header("UI")]
     [SerializeField, LabelText("현재 스테이지 텍스트")] private TMP_Text stageText;
-    [SerializeField, LabelText("스테이지 클리어 텍스트")] private TMP_Text stageClearText;
     [SerializeField, LabelText("선택한 Dawn의 초상화")] private Image dawnImage;
     [SerializeField, LabelText("선택한 Dawn의 HP")] private Slider hpSlider;
     [SerializeField, LabelText("선택한 Dawn의 Energy")] private Slider energySlider;
@@ -30,6 +29,14 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // UI 초기화
+        UpdateDawnImage(GameManager.Instance.GetSelectedDawn().DawnData);
+        SetDawnCoolTimeProgress(InGameSceneManager.Instance.dawnSpawnManager.spawnedDawn);
+
+    }
+
     /// <summary>
     /// 스테이지 이름 설정
     /// </summary>
@@ -37,20 +44,6 @@ public class InGameUIManager : MonoBehaviour
     public void SetStageText(string stageName)
     {
         stageText.text = stageName;
-    }
-
-    /// <summary>
-    /// 클리어 텍스트 온오프
-    /// </summary>
-    /// <param name="active"></param>
-    public void SetActiveStageClearText(bool active, string clearText = "None")
-    {
-        stageClearText.gameObject.SetActive(active);
-
-        if (active)
-        {
-            stageClearText.text = clearText;
-        }
     }
     
     /// <summary>
@@ -67,6 +60,7 @@ public class InGameUIManager : MonoBehaviour
     /// </summary>
     public void UpdateHpSlider(Dawn dawn)
     {
+        Debug.Log($"{dawn.DawnData.MaxHP.ToString()}, {dawn.CurrentHP.ToString()}");
         hpSlider.value = dawn.DawnData.MaxHP > 0 ? dawn.CurrentHP / dawn.DawnData.MaxHP : 0;
     }
 

@@ -9,13 +9,15 @@ public class GameManager : MonoBehaviour
     
     [Header("현재 스테이지")]
     [SerializeField] public StageData currentStageData;
-
+    
+    [Header("진행 노드 ID")]
+    [SerializeField] public int currentStageNodeId = -1;
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 안 없어지게
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

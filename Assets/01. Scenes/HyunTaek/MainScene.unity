@@ -1773,6 +1773,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedDawn: {fileID: 0}
+  currentStageData: {fileID: 0}
+  currentStageNodeId: -1
 --- !u!4 &247833266
 Transform:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ public class Dawn : MonoBehaviour
 
     public void Initialize(DawnData data)
     {
+        Debug.Log($"MaxHP: {dawnData.MaxHP}");
         dawnData = data;
         _hp = dawnData.MaxHP;
         _activeSkill = CreateActiveSkillFromData(dawnData.ActiveSkillType);

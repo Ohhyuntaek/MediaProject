@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class ClearUIManager : MonoBehaviour
 {
+    [SerializeField, LabelText("스테이지 클리어 텍스트")] private TMP_Text stageClearText;
+    
     [Header("클리어 메달 관련")]
     [SerializeField, LabelText("클리어 메달 애니메이터")]
     private Animator clearMedalAnimator;
@@ -20,7 +25,12 @@ public class ClearUIManager : MonoBehaviour
     private List<GameObject> spawnedEnhancementCards = new(); // 생성된 강화 카드 리스트
     
     public List<GameObject> SpawnedEnhancementCards => spawnedEnhancementCards;
-    
+
+    private void Start()
+    {
+        SetActiveStageClearText(false);
+    }
+
     /// <summary>
     /// 1. 클리어 메달 내려오기
     /// 2. clearMedalAndTextTerm만큼이 지난 후 클리어 텍스트 표시
@@ -38,11 +48,11 @@ public class ClearUIManager : MonoBehaviour
             yield return new WaitUntil(() => clearMedalAnimator.GetCurrentAnimatorStateInfo(0).IsName("ClearMedalDown"));
         }
 
-        InGameSceneManager.Instance.inGameUIManager.SetActiveStageClearText(true, "Stage Clear!");
+        SetActiveStageClearText(true, "Stage Clear!");
 
         yield return new WaitForSeconds(clearMedalAndTextTerm);
 
-        InGameSceneManager.Instance.inGameUIManager.SetActiveStageClearText(false);
+        SetActiveStageClearText(false);
 
         if (stageType == StageType.Normal)
         {
@@ -102,7 +112,30 @@ public class ClearUIManager : MonoBehaviour
     private IEnumerator ProceedToNextStageAfterDelay()
     {
         clearMedalAnimator.SetTrigger("isPlaying");
-        yield return new WaitForSeconds(3f);
-        InGameSceneManager.Instance.stageManager.NextStage();
+        yield return new WaitForSeconds(1f);
+        // InGameSceneManager.Instance.stageManager.NextStage();
+        OnReturnToMap();
+    }
+    
+    /// <summary>
+    /// 클리어 텍스트 온오프
+    /// </summary>
+    /// <param name="active"></param>
+    public void SetActiveStageClearText(bool active, string clearText = "None")
+    {
+        stageClearText.gameObject.SetActive(active);
+
+        if (active)
+        {
+            stageClearText.text = clearText;
+        }
+    }
+    
+    /// <summary>
+    /// 다시 MapScene으로 돌아가기
+    /// </summary>
+    public void OnReturnToMap()
+    {
+        SceneManager.LoadScene("MapScene");
     }
 }

@@ -82,7 +82,7 @@ public class EnhancementCard : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         // 강화 카드 숨기고 다음 스테이지로 넘어가기
-        InGameSceneManager.Instance.clearUIManager.HideEnhancementCardsAndProceed();
+        UIManager.Instance.clearUIManager.HideEnhancementCardsAndProceed();
     }
 
     private void DarkenImages()

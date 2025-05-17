@@ -49,8 +49,8 @@ public class StageManager : MonoBehaviour
         if (currentStageState != StageState.Playing)
             return;
 
-        InGameSceneManager.Instance.inGameUIManager.UpdateHpSlider(GameManager.Instance.GetSelectedDawn());
-        InGameSceneManager.Instance.inGameUIManager.UpdateEnergySlider(GameManager.Instance.GetSelectedDawn());
+        UIManager.Instance.inGameUIManager.UpdateHpSlider(InGameSceneManager.Instance.dawnSpawnManager.spawnedDawn);
+        UIManager.Instance.inGameUIManager.UpdateEnergySlider(InGameSceneManager.Instance.dawnSpawnManager.spawnedDawn);
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class StageManager : MonoBehaviour
 
         StageData stage = GameManager.Instance.currentStageData;
         InGameSceneManager.Instance.darkSpawner.DarksCount = stage.DarksCount; // 매 스테이지마다 초기화
-        InGameSceneManager.Instance.inGameUIManager.SetStageText(stage.StageName);
+        UIManager.Instance.inGameUIManager.SetStageText(stage.StageName);
 
         InGameSceneManager.Instance.darkSpawner.StopSpawning(); // 이전 스폰 루틴 중지
         InGameSceneManager.Instance.darkSpawner.StartSpawning(stage);
@@ -114,7 +114,7 @@ public class StageManager : MonoBehaviour
         SetStageState("Cleared");
         
         // 강화카드가 선택 중이면 클리어 처리 금지
-        if (InGameSceneManager.Instance.clearUIManager.SpawnedEnhancementCards.Count > 0)
+        if (UIManager.Instance.clearUIManager.SpawnedEnhancementCards.Count > 0)
         {
             Debug.LogWarning("강화 카드 선택 중에 스테이지 클리어 호출됨 - 무시");
             return;
@@ -140,7 +140,7 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(InGameSceneManager.Instance.clearUIManager.HandleStageClearSequence(GameManager.Instance.currentStageData.StageType));
+        StartCoroutine(UIManager.Instance.clearUIManager.HandleStageClearSequence(GameManager.Instance.currentStageData.StageType));
     }
 
     /// <summary>
