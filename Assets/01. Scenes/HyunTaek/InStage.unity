@@ -6123,6 +6123,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775033643}
   m_CullTransparentMesh: 1
+--- !u!1 &780660884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780660885}
+  - component: {fileID: 780660886}
+  m_Layer: 0
+  m_Name: ParticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780660885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780660884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1098474733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &780660886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780660884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1d2ba5a176dfd4c9b00856be8d2046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particlePairs:
+  - allyType: 0
+    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+  - allyType: 1
+    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+  - allyType: 2
+    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+  - allyType: 3
+    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+  - allyType: 4
+    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+  - allyType: 5
+    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+  _skillParticleGroups:
+  - allyType: 0
+    particleSystems:
+    - {fileID: 0}
+  - allyType: 1
+    particleSystems:
+    - {fileID: 0}
+  - allyType: 2
+    particleSystems:
+    - {fileID: 0}
+  - allyType: 3
+    particleSystems:
+    - {fileID: 0}
+  - allyType: 4
+    particleSystems:
+    - {fileID: 0}
+  - allyType: 5
+    particleSystems:
+    - {fileID: 564551857853218976, guid: 434218467c0c4234a9ad20b45cc23bd8, type: 3}
+    - {fileID: 4698807217861205215, guid: 1d85f86e67b81ef4b8d2e5a41f55e344, type: 3}
+    - {fileID: 4427907555488051568, guid: f7b8a9b466f42074696d9cee6d83056c, type: 3}
 --- !u!1 &782848870
 GameObject:
   m_ObjectHideFlags: 0
@@ -6711,6 +6789,7 @@ Transform:
   - {fileID: 1442016962}
   - {fileID: 20820151}
   - {fileID: 1075329505}
+  - {fileID: 780660885}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1098474734

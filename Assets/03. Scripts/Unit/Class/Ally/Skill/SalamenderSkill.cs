@@ -19,14 +19,14 @@ public class SalamenderSkill : ISkill<Ally> //selemender
 
         Debug.Log($"{targets.Count} 그 셀에 있는 대상의 숫자");
 
-        // 0 또는 1 또는 2 중 랜덤, 0=DamageAmp, 1=Slow, 2=Stun
+        
         DebuffType selectedDebuff = (DebuffType)owner.GetSkillRandomNum();
 
         foreach (var t in targets)
         {
             if (t is Enemy enemy)
             {
-                // 적 유닛에게만 원래 디버프 & 데미지 로직
+               
                 switch (selectedDebuff)
                 {
                     case DebuffType.DamageAmp:
@@ -40,12 +40,15 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                         break;
                 }
                 enemy.TakeDamage(10);
+                ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,(int)selectedDebuff);
+               
             }
             else if (t is Boss boss)
             {
                 // 보스에게는 CC만 적용
                 boss.ApplyCC();
                 boss.TakeDamage(10);
+                ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,boss.transform.position,(int)selectedDebuff);
             }
         }
     }

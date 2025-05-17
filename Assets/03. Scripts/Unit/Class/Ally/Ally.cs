@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.Android;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class Ally : MonoBehaviour
@@ -208,13 +209,19 @@ public class Ally : MonoBehaviour
         
         if (_unitData.TargetingType == TargetingType.Single)
         {
+            var damageableTarget = targets[0] as MonoBehaviour;
+            ParticleManager.Instance.PlayAttackParticle(_allyType,damageableTarget.transform.position );
             targets[0].TakeDamage(_baseAttack);
+            
+            
         }
         else
         {
            
             foreach (IDamageable t in targets)
             {
+                var target = t as MonoBehaviour;
+                ParticleManager.Instance.PlayAttackParticle(_allyType,target.transform.position);
                 t.TakeDamage(_baseAttack);
             }
         }
@@ -236,6 +243,7 @@ public class Ally : MonoBehaviour
             return;
         }
         _skill.Activate(this);
+        
     }
     
     
@@ -444,15 +452,15 @@ public class Ally : MonoBehaviour
 
         foreach (var dmg in targets)
         {
-           
+            
             var mb = dmg as MonoBehaviour;
             if (mb == null) continue;
-
-           
+            float threshold = Random.Range(0, 0.3f);
             Transform destination = null;
             if (dmg is Enemy e)      destination = e.GetDestination();
             else if (dmg is Boss b)
             {
+                ParticleManager.Instance.PlaySkillParticle(_allyType,b.transform.position+new Vector3(0,threshold,0),0);
                 b.ApplyCC();
             }
             //SoundManager.Instance.PlaySfx(_unitData.AttackSound,transform.position,false);
@@ -464,6 +472,7 @@ public class Ally : MonoBehaviour
             {
                 Vector3 knockDir    = (mb.transform.position - destination.position).normalized;
                 Vector3 displacement = knockDir * knockbackDistance;
+                ParticleManager.Instance.PlaySkillParticle(_allyType,mb.transform.position+new Vector3(0,threshold,0),0);
                 mb.StartCoroutine(SmoothKnockback(mb.transform, displacement, knockbackDuration));
             }
 

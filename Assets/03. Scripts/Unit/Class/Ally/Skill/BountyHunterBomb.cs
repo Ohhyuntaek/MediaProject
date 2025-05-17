@@ -41,10 +41,11 @@ public class BountyHunterBomb : MonoBehaviour
         {
             var state = _animator.GetCurrentAnimatorStateInfo(0);
             if (state.IsName("Explode") && state.normalizedTime >= 0.9f)
+                ParticleManager.Instance.PlaySkillParticle(AllyType.BountyHunter,gameObject.transform.position,0);
                 break;
             yield return null;
         }
-
+        
         // 5) 폭발 범위 내 적에게 데미지
         ExplodeTargets();
 
