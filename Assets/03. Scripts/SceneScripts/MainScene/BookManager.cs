@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class BookManager : MonoBehaviour
 {
-    
     public float fadeDuration = 0.5f;
     public float delayAfterBook = 0.5f;
     
