@@ -13,6 +13,7 @@ public class Map : MonoBehaviour
     void Start()
     {
         mapAnimator = GetComponent<Animator>();
+        SetCanvasGroupActive(mapCanvasGroup, false);
     }
 
     // Update is called once per frame

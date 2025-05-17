@@ -482,7 +482,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127966779}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -850,6 +850,13 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: d9be2e296b62afa4c87fdaeb3b52a42c, type: 3}
   shopSprite: {fileID: 21300000, guid: 5b492342caca02241924d7d06118b50a, type: 3}
   bossSprite: {fileID: 21300000, guid: 3c135f704fae8094ca1e2dd293e87b2f, type: 3}
+  normalStageDataList:
+  - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
+  - {fileID: 11400000, guid: 4a99064787b0db34c9280eaadac44dba, type: 2}
+  - {fileID: 11400000, guid: 7e49cb55334e3c74d9392ab8d96d3245, type: 2}
+  bossStageData: {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
+  shopStageDataList:
+  - {fileID: 11400000, guid: 9f6b600b88a60d1498b87bdcb6960e1b, type: 2}
   defaultPathSprite: {fileID: 543281633, guid: b8f565f924cbf564d881696e0a969baa, type: 3}
   highlightedPathSprite: {fileID: 30967774, guid: d98829177e709d14ea32d03345b7f545, type: 3}
   nodeRadius: 80
@@ -876,7 +883,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1206100893}
   - {fileID: 388090815}
-  - {fileID: 2027517952}
   - {fileID: 1298258869}
   - {fileID: 1067572438}
   - {fileID: 127409989}
+  - {fileID: 2027517952}

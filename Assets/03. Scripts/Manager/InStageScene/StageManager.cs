@@ -21,14 +21,10 @@ public enum StageState
 /// </summary>
 public class StageManager : MonoBehaviour
 {
-    [Header("스테이지 데이터")]
-    [SerializeField] private List<StageData> stageList;
-
     [FormerlySerializedAs("stageClearProcessed")]
     [Header("스테이지 관리 변수")] 
     [SerializeField] private bool stageCleared = false;
     [SerializeField] private StageState currentStageState = StageState.Idle;
-    [SerializeField] private int currentStageIndex = 0;   // 현재 스테이지 번호
 
     public StageState CurrentStageState => currentStageState;
     
@@ -102,7 +98,7 @@ public class StageManager : MonoBehaviour
         // 카드 스폰 시작
         InGameSceneManager.Instance.cardSpawner.CanSpawnCards = true;
 
-        StageData stage = stageList[currentStageIndex];
+        StageData stage = GameManager.Instance.currentStageData;
         InGameSceneManager.Instance.darkSpawner.DarksCount = stage.DarksCount; // 매 스테이지마다 초기화
         InGameSceneManager.Instance.inGameUIManager.SetStageText(stage.StageName);
 
@@ -144,7 +140,7 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(InGameSceneManager.Instance.clearUIManager.HandleStageClearSequence(stageList[currentStageIndex].StageType));
+        StartCoroutine(InGameSceneManager.Instance.clearUIManager.HandleStageClearSequence(GameManager.Instance.currentStageData.StageType));
     }
 
     /// <summary>
@@ -152,7 +148,6 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void NextStage()
     {
-        currentStageIndex++;
         SetStageState("Playing");
         StartStage();
     }

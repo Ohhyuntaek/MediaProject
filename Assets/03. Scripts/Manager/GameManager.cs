@@ -4,7 +4,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
+    [Header("선택한 Dawn 캐릭터")]
     [SerializeField] private Dawn selectedDawn;
+    
+    [Header("현재 스테이지")]
+    [SerializeField] public StageData currentStageData;
 
     void Awake()
     {

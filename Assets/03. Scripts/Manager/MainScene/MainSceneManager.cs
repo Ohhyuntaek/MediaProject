@@ -79,6 +79,6 @@ public class MainSceneManager : MonoBehaviour
 
         GameManager.Instance.SetSelectedDawn(selectedDawn);
         bookManager.CloseBook();
-        // SceneManager.LoadScene("InStage");
+        SceneManager.LoadScene("MapScene");
     }
 }
