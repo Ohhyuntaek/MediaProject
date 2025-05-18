@@ -106,8 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable
         
         if (IsTargetInRange())
         {   
-             //SoundManager.Instance.PlaySfx(_enemyData.AttackSound,transform.position,false);
-            _dawn.TakeDamage(_damage);
+             DealToPlayer();
         }
     }
 
@@ -244,6 +243,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void DealToPlayer()
     {
+        ParticleManager.Instance.TriggerVignetteAndShake();
         _dawn.TakeDamage(_damage);
     }
     

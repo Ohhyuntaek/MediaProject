@@ -41,7 +41,7 @@ MonoBehaviour:
   - {fileID: 0}
   skillSfx:
   - {fileID: 8300000, guid: bc5c60d3128e65d4bba1e966059c7a83, type: 3}
-  - {fileID: 8300000, guid: 27ad470d6a97f8244b77854b4c28a8f7, type: 3}
   - {fileID: 8300000, guid: 078800aaf51c01b4cb6a55bd2172f96f, type: 3}
+  - {fileID: 8300000, guid: 27ad470d6a97f8244b77854b4c28a8f7, type: 3}
   _playerSkillType: 0
   _duration: 5

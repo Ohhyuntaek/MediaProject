@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -31,6 +32,21 @@ public class ParticleManager : MonoBehaviour
 
     private Dictionary<AllyType, ParticleSystem> _attackDictionary;
     private Dictionary<AllyType, List<ParticleSystem>> _skillDictionary;
+    
+    [SerializeField] private GameObject _vignetteObject;
+    [Tooltip("비네팅 지속시간")]
+    [SerializeField] private float _vignetteDuration = 2f;
+    
+    [Header("Shake 설정")]
+    [Tooltip("흔들릴 카메라 Transform")]
+    [SerializeField] private Transform _cameraTransform;
+    [Tooltip("흔들림 세기")]
+    [SerializeField] private float _shakeMagnitude = 0.1f;
+    [Tooltip("흔들림 업데이트 간격")]
+    [SerializeField] private float _shakeInterval = 0.02f;
+    
+    private bool _isVignetteActive = false;
+    private Vector3 _cameraOriginalPos;
 
     private void Awake()
     {
@@ -50,7 +66,8 @@ public class ParticleManager : MonoBehaviour
             if (!_attackDictionary.ContainsKey(pair.allyType) && pair.particleSystem != null)
                 _attackDictionary.Add(pair.allyType, pair.particleSystem);
         }
-
+        if (_cameraTransform != null)
+            _cameraOriginalPos = _cameraTransform.localPosition;
         // 스킬 딕셔너리 초기화 (여러 파티클)
         _skillDictionary = new Dictionary<AllyType, List<ParticleSystem>>();
         foreach (var group in _skillParticleGroups)
@@ -135,4 +152,50 @@ public class ParticleManager : MonoBehaviour
         float lifetime = main.duration;
         Destroy(ps.gameObject, lifetime);
     }
+    #region Vignette & Shake
+
+    /// <summary>
+    /// 비네팅 + 카메라 흔들림 효과를 트리거합니다.
+    /// 이미 동작 중이면 무시됩니다.
+    /// </summary>
+    public void TriggerVignetteAndShake()
+    {
+        if (_isVignetteActive || _vignetteObject == null || _cameraTransform == null)
+            return;
+
+        StartCoroutine(VignetteAndShakeRoutine());
+    }
+
+    private IEnumerator VignetteAndShakeRoutine()
+    {
+        _isVignetteActive = true;
+        _vignetteObject.SetActive(true);
+
+        
+        StartCoroutine(CameraShakeRoutine(_vignetteDuration));
+
+        
+        yield return new WaitForSeconds(_vignetteDuration);
+
+        _vignetteObject.SetActive(false);
+
+        
+        yield return new WaitForSeconds(0.1f);
+        _isVignetteActive = false;
+    }
+
+    private IEnumerator CameraShakeRoutine(float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            _cameraTransform.localPosition = _cameraOriginalPos + UnityEngine.Random.insideUnitSphere * _shakeMagnitude;
+            elapsed += _shakeInterval;
+            yield return new WaitForSeconds(_shakeInterval);
+        }
+        // 원위치 복원
+        _cameraTransform.localPosition = _cameraOriginalPos;
+    }
+
+    #endregion
 }

@@ -31,9 +31,9 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                 {
                     case DebuffType.DamageAmp:
                         enemy.ApplyDefenseBuffDebuff(2f, 3f, false);
-                        ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,0);
+                        ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,0); //파이어볼
                         break;
-                    case DebuffType.Slow:
+                    case DebuffType.Slow://아이스볼
                         enemy.ApplySpeedBuffDebuff(2f, 3f, false);
                         if (!_onece)
                         {
@@ -41,7 +41,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                             ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,2);
                         }
                         break;
-                    case DebuffType.Stun:
+                    case DebuffType.Stun: //썬더
                         enemy.ApplyStun(2f);
                         if (!_onece)
                         {

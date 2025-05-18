@@ -104,7 +104,7 @@ public class Boss : MonoBehaviour, IDamageable
     /// <summary>플레이어에게 대미지</summary>
     public void DealDamageToPlayer(int dmg)
     {
-       
+        ParticleManager.Instance.TriggerVignetteAndShake();
         _player.GetComponent<Dawn>().TakeDamage(dmg);
     }
 
