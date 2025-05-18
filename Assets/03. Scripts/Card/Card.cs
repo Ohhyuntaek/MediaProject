@@ -58,7 +58,7 @@ public class Card : MonoBehaviour
     {
         if (unitData == null) return;
 
-        bool shouldEnable = InGameSceneManager.Instance.costManager.TotalCost >= unitData.Cost;
+        bool shouldEnable = UIManager.Instance.costManager.TotalCost >= unitData.Cost;
 
         if (cardButton.interactable != shouldEnable)
         {
@@ -100,7 +100,7 @@ public class Card : MonoBehaviour
             return;
         }
 
-        if (InGameSceneManager.Instance.costManager.TotalCost < unitData.Cost)
+        if (UIManager.Instance.costManager.TotalCost < unitData.Cost)
         {
             Debug.Log("코스트가 부족합니다! 소환할 수 없습니다.");
             return;

@@ -57,20 +57,16 @@ public class StageManager : MonoBehaviour
     /// 스테이지 상태 설정 함수
     /// </summary>
     /// <param name="stageState"></param>
-    public void SetStageState(string stageState)
+    public void SetStageState(StageState stageState)
     {
+        currentStageState = stageState;
         switch (stageState)
         {
-            case "Idle":
-                currentStageState = StageState.Idle;
+            case StageState.Idle:
+            case StageState.Playing:
                 stageCleared = false;
                 break;
-            case "Playing":
-                currentStageState = StageState.Playing;
-                stageCleared = false;
-                break;
-            case "Cleared":
-                currentStageState = StageState.Cleared;
+            case StageState.Cleared:
                 stageCleared = true;
                 break;
         }
@@ -85,15 +81,15 @@ public class StageManager : MonoBehaviour
         if (GameManager.Instance.GetSelectedDawn() != null)
             GameManager.Instance.GetSelectedDawn().ResetActiveCooldown();
         
-        SetStageState("Playing");
+        SetStageState(StageState.Playing);
         
         // 총 코스트를 0으로 설정
-        InGameSceneManager.Instance.costManager.TotalCost = 0;
+        UIManager.Instance.costManager.TotalCost = 0;
         
-        InGameSceneManager.Instance.costManager.StopCostUP(false);
+        UIManager.Instance.costManager.StopCostUP(false);
         
         // 코스트 증가 코루틴 시작
-        StartCoroutine(InGameSceneManager.Instance.costManager.IncreaseCost());
+        StartCoroutine(UIManager.Instance.costManager.IncreaseCost());
         
         // 카드 스폰 시작
         InGameSceneManager.Instance.cardSpawner.CanSpawnCards = true;
@@ -109,9 +105,9 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// 스테이지 클리어 함수
     /// </summary>
-    private void OnStageClear()
+    public void OnStageClear()
     {
-        SetStageState("Cleared");
+        SetStageState(StageState.Cleared);
         
         // 강화카드가 선택 중이면 클리어 처리 금지
         if (UIManager.Instance.clearUIManager.SpawnedEnhancementCards.Count > 0)
@@ -127,7 +123,7 @@ public class StageManager : MonoBehaviour
         InGameSceneManager.Instance.cardSpawner.ClearDeckCards();
 
         // 코스트 증가 중지
-        InGameSceneManager.Instance.costManager.StopCostUP(true);
+        UIManager.Instance.costManager.StopCostUP(true);
 
         // 모든 Ally 제거
         foreach (var allyObj in InGameSceneManager.Instance.allyPoolManager.activateAllies)
@@ -143,12 +139,12 @@ public class StageManager : MonoBehaviour
         StartCoroutine(UIManager.Instance.clearUIManager.HandleStageClearSequence(GameManager.Instance.currentStageData.StageType));
     }
 
-    /// <summary>
-    /// 다음 스테이지로 넘어가는 함수
-    /// </summary>
-    public void NextStage()
-    {
-        SetStageState("Playing");
-        StartStage();
-    }
+    // /// <summary>
+    // /// 다음 스테이지로 넘어가는 함수
+    // /// </summary>
+    // public void NextStage()
+    // {
+    //     SetStageState(StageState.Playing);
+    //     StartStage();
+    // }
 }

@@ -51,6 +51,11 @@ public class DarkSpawner : MonoBehaviour
     public void DecreaseDarkCount()
     {
         darkCount--;
+
+        if (darkCount == 0)
+        {
+            InGameSceneManager.Instance.stageManager.OnStageClear();
+        }
     }
 
     /// <summary>

@@ -6,19 +6,16 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] public InGameUIManager inGameUIManager;
     [SerializeField] public ClearUIManager clearUIManager;
+    [SerializeField] public CostManager costManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(Instance.gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
     }
     
     // Update is called once per frame

@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
 {
-    public static InGameUIManager Instance;
-    
     [Header("UI")]
     [SerializeField, LabelText("현재 스테이지 텍스트")] private TMP_Text stageText;
     [SerializeField, LabelText("선택한 Dawn의 초상화")] private Image dawnImage;
@@ -16,18 +14,6 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField, LabelText("선택한 Dawn의 액티브 스킬 쿨다운 프로그레스")] 
     private DawnCoolTimeProgress dawnCoolTimeProgress;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {

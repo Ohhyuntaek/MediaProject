@@ -59,7 +59,7 @@ public class EnhancementCard : MonoBehaviour
         switch (data.EnhancementType)
         {
             case EnhancementType.CostUp:
-                InGameSceneManager.Instance.costManager.CostSpeedUp(defferenceRandomValue);
+                UIManager.Instance.costManager.CostSpeedUp(defferenceRandomValue);
                 break;
             case EnhancementType.CardSpawnSpeedUp:
                 InGameSceneManager.Instance.cardSpawner.CardSpawnSpeedUP(defferenceRandomValue);

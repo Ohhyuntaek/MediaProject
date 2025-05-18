@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class InGameSceneManager : MonoBehaviour
 {
-    private static InGameSceneManager _instance;
+    public static InGameSceneManager Instance;
 
-    public static InGameSceneManager Instance
+    private void Awake()
     {
-        get
+        if (Instance != null)
         {
-            if (_instance == null)
-            {
-                _instance = Instantiate(Resources.Load(nameof(InGameSceneManager))).GetComponent<InGameSceneManager>();
-                DontDestroyOnLoad(_instance.gameObject);
-            }
-            return _instance;
+            Destroy(Instance.gameObject);
         }
+        Instance = this;
     }
-
+    
     [Header("Manager 및 Spawner")]
     [SerializeField] public StageManager stageManager;
     
     [SerializeField] public AllyPoolManager allyPoolManager;
-    [SerializeField] public CostManager costManager;
     [SerializeField] public DawnSpawnManager dawnSpawnManager;
     [SerializeField] public DarkSpawner darkSpawner;
     [SerializeField] public CardSpawner cardSpawner;

@@ -92,7 +92,7 @@ public class AllyPoolManager : MonoBehaviour
             ally.ApplyTileBonus();
 
         // 코스트 차감
-        InGameSceneManager.Instance.costManager.DecreaseCost(unitData.Cost);
+        UIManager.Instance.costManager.DecreaseCost(unitData.Cost);
 
         activateAllies.Add(obj);
         spawnCount++;
