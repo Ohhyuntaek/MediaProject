@@ -59,18 +59,18 @@ public class EnhancementCard : MonoBehaviour
         switch (data.EnhancementType)
         {
             case EnhancementType.CostUp:
-                InGameSceneManager.Instance.costManager.CostSpeedUp(defferenceRandomValue);
+                GameManager.Instance.enhancement.CostSpeedUp(defferenceRandomValue);
                 break;
             case EnhancementType.CardSpawnSpeedUp:
-                InGameSceneManager.Instance.cardSpawner.CardSpawnSpeedUP(defferenceRandomValue);
+                GameManager.Instance.enhancement.CardSpawnSpeedUP(defferenceRandomValue);
                 break;
             case EnhancementType.CooldownSpeedUp:
                 if (playerDawn != null)
-                    playerDawn.CooldownMultiplier *= defferenceRandomValue;
+                    GameManager.Instance.enhancement.CooldownMultiplier *= defferenceRandomValue;
                 break;
             case EnhancementType.EnergyChargeSpeedUp:
                 if (playerDawn != null)
-                    playerDawn.EnergyChargeMultiplier *= defferenceRandomValue;
+                    GameManager.Instance.enhancement.EnergyChargeMultiplier *= defferenceRandomValue;
                 break;
         }
 
@@ -82,7 +82,7 @@ public class EnhancementCard : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         // 강화 카드 숨기고 다음 스테이지로 넘어가기
-        InGameSceneManager.Instance.clearUIManager.HideEnhancementCardsAndProceed();
+        UIManager.Instance.clearUIManager.HideEnhancementCardsAndProceed();
     }
 
     private void DarkenImages()

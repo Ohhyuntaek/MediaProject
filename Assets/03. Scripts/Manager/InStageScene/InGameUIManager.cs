@@ -6,28 +6,21 @@ using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
 {
-    public static InGameUIManager Instance;
-    
     [Header("UI")]
     [SerializeField, LabelText("현재 스테이지 텍스트")] private TMP_Text stageText;
-    [SerializeField, LabelText("스테이지 클리어 텍스트")] private TMP_Text stageClearText;
     [SerializeField, LabelText("선택한 Dawn의 초상화")] private Image dawnImage;
     [SerializeField, LabelText("선택한 Dawn의 HP")] private Slider hpSlider;
     [SerializeField, LabelText("선택한 Dawn의 Energy")] private Slider energySlider;
     [SerializeField, LabelText("선택한 Dawn의 액티브 스킬 쿨다운 프로그레스")] 
     private DawnCoolTimeProgress dawnCoolTimeProgress;
 
-    private void Awake()
+
+    private void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // UI 초기화
+        UpdateDawnImage(GameManager.Instance.GetSelectedDawn().DawnData);
+        SetDawnCoolTimeProgress(InGameSceneManager.Instance.dawnSpawnManager.spawnedDawn);
+
     }
 
     /// <summary>
@@ -37,20 +30,6 @@ public class InGameUIManager : MonoBehaviour
     public void SetStageText(string stageName)
     {
         stageText.text = stageName;
-    }
-
-    /// <summary>
-    /// 클리어 텍스트 온오프
-    /// </summary>
-    /// <param name="active"></param>
-    public void SetActiveStageClearText(bool active, string clearText = "None")
-    {
-        stageClearText.gameObject.SetActive(active);
-
-        if (active)
-        {
-            stageClearText.text = clearText;
-        }
     }
     
     /// <summary>

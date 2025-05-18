@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Boss : MonoBehaviour, IDamageable
@@ -28,6 +29,7 @@ public class Boss : MonoBehaviour, IDamageable
     private StateMachine<Boss> _stateMachine;
     private bool _lastspecial = false;
     [SerializeField] private GameObject _stunEffect;
+    [SerializeField] private Slider hpSlider;
 
     private bool _jump = false;
     private float _attacckTimer;
@@ -51,6 +53,7 @@ public class Boss : MonoBehaviour, IDamageable
         _stunEffect.SetActive(false);
         _player = GameObject.FindFirstObjectByType<Dawn>().transform;
         _direction = (_bossDestination.position - transform.position).normalized;
+        hpSlider.maxValue = _hp;
 
     }
     private void OnDrawGizmos()
@@ -82,6 +85,7 @@ public class Boss : MonoBehaviour, IDamageable
             _attacckTimer -= Time.deltaTime;
         }
         
+        hpSlider.value = _hp;
         
         if (_attacckTimer < 0f && !_canAttack)
         {

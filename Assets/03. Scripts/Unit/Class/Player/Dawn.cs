@@ -24,11 +24,9 @@ public class Dawn : MonoBehaviour
     private float _currentEnergy;
     private int _MaxEnergy;
     private bool _CanUpdatePassive = true;
-    
-    [SerializeField]
-    private float cooldownMultiplier = 1f;  // 쿨다운 속도에 적용될 배수 (1보다 작을수록 빠름)
-    [SerializeField]
-    private float energyChargeMultiplier = 1f; // 에너지 회복 배수 (1보다 클수록 빠름)
+
+    private float cooldownMultiplier => GameManager.Instance.enhancement.cooldownMultiplier;
+    private float energyChargeMultiplier => GameManager.Instance.enhancement.energyChargeMultiplier;
     
     public Animator Animator => _animator;
     public DawnData DawnData => dawnData;
@@ -60,10 +58,6 @@ public class Dawn : MonoBehaviour
         _currentEnergy = dawnData.InitialEnergy;
         _stateMachine = new StateMachine<Dawn>(this);
         _stateMachine.ChangeState(new PlayerIdleState());
-
-        cooldownMultiplier = 1f;
-        energyChargeMultiplier = 1f;
-
         ResetActiveCooldown();
     }
 
@@ -106,23 +100,11 @@ public class Dawn : MonoBehaviour
         _currentEnergy -= dawnData.energyUseValue;
     }
     
-    // 외부에서 접근할 수 있도록 프로퍼티
-    public float CooldownMultiplier
-    {
-        get => cooldownMultiplier;
-        set => cooldownMultiplier = Mathf.Clamp(value, 0.1f, 10f); // 0.1x ~ 10x 제한
-    }
     
     public void ResetActiveCooldown()
     {
         _canUseActiveSkill = false;
         _activeSkillCooldownTimer = 0f;
-    }
-
-    public float EnergyChargeMultiplier
-    {
-        get => energyChargeMultiplier;
-        set => energyChargeMultiplier = Mathf.Clamp(value, 0.1f, 10f);
     }
 
     public float ActiveCooldownRatio

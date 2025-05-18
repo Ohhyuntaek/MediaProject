@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/01. Scenes/HyunTaek/MainScene.unity
     guid: f1f82765667ac194db281a2ab96eea81
   - enabled: 1
+    path: Assets/01. Scenes/HyunTaek/MapScene.unity
+    guid: 3adbc4b5686671a42bde85c2d2b04087
+  - enabled: 1
     path: Assets/01. Scenes/HyunTaek/InStage.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

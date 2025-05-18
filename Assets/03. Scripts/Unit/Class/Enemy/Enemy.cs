@@ -36,8 +36,6 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         leftSpawnPosition = GameObject.Find("LeftEnemySpawn").transform;
         rightSpawnPosition = GameObject.Find("RightEnemySpawn").transform;
-        
-
     }
 
     private void Start()
