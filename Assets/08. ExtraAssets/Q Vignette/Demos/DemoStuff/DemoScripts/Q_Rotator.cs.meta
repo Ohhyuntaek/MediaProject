@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9fdd5df45ee7bf9448e700a4d16453be
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177253
+  packageName: Quirky's Easy Animatable Vignette
+  packageVersion: 1.0
+  assetPath: Assets/Q Vignette/Demos/DemoStuff/DemoScripts/Q_Rotator.cs
+  uploadId: 386034

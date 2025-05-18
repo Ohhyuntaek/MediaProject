@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7d98ddac6918dbd45aabf220a13d175d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177253
+  packageName: Quirky's Easy Animatable Vignette
+  packageVersion: 1.0
+  assetPath: Assets/Q Vignette/Scripts/Q_Vignette_Base.cs
+  uploadId: 386034

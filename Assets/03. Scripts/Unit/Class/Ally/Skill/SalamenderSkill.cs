@@ -38,7 +38,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                         if (!_onece)
                         {
                             _onece = true;
-                            ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,1);
+                            ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,2);
                         }
                         break;
                     case DebuffType.Stun:
@@ -46,7 +46,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                         if (!_onece)
                         {
                             _onece = true;
-                            ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,2);
+                            ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,1);
                         }
                         break;
                 }

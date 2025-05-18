@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b271ef342347fba49a7e4615569d5606
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177253
+  packageName: Quirky's Easy Animatable Vignette
+  packageVersion: 1.0
+  assetPath: Assets/Q Vignette/Demos/DemoStuff/DemoAnimation/AnimSplitExample.anim
+  uploadId: 386034

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 320bc0d91a835b848865631e1c7b6ef9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177253
+  packageName: Quirky's Easy Animatable Vignette
+  packageVersion: 1.0
+  assetPath: Assets/Q Vignette/Prefabs/Q_Vignette_Single.prefab
+  uploadId: 386034
