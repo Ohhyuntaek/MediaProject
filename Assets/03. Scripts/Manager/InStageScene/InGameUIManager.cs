@@ -46,7 +46,6 @@ public class InGameUIManager : MonoBehaviour
     /// </summary>
     public void UpdateHpSlider(Dawn dawn)
     {
-        Debug.Log($"{dawn.DawnData.MaxHP.ToString()}, {dawn.CurrentHP.ToString()}");
         hpSlider.value = dawn.DawnData.MaxHP > 0 ? dawn.CurrentHP / dawn.DawnData.MaxHP : 0;
     }
 

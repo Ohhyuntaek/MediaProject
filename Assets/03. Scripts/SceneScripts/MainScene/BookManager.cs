@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +27,6 @@ public class BookManager : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        
         SetCanvasGroupActive(titlePageGroup, false);
         SetCanvasGroupActive(newGamePageGroup, false);
     }

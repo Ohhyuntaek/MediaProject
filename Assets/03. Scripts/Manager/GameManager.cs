@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     
     [Header("진행 노드 ID")]
     [SerializeField] public int currentStageNodeId = -1;
+
+    [Header("강화 효과")]
+    [SerializeField] public Enhancement enhancement;
     void Awake()
     {
         if (Instance == null)

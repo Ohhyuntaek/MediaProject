@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 
 public class CardSpawner : MonoBehaviour
 {
-    public float cardSpawnIntervalMultiplier = 2f;
     
     [SerializeField] private int cardSlotNumber = 8;
     [SerializeField] private GameObject cardPrefab;
@@ -20,6 +19,8 @@ public class CardSpawner : MonoBehaviour
         get { return canSpawnCards; }
         set { canSpawnCards = value; }
     }
+
+    private float cardSpawnIntervalMultiplier => GameManager.Instance.enhancement.cardSpawnIntervalMultiplier; 
     
     private float totalCardSpawnInterval
     {
@@ -39,15 +40,6 @@ public class CardSpawner : MonoBehaviour
                 cardSpawnTimer = 0f;
             }
         }
-    }
-    
-    /// <summary>
-    /// 다음 카드가 스폰하기까지 걸리는 시간을 감소하는 함수
-    /// </summary>
-    /// <param name="differenceValue">감소할 값</param>
-    public void CardSpawnSpeedUP(float differenceValue)
-    {
-        cardSpawnIntervalMultiplier -= differenceValue;
     }
     
     /// <summary>

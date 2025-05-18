@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class CostManager : MonoBehaviour
 {
-    /// <summary>
-    /// 코스트 가속 값
-    /// </summary>
-    public float costMultiplier = 1f;
-
     [Header("코스트 표시 텍스트")]
     [SerializeField] private TMP_Text costText;
 
     private bool isStopCostUp = false;
     private float costTimer = 0;
     private float totalCost = 0f;
+
+    private float costMultiplier => GameManager.Instance.enhancement.costMultiplier;
     public float TotalCost
     {
         get => totalCost;
@@ -25,6 +22,11 @@ public class CostManager : MonoBehaviour
             costTimer = totalCost / costMultiplier; // 내부 timer 값도 갱신
             UpdateCostText();
         }
+    }
+
+    private void Start()
+    {
+        costTimer = totalCost / costMultiplier; // 내부 timer 값도 갱신
     }
 
     private void Update()
@@ -57,28 +59,7 @@ public class CostManager : MonoBehaviour
     public void DecreaseCost(float consumedCost)
     {
         totalCost = Mathf.Max(0f, totalCost - consumedCost);
-        costTimer = totalCost / costMultiplier;
         UpdateCostText();
-    }
-
-    /// <summary>
-    /// 코스트가 증가하는 속도 가속 함수
-    /// </summary>
-    /// <param name="multiplier">가속할 값</param>
-    public void CostSpeedUp(float multiplier)
-    {
-        costMultiplier *= multiplier;
-        costTimer = totalCost / costMultiplier; // 가속 변경 시 costTimer 재계산
-    }
-
-    /// <summary>
-    /// 코스트 가속 값 설정
-    /// </summary>
-    /// <param name="multiplier">가속할 값 (기본값 1f)</param>
-    public void SetCostMultiplier(float multiplier = 1f)
-    {
-        costMultiplier = multiplier;
-        costTimer = totalCost / costMultiplier;
     }
 
     public void StopCostUP(bool check)
