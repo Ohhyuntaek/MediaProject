@@ -30,7 +30,7 @@ public class BountyHunterBomb : MonoBehaviour
 
     private void Start()
     {
-        // 퓨즈 → 폭발 순서
+        
         StartCoroutine(FuseAndExplodeRoutine());
     }
 
@@ -41,12 +41,12 @@ public class BountyHunterBomb : MonoBehaviour
         {
             var state = _animator.GetCurrentAnimatorStateInfo(0);
             if (state.IsName("Explode") && state.normalizedTime >= 0.9f)
-                ParticleManager.Instance.PlaySkillParticle(AllyType.BountyHunter,gameObject.transform.position,0);
                 break;
             yield return null;
         }
         
         // 5) 폭발 범위 내 적에게 데미지
+        ParticleManager.Instance.PlaySkillParticle(AllyType.BountyHunter,transform.position,0);
         ExplodeTargets();
 
         // 6) 투사체 오브젝트 제거
@@ -67,33 +67,33 @@ public class BountyHunterBomb : MonoBehaviour
         if (!GridTargetManager.Instance.TryGetGridIndex(hitPoly, out int baseRow, out int baseCol))
             return;
 
-        // 4) ContactFilter & 버퍼 준비
+      
         var filter = new ContactFilter2D();
         filter.SetLayerMask(enemyLayer);
         filter.useTriggers = true;
         Collider2D[] buffer = new Collider2D[16];
 
-        // 5) 패턴 만큼 확장하며 각 슬롯의 PolygonCollider2D 가져와서 내부 적 감지
+        
         foreach (var ofs in _pattern.cellOffsets)
         {
             int row = baseRow + ofs.y;
             int col = baseCol + ofs.x;
 
-            // 범위 체크
+           
             if (row < 0 || row >= GridTargetManager.Instance.coliderMat.Length) continue;
             if (col < 0 || col >= GridTargetManager.Instance.coliderMat[row].arr_row.Length) continue;
 
             var poly = GridTargetManager.Instance.coliderMat[row].arr_row[col];
             if (poly == null) continue;
 
-            // 6) 해당 폴리곤 내부의 모든 Collider2D 검사
+            
             int count = poly.Overlap(filter, buffer);
             for (int i = 0; i < count; i++)
             {
                 var col2 = buffer[i];
                 if (col2 == null) continue;
 
-                // 7) IDamageable 인터페이스 구현체에 데미지 호출
+                
                 if (col2.TryGetComponent<IDamageable>(out var dmg))
                 {
                     dmg.TakeDamage(10);

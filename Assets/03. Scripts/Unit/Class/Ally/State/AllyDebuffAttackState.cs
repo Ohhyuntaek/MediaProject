@@ -71,7 +71,6 @@ public class AllyDebuffAttackState : IState<Ally>
             var _detectEnemy = _detectList[0] as MonoBehaviour;
             Vector3 spawnPos = _detectEnemy.transform.position;
             Quaternion spawnRot = Quaternion.identity;
-
             if (skillEffectPrefab != null)
             {
                 GameObject effect = Object.Instantiate(skillEffectPrefab, spawnPos, spawnRot);

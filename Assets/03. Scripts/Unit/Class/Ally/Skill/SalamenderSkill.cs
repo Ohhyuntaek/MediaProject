@@ -9,7 +9,7 @@ public enum DebuffType
 }
 public class SalamenderSkill : ISkill<Ally> //selemender
 {
-   
+    private bool _onece = false;
     public void Activate(Ally owner)
     {
         // 근접한 타일의 적/보스들을 모두 감지
@@ -31,16 +31,28 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                 {
                     case DebuffType.DamageAmp:
                         enemy.ApplyDefenseBuffDebuff(2f, 3f, false);
+                        ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,0);
                         break;
                     case DebuffType.Slow:
                         enemy.ApplySpeedBuffDebuff(2f, 3f, false);
+                        if (!_onece)
+                        {
+                            _onece = true;
+                            ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,1);
+                        }
                         break;
                     case DebuffType.Stun:
                         enemy.ApplyStun(2f);
+                        if (!_onece)
+                        {
+                            _onece = true;
+                            ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,2);
+                        }
                         break;
                 }
                 enemy.TakeDamage(10);
-                ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,(int)selectedDebuff);
+                
+               
                
             }
             else if (t is Boss boss)
@@ -51,6 +63,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                 ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,boss.transform.position,(int)selectedDebuff);
             }
         }
+        
     }
     
 

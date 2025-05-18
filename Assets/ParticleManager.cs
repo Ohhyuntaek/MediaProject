@@ -80,21 +80,30 @@ public class ParticleManager : MonoBehaviour
     /// </summary>
     public void PlaySkillParticle(AllyType type, Vector3 position, int index = 0)
     {
-        if (_skillDictionary.TryGetValue(type, out var list))
-        {
-            if (index >= 0 && index < list.Count && list[index] != null)
-            {
-                SpawnAndPlay(list[index], position);
-            }
-            else
-            {
-                Debug.LogWarning($"[ParticleManager] {type} 스킬 파티클 인덱스({index})가 유효하지 않습니다.");
-            }
-        }
-        else
+        // 1) 해당 타입으로 그룹이 있는지 체크
+        if (!_skillDictionary.TryGetValue(type, out var list))
         {
             Debug.LogWarning($"[ParticleManager] 스킬 파티클 그룹이 없습니다: {type}");
+            return;
         }
+
+        // 2) 인덱스 범위 체크
+        if (index < 0 || index >= list.Count)
+        {
+            Debug.LogWarning($"[ParticleManager] {type} 파티클 인덱스({index})가 범위를 벗어났습니다. [0 ~ {list.Count-1}]");
+            return;
+        }
+
+        // 3) 실제로 하나만 뽑아서 출력
+        var prefab = list[index];
+        if (prefab == null)
+        {
+            Debug.LogWarning($"[ParticleManager] {type} 스킬 파티클[{index}]가 null 입니다.");
+            return;
+        }
+
+        Debug.Log($"[ParticleManager] PlaySkillParticle → type: {type}, index: {index}, prefab: {prefab.name}");
+        SpawnAndPlay(prefab, position);
     }
 
     /// <summary>
@@ -116,7 +125,7 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    // 공통 생성·재생·자동 삭제 로직
+   
     private void SpawnAndPlay(ParticleSystem prefab, Vector3 position)
     {
         var ps = Instantiate(prefab, position, Quaternion.identity);
