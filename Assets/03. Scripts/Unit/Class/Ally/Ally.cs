@@ -210,7 +210,7 @@ public class Ally : MonoBehaviour
         if (_unitData.TargetingType == TargetingType.Single)
         {
             var damageableTarget = targets[0] as MonoBehaviour;
-            ParticleManager.Instance.PlayAttackParticle(_allyType,damageableTarget.transform.position );
+            ParticleManager.Instance.PlayAttackParticle(_unitData.AllyType,damageableTarget.transform.position );
             targets[0].TakeDamage(_baseAttack);
             
             
@@ -221,7 +221,7 @@ public class Ally : MonoBehaviour
             foreach (IDamageable t in targets)
             {
                 var target = t as MonoBehaviour;
-                ParticleManager.Instance.PlayAttackParticle(_allyType,target.transform.position);
+                ParticleManager.Instance.PlayAttackParticle(_unitData.AllyType,target.transform.position);
                 t.TakeDamage(_baseAttack);
             }
         }

@@ -8326,15 +8326,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particlePairs:
   - allyType: 0
-    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+    particleSystem: {fileID: 5976055925361566142, guid: 951d675e1feba114181161c82cb9fe87, type: 3}
   - allyType: 1
-    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+    particleSystem: {fileID: 5976055925361566142, guid: f5d94ed8c96c93a4880cae4b0f66b10a, type: 3}
   - allyType: 2
-    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+    particleSystem: {fileID: 5976055925361566142, guid: 8b953faccd3c6b04a89ad5981bec137f, type: 3}
   - allyType: 3
-    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+    particleSystem: {fileID: 5976055925361566142, guid: dffa19527180fe7419f796edbf622858, type: 3}
   - allyType: 4
-    particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
+    particleSystem: {fileID: 5976055925361566142, guid: 45af1f455f9a80842a7780bd18abada9, type: 3}
   - allyType: 5
     particleSystem: {fileID: 5976055925361566142, guid: 248873e06781d6a4c838bea5727a4fae, type: 3}
   _skillParticleGroups:
