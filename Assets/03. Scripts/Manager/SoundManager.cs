@@ -8,17 +8,28 @@ public class SoundManager : MonoBehaviour
 
     [Header("SFX 재생용 AudioSource 프리팹")]
     [SerializeField] private AudioSource _sfxSourcePrefab;
+    [Header("BGM 재생용 AudioSource 프리팹")]
+    [SerializeField] private AudioSource _bgmSourcePrefab;
 
-    [Header("동시 재생 제한")]
+    [Header("동시 재생 제한 (SFX)")]
     [Tooltip("같은 클립을 동시에 이 개수 이상 재생하지 않습니다.")]
     [SerializeField] private int _maxSimultaneousPerClip = 5;
 
-    // 풀과 재생 카운터
-    private List<AudioSource> _pool = new List<AudioSource>();
-    private Dictionary<AudioClip,int> _playingCount = new Dictionary<AudioClip,int>();
+    // SFX 풀 및 재생 카운트
+    private List<AudioSource> _sfxPool = new List<AudioSource>();
+    private Dictionary<AudioClip, int> _playingSfxCount = new Dictionary<AudioClip, int>();
+
+    // BGM 재생용
+    private AudioSource _bgmSource;
+    [SerializeField]
+    private List<AudioClip> _bgmPlaylist;
+    private int _bgmIndex;
+    private bool _bgmLoop;
+    private Coroutine _bgmCoroutine;
 
     private void Awake()
     {
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -26,55 +37,107 @@ public class SoundManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // BGM Source 인스턴스화
+        _bgmSource = _bgmSourcePrefab;
+        _bgmSource.loop = false; // 개별 곡 자체 루프는 끄고, 플레이리스트 로직에서 관리
     }
 
-    /// <summary>
-    /// 지정한 SFX를 월드 좌표에서 재생합니다.
-    /// 같은 클립이 이미 _maxSimultaneousPerClip 이상 재생 중이면 호출을 무시합니다.
-    /// </summary>
+    // SFX 재생
     public void PlaySfx(AudioClip clip, Vector3 worldPos, bool spatial = true)
     {
         if (clip == null) return;
 
-        // 현재 재생 중인 개수 체크
-        if (!_playingCount.TryGetValue(clip, out int count)) 
-            count = 0;
-
+        // 동시 재생 제한 체크
+        _playingSfxCount.TryGetValue(clip, out int count);
         if (count >= _maxSimultaneousPerClip)
             return;
 
-        // 카운터 증가
-        _playingCount[clip] = count + 1;
+        _playingSfxCount[clip] = count + 1;
 
-        // AudioSource 가져오기
-        var src = GetOrCreateSource();
+        // AudioSource 가져오기 혹은 생성
+        var src = GetOrCreateSfxSource();
         src.transform.position = worldPos;
-        src.spatialBlend = spatial ? 1f : 0f;
+        src.spatialBlend       = spatial ? 1f : 0f;
         src.PlayOneShot(clip);
 
-        // 재생이 끝난 뒤 카운터 감소
-        StartCoroutine(DecrementAfter(clip, clip.length));
+        // 재생 완료 후 카운트 감소
+        StartCoroutine(DecrementSfxCountAfter(clip, clip.length));
     }
 
-    private AudioSource GetOrCreateSource()
+    private AudioSource GetOrCreateSfxSource()
     {
-        foreach (var src in _pool)
-        {
+        foreach (var src in _sfxPool)
             if (!src.isPlaying)
                 return src;
-        }
-        
+
         var inst = Instantiate(_sfxSourcePrefab, transform);
-        _pool.Add(inst);
+        _sfxPool.Add(inst);
         return inst;
     }
 
-    private IEnumerator DecrementAfter(AudioClip clip, float delay)
+    private IEnumerator DecrementSfxCountAfter(AudioClip clip, float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (_playingCount.TryGetValue(clip, out int count) && count > 0)
+        if (_playingSfxCount.TryGetValue(clip, out int cnt) && cnt > 0)
+            _playingSfxCount[clip] = cnt - 1;
+    }
+   
+    // BGM 재생 (플레이리스트)
+
+    /// <summary>
+    /// BGM 재생을 시작합니다.
+    /// playlist: 재생할 AudioClip 리스트
+    /// loopPlaylist: 리스트 순환 여부
+    /// </summary>
+    public void PlayBgmList( bool loopPlaylist = false)
+    {
+        if (_bgmPlaylist == null || _bgmPlaylist.Count == 0)
+            return;
+
+        // 기존 재생 중단
+        StopBgm();
+        _bgmLoop     = loopPlaylist;
+        _bgmIndex    = 0;
+        _bgmCoroutine = StartCoroutine(BgmPlaybackRoutine());
+    }
+
+    /// <summary>
+    /// 현재 재생 중인 BGM을 즉시 멈춥니다.
+    /// </summary>
+    public void StopBgm()
+    {
+        if (_bgmCoroutine != null)
         {
-            _playingCount[clip] = count - 1;
+            StopCoroutine(_bgmCoroutine);
+            _bgmCoroutine = null;
         }
+        if (_bgmSource.isPlaying)
+            _bgmSource.Stop();
+    }
+
+    private IEnumerator BgmPlaybackRoutine()
+    {
+        while (_bgmPlaylist != null && _bgmPlaylist.Count > 0)
+        {
+            var clip = _bgmPlaylist[_bgmIndex];
+            _bgmSource.clip = clip;
+            _bgmSource.Play();
+
+            // 곡 길이만큼 대기
+            yield return new WaitForSeconds(clip.length);
+
+            // 다음 곡으로
+            _bgmIndex++;
+            if (_bgmIndex >= _bgmPlaylist.Count)
+            {
+                if (_bgmLoop)
+                    _bgmIndex = 0;
+                else
+                    break;
+            }
+        }
+
+        _bgmCoroutine = null;
     }
 }

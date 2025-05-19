@@ -87,7 +87,8 @@ public class StageManager : MonoBehaviour
         UIManager.Instance.costManager.TotalCost = 0;
         
         UIManager.Instance.costManager.StopCostUP(false);
-        
+       
+        SoundManager.Instance.PlayBgmList();
         // 코스트 증가 코루틴 시작
         StartCoroutine(UIManager.Instance.costManager.IncreaseCost());
         
@@ -124,6 +125,8 @@ public class StageManager : MonoBehaviour
 
         // 코스트 증가 중지
         UIManager.Instance.costManager.StopCostUP(true);
+        //브금 정지
+        //SoundManager.Instance.StopBgm();
 
         // 모든 Ally 제거
         foreach (var allyObj in InGameSceneManager.Instance.allyPoolManager.activateAllies)

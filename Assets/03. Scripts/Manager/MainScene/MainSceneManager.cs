@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -28,6 +29,11 @@ public class MainSceneManager : MonoBehaviour
     {
         Instance = this;
         startButton.interactable = false; // Dawn 선택 전까지 비활성화
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayBgmList();
     }
 
     /// <summary>
@@ -71,6 +77,7 @@ public class MainSceneManager : MonoBehaviour
 
     public void OnStartButtonClick()
     {
+    
         if (selectedDawn == null)
         {
             Debug.LogWarning("Dawn을 선택하지 않았습니다!");
@@ -80,5 +87,6 @@ public class MainSceneManager : MonoBehaviour
         GameManager.Instance.SetSelectedDawn(selectedDawn);
         bookManager.CloseBook();
         SceneManager.LoadScene("MapScene");
+        SoundManager.Instance.StopBgm();
     }
 }
