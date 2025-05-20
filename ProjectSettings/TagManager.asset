@@ -73,6 +73,9 @@ TagManager:
   - name: AllysDownLine
     uniqueID: 3793178111
     locked: 0
+  - name: TileEffect
+    uniqueID: 1185296717
+    locked: 0
   - name: SpawnEffect
     uniqueID: 1871290809
     locked: 0
