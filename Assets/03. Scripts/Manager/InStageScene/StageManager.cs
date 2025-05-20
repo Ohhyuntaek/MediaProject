@@ -92,6 +92,8 @@ public class StageManager : MonoBehaviour
         // 코스트 증가 코루틴 시작
         StartCoroutine(UIManager.Instance.costManager.IncreaseCost());
         
+        InGameSceneManager.Instance.tileManager.PreviewAvailableTile();
+        
         // 카드 스폰 시작
         InGameSceneManager.Instance.cardSpawner.CanSpawnCards = true;
 

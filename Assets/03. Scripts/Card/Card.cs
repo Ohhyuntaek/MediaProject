@@ -29,7 +29,7 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
     private LineType lineType;
     private UnitData unitData;
     private Dictionary<Image, Color> originalColors = new(); // 자식 이미지와 원래 색 저장
-
+    
     [Header("어둡게 할 계수 (0~1 사이)")]
     [SerializeField] private float darkenMultiplier = 0.6f; // 어둡게 만드는 강도 (예: 60%)
     
@@ -108,6 +108,8 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
             return;
         }
         
+        // 이펙트 제거 후 스폰
+        InGameSceneManager.Instance.tileManager.ClearSpawnTileEffect();
         GameObject ally = InGameSceneManager.Instance.allyPoolManager.SpawnAlly(unitData, lineType);
 
         if (ally != null)

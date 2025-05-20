@@ -22,6 +22,7 @@ public class AllyPoolManager : MonoBehaviour
     [SerializeField] private int spawnCount = 0;
     [SerializeField] private List<UnitData> unitDataList;
     [SerializeField] private GameObject spawnEffectPrefab;
+    [SerializeField] private GameObject spawnTileEffectPrefab;
     
     public int SpawnCount
     {
@@ -50,7 +51,7 @@ public class AllyPoolManager : MonoBehaviour
     /// <returns></returns>
     public GameObject SpawnAlly(UnitData unitData, LineType lineType)
     {
-        AllyTile tile = InGameSceneManager.Instance.tileManager.GetAvailableTile();
+        AllyTile tile = InGameSceneManager.Instance.tileManager.GetPreviewedTile();
         if (tile == null) return null;
 
         // 풀에서 해당 AllyType의 프리팹 가져오기
@@ -73,6 +74,9 @@ public class AllyPoolManager : MonoBehaviour
             GameObject effect = Instantiate(spawnEffectPrefab, tile.transform.position, Quaternion.identity);
             Destroy(effect, 1f); // 애니메이션 종료 후 자동 파괴
         }
+        
+        // 타일 이펙트 제거
+        InGameSceneManager.Instance.tileManager.ClearSpawnTileEffect();
 
         // Sorting Layer 설정
         Transform parent = tile.transform.parent;
@@ -96,7 +100,9 @@ public class AllyPoolManager : MonoBehaviour
 
         activateAllies.Add(obj);
         spawnCount++;
-
+        
+        InGameSceneManager.Instance.tileManager.PreviewAvailableTile();
+        
         return obj;
     }
 
