@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public enum CardType
@@ -13,7 +14,8 @@ public enum CardType
     RearLine
 }
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour,IPointerEnterHandler,
+    IPointerExitHandler
 {
     public int slotIndex;
     public CardType cardType;
@@ -149,4 +151,16 @@ public class Card : MonoBehaviour
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+        
+        PreviewManager.Instance.ShowPreview(unitData);
+           // ← 그다음에 타일 표시
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        PreviewManager.Instance.ClearPreview();
+    }
 }

@@ -330,8 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotIndex: 0
   cardType: 2
-  allyType: 4
-  lineType: 2
   cardButton: {fileID: 6959115647413270161}
   costText: {fileID: 8409117908633720299}
   selectSound: {fileID: 8300000, guid: d02b362c09ec6fb499e204d2eb1d16b0, type: 3}

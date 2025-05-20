@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridTargetManager : MonoBehaviour
@@ -111,5 +112,45 @@ public class GridTargetManager : MonoBehaviour
     {
        
         return TryGetColliderAtPosition((Vector3)t.position, out outCollider);
+    }
+    
+    public List<GameObject> GetPatternGameObjects(DetectionPatternSO patternSo, AllyTile occupiedTile)
+    {
+        var result = new List<GameObject>();
+        if (patternSo == null || occupiedTile == null || occupiedTile._hitCollider == null)
+            return result;
+
+        // 기준이 되는 타일의 콜라이더
+        var baseCollider = occupiedTile._hitCollider;
+
+        // 기준 타일의 (row, col) 얻기
+        if (!TryGetGridIndex(baseCollider, out int baseRow, out int baseCol))
+            return result;
+
+        // 패턴 오프셋 순회
+        foreach (var ofs in patternSo.cellOffsets)
+        {
+            // dir에 따라 Y축 반전 처리 (위/아래 구분)
+            var applied = occupiedTile.dir
+                ? new Vector2Int(ofs.x, -ofs.y)
+                : new Vector2Int(ofs.x, ofs.y);
+
+            int row = baseRow + applied.y;
+            int col = baseCol + applied.x;
+
+            // 범위 검사
+            if (row < 0 || row >= coliderMat.Length) continue;
+            if (col < 0 || col >= coliderMat[row].arr_row.Length) continue;
+
+            // 해당 위치의 콜라이더 가져오기
+            var poly = coliderMat[row].arr_row[col];
+            if (poly == null) continue;
+
+            var go = poly.gameObject;
+            if (!result.Contains(go))
+                result.Add(go);
+        }
+
+        return result;
     }
 }
