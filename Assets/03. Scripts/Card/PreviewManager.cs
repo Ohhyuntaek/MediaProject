@@ -5,114 +5,98 @@ public class PreviewManager : MonoBehaviour
 {
     public static PreviewManager Instance { get; private set; }
 
-    [Header("UnitData 리스트 (스크립터블 객체)")]
+    [Header("UnitData 리스트")]
     [SerializeField] private List<UnitData> _unitDataList;
-
-    [Header("미리보기 모델 리스트 (UnitData 순서와 1:1 매핑)")]
+    [Header("프리뷰 모델 리스트 (UnitData 순서와 1:1 매핑)")]
     [SerializeField] private List<GameObject> _previewModel;
-
-    [Header("테스트용 타일 (Inspector에 드래그)")]
+    [Header("테스트용 타일")]
     [SerializeField] private AllyTile _testTile;
 
-    // 현재 선택된 타일·범위·모델
-    private AllyTile _selectedTile;
-    private List<GameObject> _selectedRange;
-    private GameObject _selectedModel;
+    // 풀링된 프리뷰 모델 & 현재 어떤 프리팹을 띄웠는지 추적
+    private GameObject _pooledPreviewModel;
+    private GameObject _currentModelPrefab;
 
-    // 인스턴스화된 프리뷰 모델
-    private GameObject _spawnedModel;
+    private List<GameObject> _selectedRange = new List<GameObject>();
+    private List<SpriteRenderer> _selectedRenderers = new List<SpriteRenderer>();
 
-    // 프리뷰 모드 상태 플래그
     private bool _onPreview = false;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            _selectedRange = new List<GameObject>();
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance == null) Instance = this;
+        else if (Instance != this) Destroy(gameObject);
     }
 
-    // 기존 ShowPreview API 유지 (AllyTile 직접 넘길 때)
-    public void ShowPreview(AllyTile tile, UnitData unitData)
-    {
-        // 이전 프리뷰 정리
-        ClearPreview();
-
-        // 셋업
-        _selectedTile  = tile;
-        _selectedModel = GetModelByType(unitData.AllyType);
-        _selectedRange = GridTargetManager.Instance
-                            .GetPatternGameObjects(unitData.DetectionPatternSo, tile);
-
-        // 프리뷰 모드 on
-        _onPreview = true;
-
-        // 모델 스폰
-        if (_selectedModel != null)
-        {
-            var sr = _selectedModel.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.flipX = tile.dir;
-
-            _spawnedModel = Instantiate(
-                _selectedModel,
-                tile.transform.position,
-                Quaternion.identity
-            );
-        }
-
-        // 타일 하이라이트
-        foreach (var t in _selectedRange)
-            t.GetComponent<SpriteRenderer>().enabled = true;
-    }
-
-    // **테스트용**: 내부에 지정한 _testTile 만 사용
+    // (1) 카드 스크립트에서 이걸 사용하세요.
     public void ShowPreview(UnitData unitData)
     {
-        if (_testTile == null)
-        {
-            Debug.LogWarning("[PreviewManager] _testTile이 할당되지 않았습니다.");
-            return;
-        }
+        if (_testTile == null || unitData == null) return;
         ShowPreview(_testTile, unitData);
     }
 
-    /// <summary>현재 프리뷰 전부 초기화</summary>
-    public void ClearPreview()
+    // (2) 실제 프리뷰 로직
+    public void ShowPreview(AllyTile tile, UnitData unitData)
     {
-        // 모델 제거
-        if (_spawnedModel != null)
+        ClearPreview();
+        _onPreview = true;
+
+        // 1) 선택된 모델 프리팹 결정
+        int idx = _unitDataList.FindIndex(u => u.AllyType == unitData.AllyType);
+        if (idx < 0 || idx >= _previewModel.Count) return;
+        var prefab = _previewModel[idx];
+
+        // 2) 모델 풀링 재생성 로직
+        if (_pooledPreviewModel == null || _currentModelPrefab != prefab)
         {
-            Destroy(_spawnedModel);
-            _spawnedModel = null;
+            // 이전 모델이 있으면 파괴
+            if (_pooledPreviewModel != null)
+                Destroy(_pooledPreviewModel);
+
+            // 새로 생성
+            _pooledPreviewModel    = Instantiate(prefab, tile.transform);
+            _pooledPreviewModel.transform.localPosition = Vector3.zero;
+            _currentModelPrefab    = prefab;
         }
-        // 타일 하이라이트 해제
-        if (_selectedRange != null)
+        else
         {
-            foreach (var t in _selectedRange)
-                t.GetComponent<SpriteRenderer>().enabled = false;
-            _selectedRange.Clear();
+            // 동일 프리팹이면 위치만 갱신
+            _pooledPreviewModel.transform.SetParent(tile.transform, false);
+            _pooledPreviewModel.transform.localPosition = Vector3.zero;
+            _pooledPreviewModel.SetActive(true);
         }
-        // 상태 리셋
-        _selectedTile  = null;
-        _selectedModel = null;
-        _onPreview     = false;
+
+        // 캐릭터가 바라보는 방향 반전
+        var sr = _pooledPreviewModel.GetComponent<SpriteRenderer>();
+        if (sr != null) sr.flipX = tile.dir;
+
+        // 3) 범위 타일 가져오기 (Overlap 없이 직접 조회)
+        _selectedRange = GridTargetManager.Instance
+            .GetPatternGameObjectsFast(unitData.DetectionPatternSo, tile);
+
+        // 4) SpriteRenderer 캐싱 & 활성화
+        _selectedRenderers.Clear();
+        foreach (var go in _selectedRange)
+        {
+            var r = go.GetComponent<SpriteRenderer>();
+            if (r != null)
+            {
+                r.enabled = true;
+                _selectedRenderers.Add(r);
+            }
+        }
     }
 
-    // ---- 내부 헬퍼 ----
-    private GameObject GetModelByType(AllyType type)
+    // 프리뷰 해제
+    public void ClearPreview()
     {
-        for (int i = 0; i < _unitDataList.Count; i++)
-            if (_unitDataList[i].AllyType == type)
-                if (i < _previewModel.Count)
-                    return _previewModel[i];
-        Debug.LogWarning($"[PreviewManager] 모델을 찾을 수 없습니다: {type}");
-        return null;
+        if (_pooledPreviewModel != null)
+            _pooledPreviewModel.SetActive(false);
+
+        foreach (var r in _selectedRenderers)
+            r.enabled = false;
+
+        _selectedRange.Clear();
+        _selectedRenderers.Clear();
+        _onPreview = false;
     }
 }

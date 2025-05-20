@@ -153,4 +153,40 @@ public class GridTargetManager : MonoBehaviour
 
         return result;
     }
+    public List<GameObject> GetPatternGameObjectsFast(DetectionPatternSO patternSo, AllyTile occupiedTile)
+    {
+        var result = new List<GameObject>();
+        if (patternSo == null || occupiedTile == null || occupiedTile._hitCollider == null)
+            return result;
+
+        // 기준 타일의 그리드 인덱스 구하기
+        if (!TryGetGridIndex(occupiedTile._hitCollider, out int baseRow, out int baseCol))
+            return result;
+
+        // 패턴 오프셋 순회
+        foreach (var ofs in patternSo.cellOffsets)
+        {
+            // dir에 따라 Y축 반전 처리 (위/아래 구분)
+            var applied = occupiedTile.dir
+                ? new Vector2Int(ofs.x, -ofs.y)
+                : new Vector2Int(ofs.x, ofs.y);
+
+            int r = baseRow + applied.y;
+            int c = baseCol + applied.x;
+
+            // 범위 검사
+            if (r < 0 || r >= coliderMat.Length) continue;
+            if (c < 0 || c >= coliderMat[r].arr_row.Length) continue;
+
+            var poly = coliderMat[r].arr_row[c];
+            if (poly != null)
+            {
+                var go = poly.gameObject;
+                if (!result.Contains(go))
+                    result.Add(go);
+            }
+        }
+
+        return result;
+    }
 }
