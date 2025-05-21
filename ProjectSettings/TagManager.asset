@@ -49,6 +49,9 @@ TagManager:
   - name: BackGround
     uniqueID: 652563069
     locked: 0
+  - name: Collider
+    uniqueID: 2550590017
+    locked: 0
   - name: DefenderTiles
     uniqueID: 1388045687
     locked: 0
