@@ -88,7 +88,7 @@ public class StageManager : MonoBehaviour
         
         UIManager.Instance.costManager.StopCostUP(false);
        
-        SoundManager.Instance.PlayBgmList(1,true);
+      
         // 코스트 증가 코루틴 시작
         StartCoroutine(UIManager.Instance.costManager.IncreaseCost());
         
@@ -96,8 +96,17 @@ public class StageManager : MonoBehaviour
         
         // 카드 스폰 시작
         InGameSceneManager.Instance.cardSpawner.CanSpawnCards = true;
+        
 
         StageData stage = GameManager.Instance.currentStageData;
+        if (stage.StageType == StageType.Normal)
+        {
+            SoundManager.Instance.PlayBgmList(1,true);
+        }
+        else if (stage.StageType == StageType.Boss)
+        {
+            SoundManager.Instance.PlayBgmList(2,true);
+        }
         InGameSceneManager.Instance.darkSpawner.DarksCount = stage.DarksCount; // 매 스테이지마다 초기화
         UIManager.Instance.inGameUIManager.SetStageText(stage.StageName);
 

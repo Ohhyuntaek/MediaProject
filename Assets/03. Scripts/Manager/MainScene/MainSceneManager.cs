@@ -91,6 +91,6 @@ public class MainSceneManager : MonoBehaviour
         GameManager.Instance.SetSelectedDawn(selectedDawn);
         bookManager.CloseBook();
         SceneManager.LoadScene("MapScene");
-        SoundManager.Instance.StopBgm();
+        
     }
 }

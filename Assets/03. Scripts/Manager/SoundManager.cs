@@ -96,7 +96,7 @@ public class SoundManager : MonoBehaviour
         if (_bgmPlaylist == null || _bgmPlaylist.Count == 0)
             return;
 
-        // 유효한 인덱스로 클램프
+        
         _bgmIndex = Mathf.Clamp(startIndex, 0, _bgmPlaylist.Count - 1);
         _bgmLoop  = loopPlaylist;
 
