@@ -21,15 +21,15 @@ public class SoundManager : MonoBehaviour
 
     // BGM 재생용
     private AudioSource _bgmSource;
-    [SerializeField]
-    private List<AudioClip> _bgmPlaylist;
+    [Header("BGM 플레이리스트 (Inspector 에 Array 로 할당)")]
+    [SerializeField] private List<AudioClip> _bgmPlaylist;
     private int _bgmIndex;
     private bool _bgmLoop;
     private Coroutine _bgmCoroutine;
 
     private void Awake()
     {
-        
+        // 싱글턴 설정
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -38,11 +38,12 @@ public class SoundManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // BGM Source 인스턴스화
-        _bgmSource = _bgmSourcePrefab;
-        _bgmSource.loop = false; // 개별 곡 자체 루프는 끄고, 플레이리스트 로직에서 관리
+        // BGM Source 셋업
+        _bgmSource = Instantiate(_bgmSourcePrefab, transform);
+        _bgmSource.loop = false; // 개별 트랙 루프는 리스트 로직에서 관리
     }
 
+    //──────────────────────────────────────────────
     // SFX 재생
     public void PlaySfx(AudioClip clip, Vector3 worldPos, bool spatial = true)
     {
@@ -82,23 +83,27 @@ public class SoundManager : MonoBehaviour
         if (_playingSfxCount.TryGetValue(clip, out int cnt) && cnt > 0)
             _playingSfxCount[clip] = cnt - 1;
     }
-   
-    // BGM 재생 (플레이리스트)
+    //──────────────────────────────────────────────
+    // BGM 재생 (플레이리스트 시작 인덱스 지정 가능)
 
     /// <summary>
-    /// BGM 재생을 시작합니다.
-    /// playlist: 재생할 AudioClip 리스트
-    /// loopPlaylist: 리스트 순환 여부
+    /// BGM 플레이리스트 재생을 시작합니다.
+    /// startIndex: 재생할 트랙의 시작 인덱스 (0-based)
+    /// loopPlaylist: 플레이리스트 끝나면 반복 재생 여부
     /// </summary>
-    public void PlayBgmList( bool loopPlaylist = false)
+    public void PlayBgmList(int startIndex, bool loopPlaylist = false)
     {
         if (_bgmPlaylist == null || _bgmPlaylist.Count == 0)
             return;
 
+        // 유효한 인덱스로 클램프
+        _bgmIndex = Mathf.Clamp(startIndex, 0, _bgmPlaylist.Count - 1);
+        _bgmLoop  = loopPlaylist;
+
         // 기존 재생 중단
         StopBgm();
-        _bgmLoop     = loopPlaylist;
-        _bgmIndex    = 0;
+
+        // 새 코루틴 시작
         _bgmCoroutine = StartCoroutine(BgmPlaybackRoutine());
     }
 

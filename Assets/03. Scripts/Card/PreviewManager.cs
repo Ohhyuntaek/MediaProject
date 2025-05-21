@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PreviewManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PreviewManager : MonoBehaviour
     [SerializeField] private List<GameObject> _previewModel;
     [Header("테스트용 타일")]
     [SerializeField] private AllyTile _testTile;
-
+    [SerializeField] private TileManager _tileManager;
     // 풀링된 프리뷰 모델 & 현재 어떤 프리팹을 띄웠는지 추적
     private GameObject _pooledPreviewModel;
     private GameObject _currentModelPrefab;
@@ -27,20 +28,14 @@ public class PreviewManager : MonoBehaviour
         else if (Instance != this) Destroy(gameObject);
     }
 
-    // (1) 카드 스크립트에서 이걸 사용하세요.
+    
+    
     public void ShowPreview(UnitData unitData)
-    {
-        if (_testTile == null || unitData == null) return;
-        ShowPreview(_testTile, unitData);
-    }
-
-    // (2) 실제 프리뷰 로직
-    public void ShowPreview(AllyTile tile, UnitData unitData)
     {
         ClearPreview();
         _onPreview = true;
-
-        // 1) 선택된 모델 프리팹 결정
+        AllyTile tile = _tileManager.GetPreviewedTile();
+        
         int idx = _unitDataList.FindIndex(u => u.AllyType == unitData.AllyType);
         if (idx < 0 || idx >= _previewModel.Count) return;
         var prefab = _previewModel[idx];
@@ -69,11 +64,8 @@ public class PreviewManager : MonoBehaviour
         var sr = _pooledPreviewModel.GetComponent<SpriteRenderer>();
         if (sr != null) sr.flipX = tile.dir;
 
-        // 3) 범위 타일 가져오기 (Overlap 없이 직접 조회)
-        _selectedRange = GridTargetManager.Instance
-            .GetPatternGameObjectsFast(unitData.DetectionPatternSo, tile);
 
-        // 4) SpriteRenderer 캐싱 & 활성화
+        _selectedRange = GridTargetManager.Instance.GetPatternGameObjectsFast(unitData.DetectionPatternSo, tile);
         _selectedRenderers.Clear();
         foreach (var go in _selectedRange)
         {

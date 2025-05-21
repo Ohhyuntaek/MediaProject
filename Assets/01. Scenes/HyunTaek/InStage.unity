@@ -3842,7 +3842,7 @@ PrefabInstance:
     - target: {fileID: 1658298865785598346, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
-      objectReference: {fileID: 771058552}
+      objectReference: {fileID: 631234357}
     - target: {fileID: 1952251884844382582, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: dir
       value: 1
@@ -3866,11 +3866,11 @@ PrefabInstance:
     - target: {fileID: 2911978487895236904, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
-      objectReference: {fileID: 771058553}
+      objectReference: {fileID: 2091649819}
     - target: {fileID: 3778434556333191451, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: _hitCollider
       value: 
-      objectReference: {fileID: 771058551}
+      objectReference: {fileID: 1998034826}
     - target: {fileID: 4471734612707170365, guid: fec05c282d9605546bdd7623d3f7011b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4851,6 +4851,7 @@ MonoBehaviour:
   - {fileID: 4428222100674180596, guid: 4964395f09f1688488ec8590122da171, type: 3}
   - {fileID: 8626517506107298765, guid: 6653535af71e3254d9657356178b4421, type: 3}
   _testTile: {fileID: 421666719}
+  _tileManager: {fileID: 289891718729930317}
 --- !u!1 &543949081
 GameObject:
   m_ObjectHideFlags: 0
@@ -5107,6 +5108,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!60 &631234357 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 447178057971168034, guid: 05c49c721e7e49d43998d7365471371a, type: 3}
+  m_PrefabInstance: {fileID: 771058548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642610532
 GameObject:
   m_ObjectHideFlags: 0
@@ -9535,7 +9541,7 @@ MonoBehaviour:
   _vignetteDuration: 2
   _cameraTransform: {fileID: 330585546}
   _shakeMagnitude: 0.01
-  _shakeInterval: 0.02
+  _shakeInterval: 0.1
 --- !u!1 &1673169217
 GameObject:
   m_ObjectHideFlags: 0
@@ -17681,6 +17687,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983815877}
   m_CullTransparentMesh: 1
+--- !u!60 &1998034826 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3306615517738049657, guid: 05c49c721e7e49d43998d7365471371a, type: 3}
+  m_PrefabInstance: {fileID: 771058548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2006370210
 GameObject:
   m_ObjectHideFlags: 0
@@ -17831,6 +17842,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034236061}
   m_CullTransparentMesh: 1
+--- !u!60 &2091649819 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 9116146621458048533, guid: 05c49c721e7e49d43998d7365471371a, type: 3}
+  m_PrefabInstance: {fileID: 771058548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2098034983
 GameObject:
   m_ObjectHideFlags: 0

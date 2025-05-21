@@ -88,7 +88,7 @@ public class StageManager : MonoBehaviour
         
         UIManager.Instance.costManager.StopCostUP(false);
        
-        SoundManager.Instance.PlayBgmList();
+        SoundManager.Instance.PlayBgmList(1,true);
         // 코스트 증가 코루틴 시작
         StartCoroutine(UIManager.Instance.costManager.IncreaseCost());
         

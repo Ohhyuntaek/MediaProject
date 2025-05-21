@@ -11211,7 +11211,9 @@ MonoBehaviour:
   _bgmSourcePrefab: {fileID: 1256360213}
   _maxSimultaneousPerClip: 5
   _bgmPlaylist:
-  - {fileID: 8300000, guid: 32ce24656880eaa409351c06a8a8ef20, type: 3}
+  - {fileID: 8300000, guid: e143a97c336fa7541bcb63c017485a08, type: 3}
+  - {fileID: 8300000, guid: 62a8fb065c3e85242ba9e83d208b004a, type: 3}
+  - {fileID: 8300000, guid: fea28a8a109fe7c4493f9fa22d74e5d0, type: 3}
 --- !u!4 &1925852893
 Transform:
   m_ObjectHideFlags: 0

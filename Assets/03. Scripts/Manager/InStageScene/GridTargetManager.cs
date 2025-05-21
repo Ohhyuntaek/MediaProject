@@ -174,10 +174,11 @@ public class GridTargetManager : MonoBehaviour
             int r = baseRow + applied.y;
             int c = baseCol + applied.x;
 
-            // 범위 검사
+            // 배열 범위 검사
             if (r < 0 || r >= coliderMat.Length) continue;
             if (c < 0 || c >= coliderMat[r].arr_row.Length) continue;
 
+            // 해당 위치의 콜라이더 오브젝트 추가 (중복 없이)
             var poly = coliderMat[r].arr_row[c];
             if (poly != null)
             {

@@ -158,7 +158,6 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
         
         
         PreviewManager.Instance.ShowPreview(unitData);
-           // ← 그다음에 타일 표시
     }
 
     public void OnPointerExit(PointerEventData eventData)
