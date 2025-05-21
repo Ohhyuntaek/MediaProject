@@ -28,7 +28,7 @@ public class InGameSceneManager : MonoBehaviour
     private void Start()
     {
         // 현재 스테이지 데이터 존재 시 자동 시작
-        if (GameManager.Instance.currentStageData != null)
+        if (RuntimeDataManager.Instance.currentStageData != null)
         {
             stageManager.StartStage();
         }

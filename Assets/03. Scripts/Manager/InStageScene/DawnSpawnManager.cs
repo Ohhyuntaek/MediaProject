@@ -12,7 +12,7 @@ public class DawnSpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        SpawnDawn(GameManager.Instance.GetSelectedDawn(), spawnPoint);
+        SpawnDawn(RuntimeDataManager.Instance.GetSelectedDawn(), spawnPoint);
     }
 
     /// <summary>

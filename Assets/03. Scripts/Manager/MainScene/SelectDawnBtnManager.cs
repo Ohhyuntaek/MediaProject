@@ -15,7 +15,7 @@ public class SelectDawnBtnManager : MonoBehaviour
     public void OnSelect()
     {
         // 1. GameManager에 저장
-        GameManager.Instance.SetSelectedDawn(dawn);
+        RuntimeDataManager.Instance.SetSelectedDawn(dawn);
 
         // 2. UI 갱신
         if (dawnImage != null)

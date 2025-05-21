@@ -1,20 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class RuntimeDataManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static RuntimeDataManager Instance;
     
     [Header("선택한 Dawn 캐릭터")]
     [SerializeField] private Dawn selectedDawn;
     
+    [Header("맵")]
+    public List<StageNode> stageGraphData = new();
+    
     [Header("현재 스테이지")]
-    [SerializeField] public StageData currentStageData;
+    public StageData currentStageData;
     
     [Header("진행 노드 ID")]
-    [SerializeField] public int currentStageNodeId = -1;
+    public int currentStageNodeId = -1;
 
     [Header("강화 효과")]
-    [SerializeField] public Enhancement enhancement;
+    public Enhancement enhancement;
     void Awake()
     {
         if (Instance == null)

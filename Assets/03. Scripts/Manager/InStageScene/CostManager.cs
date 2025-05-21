@@ -12,7 +12,7 @@ public class CostManager : MonoBehaviour
     private float costTimer = 0;
     private float totalCost = 0f;
 
-    private float costMultiplier => GameManager.Instance.enhancement.costMultiplier;
+    private float costMultiplier => RuntimeDataManager.Instance.enhancement.costMultiplier;
     public float TotalCost
     {
         get => totalCost;

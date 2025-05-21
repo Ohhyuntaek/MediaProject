@@ -78,8 +78,8 @@ public class StageManager : MonoBehaviour
     public void StartStage()
     {
         // 쿨다운 초기화
-        if (GameManager.Instance.GetSelectedDawn() != null)
-            GameManager.Instance.GetSelectedDawn().ResetActiveCooldown();
+        if (RuntimeDataManager.Instance.GetSelectedDawn() != null)
+            RuntimeDataManager.Instance.GetSelectedDawn().ResetActiveCooldown();
         
         SetStageState(StageState.Playing);
         
@@ -98,7 +98,7 @@ public class StageManager : MonoBehaviour
         InGameSceneManager.Instance.cardSpawner.CanSpawnCards = true;
         
 
-        StageData stage = GameManager.Instance.currentStageData;
+        StageData stage = RuntimeDataManager.Instance.currentStageData;
         if (stage.StageType == StageType.Normal)
         {
             SoundManager.Instance.PlayBgmList(1,true);
@@ -150,7 +150,7 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(UIManager.Instance.clearUIManager.HandleStageClearSequence(GameManager.Instance.currentStageData.StageType));
+        StartCoroutine(UIManager.Instance.clearUIManager.HandleStageClearSequence(RuntimeDataManager.Instance.currentStageData.StageType));
     }
 
     // /// <summary>

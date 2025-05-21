@@ -62,9 +62,17 @@ public class StageTreeGenerator : MonoBehaviour
 
     void Start()
     {
-        StageNode root = GenerateStageGraph();  // 그래프 생성
+        if (RuntimeDataManager.Instance.stageGraphData.Count > 0)
+        {
+            allNodes = RuntimeDataManager.Instance.stageGraphData;
+            currentNode = allNodes.FirstOrDefault(n => n.id == RuntimeDataManager.Instance.currentStageNodeId);
+        }
+        else
+        {
+            StageNode root = GenerateStageGraph();  // 그래프 생성
+        }
         
-        int storedId = GameManager.Instance.currentStageNodeId;
+        int storedId = RuntimeDataManager.Instance.currentStageNodeId;
 
         if (storedId != -1)  // 저장된 위치가 있으면 복원
         {
@@ -271,10 +279,10 @@ public class StageTreeGenerator : MonoBehaviour
         currentNode = clickedNode;
         currentNode.isCurrent = true;
 
-        GameManager.Instance.currentStageData = clickedNode.dataAsset;
-        GameManager.Instance.currentStageNodeId = clickedNode.id;  // 현재 노드 ID 저장
-
-
+        RuntimeDataManager.Instance.stageGraphData = allNodes;
+        RuntimeDataManager.Instance.currentStageData = clickedNode.dataAsset;
+        RuntimeDataManager.Instance.currentStageNodeId = clickedNode.id;  // 현재 노드 ID 저장
+        
         foreach (var node in allNodes)
         {
             var go = nodeMap[node];

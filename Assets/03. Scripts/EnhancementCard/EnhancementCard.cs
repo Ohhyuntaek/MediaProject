@@ -59,18 +59,18 @@ public class EnhancementCard : MonoBehaviour
         switch (data.EnhancementType)
         {
             case EnhancementType.CostUp:
-                GameManager.Instance.enhancement.CostSpeedUp(defferenceRandomValue);
+                RuntimeDataManager.Instance.enhancement.CostSpeedUp(defferenceRandomValue);
                 break;
             case EnhancementType.CardSpawnSpeedUp:
-                GameManager.Instance.enhancement.CardSpawnSpeedUP(defferenceRandomValue);
+                RuntimeDataManager.Instance.enhancement.CardSpawnSpeedUP(defferenceRandomValue);
                 break;
             case EnhancementType.CooldownSpeedUp:
                 if (playerDawn != null)
-                    GameManager.Instance.enhancement.CooldownMultiplier *= defferenceRandomValue;
+                    RuntimeDataManager.Instance.enhancement.CooldownMultiplier *= defferenceRandomValue;
                 break;
             case EnhancementType.EnergyChargeSpeedUp:
                 if (playerDawn != null)
-                    GameManager.Instance.enhancement.EnergyChargeMultiplier *= defferenceRandomValue;
+                    RuntimeDataManager.Instance.enhancement.EnergyChargeMultiplier *= defferenceRandomValue;
                 break;
         }
 

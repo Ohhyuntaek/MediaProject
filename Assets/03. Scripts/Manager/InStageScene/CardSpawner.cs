@@ -20,7 +20,7 @@ public class CardSpawner : MonoBehaviour
         set { canSpawnCards = value; }
     }
 
-    private float cardSpawnIntervalMultiplier => GameManager.Instance.enhancement.cardSpawnIntervalMultiplier; 
+    private float cardSpawnIntervalMultiplier => RuntimeDataManager.Instance.enhancement.cardSpawnIntervalMultiplier; 
     
     private float totalCardSpawnInterval
     {

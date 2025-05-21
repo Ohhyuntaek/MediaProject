@@ -25,8 +25,8 @@ public class Dawn : MonoBehaviour
     private int _MaxEnergy;
     private bool _CanUpdatePassive = true;
 
-    private float cooldownMultiplier => GameManager.Instance.enhancement.cooldownMultiplier;
-    private float energyChargeMultiplier => GameManager.Instance.enhancement.energyChargeMultiplier;
+    private float cooldownMultiplier => RuntimeDataManager.Instance.enhancement.cooldownMultiplier;
+    private float energyChargeMultiplier => RuntimeDataManager.Instance.enhancement.energyChargeMultiplier;
     
     public Animator Animator => _animator;
     public DawnData DawnData => dawnData;

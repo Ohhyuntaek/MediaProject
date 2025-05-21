@@ -18,7 +18,7 @@ public class InGameUIManager : MonoBehaviour
     private void Start()
     {
         // UI 초기화
-        UpdateDawnImage(GameManager.Instance.GetSelectedDawn().DawnData);
+        UpdateDawnImage(RuntimeDataManager.Instance.GetSelectedDawn().DawnData);
         SetDawnCoolTimeProgress(InGameSceneManager.Instance.dawnSpawnManager.spawnedDawn);
 
     }
