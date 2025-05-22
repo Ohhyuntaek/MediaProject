@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    [Header("SFX 재생용 AudioSource 프리팹")]
-    [SerializeField] private AudioSource _sfxSourcePrefab;
-    [Header("BGM 재생용 AudioSource 프리팹")]
-    [SerializeField] private AudioSource _bgmSourcePrefab;
+    [Header("SFX 재생용 AudioSource 프리팹")] [SerializeField]
+    private AudioSource _sfxSourcePrefab;
 
-    [Header("동시 재생 제한 (SFX)")]
-    [Tooltip("같은 클립을 동시에 이 개수 이상 재생하지 않습니다.")]
-    [SerializeField] private int _maxSimultaneousPerClip = 5;
+    [Header("BGM 재생용 AudioSource 프리팹")] [SerializeField]
+    private AudioSource _bgmSourcePrefab;
+
+    [Header("동시 재생 제한 (SFX)")] [Tooltip("같은 클립을 동시에 이 개수 이상 재생하지 않습니다.")] [SerializeField]
+    private int _maxSimultaneousPerClip = 5;
 
     // SFX 풀 및 재생 카운트
     private List<AudioSource> _sfxPool = new List<AudioSource>();
@@ -21,13 +23,64 @@ public class SoundManager : MonoBehaviour
 
     // BGM 재생용
     private AudioSource _bgmSource;
-    [Header("BGM 플레이리스트 (Inspector 에 Array 로 할당)")]
-    [SerializeField] private List<AudioClip> _bgmPlaylist;
+
+    [Header("BGM 플레이리스트 (Inspector 에 Array 로 할당)")] [SerializeField]
+    private List<AudioClip> _bgmPlaylist;
+
     private int _bgmIndex;
     private bool _bgmLoop;
     private Coroutine _bgmCoroutine;
 
-    private void Awake()
+    private Slider _sfxSlider;
+    private Slider _bgmSlider;
+
+    private float _sfxVolume = 1f;
+    private float _bgmVolume = 1f;
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 1) 이전에 연결된 이벤트는 제거
+        if (_sfxSlider != null)
+            _sfxSlider.onValueChanged.RemoveListener(OnSfxVolumeChanged);
+        if (_bgmSlider != null)
+            _bgmSlider.onValueChanged.RemoveListener(OnBgmVolumeChanged);
+
+        // 2) 씬에서 슬라이더들 찾아 연결 (태그나 이름, 직접 Find 등)
+        var sfxGO = GameObject.FindWithTag("SFXSlider");
+        _sfxSlider = sfxGO ? sfxGO.GetComponent<Slider>() : null;
+
+        var bgmGO = GameObject.FindWithTag("BgmSlider");
+        _bgmSlider = bgmGO ? bgmGO.GetComponent<Slider>() : null;
+
+        // 3) 찾았으면 리스너 다시 추가
+        if (_sfxSlider != null)
+        {
+            _sfxSlider.value=_sfxVolume;
+            Debug.Log(_sfxVolume + "설정");
+            _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
+        }
+
+        if (_bgmSlider != null)
+        {
+            _bgmSlider.value = _bgmVolume;
+            _bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
+        }
+
+       
+    }
+
+
+private void Awake()
     {
         // 싱글턴 설정
         if (Instance != null && Instance != this)
@@ -144,5 +197,27 @@ public class SoundManager : MonoBehaviour
         }
 
         _bgmCoroutine = null;
+    }
+    public void OnSfxVolumeChanged(float value)
+    {
+        Debug.Log("[SoundManager] SFX Volume → " + value);
+        // 프리팹 기본 볼륨 설정
+        _sfxSourcePrefab.volume = value;
+        _sfxVolume = value;
+
+        // 이미 풀에 생성된 모든 SFX AudioSource에도 적용
+        foreach (var src in _sfxPool)
+        {
+            src.volume = value;
+        }
+    }
+    public void OnBgmVolumeChanged(float value)
+    {
+        _bgmVolume = value;
+        Debug.Log("[SoundManager] BGM Volume → " + value);
+        if (_bgmSource != null)
+        {
+            _bgmSource.volume = value;
+        }
     }
 }

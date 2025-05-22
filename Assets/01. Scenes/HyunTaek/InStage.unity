@@ -18745,7 +18745,10 @@ MonoBehaviour:
   _sfxSourcePrefab: {fileID: 5756962669435070162}
   _bgmSourcePrefab: {fileID: 478755051}
   _maxSimultaneousPerClip: 5
-  _bgmPlaylist: []
+  _bgmPlaylist:
+  - {fileID: 8300000, guid: e143a97c336fa7541bcb63c017485a08, type: 3}
+  - {fileID: 8300000, guid: 62a8fb065c3e85242ba9e83d208b004a, type: 3}
+  - {fileID: 8300000, guid: fea28a8a109fe7c4493f9fa22d74e5d0, type: 3}
 --- !u!1 &6859054811234897535
 GameObject:
   m_ObjectHideFlags: 0

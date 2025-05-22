@@ -25,7 +25,7 @@ public class BossDropAttackState : IState<Boss>
        
         
         yield return new WaitForSeconds(1f);
-        if (boss.MoveCount >= 5)
+        if (boss.MoveCount >= 4)
         {
             boss.transform.position = boss.InitialPosition;
             boss.MoveCount = 0;

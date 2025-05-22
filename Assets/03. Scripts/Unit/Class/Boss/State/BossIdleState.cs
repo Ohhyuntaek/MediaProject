@@ -21,7 +21,7 @@ public class BossIdleState : IState<Boss>
         if (_timer <= 0f)
         {   
             
-            if (boss.CheckDistance() || boss.MoveCount>=5)
+            if (boss.CheckDistance() || boss.MoveCount>=4)
             {
                 _finished = true;
                 boss.ChangeState(new BossDropAttackState());
