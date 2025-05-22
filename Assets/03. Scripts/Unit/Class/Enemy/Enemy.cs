@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        
         _stateMachine?.Update();
 
         hpSlider.value = _hp;
