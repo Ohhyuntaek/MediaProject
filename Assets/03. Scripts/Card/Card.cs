@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using ColorUtility = Unity.VisualScripting.ColorUtility;
 
 public enum CardType
 {
@@ -23,7 +25,8 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
     [SerializeField] private Button cardButton; // 카드 클릭용 버튼
     [SerializeField] private TMP_Text costText; // 카드에 표시할 cost 텍스트
     [SerializeField] private AudioClip selectSound;
-    [SerializeField] private Image unitImage; 
+    [SerializeField] private Image unitImage;
+    [SerializeField] private Image costColor;
 
     private AllyType allyType;
     private LineType lineType;
@@ -81,6 +84,27 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
         this.allyType = data.AllyType;
         this.cardType = (CardType)data.UnitType; // enum 간 매핑
 
+        switch (lineType)
+        {
+            case LineType.Front:
+            {
+                costColor.color = HexToColor("#F75A5A");
+                break;
+            } 
+            case LineType.Mid:
+            {
+                costColor.color = HexToColor("#FFD63A");
+                break;
+            }
+            case LineType.Rear:
+            {
+                costColor.color = HexToColor("#6DE1D2");
+                break;
+            }
+            default:
+                break;
+        }
+        
         // cost 텍스트 표시
         if (costText != null)
             costText.text = unitData.Cost.ToString();
@@ -155,13 +179,32 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
-        
         PreviewManager.Instance.ShowPreview(unitData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         PreviewManager.Instance.ClearPreview();
+    }
+    
+    /// <summary>
+    /// Hex를 Color로 리턴합니다.
+    /// </summary>
+    /// <param name="hex">Hex (#생략 가능)</param>
+    /// <returns></returns>
+    public static Color HexToColor(string hex)
+    {
+        hex = hex.Replace("#", ""); // "#" 문자 제거
+        if (hex.Length != 6)
+        {
+            Debug.LogError("유효하지 않은 Hex 값입니다.");
+            return Color.white;
+        }
+
+        byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+        byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+        byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+        return new Color32(r, g, b, 255);
     }
 }
