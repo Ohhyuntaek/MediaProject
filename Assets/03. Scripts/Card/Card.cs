@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Sirenix.Utilities;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using ColorUtility = Unity.VisualScripting.ColorUtility;
 
 public enum CardType
 {
@@ -27,14 +26,15 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
     [SerializeField] private AudioClip selectSound;
     [SerializeField] private Image unitImage;
     [SerializeField] private Image costColor;
-
+    [SerializeField] private MMF_Player spawnFeedback;
+    [Header("어둡게 할 계수 (0~1 사이)")]
+    [SerializeField] private float darkenMultiplier = 0.6f; // 어둡게 만드는 강도 (예: 60%)
+    
     private AllyType allyType;
     private LineType lineType;
     private UnitData unitData;
     private Dictionary<Image, Color> originalColors = new(); // 자식 이미지와 원래 색 저장
     
-    [Header("어둡게 할 계수 (0~1 사이)")]
-    [SerializeField] private float darkenMultiplier = 0.6f; // 어둡게 만드는 강도 (예: 60%)
     
     void Start()
     {
@@ -83,7 +83,7 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
         this.lineType = lineType;
         this.allyType = data.AllyType;
         this.cardType = (CardType)data.UnitType; // enum 간 매핑
-
+        
         switch (lineType)
         {
             case LineType.Front:
@@ -114,6 +114,9 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
         {
             unitImage.sprite = unitData.Sprite;
         }
+        
+        if (spawnFeedback != null)
+            spawnFeedback.PlayFeedbacks();
     }
 
     public void OnButtonClick()

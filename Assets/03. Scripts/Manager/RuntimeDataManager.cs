@@ -19,6 +19,13 @@ public class RuntimeDataManager : MonoBehaviour
 
     [Header("강화 효과")]
     public Enhancement enhancement;
+    
+    [Header("재화 관리 및 계산")]
+    public LumenCalculator lumenCalculator;
+    
+    [Header("수집한 아이템")]
+    public ItemCollector itemCollector;
+    
     void Awake()
     {
         if (Instance == null)
