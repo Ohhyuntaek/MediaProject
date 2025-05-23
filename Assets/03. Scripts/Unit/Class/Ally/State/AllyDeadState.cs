@@ -4,7 +4,7 @@ public class AllyDeadState : IState<Ally>
 {
     public void Enter(Ally ally)
     {
-        ally.Animator?.SetTrigger("4_Death");
+        ally.Animator?.CrossFade("Death", 0f);
         
     }
 
