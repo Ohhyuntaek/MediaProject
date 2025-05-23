@@ -21,7 +21,7 @@ public class AllySkillParticleGroup
 public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager Instance { get; private set; }
-
+    
     [Header("일반 공격 파티클 (단일)")]
     [SerializeField]
     private List<AllyParticlePair> _particlePairs = new List<AllyParticlePair>();
@@ -32,7 +32,8 @@ public class ParticleManager : MonoBehaviour
 
     private Dictionary<AllyType, ParticleSystem> _attackDictionary;
     private Dictionary<AllyType, List<ParticleSystem>> _skillDictionary;
-    
+    [Header("Dawn effect Material")] 
+    [SerializeField]private Material _material;
     [SerializeField] private GameObject _vignetteObject;
     [Tooltip("비네팅 지속시간")]
     [SerializeField] private float _vignetteDuration = 2f;
@@ -47,7 +48,8 @@ public class ParticleManager : MonoBehaviour
     
     private bool _isVignetteActive = false;
     private Vector3 _cameraOriginalPos;
-
+    private GameObject _dawn;
+    private Material baseMaterial;
     private void Awake()
     {
         // 싱글턴 설정
@@ -75,6 +77,12 @@ public class ParticleManager : MonoBehaviour
             if (!_skillDictionary.ContainsKey(group.allyType))
                 _skillDictionary.Add(group.allyType, group.particleSystems);
         }
+    }
+
+    private void Start()
+    {
+        _dawn = GameObject.FindGameObjectWithTag("Player");
+        baseMaterial = _dawn.GetComponent<SpriteRenderer>().material;
     }
 
     /// <summary>
@@ -168,9 +176,10 @@ public class ParticleManager : MonoBehaviour
 
     private IEnumerator VignetteAndShakeRoutine()
     {
+        _dawn.GetComponent<SpriteRenderer>().material = _material;
         _isVignetteActive = true;
         _vignetteObject.SetActive(true);
-
+        
         
         StartCoroutine(CameraShakeRoutine(_vignetteDuration));
 
@@ -195,6 +204,7 @@ public class ParticleManager : MonoBehaviour
         }
         // 원위치 복원
         _cameraTransform.localPosition = _cameraOriginalPos;
+        _dawn.GetComponent<SpriteRenderer>().material = baseMaterial;
     }
 
     #endregion

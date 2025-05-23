@@ -187,6 +187,7 @@ public class Dawn : MonoBehaviour
            
         };
     }
+    
     public float currentEnergy {get => _currentEnergy; set => _currentEnergy = value;}
     
 }
