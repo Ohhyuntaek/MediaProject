@@ -30,7 +30,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                 switch (selectedDebuff)
                 {
                     case DebuffType.DamageAmp:
-                        enemy.ApplyDefenseBuffDebuff(2f, 3f, false);
+                        enemy.ApplyDefensDebuff();
                         ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,enemy.transform.position,0); //파이어볼
                         break;
                     case DebuffType.Slow://아이스볼

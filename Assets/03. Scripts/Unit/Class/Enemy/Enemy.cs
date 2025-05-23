@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private bool _hide = false;
     private float _damage;
     private Dawn _dawn;
+    private bool _damagedDebuff=false;
     [SerializeField] private Slider hpSlider;
     
     public Animator Animator => _animator;
@@ -115,8 +116,12 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     // 외부에서 데미지를 받을 때 호출
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
+        if (_damagedDebuff)
+        {
+            damage *= 1.2f;
+        }
         if (!_hide)
         {
             _hp -= damage;
@@ -219,19 +224,9 @@ public class Enemy : MonoBehaviour, IDamageable
         _moveSpeed = originalSpeed;
     }
 
-    public void ApplyDefenseBuffDebuff(float times, float duration, bool buffOrDebuff)
+    public void ApplyDefensDebuff()
     {
-        float originalDefense = -_enemyData.Deffense;
-        if (buffOrDebuff)
-        {
-            _defense = originalDefense * times;
-        }
-        else
-        {
-            originalDefense = originalDefense / times;
-        }
-
-        StartCoroutine(RemoveDeffenseBuffDebuffAfter(duration, originalDefense));
+        _damagedDebuff = true;
     }
     
     private IEnumerator RemoveDeffenseBuffDebuffAfter(float duration, float originalDefense)

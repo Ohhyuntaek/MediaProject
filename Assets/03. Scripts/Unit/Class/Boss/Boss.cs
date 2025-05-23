@@ -112,7 +112,7 @@ public class Boss : MonoBehaviour, IDamageable
         _player.GetComponent<Dawn>().TakeDamage(dmg);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         _hp -= damage;
         Debug.Log("남은 hp" + _hp);
