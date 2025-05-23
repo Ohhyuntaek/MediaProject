@@ -63,6 +63,6 @@ public class BountyHunterSpecialAttackState : IState<Ally>
             bombComp = bombInstance.AddComponent<BountyHunterBomb>();
 
         // 4) 초기화 호출
-        bombComp.Init(ally.UnitData.DetectionPatternSo, _hitPos);
+        bombComp.Init(ally.UnitData, _hitPos,false);
     }
 }

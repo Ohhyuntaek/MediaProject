@@ -2,23 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BountyHunterBomb : MonoBehaviour
 {
     
     [SerializeField] private LayerMask enemyLayer;
-
+    List<Vector2Int> NomalRange =new List<Vector2Int>{new Vector2Int(0,0),new Vector2Int(1,0),new Vector2Int(0,1),new Vector2Int(1,1)};
+    List<Vector2Int> RainforceRange =new List<Vector2Int>{new Vector2Int(0,0),new Vector2Int(1,0),new Vector2Int(0,1),new Vector2Int(1,1),new Vector2Int(-1,0),new Vector2Int(-1,1)};
     private Animator _animator;
-    private DetectionPatternSO _pattern;
+    private List<Vector2Int> _pattern;
+    
     private Transform _spawnPosition;
+    private UnitData _unitData;
 
+    private bool dir;
+    
     
 
     /// <summary>
     /// 외부에서 초기화할 때 호출하세요.
     /// </summary>
-    public void Init(DetectionPatternSO pattern, Transform spawnPosition)
+    public void Init(UnitData unitData, Transform spawnPosition,bool isRainforce)
     {
-        _pattern       = pattern;
+        _unitData = unitData;
+        if (isRainforce)
+        {
+            _pattern = RainforceRange;
+        }
+        else
+        {
+            _pattern = NomalRange;
+        }
+       
         _spawnPosition = spawnPosition;
         enemyLayer = LayerMask.GetMask("Enemy", "Boss");
     }
@@ -56,14 +71,14 @@ public class BountyHunterBomb : MonoBehaviour
     
     private void ExplodeTargets()
     {
-        // 1) 소환 지점 월드 좌표
+        
         Vector2 worldPos = _spawnPosition.position;
 
-        // 2) 해당 지점이 속한 PolygonCollider2D 얻기
+       
         if (!GridTargetManager.Instance.TryGetColliderAtPosition(worldPos, out PolygonCollider2D hitPoly))
             return;
 
-        // 3) 그 콜라이더를 기반으로 행·열 인덱스 얻기
+        
         if (!GridTargetManager.Instance.TryGetGridIndex(hitPoly, out int baseRow, out int baseCol))
             return;
 
@@ -72,13 +87,26 @@ public class BountyHunterBomb : MonoBehaviour
         filter.SetLayerMask(enemyLayer);
         filter.useTriggers = true;
         Collider2D[] buffer = new Collider2D[16];
-
-        
-        foreach (var ofs in _pattern.cellOffsets)
+        if (hitPoly.gameObject.name.Contains("Up"))
         {
+            dir = false;
+        }
+        else
+        {
+            dir = true;
+        }
+        
+        foreach (var ofs in _pattern)
+        {
+            
             int row = baseRow + ofs.y;
             int col = baseCol + ofs.x;
-
+            if (dir)
+            {
+                row = baseRow - ofs.y;
+                col = baseCol + ofs.x;
+            }
+            
            
             if (row < 0 || row >= GridTargetManager.Instance.coliderMat.Length) continue;
             if (col < 0 || col >= GridTargetManager.Instance.coliderMat[row].arr_row.Length) continue;

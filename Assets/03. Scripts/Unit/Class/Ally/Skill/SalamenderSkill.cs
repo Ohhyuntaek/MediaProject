@@ -50,7 +50,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
                         }
                         break;
                 }
-                enemy.TakeDamage(10);
+                enemy.TakeDamage(owner.BASEATTACK*2);
                 
                
                
@@ -59,7 +59,7 @@ public class SalamenderSkill : ISkill<Ally> //selemender
             {
                 // 보스에게는 CC만 적용
                 boss.ApplyCC();
-                boss.TakeDamage(10);
+                boss.TakeDamage(owner.BASEATTACK*2);
                 ParticleManager.Instance.PlaySkillParticle(AllyType.Salamander,boss.transform.position,(int)selectedDebuff);
             }
         }

@@ -172,10 +172,10 @@ public class Ally : MonoBehaviour
         var pattern = UnitData.DetectionPatternSo.cellOffsets;
         foreach (var ofs in pattern)
         {
-            // 4-1) 좌우 반전 고려
+            
             var applied = (_occupiedTile.dir)  // dir=false → up, dir=true → down (flip 여부에 따라)
-                ? new Vector2Int(ofs.x, -ofs.y)    // 아래 행이면 그대로
-                : new Vector2Int(ofs.x, ofs.y);  // 위 행이면 X 반전
+                ? new Vector2Int(ofs.x, -ofs.y)   
+                : new Vector2Int(ofs.x, ofs.y); 
 
             int row = baseRow + applied.y;
             int col = baseCol + applied.x;

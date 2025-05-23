@@ -5,4 +5,5 @@ using System.Collections.Generic;
 public class DetectionPatternSO : ScriptableObject
 {
    [SerializeField]public List<Vector2Int> cellOffsets = new List<Vector2Int>();
+   
 }
