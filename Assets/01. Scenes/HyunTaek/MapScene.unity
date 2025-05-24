@@ -3107,10 +3107,10 @@ MonoBehaviour:
   bossStageData: {fileID: 11400000, guid: b58960ee92d49554e9890ae554b0d09f, type: 2}
   shopStageDataList:
   - {fileID: 11400000, guid: 7849dc50b4284cf40add40ac18a978d1, type: 2}
-  defaultPathSprite: {fileID: 543281633, guid: b8f565f924cbf564d881696e0a969baa, type: 3}
-  highlightedPathSprite: {fileID: 30967774, guid: d98829177e709d14ea32d03345b7f545, type: 3}
-  nodeRadius: 80
-  pathThickness: 35
+  defaultPathSprite: {fileID: 118721478, guid: a6ae458264a4a8e42a10f166c8becc96, type: 3}
+  highlightedPathSprite: {fileID: 118721478, guid: a6ae458264a4a8e42a10f166c8becc96, type: 3}
+  nodeRadius: 70
+  pathThickness: 15
   totalHeight: 800
 --- !u!4 &2027517952
 Transform:

@@ -23,6 +23,7 @@ public class TitleSceneController : MonoBehaviour
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene("MainScene");
+        // SceneManager.LoadScene("MainScene");
+        LoadingSceneManager.LoadScene("MainScene");
     }
 }
