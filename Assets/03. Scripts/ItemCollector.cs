@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
+    [SerializeField]
     private List<ItemData> selectedItems;
 
     public List<ItemData> GetSelectedItem() => selectedItems;

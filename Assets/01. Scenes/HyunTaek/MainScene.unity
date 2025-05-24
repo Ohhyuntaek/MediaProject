@@ -1795,7 +1795,7 @@ MonoBehaviour:
   currentStageNodeId: -1
   enhancement: {fileID: 2004168310}
   lumenCalculator: {fileID: 355092559}
-  itemCollector: {fileID: 0}
+  itemCollector: {fileID: 1702333682}
 --- !u!1 &253182032
 GameObject:
   m_ObjectHideFlags: 0
@@ -9640,6 +9640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7331c98fcab7544fa66dd51f9d73306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedItems: []
 --- !u!1 &1717900375
 GameObject:
   m_ObjectHideFlags: 0

@@ -182,14 +182,14 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        PreviewManager.Instance.ShowPreview(unitData);
-        PreviewManager.Instance.ShowTooltip(unitData);
+        InGameSceneManager.Instance.previewManager.ShowPreview(unitData);
+        InGameSceneManager.Instance.previewManager.ShowTooltip(unitData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        PreviewManager.Instance.ClearPreview();
-        PreviewManager.Instance.ClearToolTip();
+        InGameSceneManager.Instance.previewManager.ClearPreview();
+        InGameSceneManager.Instance.previewManager.ClearToolTip();
     }
     
     /// <summary>

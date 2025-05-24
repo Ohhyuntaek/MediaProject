@@ -17,12 +17,12 @@ public class InGameSceneManager : MonoBehaviour
     
     [Header("Manager 및 Spawner")]
     [SerializeField] public StageManager stageManager;
-    
     [SerializeField] public AllyPoolManager allyPoolManager;
     [SerializeField] public DawnSpawnManager dawnSpawnManager;
     [SerializeField] public DarkSpawner darkSpawner;
     [SerializeField] public CardSpawner cardSpawner;
     [SerializeField] public TileManager tileManager;
+    [SerializeField] public PreviewManager previewManager;
     
 
     private void Start()

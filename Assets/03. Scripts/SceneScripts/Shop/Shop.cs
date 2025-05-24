@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -36,8 +37,6 @@ public class Shop : MonoBehaviour
     {
         mapAnimator = GetComponent<Animator>();
         SetCanvasGroupActive(mapCanvasGroup, false);
-        
-        // lumenText.text = RuntimeDataManager.Instance.lumenCalculator.Lumen.ToString();
         SetupShopItems();
     }
 
@@ -76,9 +75,10 @@ public class Shop : MonoBehaviour
 
                 // 구매 성공 시:
                 RuntimeDataManager.Instance.lumenCalculator.RemoveLumen(data.ItemPrice);
-                lumenText.text = RuntimeDataManager.Instance.lumenCalculator.Lumen.ToString();
 
                 RuntimeDataManager.Instance.itemCollector.SelectItem(data);
+                
+                SceneManager.LoadScene("MapScene");
             });
         }
     }

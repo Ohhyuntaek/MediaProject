@@ -8359,7 +8359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1401667503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9094,7 +9094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403542937766767465, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8275575550405795535, guid: 1bc27cfe04daf8b499c92c779fc3dd96, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -19276,6 +19276,7 @@ MonoBehaviour:
   darkSpawner: {fileID: 8498888060027763543}
   cardSpawner: {fileID: 3984260822027024718}
   tileManager: {fileID: 289891718729930317}
+  previewManager: {fileID: 533918869}
 --- !u!114 &7025816221929509699
 MonoBehaviour:
   m_ObjectHideFlags: 0

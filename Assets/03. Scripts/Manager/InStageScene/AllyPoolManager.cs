@@ -51,7 +51,7 @@ public class AllyPoolManager : MonoBehaviour
     /// <returns></returns>
     public GameObject SpawnAlly(UnitData unitData, LineType lineType)
     {
-        PreviewManager.Instance.ClearPreview();
+        InGameSceneManager.Instance.previewManager.ClearPreview();
         AllyTile tile = InGameSceneManager.Instance.tileManager.GetPreviewedTile();
         if (tile == null) return null;
 

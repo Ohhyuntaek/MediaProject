@@ -56,7 +56,7 @@ public class ClearUIManager : MonoBehaviour
 
         if (stageType == StageType.Normal)
         {
-            ShowEnhancementCard();    
+            ShowEnhancementCard();
         }
         else if (stageType == StageType.Boss)
         {
@@ -136,6 +136,8 @@ public class ClearUIManager : MonoBehaviour
     /// </summary>
     public void OnReturnToMap()
     {
+        RuntimeDataManager.Instance.lumenCalculator.AddLumen(10);
+        
         SceneManager.LoadScene("MapScene");
     }
 }

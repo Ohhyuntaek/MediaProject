@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 367443240}
   - component: {fileID: 367443239}
   - component: {fileID: 367443238}
+  - component: {fileID: 367443242}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -537,6 +538,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &367443242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367443237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bbdea00a9d0f7c4e910fe5af6c414ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backButton: {fileID: 1700445490}
+  lumenText: {fileID: 942168327}
 --- !u!1 &383061889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,6 +2424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7331c98fcab7544fa66dd51f9d73306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedItems: []
 --- !u!4 &1229234824
 Transform:
   m_ObjectHideFlags: 0
@@ -4093,7 +4109,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1700445491}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 367443242}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: OnBackButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1700445491
 MonoBehaviour:
   m_ObjectHideFlags: 0
