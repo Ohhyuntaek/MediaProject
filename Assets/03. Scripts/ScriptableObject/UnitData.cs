@@ -31,7 +31,6 @@ public class UnitData : ScriptableObject
     [Title("스킬 관련 공통")]
     [SerializeField, LabelText("스킬 쿨타임")] private float _skillCoolTime;
     [SerializeField, LabelText("스킬 이름")] private string _skillname;
-    [SerializeField, LabelText("스킬 관련 설명, 추후 툴팁 개발 가능성")] private string _skilldescripter;
     [SerializeField, LabelText("스킬 이펙트")] private List<GameObject> _skillEffect;
     [SerializeField, LabelText("스킬 범위/단일")] private TargetingType _targetingType;
 
@@ -45,8 +44,12 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("코스트")] private int cost;
 
     [FormerlySerializedAs("_image")]
-    [Title("초상화")] 
-    [SerializeField, LabelText("초상화")] private Sprite _sprite;   
+    [Title("툴팁관련")] 
+    [SerializeField, LabelText("초상화")] private Sprite _sprite;
+    [SerializeField, LabelText("추천 텍스트")] private string _recomendText;
+    [SerializeField, LabelText("일반공격 텍스트")] private string _nomalText;
+    [SerializeField, LabelText("스킬 관련 설명, 추후 툴팁 개발 가능성")] private string _skilldescripter;
+       
     
     [Title("사운드")]
     [SerializeField, LabelText("공격사운드")] private AudioClip[] attackSfx;
@@ -85,5 +88,7 @@ public class UnitData : ScriptableObject
     public AudioClip[] AttackSound => attackSfx;
     public AudioClip[] DeathSound => deathSfx;
     public AudioClip[] SkillSound => skillSfx;
-    
+    public string NomalDescriptor => _nomalText;
+    public string RecomendDescriptor => _recomendText;
+
 }

@@ -8,6 +8,14 @@ TagManager:
   - TargetTileLeft
   - SFXSlider
   - BgmSlider
+  - AttackText
+  - DurationText
+  - TypeText
+  - RecomedText
+  - NomalText
+  - SkillText
+  - UnitNameText
+  - Portrait
   layers:
   - Default
   - TransparentFX
