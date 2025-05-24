@@ -310,11 +310,13 @@ public class StageTreeGenerator : MonoBehaviour
         // 씬 전환
         if (clickedNode.stageType == StageType.Shop)
         {
-            SceneManager.LoadScene("ShopScene");
+            // SceneManager.LoadScene("ShopScene");
+            LoadingSceneManager.LoadScene("ShopScene");
         }
         else
         {
-            SceneManager.LoadScene("InStage");
+            // SceneManager.LoadScene("InStage");
+            LoadingSceneManager.LoadScene("InStage");
         }
     }
 

@@ -90,7 +90,7 @@ public class MainSceneManager : MonoBehaviour
 
         RuntimeDataManager.Instance.SetSelectedDawn(selectedDawn);
         bookManager.CloseBook();
-        SceneManager.LoadScene("MapScene");
-        
+        // SceneManager.LoadScene("MapScene");
+        LoadingSceneManager.LoadScene("MapScene");
     }
 }

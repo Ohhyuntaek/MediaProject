@@ -60,7 +60,8 @@ public class ClearUIManager : MonoBehaviour
         }
         else if (stageType == StageType.Boss)
         {
-            SceneManager.LoadScene("MainScene");
+            // SceneManager.LoadScene("MainScene");
+            LoadingSceneManager.LoadScene("MainScene");
         }
     }
     
@@ -138,6 +139,7 @@ public class ClearUIManager : MonoBehaviour
     {
         RuntimeDataManager.Instance.lumenCalculator.AddLumen(10);
         
-        SceneManager.LoadScene("MapScene");
+        // SceneManager.LoadScene("MapScene");
+        LoadingSceneManager.LoadScene("MapScene");
     }
 }
