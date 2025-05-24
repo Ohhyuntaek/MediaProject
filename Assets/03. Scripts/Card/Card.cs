@@ -29,7 +29,7 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
     [SerializeField] private MMF_Player spawnFeedback;
     [Header("어둡게 할 계수 (0~1 사이)")]
     [SerializeField] private float darkenMultiplier = 0.6f; // 어둡게 만드는 강도 (예: 60%)
-    
+    private bool hasHovered = false;
     private AllyType allyType;
     private LineType lineType;
     private UnitData unitData;
@@ -182,6 +182,7 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+       
         InGameSceneManager.Instance.previewManager.ShowPreview(unitData);
         InGameSceneManager.Instance.previewManager.ShowTooltip(unitData);
     }
