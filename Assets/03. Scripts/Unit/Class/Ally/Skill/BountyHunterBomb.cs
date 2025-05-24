@@ -71,63 +71,55 @@ public class BountyHunterBomb : MonoBehaviour
     
     private void ExplodeTargets()
     {
-        
         Vector2 worldPos = _spawnPosition.position;
 
-       
+      
         if (!GridTargetManager.Instance.TryGetColliderAtPosition(worldPos, out PolygonCollider2D hitPoly))
             return;
-
-        
         if (!GridTargetManager.Instance.TryGetGridIndex(hitPoly, out int baseRow, out int baseCol))
             return;
 
-      
+       
+        var damaged = new HashSet<IDamageable>();
+
+       
         var filter = new ContactFilter2D();
         filter.SetLayerMask(enemyLayer);
         filter.useTriggers = true;
         Collider2D[] buffer = new Collider2D[16];
-        if (hitPoly.gameObject.name.Contains("Up"))
-        {
-            dir = false;
-        }
-        else
-        {
-            dir = true;
-        }
+
+       
+        bool isDown = hitPoly.gameObject.name.Contains("Down");
+
         
         foreach (var ofs in _pattern)
         {
-            
-            int row = baseRow + ofs.y;
+            int row = baseRow + (isDown ? -ofs.y : ofs.y);
             int col = baseCol + ofs.x;
-            if (dir)
-            {
-                row = baseRow - ofs.y;
-                col = baseCol + ofs.x;
-            }
-            
-           
+
+            // 범위 검사
             if (row < 0 || row >= GridTargetManager.Instance.coliderMat.Length) continue;
             if (col < 0 || col >= GridTargetManager.Instance.coliderMat[row].arr_row.Length) continue;
 
             var poly = GridTargetManager.Instance.coliderMat[row].arr_row[col];
             if (poly == null) continue;
 
-            
+            // 6) 해당 폴리곤 내부의 모든 콜라이더 검사
             int count = poly.Overlap(filter, buffer);
             for (int i = 0; i < count; i++)
             {
                 var col2 = buffer[i];
                 if (col2 == null) continue;
 
-                
-                if (col2.TryGetComponent<IDamageable>(out var dmg))
+                // 7) IDamageable 구현체만, 한 번만 처리
+                if (col2.TryGetComponent<IDamageable>(out var dmg)
+                    && damaged.Add(dmg))   // Add가 true일 때만 최초 추가
                 {
-                    dmg.TakeDamage(10);
+                    dmg.TakeDamage(_unitData.BaseAttack*2f);
                 }
             }
         }
     }
+
 
 }
