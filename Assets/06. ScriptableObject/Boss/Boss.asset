@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyName: 
   _moveSpeed: 0.5
-  _maxHp: 100
+  _maxHp: 1000
   _atkSpeed: 0
   _damage: 0
   _range: 0

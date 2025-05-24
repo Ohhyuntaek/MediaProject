@@ -23,7 +23,6 @@ MonoBehaviour:
   _detectionPattern: {fileID: 11400000, guid: 084f2edd1ed554440957e0c68324d6d8, type: 2}
   _skillCoolTime: 0
   _skillname: 
-  _skilldescripter: 
   _skillEffect:
   - {fileID: 6667844496462446706, guid: 230b5ddf4e79cf942920c1ce248421fc, type: 3}
   _targetingType: 0
@@ -33,6 +32,10 @@ MonoBehaviour:
   _maxHP: 0
   cost: 2
   _sprite: {fileID: 121734609, guid: 1737c18c3919a124d8faeff16fb5fc60, type: 3}
+  _recomendText: "\"\uD6D4\uCE5C \uBCF4\uBB3C\uB85C \uD3ED\uD0C4\uC744 \uC0AC\uB294
+    \uBBF8\uCE5C \uC0AC\uB0E5\uAFBC\""
+  _nomalText: "\uBE60\uB978 \uC18D\uB3C4\uB85C \uC801\uB4E4\uC744 \uB2E8\uC77C \uACF5\uACA9\uD569\uB2C8\uB2E4."
+  _skilldescripter: "\uC801\uC5D0\uAC8C \uBC94\uC704 \uACF5\uACA9\uC744 \uD569\uB2C8\uB2E4."
   attackSfx:
   - {fileID: 8300000, guid: 9a7ae10fa6ff94b4f91a78b49c0c2224, type: 3}
   deathSfx:
