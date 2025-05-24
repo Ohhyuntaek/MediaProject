@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class PreviewManager : MonoBehaviour
 {
-    public static PreviewManager Instance { get; private set; }
-
     [Header("UnitData 리스트")]
     [SerializeField] private List<UnitData> _unitDataList;
     [Header("프리뷰 모델 리스트 (UnitData 순서와 1:1 매핑)")]
@@ -38,12 +36,6 @@ public class PreviewManager : MonoBehaviour
     private List<SpriteRenderer> _selectedRenderers = new List<SpriteRenderer>();
 
     private bool _onPreview = false;
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else if (Instance != this) Destroy(gameObject);
-    }
 
     private void Start()
     {

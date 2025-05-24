@@ -121,6 +121,8 @@ public class StageManager : MonoBehaviour
     {
         SetStageState(StageState.Cleared);
         
+        InGameSceneManager.Instance.previewManager.ClearToolTip();
+        
         // 강화카드가 선택 중이면 클리어 처리 금지
         if (UIManager.Instance.clearUIManager.SpawnedEnhancementCards.Count > 0)
         {
@@ -136,6 +138,7 @@ public class StageManager : MonoBehaviour
 
         // 코스트 증가 중지
         UIManager.Instance.costManager.StopCostUP(true);
+        
         //브금 정지
         //SoundManager.Instance.StopBgm();
 

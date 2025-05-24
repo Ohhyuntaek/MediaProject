@@ -308,7 +308,16 @@ public class StageTreeGenerator : MonoBehaviour
         Debug.Log($"이동: {clickedNode.id}, 타입: {clickedNode.stageType}");
         
         // 씬 전환
-        SceneManager.LoadScene("InStage");
+        if (clickedNode.stageType == StageType.Shop)
+        {
+            // SceneManager.LoadScene("ShopScene");
+            LoadingSceneManager.LoadScene("ShopScene");
+        }
+        else
+        {
+            // SceneManager.LoadScene("InStage");
+            LoadingSceneManager.LoadScene("InStage");
+        }
     }
 
     // 두 노드 간 선 그리기
