@@ -244,12 +244,22 @@ public class StageTreeGenerator : MonoBehaviour
             var go = Instantiate(nodePrefab, nodeRoot);
             go.GetComponent<RectTransform>().anchoredPosition = pos;
 
+            // 이미지 설정
             var img = go.GetComponentInChildren<Image>();
             img.sprite = GetSpriteByStageType(node.stageType);
 
+            // 이름 텍스트 설정
+            var textComponent = go.GetComponentInChildren<TMP_Text>();
+            if (textComponent != null && node.dataAsset != null)
+            {
+                textComponent.text = node.dataAsset.StageType.ToString();
+            }
+
+            // 하이라이트 설정
             var highlight = go.transform.Find("Highlighter")?.gameObject;
             if (highlight != null) highlight.SetActive(node.isCurrent);
 
+            // 버튼 리스너 설정
             var btn = go.transform.Find("Button")?.GetComponent<Button>();
             if (btn != null)
             {
