@@ -64,15 +64,17 @@ public class Ally : MonoBehaviour
         _isDead = false;
         _revived = false;
         _isSpawnEnd = false;
-        _maxDuration = UnitData.Duration;
-        _DurationSlider.maxValue = _maxDuration;
-        _DurationSlider.value = _maxDuration;
+       
         GetFlip();
-        // 추가: Duration 초기화
+       
         if (_unitData != null)
         {
             _duration = _unitData.Duration;
-            _maxDuration = _unitData.Duration;
+            ApplyItem(RuntimeDataManager.Instance.itemCollector.GetSelectedRemnants());
+            Debug.Log("아이템 적용후 " + _duration);
+            _maxDuration = _duration;
+            _DurationSlider.maxValue = _maxDuration;
+            _DurationSlider.value = _maxDuration;
         }
         else
         {
@@ -99,7 +101,7 @@ public class Ally : MonoBehaviour
         if (_unitData != null)
         {
             Initialize(_unitData);
-            
+            ApplyItem(RuntimeDataManager.Instance.itemCollector.GetSelectedRemnants());
            
         }
         else
@@ -117,7 +119,6 @@ public class Ally : MonoBehaviour
         _skill = CreateSkillFromData(_unitData.AllySkillType);
         _atkSpd = _unitData.AttackSpeed;
         _baseAttack = _unitData.BaseAttack;
-        ApplyItem(RuntimeDataManager.Instance.itemCollector.GetSelectedRemnants());
         _stateMachine = new StateMachine<Ally>(this);
         _stateMachine.ChangeState(new AllySpawnState());
         
@@ -273,6 +274,7 @@ public class Ally : MonoBehaviour
     private void OnEnable()
     {
         InitPatternColliders();
+        Debug.Log("지속시간 증가 햇으려나" + _duration);
         
     }
 
@@ -639,12 +641,16 @@ public class Ally : MonoBehaviour
                     {
                         case RemnantStatType.ATK:
                             _baseAttack += item.Amount;
+                            Debug.Log("공격력 상승 아이템 적용 " + _baseAttack);
                             break;
                         case RemnantStatType.SPD:
                             _atkSpd += item.Amount;
+                            Debug.Log("스피드 상승 어아탬 적용" + _atkSpd);
                             break;
                         case RemnantStatType.DURATION:
+                            
                             _duration += item.Amount;
+                            Debug.Log("지속시간 상승 어아탬 적용" + _duration);
                             break;
                     }
                 }
