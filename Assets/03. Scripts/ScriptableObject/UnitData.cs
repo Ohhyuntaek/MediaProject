@@ -60,7 +60,48 @@ public class UnitData : ScriptableObject
 
     [Title("아군 전용 스탯"), ShowIf(nameof(IsAlly))]
     [SerializeField, LabelText("유지 시간")] private float _duration;
-    
+
+
+    public List<int> GetApplyItemUnitData(List<RemnantSO> remnantSo)
+    {
+        int copyAtk = _baseAttack;
+        int copySpd = (int)_attackSpeed;
+        int copyDuration = (int)_duration;
+        List<int> _stat = new List<int>();
+       
+        if (remnantSo != null)
+        {
+
+
+            foreach (var item in remnantSo)
+            {
+                if (item.Type == RemnantType.Unit)
+                {
+                    switch (item.Stat)
+                    {
+                        case RemnantStatType.ATK:
+                            copyAtk += item.Amount;
+                      
+                            break;
+                        case RemnantStatType.SPD:
+                            copySpd += item.Amount;
+                           
+                            break;
+                        case RemnantStatType.DURATION:
+                            
+                            copyDuration += item.Amount;
+                           
+                            break;
+                    }
+                }
+            }
+            _stat.Add(copyAtk);
+            _stat.Add(copySpd);
+            _stat.Add(copyDuration);
+        }
+
+        return _stat;
+    }
     public string UnitName => _unitName;
     public UnitFaction UnitFaction => _unitFaction;
     public UnitType UnitType => _unitType;

@@ -97,6 +97,7 @@ public class Shop : MonoBehaviour
         foreach (Transform child in parent)
         {
             CanvasGroup cg = child.GetComponent<CanvasGroup>() ?? child.gameObject.AddComponent<CanvasGroup>();
+            
             cg.alpha = 0f;
             cg.interactable = false;
             cg.blocksRaycasts = false;

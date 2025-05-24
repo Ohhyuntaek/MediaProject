@@ -34,8 +34,9 @@ public class PreviewManager : MonoBehaviour
     
     private List<GameObject> _selectedRange = new List<GameObject>();
     private List<SpriteRenderer> _selectedRenderers = new List<SpriteRenderer>();
-
+    private List<int> _applieedStat;
     private bool _onPreview = false;
+    private bool _finished = false;
 
     private void Start()
     {
@@ -58,8 +59,13 @@ public class PreviewManager : MonoBehaviour
 
     public void ShowTooltip(UnitData unitData)
     {
-        _attackText.text = "공격력 : " + unitData.BaseAttack;
-        _durationText.text = "지속시간 : " + (int)unitData.Duration;
+        if (!_finished)
+        {
+           _applieedStat = unitData.GetApplyItemUnitData(RuntimeDataManager.Instance.itemCollector.GetSelectedRemnants());
+           _finished = true;
+        }
+        _attackText.text = "공격력 : " + _applieedStat[0];
+        _durationText.text = "지속시간 : " + _applieedStat[2];
         _typeText.text = "선호 라인 : " + unitData.UnitType.ToString();
         _unitNameText.text = GetUnitNmae(unitData.AllyType);
         _skillText.text = "스킬 : "+unitData.SkillDescriptor;
@@ -72,6 +78,7 @@ public class PreviewManager : MonoBehaviour
 
     public void ClearToolTip()
     {
+        _finished = false;
         tooltipCard.SetActive(false);
     }
 

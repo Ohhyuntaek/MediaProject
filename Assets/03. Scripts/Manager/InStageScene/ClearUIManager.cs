@@ -61,6 +61,7 @@ public class ClearUIManager : MonoBehaviour
         else if (stageType == StageType.Boss)
         {
             // SceneManager.LoadScene("MainScene");
+            RuntimeDataManager.Instance.itemCollector.ClearAll();
             LoadingSceneManager.LoadScene("MainScene");
         }
     }
