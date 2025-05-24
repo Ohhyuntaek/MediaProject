@@ -7,7 +7,7 @@ public class BossDeadState : IState<Boss>
     public void Enter(Boss boss)
     {
         boss.Animator.SetTrigger("4_Death");
-        SoundManager.Instance.PlaySfx(boss.BossData.DeathSound[0],boss.transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(boss.BossData.DeathSound[0],boss.transform.position,false);
     }
 
     public void Update(Boss owner)

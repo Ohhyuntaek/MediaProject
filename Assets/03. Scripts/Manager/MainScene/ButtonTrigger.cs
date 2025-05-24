@@ -14,7 +14,7 @@ public class ButtonTrigger : MonoBehaviour
     // 텍스트만 이동 (눌렀을 때)
     public void OnTextButtonPress(TMP_Text text)
     {
-        SoundManager.Instance.PlaySfx(buttonClickSound,transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(buttonClickSound,transform.position,false);
         
         if (text == null) return;
 
@@ -39,7 +39,7 @@ public class ButtonTrigger : MonoBehaviour
     // 이미지만 이동 (눌렀을 때)
     public void OnImageButtonPress(Image image)
     {
-        SoundManager.Instance.PlaySfx(buttonClickSound,transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(buttonClickSound,transform.position,false);
         
         if (image == null) return;
 

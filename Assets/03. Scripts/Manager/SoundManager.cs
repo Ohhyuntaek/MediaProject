@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance { get; private set; }
-
     [Header("SFX 재생용 AudioSource 프리팹")] [SerializeField]
     private AudioSource _sfxSourcePrefab;
 
@@ -82,15 +80,6 @@ public class SoundManager : MonoBehaviour
 
 private void Awake()
     {
-        // 싱글턴 설정
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         // BGM Source 셋업
         _bgmSource = Instantiate(_bgmSourcePrefab, transform);
         _bgmSource.loop = false; // 개별 트랙 루프는 리스트 로직에서 관리

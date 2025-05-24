@@ -7,7 +7,7 @@ public class BossAttack1State : IState<Boss>
     public void Enter(Boss boss)
     {
         boss.Animator.SetTrigger("2_Attack1");
-        SoundManager.Instance.PlaySfx(boss.BossData.AttackSound[0],boss.transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(boss.BossData.AttackSound[0],boss.transform.position,false);
     }
 
     public void Update(Boss owner)

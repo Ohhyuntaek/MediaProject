@@ -12,9 +12,11 @@ public class ItemData : ScriptableObject
     [SerializeField, LabelText("아이템 종류")] private ItemType _itemType; 
     [SerializeField, LabelText("아이템 설명")] private string _description;
     [SerializeField, LabelText("아이템 이미지")] private Sprite _itemImage;
+    [SerializeField, LabelText("아이템 가격")] private int _itemPrice;
     
     public string ItemName => _itemName;
     public ItemType ItemType => _itemType;
     public string Description => _description;
     public Sprite ItemImage => _itemImage;
+    public int ItemPrice => _itemPrice;
 }

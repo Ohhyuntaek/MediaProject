@@ -101,11 +101,11 @@ public class StageManager : MonoBehaviour
         StageData stage = RuntimeDataManager.Instance.currentStageData;
         if (stage.StageType == StageType.Normal)
         {
-            SoundManager.Instance.PlayBgmList(1,true);
+            EntireGameManager.Instance.soundManager.PlayBgmList(1,true);
         }
         else if (stage.StageType == StageType.Boss)
         {
-            SoundManager.Instance.PlayBgmList(2,true);
+            EntireGameManager.Instance.soundManager.PlayBgmList(2,true);
         }
         InGameSceneManager.Instance.darkSpawner.DarksCount = stage.DarksCount; // 매 스테이지마다 초기화
         UIManager.Instance.inGameUIManager.SetStageText(stage.StageName);

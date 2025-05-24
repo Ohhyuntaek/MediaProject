@@ -8,7 +8,7 @@ public class TitleSceneController : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.Instance.PlayBgmList(0,true);
+        EntireGameManager.Instance.soundManager.PlayBgmList(0,true);
     }
 
     // Update is called once per frame

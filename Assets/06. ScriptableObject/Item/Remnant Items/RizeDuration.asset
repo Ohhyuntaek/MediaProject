@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6710eb5210b60f9499c4da5243434ac2, type: 3}
-  m_Name: RiseEnergeChargeSpeed
+  m_Name: RizeDuration
   m_EditorClassIdentifier: 
-  _itemName: Rise the Energe Charge Speed
+  _itemName: "\uC9C0\uC18D\uC2DC\uAC04 \uC99D\uAC00"
   _itemType: 1
-  _description: "\uC5D0\uB108\uC9C0 \uCDA9\uC804 \uC18D\uB3C4\uB97C \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  _itemImage: {fileID: 0}
+  _description: "Ally\uAC00 \uC18C\uD658\uD560 \uC218 \uC788\uB294 \uC2DC\uAC04\uC774
+    50% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  _itemImage: {fileID: 21300000, guid: 888c40460082de44f8ab0990c83d5277, type: 3}
+  _itemPrice: 15

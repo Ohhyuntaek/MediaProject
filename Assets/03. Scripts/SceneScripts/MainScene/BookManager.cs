@@ -45,7 +45,7 @@ public class BookManager : MonoBehaviour
         SetCanvasGroupActive(settingPageGroup, false);
         
         // 책 넘기기 소리 재생
-        SoundManager.Instance.PlaySfx(pageFlipSound,transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(pageFlipSound,transform.position,false);
         
         // 책 넘기기 애니메이션 진행
         animator.SetTrigger("isFlipped");
@@ -59,7 +59,7 @@ public class BookManager : MonoBehaviour
         SetCanvasGroupActive(newGamePageGroup, false);
         
         // 책 넘기기 소리 재생
-        SoundManager.Instance.PlaySfx(pageFlipSound,transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(pageFlipSound,transform.position,false);
         
         // 책 반대로 넘기기 애니메이션 진행
         animator.SetTrigger("isBackFlipped");
@@ -92,7 +92,7 @@ public class BookManager : MonoBehaviour
     
     public IEnumerator FadeInTitleGroup()
     {
-        SoundManager.Instance.PlaySfx(bookOpenSound,transform.position,false);
+        EntireGameManager.Instance.soundManager.PlaySfx(bookOpenSound,transform.position,false);
         
         // OpenBook 애니메이션의 이벤트로 추가 - 책이 펼쳐지면 delayAfterBook 시간 후 titlePageGroup이 생성
         yield return new WaitForSeconds(delayAfterBook);

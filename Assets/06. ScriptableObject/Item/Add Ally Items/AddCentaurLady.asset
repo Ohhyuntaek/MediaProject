@@ -15,4 +15,5 @@ MonoBehaviour:
   _itemName: Centaur Lady
   _itemType: 0
   _description: "\uB371\uC5D0 Centaur Lady\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
-  _itemImage: {fileID: 0}
+  _itemImage: {fileID: -1292439875, guid: 5bdaa8422451f674a93b3963f8737153, type: 3}
+  _itemPrice: 5

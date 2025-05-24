@@ -121,7 +121,7 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
 
     public void OnButtonClick()
     {
-        SoundManager.Instance.PlaySfx(selectSound, transform.position, false);
+        EntireGameManager.Instance.soundManager.PlaySfx(selectSound, transform.position, false);
         
         if (unitData == null)
         {

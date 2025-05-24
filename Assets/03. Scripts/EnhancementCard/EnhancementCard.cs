@@ -46,7 +46,7 @@ public class EnhancementCard : MonoBehaviour
         isClicked = true;
         
         // 카드 선택 시 소리 재생
-        SoundManager.Instance.PlaySfx(selectSound, transform.position, false);
+        EntireGameManager.Instance.soundManager.PlaySfx(selectSound, transform.position, false);
 
         StartCoroutine(ClickFlashEffectAndProceed());
     }

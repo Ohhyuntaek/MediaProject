@@ -67,7 +67,7 @@ public class AllySpecialAttackState : IState<Ally>
             
             
             GameObject projectileInstance = GameObject.Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
-            SoundManager.Instance.PlaySfx(owner.UnitData.SkillSound[0],owner.transform.position);
+            EntireGameManager.Instance.soundManager.PlaySfx(owner.UnitData.SkillSound[0],owner.transform.position);
           
             projectileInstance.GetComponent<CentaurLadyProjectile>().SetDestination(dir);
             

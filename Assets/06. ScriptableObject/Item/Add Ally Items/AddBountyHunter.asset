@@ -15,4 +15,5 @@ MonoBehaviour:
   _itemName: Bounty Hunter
   _itemType: 0
   _description: "\uB371\uC5D0 Bounty Hunter\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
-  _itemImage: {fileID: 0}
+  _itemImage: {fileID: 121734609, guid: 1737c18c3919a124d8faeff16fb5fc60, type: 3}
+  _itemPrice: 5

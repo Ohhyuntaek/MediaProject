@@ -35,7 +35,7 @@ public class MainSceneManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainScene")
         {
-            SoundManager.Instance.PlayBgmList(0,true);
+            EntireGameManager.Instance.soundManager.PlayBgmList(0,true);
         }
      
     }

@@ -15,4 +15,5 @@ MonoBehaviour:
   _itemName: Rogue
   _itemType: 0
   _description: "\uB371\uC5D0 Rogue\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
-  _itemImage: {fileID: 0}
+  _itemImage: {fileID: 1170413532, guid: 29f07a00b2dd83d4f88eb3f1b58e8968, type: 3}
+  _itemPrice: 5

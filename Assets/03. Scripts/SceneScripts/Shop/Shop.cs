@@ -1,5 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
+using TMPro;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -9,14 +15,74 @@ public class Shop : MonoBehaviour
     [SerializeField] private float delayAfterMapOpened = 1f;
     [SerializeField] private float fadeDuration = 0.3f;
     [SerializeField] private float elementDelay = 0.1f;
-    [SerializeField] private float slideOffsetX = -100f; // ¿ŞÂÊÀ¸·Î ¾ó¸¶³ª Æ¢¾î³ª¿ÃÁö
+    [SerializeField] private float slideOffsetX = -100f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶³ï¿½ Æ¢ï¿½î³ªï¿½ï¿½ï¿½ï¿½
 
+    [Header("ìƒì  UI")]
+    [SerializeField] private List<Button> buyButtons;
+    [SerializeField] private TMP_Text lumenText;
+    
+    [Header("ì•„ì´í…œ SO")] 
+    [SerializeField, LabelText("ìœ ë‹› ì¶”ê°€ ì•„ì´í…œ")] private List<ItemData> addAllyItems;
+    [SerializeField, LabelText("ìœ ë‹› ê°•í™” ì•„ì´í…œ")] private List<ItemData> remnantItems;
+    
+    [Header("ì•„ì´í…œ UI")]
+    [SerializeField] private List<Image> itemImages;
+    [SerializeField] private List<TMP_Text> itemPrices;
+    [SerializeField] private List<TMP_Text> itemDescriptions;
+    
+    private List<ItemData> chosenItems = new();
+    
     void Start()
     {
         mapAnimator = GetComponent<Animator>();
         SetCanvasGroupActive(mapCanvasGroup, false);
+        
+        // lumenText.text = RuntimeDataManager.Instance.lumenCalculator.Lumen.ToString();
+        SetupShopItems();
     }
 
+    void SetupShopItems()
+    {
+        // 1. ì¤‘ë³µ ì—†ì´ 3ê°œì”© ëœë¤ ì„ íƒ
+        List<ItemData> randomAllies = addAllyItems.OrderBy(x => Random.value).Take(3).ToList();
+        List<ItemData> randomRemnants = remnantItems.OrderBy(x => Random.value).Take(3).ToList();
+        chosenItems = randomAllies.Concat(randomRemnants).ToList(); // ì´ 6ê°œ
+
+        for (int i = 0; i < buyButtons.Count && i < chosenItems.Count; i++)
+        {
+            int index = i; // ë¡œì»¬ ë³€ìˆ˜ ìº¡ì²˜ ì£¼ì˜ (Closure ì´ìŠˆ ë°©ì§€)
+            ItemData data = chosenItems[i];
+
+            // ìì‹ Image ë° Text ê°€ì ¸ì˜¤ê¸°
+            Image image = itemImages[i].GetComponentInChildren<Image>();
+            TMP_Text priceText = itemPrices[i].GetComponentInChildren<TMP_Text>();
+            TMP_Text descriptionText = itemDescriptions[i].GetComponentInChildren<TMP_Text>();
+            
+            if (image != null) image.sprite = data.ItemImage;
+            if (priceText != null) priceText.text = $"{data.ItemPrice}";
+            if (descriptionText != null) descriptionText.text = data.Description;
+
+            // ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸ í• ë‹¹
+            buyButtons[i].onClick.RemoveAllListeners();
+            buyButtons[i].onClick.AddListener(() =>
+            {
+                int currentLumen = RuntimeDataManager.Instance.lumenCalculator.Lumen;
+
+                if (currentLumen < data.ItemPrice)
+                {
+                    Debug.Log($"êµ¬ë§¤ ë¶ˆê°€: í˜„ì¬ Lumen({currentLumen})ì´ {data.ItemPrice}ë³´ë‹¤ ë¶€ì¡±í•©ë‹ˆë‹¤.");
+                    return;
+                }
+
+                // êµ¬ë§¤ ì„±ê³µ ì‹œ:
+                RuntimeDataManager.Instance.lumenCalculator.RemoveLumen(data.ItemPrice);
+                lumenText.text = RuntimeDataManager.Instance.lumenCalculator.Lumen.ToString();
+
+                RuntimeDataManager.Instance.itemCollector.SelectItem(data);
+            });
+        }
+    }
+    
     public void FadeInMap()
     {
         SetCanvasGroupActive(mapCanvasGroup, true);
@@ -27,21 +93,21 @@ public class Shop : MonoBehaviour
 
         foreach (Transform child in parent)
         {
-            // CanvasGroup ¾øÀ¸¸é Ãß°¡
+            // CanvasGroup ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
             CanvasGroup cg = child.GetComponent<CanvasGroup>();
             if (cg == null) cg = child.gameObject.AddComponent<CanvasGroup>();
 
-            // ÃÊ±â ¼³Á¤
+            // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½
             cg.alpha = 0f;
             cg.interactable = false;
             cg.blocksRaycasts = false;
 
-            // À§Ä¡ ¼³Á¤ (¿ŞÂÊÀ¸·Î ÀÌµ¿)
+            // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½)
             RectTransform rect = child.GetComponent<RectTransform>();
             Vector3 originalPos = rect.anchoredPosition;
             rect.anchoredPosition = originalPos + new Vector3(slideOffsetX, 0f, 0f);
 
-            // Æ®À© »ı¼º
+            // Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Sequence seq = DOTween.Sequence();
             seq.AppendInterval(delayAfterMapOpened + index * elementDelay);
             seq.Append(rect.DOAnchorPos(originalPos, fadeDuration).SetEase(Ease.OutCubic));

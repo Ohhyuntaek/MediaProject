@@ -8,7 +8,7 @@ public class PlayerActiveSkillState : IState<Dawn>
     {
         dawn.Animator?.SetTrigger("5_Active");
         dawn.useEnerge();
-        SoundManager.Instance.PlaySfx(dawn.DawnData.SkillSound,dawn.transform.position);
+        EntireGameManager.Instance.soundManager.PlaySfx(dawn.DawnData.SkillSound,dawn.transform.position);
     }
 
     public void Update(Dawn dawn)

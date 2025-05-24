@@ -13,7 +13,7 @@ public class AllyDebuffAttackState : IState<Ally>
          ally.SetSkillRandomNum(Random.Range(0, 3));
          index = ally.GetSkillRandomNum();
         PlaySlamanderDebuffAnimation(ally);
-        SoundManager.Instance.PlaySfx(ally.UnitData.SkillSound[index],ally.transform.position);
+        EntireGameManager.Instance.soundManager.PlaySfx(ally.UnitData.SkillSound[index],ally.transform.position);
         //ally.StartCoroutine(DebuffRoutine(ally));
     }
 

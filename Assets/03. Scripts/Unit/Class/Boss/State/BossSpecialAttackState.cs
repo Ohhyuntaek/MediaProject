@@ -37,7 +37,7 @@ public class BossDropAttackState : IState<Boss>
         // Land 애니
         boss.Animator.SetTrigger("Land");
         yield return new WaitForSeconds(0.7f);
-        SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
+        EntireGameManager.Instance.soundManager.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
         
         
         if (boss.SkipNextMove)
@@ -48,7 +48,7 @@ public class BossDropAttackState : IState<Boss>
         }
 
       
-        SoundManager.Instance.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
+        EntireGameManager.Instance.soundManager.PlaySfx(boss.BossData.SkillSound[0],boss.transform.position);
         // 기존 랜딩 후 아군 처리
         List<Ally> front = InGameSceneManager.Instance.allyPoolManager.GetLineObject_Spawned(LineType.Front);
         if (front.Count < 2)
