@@ -3831,7 +3831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1571360763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4667,18 +4667,14 @@ MonoBehaviour:
   - {fileID: 900219215}
   - {fileID: 1161715070}
   - {fileID: 1825541169}
-  lumenText: {fileID: 0}
-  addAllyItems:
-  - {fileID: 11400000, guid: 310a535329a04e043a460da73f8048ef, type: 2}
-  - {fileID: 11400000, guid: d8dc66f10a02d744cb36ad566ed30456, type: 2}
-  - {fileID: 11400000, guid: ca16044e5c2860d4f871bbfd417a1cd1, type: 2}
-  - {fileID: 11400000, guid: c6757f55efc26ff44803d9b4b280a457, type: 2}
-  - {fileID: 11400000, guid: fec14e2b8b1bcff418401bb89d37b967, type: 2}
-  - {fileID: 11400000, guid: 16cf36a341892484fbf4a79eae02125f, type: 2}
-  remnantItems:
-  - {fileID: 11400000, guid: a04bc3e62c064454586f75856bb01314, type: 2}
-  - {fileID: 11400000, guid: 7d9d7d37dce585243afba49dc0f02eb8, type: 2}
-  - {fileID: 11400000, guid: 51044d042e4772a469d71e67f29f4d7d, type: 2}
+  lumenText: {fileID: 942168327}
+  allItems:
+  - {fileID: 11400000, guid: 4ef8ced847245b441b271a58421755b8, type: 2}
+  - {fileID: 11400000, guid: 8fcba487d2a119e4b9243dc4467da6b8, type: 2}
+  - {fileID: 11400000, guid: fbf51bd3292efdd4ab379e3c960f83e3, type: 2}
+  - {fileID: 11400000, guid: b7ee207992fb91e4dbd3a48e75f466af, type: 2}
+  - {fileID: 11400000, guid: dba6f8e8db87c4746b3772641e34bddf, type: 2}
+  - {fileID: 11400000, guid: f3cc93044754cd94aa5597877c373d66, type: 2}
   itemImages:
   - {fileID: 591301240}
   - {fileID: 1243859164}

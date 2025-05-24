@@ -1808,6 +1808,14 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: -38.948593
       objectReference: {fileID: 0}
+    - target: {fileID: 1059368364406198044, guid: d939f0184b54f2347bc720fc4d84cab1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.2736816
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228304806756922085, guid: d939f0184b54f2347bc720fc4d84cab1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.2736816
+      objectReference: {fileID: 0}
     - target: {fileID: 3967996964727922524, guid: d939f0184b54f2347bc720fc4d84cab1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

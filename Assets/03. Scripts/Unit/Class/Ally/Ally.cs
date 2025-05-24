@@ -117,6 +117,7 @@ public class Ally : MonoBehaviour
         _skill = CreateSkillFromData(_unitData.AllySkillType);
         _atkSpd = _unitData.AttackSpeed;
         _baseAttack = _unitData.BaseAttack;
+        ApplyItem(RuntimeDataManager.Instance.itemCollector.GetSelectedRemnants());
         _stateMachine = new StateMachine<Ally>(this);
         _stateMachine.ChangeState(new AllySpawnState());
         
@@ -622,6 +623,33 @@ public class Ally : MonoBehaviour
 
         SetOntile();
 
+    }
+
+    public void ApplyItem(List<RemnantSO> remnantSo)
+    {
+        if (remnantSo != null)
+        {
+
+
+            foreach (var item in remnantSo)
+            {
+                if (item.Type == RemnantType.Unit)
+                {
+                    switch (item.Stat)
+                    {
+                        case RemnantStatType.ATK:
+                            _baseAttack += item.Amount;
+                            break;
+                        case RemnantStatType.SPD:
+                            _atkSpd += item.Amount;
+                            break;
+                        case RemnantStatType.DURATION:
+                            _duration += item.Amount;
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     public void SetOntile()
