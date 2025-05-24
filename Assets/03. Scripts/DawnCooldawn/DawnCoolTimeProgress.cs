@@ -1,13 +1,20 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DawnCoolTimeProgress : MonoBehaviour
 {
-    public TMP_Text ProgressIndicator;
-    public Image LoadingBar;
+    [SerializeField]
+    private TMP_Text progressIndicator;
+    [SerializeField]
+    private Image loadingBar;
+    [SerializeField]
+    private float blinkInterval = 0.5f;
 
     private Dawn targetDawn;
+    private float blinkTime = 0;
 
     /// <summary>
     /// 외부에서 Dawn 객체를 지정할 수 있게 해주는 Setter
@@ -30,14 +37,14 @@ public class DawnCoolTimeProgress : MonoBehaviour
         float cooldownRatio = targetDawn.ActiveCooldownRatio;
 
         // UI 업데이트
-        LoadingBar.fillAmount = cooldownRatio;
+        loadingBar.fillAmount = cooldownRatio;
         if (cooldownRatio < 1f)
         {
-            ProgressIndicator.text = Mathf.RoundToInt(cooldownRatio * 100) + "%";
+            progressIndicator.text = Mathf.RoundToInt(cooldownRatio * 100) + "%";
         }
         else
         {
-            ProgressIndicator.text = "준비!";
+            progressIndicator.text = "Space!";
         }
     }
 }
