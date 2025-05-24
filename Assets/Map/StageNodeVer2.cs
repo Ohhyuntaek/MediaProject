@@ -17,7 +17,11 @@ public class StageNodeVer2
 
     // 이전 층에서 이 노드로 연결된 노드 목록
     public List<StageNodeVer2> IncomingNodes;
+    
+    public bool IsCleared = false;
 
+    public Vector2? CachedPosition = null;
+    
     // 생성자
     public StageNodeVer2(int x, int y)
     {

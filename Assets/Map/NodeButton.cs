@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class NodeButton : MonoBehaviour
     private MapGenerator mapGenerator;
 
     public Button button;
+    public TMP_Text label;
     
     // 노드 초기화 함수
     public void Init(StageNodeVer2 node)
@@ -16,6 +18,11 @@ public class NodeButton : MonoBehaviour
         mapGenerator = FindObjectOfType<MapGenerator>();
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
+        
+        if (stageNode.StageData != null && label != null)
+        {
+            label.text = stageNode.StageData.StageType.ToString();
+        }
     }
     
     public void OnClick()

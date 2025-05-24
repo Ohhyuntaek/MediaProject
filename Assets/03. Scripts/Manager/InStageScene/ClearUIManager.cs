@@ -140,6 +140,7 @@ public class ClearUIManager : MonoBehaviour
     {
         RuntimeDataManager.Instance.lumenCalculator.AddLumen(10);
         
+        RuntimeDataManager.Instance.currentNode.IsCleared = true;
         // SceneManager.LoadScene("MapScene");
         LoadingSceneManager.LoadScene("MapScene");
     }

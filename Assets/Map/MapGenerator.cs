@@ -37,7 +37,6 @@ public class MapGenerator : MonoBehaviour
         {
             LoadMapFromRuntime();
 
-            // 복귀한 경우 이동 처리
             if (RuntimeDataManager.Instance.nextNode != null)
             {
                 currentNode = RuntimeDataManager.Instance.nextNode;
@@ -47,12 +46,36 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            GenerateLogicalGrid();
-            AssignStageTypes();
-            ConnectNodes();
-            PruneUnreachableNodes();
-            RemoveDisconnectedNodes();
-            ConnectNodes();
+            StageNodeVer2 bossNode = null;
+
+            // 💡 Boss 노드까지 경로가 이어질 때까지 반복 생성
+            do
+            {
+                GenerateLogicalGrid();
+
+                // 💡 보스 노드 강제 생성
+                if (grid[width - 1, height - 1] == null)
+                    grid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
+
+                bossNode = grid[width - 1, height - 1]; // 보스 노드 캐싱
+
+                AssignStageTypes();
+                ConnectNodes();
+
+                var reachable = CollectConnectedNodes(grid[0, 0]);
+
+                // 💥 Boss까지 도달 불가능하면 다시 생성
+                if (!reachable.Contains(bossNode))
+                    continue;
+
+                RemoveDisconnectedNodes();
+                ConnectNodes();
+                PruneUnreachableNodes();
+                ConnectNodes();
+
+                break;
+
+            } while (true);
 
             currentNode = grid[0, 0];
             SaveMapToRuntime();
@@ -61,6 +84,7 @@ public class MapGenerator : MonoBehaviour
         GenerateNodeButtons();
         HighlightAvailableNodes(currentNode);
     }
+
 
     private void SaveMapToRuntime()
     {
@@ -104,6 +128,11 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+        
+        if (grid[width - 1, height - 1] == null)
+        {
+            grid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
+        }
     }
 
     private void AssignStageTypes()
@@ -131,7 +160,7 @@ public class MapGenerator : MonoBehaviour
                 }
 
                 StageType type;
-                if (shopCount < maxShops && Random.value < 0.1f)
+                if (shopCount < maxShops && y >= height / 2 && Random.value < 0.25f)
                 {
                     type = StageType.Shop;
                     shopCount++;
@@ -293,9 +322,22 @@ public class MapGenerator : MonoBehaviour
 
                 GameObject btn = Instantiate(nodeButtonPrefab, gridOrigin);
                 var rt = btn.GetComponent<RectTransform>();
-                float xOffset = x * xSpacing + Random.Range(-xJitter, xJitter);
-                float yOffset = y * ySpacing + Random.Range(-yJitter, yJitter);
-                rt.anchoredPosition = new Vector2(xOffset, yOffset);
+
+                // ✅ 위치 캐싱 로직
+                Vector2 offset;
+                if (node.CachedPosition.HasValue)
+                {
+                    offset = node.CachedPosition.Value;
+                }
+                else
+                {
+                    float xOffset = x * xSpacing + Random.Range(-xJitter, xJitter);
+                    float yOffset = y * ySpacing + Random.Range(-yJitter, yJitter);
+                    offset = new Vector2(xOffset, yOffset);
+                    node.CachedPosition = offset;
+                }
+
+                rt.anchoredPosition = offset;
 
                 btn.GetComponent<NodeButton>().Init(node);
                 nodeButtons[node] = btn;
@@ -354,24 +396,34 @@ public class MapGenerator : MonoBehaviour
              currentNode.IncomingNodes.Contains(selectedNode) ||
              selectedNode.IncomingNodes.Contains(currentNode));
 
-        if (isReachable)
+        if (!isReachable)
+            return;
+
+        // ✅ 이동 (씬 전환 여부와 관계없이)
+        currentNode = selectedNode;
+        RuntimeDataManager.Instance.currentNode = currentNode;
+        HighlightAvailableNodes(currentNode);
+
+        // ✅ 클리어된 노드일 경우 씬 전환 없이 종료
+        if (selectedNode.IsCleared)
         {
-            // 다음 노드 임시 저장 (전투 종료 후 currentNode로 승격됨)
-            RuntimeDataManager.Instance.nextNode = selectedNode;
+            Debug.Log("이미 클리어한 노드에 도착함. 씬 전환 없음.");
+            return;
+        }
 
-            // 선택한 스테이지로 진입
-            RuntimeDataManager.Instance.currentStageData = selectedNode.StageData;
+        // ⛳ 씬 전환 처리
+        RuntimeDataManager.Instance.nextNode = selectedNode;
+        RuntimeDataManager.Instance.currentStageData = selectedNode.StageData;
 
-            switch (selectedNode.StageData.StageType)
-            {
-                case StageType.Normal:
-                case StageType.Boss:
-                    LoadingSceneManager.LoadScene("InStage");
-                    break;
-                case StageType.Shop:
-                    LoadingSceneManager.LoadScene("ShopScene");
-                    break;
-            }
+        switch (selectedNode.StageData.StageType)
+        {
+            case StageType.Normal:
+            case StageType.Boss:
+                LoadingSceneManager.LoadScene("InStage");
+                break;
+            case StageType.Shop:
+                LoadingSceneManager.LoadScene("ShopScene");
+                break;
         }
     }
 }
