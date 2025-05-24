@@ -8,6 +8,12 @@ public class RuntimeDataManager : MonoBehaviour
     [Header("선택한 Dawn 캐릭터")]
     [SerializeField] private Dawn selectedDawn;
     
+    [Header("맵 상태")]
+    public StageNodeVer2[,] mapGrid;                // 전체 맵 구조
+    public StageNodeVer2 currentNode;               // 현재 노드
+    public StageNodeVer2 nextNode;                  // 다음으로 이동할 노드
+    public bool mapGenerated = false;               // 맵 생성 여부
+    
     [Header("맵")]
     public List<StageNode> stageGraphData = new();
     
