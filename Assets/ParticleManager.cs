@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 
 [Serializable]
 public class AllyParticlePair
@@ -37,6 +38,11 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] private GameObject _vignetteObject;
     [Tooltip("비네팅 지속시간")]
     [SerializeField] private float _vignetteDuration = 2f;
+    [Tooltip("비네팅 by Dotween")]
+    [SerializeField] private float _shakeStrength = 0.5f;    // 흔들림 범위
+    [SerializeField] private int   _shakeVibrato  = 10;     // 진동 횟수
+    [SerializeField] private float _shakeRandomness = 90f;  // 랜덤성(각도)
+    [SerializeField] private float _shakeFadeOut   = true ? 1f : 0f; // 페이드아웃 효과 (Pro 전용)
     
     [Header("Shake 설정")]
     [Tooltip("흔들릴 카메라 Transform")]
@@ -50,6 +56,8 @@ public class ParticleManager : MonoBehaviour
     private Vector3 _cameraOriginalPos;
     private GameObject _dawn;
     private Material baseMaterial;
+    
+    
     private void Awake()
     {
         // 싱글턴 설정
@@ -171,7 +179,8 @@ public class ParticleManager : MonoBehaviour
         if (_isVignetteActive || _vignetteObject == null || _cameraTransform == null)
             return;
 
-        StartCoroutine(VignetteAndShakeRoutine());
+       // StartCoroutine(VignetteAndShakeRoutine());
+        StartVignetteAndShakeByDotween();
     }
 
     private IEnumerator VignetteAndShakeRoutine()
@@ -205,6 +214,39 @@ public class ParticleManager : MonoBehaviour
         // 원위치 복원
         _cameraTransform.localPosition = _cameraOriginalPos;
         _dawn.GetComponent<SpriteRenderer>().material = baseMaterial;
+    }
+    private void StartVignetteAndShakeByDotween()
+    {
+        // 비네팅
+        _dawn.GetComponent<SpriteRenderer>().material = _material;
+        _vignetteObject.SetActive(true);
+        _isVignetteActive = true;
+
+        // DOTween 카메라 흔들기
+        _cameraTransform
+            // DOShakePosition(지속시간, strength, vibrato, randomness, snapping, fadeOut)
+            .DOShakePosition(
+                _vignetteDuration,
+                strength: _shakeStrength,
+                vibrato: _shakeVibrato,
+                randomness: _shakeRandomness,
+                snapping: false,
+                fadeOut: true    // Pro 버전에서만 지원
+            )
+            .OnComplete(() =>
+            {
+                // 흔들림 끝나면 복원
+                _cameraTransform.localPosition = _cameraOriginalPos;
+                // 머터리얼 복구
+                _dawn.GetComponent<SpriteRenderer>().material = baseMaterial;
+            });
+
+        // 비네팅 종료 타이밍
+        DOVirtual.DelayedCall(_vignetteDuration, () =>
+        {
+            _vignetteObject.SetActive(false);
+            _isVignetteActive = false;
+        });
     }
 
     #endregion
