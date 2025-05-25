@@ -10040,6 +10040,10 @@ MonoBehaviour:
   _material: {fileID: 2100000, guid: 688f83bfc3b271741a8cf5001ca274d1, type: 2}
   _vignetteObject: {fileID: 1232615389}
   _vignetteDuration: 2
+  _shakeStrength: 0.5
+  _shakeVibrato: 10
+  _shakeRandomness: 90
+  _shakeFadeOut: 1
   _cameraTransform: {fileID: 330585546}
   _shakeMagnitude: 0.01
   _shakeInterval: 0.1
@@ -19160,11 +19164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6118517571653663194, guid: c9dedccffb47b7c4fbae6a612d1b6009, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80.3763
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6118517571653663194, guid: c9dedccffb47b7c4fbae6a612d1b6009, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 38.7988
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6118517571653663194, guid: c9dedccffb47b7c4fbae6a612d1b6009, type: 3}
       propertyPath: m_LocalPosition.x
