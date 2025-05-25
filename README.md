@@ -12,7 +12,7 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 ### 2. 프로젝트 개요
 
-- 개발 기간: 2025.03.10. ~ 2025.05.25.
+- 개발 기간: 2025.03.10. ~ 2025.05.25. (이 후 추가 개발 진행 예정)
 - 개발 도구: Unity 6000.0.32f1
 - 개발 언어: C#
 
@@ -40,11 +40,12 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 - 조작
   > 마우스 클릭
+  > Space bar (Dawn Active Skill)
 
 ### 5. Ally
 
 **5-1. 개요**
-- 유닛은 기본적인 특성항목을 공유하며 (공격력 , 사거리 등) 각 항목 당 수치는 상이합니다. 각 유닛의 역할군, 종족, 혹은 유닛 자체에 따라 고유의 항목이 존재합니다.
+  - 유닛은 기본적인 특성항목을 공유하며 (공격력 , 사거리 등) 각 항목 당 수치는 상이합니다. 각 유닛의 역할군, 종족, 혹은 유닛 자체에 따라 고유의 항목이 존재합니다.
 
 **5-2. Ally Status**
 
@@ -72,16 +73,28 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 | 이미지 | 이름 | 역할군 | 링크 |
 |--------|------|--------|------|
-|![Joandarc](https://github.com/user-attachments/assets/083edb28-8560-490d-9ff9-61f7640f3b87)|Joan Dark|Front Lain|![Asset Site](https://otsoga.itch.io/swordswoman)|
-|![Rogue](https://github.com/user-attachments/assets/1030e892-e520-4955-8a8a-7bcfd26838ba)|Rogue|Front Lain|![Asset Site](https://pixelthewise.itch.io/character-animation-set)|
-|![NightLord](https://github.com/user-attachments/assets/8dba4548-5f6f-4cb5-adaf-3a89db9e10ee)|Night Lord|Mid Lain|![Asset Site](https://otsoga.itch.io/night-lord)|
-|![BountyHunter](https://github.com/user-attachments/assets/0a27baa3-2f61-434f-9b6b-aa9d0ba9f3d0)|The Bounty Hunter|Mid Lain|![Asset Site](https://clembod.itch.io/bounty-h)|
-|![CentaurLady](https://github.com/user-attachments/assets/8e83d5df-ee5b-4b77-a05e-4e2d64758031)|Centaur Lady|Rear Lain|![Asset Site](https://otsoga.itch.io/centaur-lady)|
-|![SalamanderWitch](https://github.com/user-attachments/assets/ebf33175-a45f-4f71-85c9-22f60c253566)|Salamander Witch|Rear Lain|![Asset Site](https://otsoga.itch.io/eleonore)|
+|![Joandarc](https://github.com/user-attachments/assets/083edb28-8560-490d-9ff9-61f7640f3b87) | Joan Dark | Front Lain | [Asset Site](https://otsoga.itch.io/swordswoman) |
+|![Rogue](https://github.com/user-attachments/assets/1030e892-e520-4955-8a8a-7bcfd26838ba) | Rogue | Front Lain | [Asset Site](https://pixelthewise.itch.io/character-animation-set) |
+|![NightLord](https://github.com/user-attachments/assets/8dba4548-5f6f-4cb5-adaf-3a89db9e10ee) | Night Lord | Mid Lain | [Asset Site](https://otsoga.itch.io/night-lord) |
+|![BountyHunter](https://github.com/user-attachments/assets/0a27baa3-2f61-434f-9b6b-aa9d0ba9f3d0) | The Bounty Hunter | Mid Lain | [Asset Site](https://clembod.itch.io/bounty-h)|
+|![CentaurLady](https://github.com/user-attachments/assets/8e83d5df-ee5b-4b77-a05e-4e2d64758031) | Centaur Lady | Rear Lain | [Asset Site](https://otsoga.itch.io/centaur-lady) |
+|![SalamanderWitch](https://github.com/user-attachments/assets/ebf33175-a45f-4f71-85c9-22f60c253566) | Salamander Witch | Rear Lain | [Asset Site](https://otsoga.itch.io/eleonore) |
 
-**5-4. Dawn (플레이어 캐릭터)**
+**5-4. Ally Parameter**
+
+| 한국어 | 영어 | 설명 | 수치 범위 | 자료형 | 초기화 수치 | 강화 여부 |
+|--------|------|------|-----------|--------|-------------|-----------|
+| 공격력 | attack | 아군 유닛의 기본 공격력 | 2 ~ 20 | float | - | O |
+| 사거리 | range | 아군 유닛의 사거리 | - | - | - | - |
+| 공격 속도 | attackSpeed | 아군 유닛의 공격속도 | 1 ~ 3 | float | - | O |
+| 지속 시간 | duration | 아군 유닛이 필드에 존재하는 시간 | 5 ~ 10 | float | 5 | O |
+| 소환 코스트 | cost | 아군 유닛을 소환하기 위해 사용되는 빛 조각의 개수 | 2 ~ 5 | int | - | O |
+
+### 6. Dawn (플레이어 캐릭터)
 
 - 플레이어 캐릭터는 Ally 중 하나를 선택하여 사용합니다. Ally 상태와는 다른 스킬을 보유합니다.
+
+- 액티브 스킬은 Space bar를 누르면 사용할 수 있습니다.
 
   a. Joan Dark
     
@@ -96,13 +109,41 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
     - 액티브: **Daybreak(새벽의 여명)**
  
       - 필드의 모든 Ally의 유지 시간을 최대로 회복
+     
+### 7. Dark
 
-**5-5. Ally Parameter**
+**7-1. 개요**
 
-| 한국어 | 영어 | 설명 | 수치 범위 | 자료형 | 초기화 수치 | 강화 여부 |
-|--------|------|------|-----------|--------|-------------|-----------|
-| 공격력 | attack | 아군 유닛의 기본 공격력 | 2 ~ 20 | float | - | O |
-| 사거리 | range | 아군 유닛의 사거리 | - | - | - | - |
-| 공격 속도 | attackSpeed | 아군 유닛의 공격속도 | 1 ~ 3 | float | - | O |
-| 지속 시간 | duration | 아군 유닛이 필드에 존재하는 시간 | 5 ~ 10 | float | 5 | O |
-| 소환 코스트 | cost | 아군 유닛을 소환하기 위해 사용되는 빛 조각의 개수 | 2 ~ 5 | int | - | O |
+  - Dark는 기본, 특수, 보스로 나뉩니다.
+  
+  - 각 Dark는 서로 다른 개체 값을 가지고 있으며, Dark에 따라 아군 Aly와의 상성을 가지고 있습니다. (추가 예정)
+
+**7-2. Dark Types**
+
+  a. 기본
+
+    - 기본 Dark는 특별한 능력을 가지고 있지 않습니다.
+
+  b. 특수
+
+    - 특수 Dark는 고유의 이동 혹은 공격 매커니즘을 가지고 있습니다.
+
+  c. 보스
+
+    - 보스 Dark는 Boss Stage에 등장합니다. 여러 개의 패턴을 보유하고 있습니다.
+
+**7-3. Dark Table**
+
+| 이름 | 종류 | 링크 |
+| Dark Dusts | 기본 및 특수 Dark | [Asset Site](https://penusbmic.itch.io/the-dark-series-top-down-monster-pack-1) |
+| Boss | 보스 Dark | [Asset Site](https://penusbmic.itch.io/the-dark-series-the-tarnished-widow-boss) |
+
+### 8. UI 및 기타 에셋
+
+| 이름 | UI 오브젝트 | 씬 | 링크 |
+| Isometric Asset Jumpstart Pack | InStage 타일 맵 디자인 | InStage | [Asset Site](https://philtacular.itch.io/pixel-art-tileset-isometric-starter-pack) |
+| Super Asset Bundle #5 : Mini Pocket Status | Book, Map, Deck, Card 등 기타 UI | MainScene, MapScene, InStage | [Asset Site](https://humblepixel.itch.io/super-asset-bundle-5-mini-pocket-status) |
+| Holy Spell Effect | Ally 소환 이펙트 | InStage | [Asset Site](https://pimen.itch.io/holy-spell-effect) |
+| Pixel Reward Series #1: Coins | 클리어 이벤트 | InStage | [Asset Site](https://humblepixel.itch.io/pixel-reward-series-1-coins/download/fIlxm_Cgp1MJ6Vb_5ElAc8WreZR_pAEXSEF231C1) |
+| LockVenture #5: Weather Forecast | 강화 카드 | InStage | [Asset Site](https://humblepixel.itch.io/lockventure-5-weather-forecast/download/0DKYZnHA1QVmTlqxfpVcZBBj6NpXrEu62xwLCAtK) |
+| Pixel Buttons | 설정 및 돌아가기 버튼 | MapScene | [Asset Site](https://humblepixel.itch.io/pixel-buttons/download/TRDpBhWBfraVOOssJHAVYF6S2_cPOmR6nY6mPKcj) |
