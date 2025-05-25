@@ -22,6 +22,7 @@ public class ItemCollector : MonoBehaviour
     /// 수집된 AllyItemData 목록을 반환합니다.
     /// </summary>
     public List<AllyItemData> GetSelectedAllyItems() => selectedAllyItem;
+    
     /// <summary>
     /// 아이템을 수집 목록에 추가합니다.
     /// </summary>
@@ -48,6 +49,4 @@ public class ItemCollector : MonoBehaviour
         selectedRemnant.Clear();
         selectedAllyItem.Clear();
     }
-
-    
 }

@@ -13,8 +13,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField, LabelText("선택한 Dawn의 Energy")] private Slider energySlider;
     [SerializeField, LabelText("선택한 Dawn의 액티브 스킬 쿨다운 프로그레스")] 
     private DawnCoolTimeProgress dawnCoolTimeProgress;
-
-
+    
     private void Start()
     {
         // UI 초기화

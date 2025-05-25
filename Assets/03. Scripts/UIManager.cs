@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public InGameUIManager inGameUIManager;
     [SerializeField] public ClearUIManager clearUIManager;
     [SerializeField] public CostManager costManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Button nextButton;
     
     private void Awake()
     {
@@ -17,10 +19,23 @@ public class UIManager : MonoBehaviour
         }
         Instance = this;
     }
-    
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        
+        nextButton.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (InGameSceneManager.Instance.isGameOver)
+        {
+            clearUIManager.SetActiveStageClearText(true, "GameOver");
+            nextButton.gameObject.SetActive(true);
+        }
+    }
+
+    public void OnNextButtonClick()
+    {
+        LoadingSceneManager.LoadScene("MainScene");
     }
 }

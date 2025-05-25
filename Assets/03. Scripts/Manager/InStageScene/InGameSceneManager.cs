@@ -24,9 +24,12 @@ public class InGameSceneManager : MonoBehaviour
     [SerializeField] public TileManager tileManager;
     [SerializeField] public PreviewManager previewManager;
     
-
+    public bool isGameOver = false;
+    
     private void Start()
     {
+        isGameOver = false;
+        
         // 현재 스테이지 데이터 존재 시 자동 시작
         if (RuntimeDataManager.Instance.currentStageData != null)
         {
@@ -35,6 +38,14 @@ public class InGameSceneManager : MonoBehaviour
         else
         {
             Debug.LogWarning("currentStageData가 null입니다. MapScene에서 노드를 클릭하지 않았을 수 있습니다.");
+        }
+    }
+
+    private void Update()
+    {
+        if (isGameOver)
+        {
+            RuntimeDataManager.Instance.InitMapState();
         }
     }
 }
