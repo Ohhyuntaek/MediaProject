@@ -44,7 +44,7 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         GenerateDebugGridLines();
-        
+
         if (RuntimeDataManager.Instance.mapGenerated)
         {
             LoadMapFromRuntime();
@@ -61,35 +61,32 @@ public class MapGenerator : MonoBehaviour
             StageNodeVer2 bossNode = null;
             bool success = false;
 
-            // 💡 연결된 경로가 보스까지 반드시 도달하도록 최대 10번 시도
             for (int attempt = 0; attempt < 30 && !success; attempt++)
             {
+                StageNodeVer2[,] tempGrid;
+                List<StageNodeVer2> mainPath = GenerateLogicalGrid(out tempGrid);
+
                 // 💡 보스 노드 강제 생성
-                if (grid[width - 1, height - 1] == null)
-                    grid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
+                if (tempGrid[width - 1, height - 1] == null)
+                    tempGrid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
 
-                bossNode = grid[width - 1, height - 1];
+                bossNode = tempGrid[width - 1, height - 1];
 
-                List<StageNodeVer2> mainPath = GenerateLogicalGrid(out grid);
-
-                // 주 경로 연결 강제 생성
+                // mainPath 강제 연결
                 for (int i = 0; i < mainPath.Count - 1; i++)
                 {
                     var from = mainPath[i];
                     var to = mainPath[i + 1];
-
                     from.ConnectedNodes.Add(to);
                     to.IncomingNodes.Add(from);
                 }
-                
-                AssignStageTypes();
 
+                grid = tempGrid;
+                AssignStageTypes();
                 ConnectNodes();
 
-                // 💡 시작 노드에서 도달 가능한 노드
                 var reachable = CollectConnectedNodes(grid[0, 0]);
 
-                // 💥 Boss 노드가 도달 불가능한 경우 → 가장 가까운 노드와 연결
                 if (!reachable.Contains(bossNode))
                 {
                     StageNodeVer2 nearest = null;
@@ -111,7 +108,6 @@ public class MapGenerator : MonoBehaviour
                         bossNode.IncomingNodes.Add(nearest);
                     }
 
-                    // 다시 reachable 검사
                     reachable = CollectConnectedNodes(grid[0, 0]);
                 }
 
@@ -125,13 +121,10 @@ public class MapGenerator : MonoBehaviour
                 return;
             }
 
-            // 💡 boss까지 연결된 경로 안의 노드만 남김
             var fromStart = CollectConnectedNodes(grid[0, 0]);
             var toBoss = CollectNodesReachableFrom(bossNode);
             var validNodes = new HashSet<StageNodeVer2>(fromStart);
             validNodes.IntersectWith(toBoss);
-
-            // 보스와 시작점은 반드시 포함
             validNodes.Add(grid[0, 0]);
             validNodes.Add(bossNode);
 
@@ -146,15 +139,13 @@ public class MapGenerator : MonoBehaviour
                     bool isBoss = (x == width - 1 && y == height - 1);
 
                     if (!validNodes.Contains(node) && !isStart && !isBoss)
-                    {
                         grid[x, y] = null;
-                    }
                 }
             }
 
-            ConnectNodes();          // 다시 연결
+            ConnectNodes();
             PruneUnreachableNodes();
-            ConnectNodes();          // 필터링 후 다시 연결
+            ConnectNodes();
 
             currentNode = grid[0, 0];
             currentNode.IsCleared = true;
@@ -167,9 +158,7 @@ public class MapGenerator : MonoBehaviour
         UpdateMarkerPosition(currentNode);
 
         foreach (var btn in nodeButtons.Values)
-        {
-            btn.GetComponent<NodeButton>().Refresh(); // 클리어 상태 반영
-        }
+            btn.GetComponent<NodeButton>().Refresh();
     }
     
     private void GenerateDebugGridLines()
