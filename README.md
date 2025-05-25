@@ -18,7 +18,15 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 - 개발 언어: C#
 
-- 씬 구조: TitleScene -> MainScene -> MapScene <-> InStage <-> Shop
+- 씬 구조:
+
+  | 이름 | 연결된 다른 씬 |
+  |-----|----------------|
+  | TitleScene | LoadingScene, MainScene |
+  | MainScene | TitleScene, LoadingScene, MapScene |
+  | MapScene | MainScene, LoadingScene, Shop, InStage |
+  | InStage | MapScene, LoadingScene |
+  | Shop | MapScene, LoadingScene |
 
 ### 3. 기술
 
@@ -31,7 +39,8 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
   - Scriptable Object: DarkData, AllyData, DawnData, etc.
     
   - Singletone: RuntimeDataManager, etc.
-    
+
+  - Async: LoadingScene
 
 - Git
   
