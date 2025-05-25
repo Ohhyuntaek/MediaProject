@@ -79,5 +79,30 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 |![CentaurLady](https://github.com/user-attachments/assets/8e83d5df-ee5b-4b77-a05e-4e2d64758031)|Centaur Lady|Rear Lain|![Asset Site](https://otsoga.itch.io/centaur-lady)|
 |![SalamanderWitch](https://github.com/user-attachments/assets/ebf33175-a45f-4f71-85c9-22f60c253566)|Salamander Witch|Rear Lain|![Asset Site](https://otsoga.itch.io/eleonore)|
 
+**5-4. Dawn (플레이어 캐릭터)**
 
+- 플레이어 캐릭터는 Ally 중 하나를 선택하여 사용합니다. Ally 상태와는 다른 스킬을 보유합니다.
 
+  a. Joan Dark
+    
+    - 빛을 다루는 수호자
+    
+    - 광역 버프 & 유닛 유지력
+    
+    - 패시브: **Twilight Aura(황혼의 기운)**
+ 
+      - 매 3번째 아군이 배치될 때, 인접한(같은 열의 좌 우) 유닛들에게 1초동안 군중 제어 면역 효과를 부여
+ 
+    - 액티브: **Daybreak(새벽의 여명)**
+ 
+      - 필드의 모든 Ally의 유지 시간을 최대로 회복
+
+**5-5. Ally Parameter**
+
+| 한국어 | 영어 | 설명 | 수치 범위 | 자료형 | 초기화 수치 | 강화 여부 |
+|--------|------|------|-----------|--------|-------------|-----------|
+| 공격력 | attack | 아군 유닛의 기본 공격력 | 2 ~ 20 | float | - | O |
+| 사거리 | range | 아군 유닛의 사거리 | - | - | - | - |
+| 공격 속도 | attackSpeed | 아군 유닛의 공격속도 | 1 ~ 3 | float | - | O |
+| 지속 시간 | duration | 아군 유닛이 필드에 존재하는 시간 | 5 ~ 10 | float | 5 | O |
+| 소환 코스트 | cost | 아군 유닛을 소환하기 위해 사용되는 빛 조각의 개수 | 2 ~ 5 | int | - | O |
