@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1277188567
-  m_SortingLayer: 11
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Sprite: {fileID: -691099098, guid: 990702a125d44df4ba1c35c60c1aef72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,8 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
   _animator: {fileID: 2164910166956106845}
-  cooldownMultiplier: 1
-  energyChargeMultiplier: 0.2
+  _activeSkillCooldownTimer: 0
   currentEnergyUpSpeed: 0.5
 --- !u!95 &2164910166956106845
 Animator:

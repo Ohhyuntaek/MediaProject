@@ -5,8 +5,8 @@ public class PlayerDeadState : IState<Dawn>
     
     public void Enter(Dawn dawn)
     {
-        dawn.Animator?.SetTrigger("4_Death");
-       
+        dawn.Animator?.CrossFade("Death", 0f);
+        Debug.Log("죽엇다.");
     }
 
     public void Update(Dawn dawn)
