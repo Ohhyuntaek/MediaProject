@@ -135,6 +135,12 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
             return;
         }
         
+        if (!InGameSceneManager.Instance.tileManager.PreviewAvailableTile())
+        {
+            Debug.Log("No available tile or ally in pool");
+            return;
+        }
+        
         // 이펙트 제거 후 스폰
         InGameSceneManager.Instance.tileManager.ClearSpawnTileEffect();
         GameObject ally = InGameSceneManager.Instance.allyPoolManager.SpawnAlly(unitData, lineType);
@@ -143,10 +149,6 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
         {
             Destroy(this.gameObject);
             InGameSceneManager.Instance.cardSpawner.ShiftCardsLeft(slotIndex);   
-        }
-        else
-        {
-            Debug.Log("No available tile or ally in pool");
         }
     }
     

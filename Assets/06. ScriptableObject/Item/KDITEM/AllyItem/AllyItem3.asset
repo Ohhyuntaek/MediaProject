@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AllyItem3
   m_EditorClassIdentifier: 
   _icon: {fileID: 1170413532, guid: 29f07a00b2dd83d4f88eb3f1b58e8968, type: 3}
-  _price: 0
+  _price: 10
   _description: "\uB85C\uADF8 \uD655\uB960 \uC99D\uAC00"
   _allyItemType: 0
   _allyType: 3
