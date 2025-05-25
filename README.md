@@ -43,10 +43,10 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 ### 5. Ally
 
-"5-1. 개요"
+**5-1. 개요**
 - 유닛은 기본적인 특성항목을 공유하며 (공격력 , 사거리 등) 각 항목 당 수치는 상이합니다. 각 유닛의 역할군, 종족, 혹은 유닛 자체에 따라 고유의 항목이 존재합니다.
 
-"5-2. Ally Status"
+**5-2. Ally Status**
 
   5-2-1. 유닛 사거리 : 유닛 사거리는 숫자로 표기합니다. 유닛 사거리는 기본적으로 자신앞에 있는 적을 포함하며 적혀있는 숫자만큼 적이 스폰되는 쪽에 가까워집니다. 
 
@@ -68,8 +68,16 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
   5-2-5. 일반 공격 : 모든 유닛은 사정거리 안의 적 중 가장 가까운 적에게 우선 공격합니다. 만일 같은 위치에 있다면 둘 중 더 먼저 스폰된 몬스터에게 공격합니다. 
 
-"5-3. Ally 리스트"
+**5-3. Ally 리스트**
 
 | 이미지 | 이름 | 역할군 | 링크 |
 |--------|------|--------|------|
-|![SalamanderWitch](https://github.com/user-attachments/assets/ebf33175-a45f-4f71-85c9-22f60c253566)|Salamander Witch|Rear|![Asset Site](https://otsoga.itch.io/eleonore)|
+|![Joandarc](https://github.com/user-attachments/assets/083edb28-8560-490d-9ff9-61f7640f3b87)|Joan Dark|Front Lain|![Asset Site](https://otsoga.itch.io/swordswoman)|
+|![Rogue](https://github.com/user-attachments/assets/1030e892-e520-4955-8a8a-7bcfd26838ba)|Rogue|Front Lain|![Asset Site](https://pixelthewise.itch.io/character-animation-set)|
+|![NightLord](https://github.com/user-attachments/assets/8dba4548-5f6f-4cb5-adaf-3a89db9e10ee)|Night Lord|Mid Lain|![Asset Site](https://otsoga.itch.io/night-lord)|
+|![BountyHunter](https://github.com/user-attachments/assets/0a27baa3-2f61-434f-9b6b-aa9d0ba9f3d0)|The Bounty Hunter|Mid Lain|![Asset Site](https://clembod.itch.io/bounty-h)|
+|![CentaurLady](https://github.com/user-attachments/assets/8e83d5df-ee5b-4b77-a05e-4e2d64758031)|Centaur Lady|Rear Lain|![Asset Site](https://otsoga.itch.io/centaur-lady)|
+|![SalamanderWitch](https://github.com/user-attachments/assets/ebf33175-a45f-4f71-85c9-22f60c253566)|Salamander Witch|Rear Lain|![Asset Site](https://otsoga.itch.io/eleonore)|
+
+
+
