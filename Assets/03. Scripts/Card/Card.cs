@@ -135,7 +135,8 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
             return;
         }
         
-        if (!InGameSceneManager.Instance.tileManager.PreviewAvailableTile())
+        var tile = InGameSceneManager.Instance.tileManager.GetPreviewedTile();
+        if (tile == null)
         {
             Debug.Log("No available tile or ally in pool");
             return;

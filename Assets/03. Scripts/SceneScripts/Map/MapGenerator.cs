@@ -64,15 +64,13 @@ public class MapGenerator : MonoBehaviour
             // 💡 연결된 경로가 보스까지 반드시 도달하도록 최대 10번 시도
             for (int attempt = 0; attempt < 30 && !success; attempt++)
             {
-                GenerateLogicalGrid();
-
                 // 💡 보스 노드 강제 생성
                 if (grid[width - 1, height - 1] == null)
                     grid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
 
                 bossNode = grid[width - 1, height - 1];
 
-                List<StageNodeVer2> mainPath = GenerateLogicalGrid();  // 주 경로 확보
+                List<StageNodeVer2> mainPath = GenerateLogicalGrid(out grid);
 
                 // 주 경로 연결 강제 생성
                 for (int i = 0; i < mainPath.Count - 1; i++)
@@ -215,14 +213,14 @@ public class MapGenerator : MonoBehaviour
         currentNode = RuntimeDataManager.Instance.currentNode;
     }
 
-    private List<StageNodeVer2> GenerateLogicalGrid()
+    private List<StageNodeVer2> GenerateLogicalGrid(out StageNodeVer2[,] generatedGrid)
     {
-        grid = new StageNodeVer2[width, height];
-        List<StageNodeVer2> mainPath = new();  // 주 경로
+        generatedGrid = new StageNodeVer2[width, height];
+        List<StageNodeVer2> mainPath = new();
 
         int x = 0, y = 0;
         var node = new StageNodeVer2(x, y);
-        grid[x, y] = node;
+        generatedGrid[x, y] = node;
         mainPath.Add(node);
 
         while (x < width - 1 || y < height - 1)
@@ -234,27 +232,26 @@ public class MapGenerator : MonoBehaviour
             if (moveRight) x++;
             else y++;
 
-            if (grid[x, y] == null)
+            if (generatedGrid[x, y] == null)
             {
                 node = new StageNodeVer2(x, y);
-                grid[x, y] = node;
+                generatedGrid[x, y] = node;
             }
             else
             {
-                node = grid[x, y];
+                node = generatedGrid[x, y];
             }
 
             mainPath.Add(node);
         }
 
-        // 나머지 노드 랜덤 배치
         for (int j = 0; j < height; j++)
         {
             for (int i = 0; i < width; i++)
             {
-                if (grid[i, j] == null && Random.value < nodeSpawnChance)
+                if (generatedGrid[i, j] == null && Random.value < nodeSpawnChance)
                 {
-                    grid[i, j] = new StageNodeVer2(i, j);
+                    generatedGrid[i, j] = new StageNodeVer2(i, j);
                 }
             }
         }
