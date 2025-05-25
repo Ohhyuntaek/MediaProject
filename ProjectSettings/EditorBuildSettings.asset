@@ -6,9 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-<<<<<<< Updated upstream
     path: Assets/01. Scenes/HyunTaek/TitleScene.unity
     guid: 163b033f140237d44a708381f0f2bdef
+  - enabled: 1
+    path: Assets/01. Scenes/HyunTaek/LoadingScene.unity
+    guid: 80c318284178a134eac3e5fd328e3e39
   - enabled: 1
     path: Assets/01. Scenes/HyunTaek/MainScene.unity
     guid: f1f82765667ac194db281a2ab96eea81
@@ -16,16 +18,10 @@ EditorBuildSettings:
     path: Assets/01. Scenes/HyunTaek/MapScene.unity
     guid: 3adbc4b5686671a42bde85c2d2b04087
   - enabled: 1
-=======
->>>>>>> Stashed changes
     path: Assets/01. Scenes/HyunTaek/InStage.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/01. Scenes/JiSeok/ShopScene.unity
     guid: 3226fd1748d5a7d44a3c045393be6246
-  - enabled: 1
-    path: Assets/01. Scenes/HyunTaek/LoadingScene.unity
-    guid: 80c318284178a134eac3e5fd328e3e39
-  m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

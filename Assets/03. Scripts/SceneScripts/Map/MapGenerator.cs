@@ -569,10 +569,10 @@ public class MapGenerator : MonoBehaviour
         {
             case StageType.Normal:
             case StageType.Boss:
-                // LoadingSceneManager.LoadScene("InStage");
+                LoadingSceneManager.LoadScene("InStage");
                 break;
             case StageType.Shop:
-                // LoadingSceneManager.LoadScene("ShopScene");
+                LoadingSceneManager.LoadScene("ShopScene");
                 break;
         }
     }
