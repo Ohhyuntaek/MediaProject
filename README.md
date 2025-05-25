@@ -13,27 +13,42 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 ### 2. 프로젝트 개요
 
 - 개발 기간: 2025.03.10. ~ 2025.05.25. (이 후 추가 개발 진행 예정)
+  
 - 개발 도구: Unity 6000.0.32f1
+
 - 개발 언어: C#
+
+- 씬 구조: TitleScene -> MainScene -> MapScene <-> InStage <-> Shop
 
 ### 3. 기술
 
 - Unity
+  
   - FSM: Dark, Ally, Dawn.
+    
   - Object Pool: Spawn the Allies.
+    
   - Scriptable Object: DarkData, AllyData, DawnData, etc.
+    
   - Singletone: RuntimeDataManager, etc.
+    
 
 - Git
+  
   - Git-Flow 형식의 Branch 관리
+    
   - Ryder
  
 - 생성형 AI
+  
   - SUNO AI Music
+    
   - Chat GPT
 
 - 디자인
+  
   - adobe photoshop
+    
   - itch.io
 
 ### 4. 플레이 설명
@@ -47,6 +62,7 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 ### 5. Ally
 
 **5-1. 개요**
+
   - 유닛은 기본적인 특성항목을 공유하며 (공격력 , 사거리 등) 각 항목 당 수치는 상이합니다. 각 유닛의 역할군, 종족, 혹은 유닛 자체에 따라 고유의 항목이 존재합니다.
 
 **5-2. Ally Status**
@@ -146,8 +162,11 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 | 이름 | UI 오브젝트 | 씬 | 링크 |
 |------|------------|----|-----|
 | Isometric Asset Jumpstart Pack | InStage 타일 맵 디자인 | InStage | [Asset Site](https://philtacular.itch.io/pixel-art-tileset-isometric-starter-pack) |
-| Super Asset Bundle #5 : Mini Pocket Status | Book, Map, Deck, Card 등 기타 UI | MainScene, MapScene, InStage | [Asset Site](https://humblepixel.itch.io/super-asset-bundle-5-mini-pocket-status) |
+| Super Asset Bundle #5 : Mini Pocket Status | Book, Map, Deck, Card 등 기타 UI | MainScene, MapScene, InStage, Shop | [Asset Site](https://humblepixel.itch.io/super-asset-bundle-5-mini-pocket-status) |
 | Holy Spell Effect | Ally 소환 이펙트 | InStage | [Asset Site](https://pimen.itch.io/holy-spell-effect) |
 | Pixel Reward Series #1: Coins | 클리어 이벤트 | InStage | [Asset Site](https://humblepixel.itch.io/pixel-reward-series-1-coins/download/fIlxm_Cgp1MJ6Vb_5ElAc8WreZR_pAEXSEF231C1) |
 | LockVenture #5: Weather Forecast | 강화 카드 | InStage | [Asset Site](https://humblepixel.itch.io/lockventure-5-weather-forecast/download/0DKYZnHA1QVmTlqxfpVcZBBj6NpXrEu62xwLCAtK) |
 | Pixel Buttons | 설정 및 돌아가기 버튼 | MapScene | [Asset Site](https://humblepixel.itch.io/pixel-buttons/download/TRDpBhWBfraVOOssJHAVYF6S2_cPOmR6nY6mPKcj) |
+| Free Pixel Font - Thaleah | 폰트 | TitleScene, MainScene, MapScene, InStage | [Asset Site](https://tinyworlds.itch.io/free-pixel-font-thaleah) |
+| Silver: Premere pixel font for games | 폰트 | TitleScene, MainScene, MapScene, InStage, Shop | [Asset Site](https://poppyworks.itch.io/silver) |
+| 8000+ Raven Fantasy Icons | 아이콘 | MapScene, Shop | [Asset Site](https://clockworkraven.itch.io/raven-fantasy-icons) |
