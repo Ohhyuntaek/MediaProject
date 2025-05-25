@@ -64,7 +64,6 @@ public class SoundManager : MonoBehaviour
         if (_sfxSlider != null)
         {
             _sfxSlider.value=_sfxVolume;
-            Debug.Log(_sfxVolume + "설정");
             _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
         }
 
@@ -74,13 +73,46 @@ public class SoundManager : MonoBehaviour
             _bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
         }
 
-       
+        _bgmSourcePrefab.volume = _bgmVolume;
+        _sfxSourcePrefab.volume = _sfxVolume;
+
+
+
+
+    }
+
+    public void ButtonClick(GameObject SoundPanel)
+    {   
+        if (_sfxSlider != null)
+            _sfxSlider.onValueChanged.RemoveListener(OnSfxVolumeChanged);
+        if (_bgmSlider != null)
+            _bgmSlider.onValueChanged.RemoveListener(OnBgmVolumeChanged);
+
+        // 2) 씬에서 슬라이더들 찾아 연결 (태그나 이름, 직접 Find 등)
+        var sfxGO = GameObject.FindWithTag("SFXSlider");
+        _sfxSlider = sfxGO ? sfxGO.GetComponent<Slider>() : null;
+
+        var bgmGO = GameObject.FindWithTag("BgmSlider");
+        _bgmSlider = bgmGO ? bgmGO.GetComponent<Slider>() : null;
+        if (_sfxSlider != null)
+        {
+            _sfxSlider.value=_sfxVolume;
+            Debug.Log(_sfxVolume + "설정");
+            _sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
+        }
+
+        if (_bgmSlider != null)
+        {
+            _bgmSlider.value = _bgmVolume;
+            _bgmSlider.onValueChanged.AddListener(OnBgmVolumeChanged);
+        }
     }
 
 
-private void Awake()
+    private void Awake()
     {
         // BGM Source 셋업
+        
         _bgmSource = Instantiate(_bgmSourcePrefab, transform);
         _bgmSource.loop = false; // 개별 트랙 루프는 리스트 로직에서 관리
     }
@@ -169,6 +201,7 @@ private void Awake()
         {
             var clip = _bgmPlaylist[_bgmIndex];
             _bgmSource.clip = clip;
+            _bgmSource.volume = _bgmVolume;
             _bgmSource.Play();
 
             // 곡 길이만큼 대기
@@ -209,4 +242,10 @@ private void Awake()
             _bgmSource.volume = value;
         }
     }
+
+    public void OnClickButton()
+    {
+        
+    }
+  
 }

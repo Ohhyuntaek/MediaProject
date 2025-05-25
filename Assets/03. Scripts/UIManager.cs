@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public ClearUIManager clearUIManager;
     [SerializeField] public CostManager costManager;
     [SerializeField] private Button nextButton;
+    [SerializeField] private GameObject soundPanel;
     
     private void Awake()
     {
@@ -39,6 +40,26 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnNextButtonClick()
+    {
+        LoadingSceneManager.LoadScene("MainScene");
+    }
+
+    public void OnPanelButtonClick()
+    {
+        
+        soundPanel.SetActive(true);
+        Time.timeScale = 0f;
+        EntireGameManager.Instance.soundManager.ButtonClick(soundPanel);
+    }
+
+    public void OnBackButtonClick()
+    {
+    
+        soundPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void OnExitButtonClick()
     {
         LoadingSceneManager.LoadScene("MainScene");
     }
