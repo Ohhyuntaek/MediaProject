@@ -191,7 +191,9 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 **9-1. Ally 카드**
 
-- 
+![image](https://github.com/user-attachments/assets/cd3e1dc7-977b-4dc4-9b30-dd09ec8fedb5)
+
+-  카드 이미지와 일치하는 Ally를 
 
 **9-2. 강화 카드**
 
