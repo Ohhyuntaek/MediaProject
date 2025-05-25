@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: b6ad59cb6cb9a9a4abfb675b01a34d48, type: 3}
   _price: 15
-  _description: "\uC720\uB2DB \uACF5\uACA9\uB825 \uC99D\uAC00"
+  _description: "Ally \uACF5\uACA9\uB825 \uC99D\uAC00"
   _remnantType: 0
   _remnantStat: 0
   _amount: 2

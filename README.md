@@ -193,15 +193,38 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 ![image](https://github.com/user-attachments/assets/cd3e1dc7-977b-4dc4-9b30-dd09ec8fedb5)
 
--  카드 이미지와 일치하는 Ally를 
+- 카드를 클릭하면, 카드 이미지와 일치하는 Ally를 Spawn Point에 소환할 수 있습니다.
 
 **9-2. 강화 카드**
 
-- 
+![alt text](image.png)
+
+- 각 Stage에 나오는 Dark를 모두 처치할 경우, 3개 중 하나를 선택할 수 있습니다.
+
+- Enhancment Card List
+
+  | 이름 | 강화 효과 | 설명 | 배수 |
+  |------|----------|------|-----|
+  | Cost Up | Cost UP | 코스트 상승 속도 증가 | 1.2 ~ 1.5 |
+  | More Cards | Card Spawn Speed Up | 카드 생성 속도 증가 | 1.2 ~ 1.5 |
+  | Skill Faster | Cooldown Speed Up | 액티브 스킬의 쿨타임 감소 | 1.2 ~ 1.5 |
+  | Energy Up | Energy Charge Speed UP | 에너지 충전 속도 증가 | 1.2 ~ 1.5 |
 
 **9-3. 아이템**
 
-- 
+- 아이템은 Shop Stage에서 구매가 가능합니다.
+
+- 재화는 매 Stage 클리어 시, 10개의 Lumen을 습득할 수 있습니다.
+
+- Item List
+  | 종류 | 이름 | 효과 설명 | 가격 |
+  |------|------|---------|------|
+  | Ally Item | AllyItem1 | Joan Dark 카드 생성 확률 증가 | 10 |
+  |  | AllyItem2 | Night Lord 카드 생성 확률 증가 | 10 |
+  |  | AllyItem3 | Rogue 카드 생성 확률 증가 | 10 |
+  | Ramnent Item | UnitAtk | Ally 공격력 증가 | 15 |
+  |  | UnitDuration | Ally 지속시간 증가 | 10 |
+  |  | UnitSpd | Ally 공격속도 증가 | 15 |
 
 ### 10. UI 및 기타 에셋
 
