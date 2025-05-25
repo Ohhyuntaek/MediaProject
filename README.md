@@ -39,7 +39,9 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 ### 4. 플레이 설명
 
 - 조작
+  
   > 마우스 클릭
+  
   > Space bar (Dawn Active Skill)
 
 ### 5. Ally
@@ -135,12 +137,14 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 **7-3. Dark Table**
 
 | 이름 | 종류 | 링크 |
+|------|-----|-------|
 | Dark Dusts | 기본 및 특수 Dark | [Asset Site](https://penusbmic.itch.io/the-dark-series-top-down-monster-pack-1) |
 | Boss | 보스 Dark | [Asset Site](https://penusbmic.itch.io/the-dark-series-the-tarnished-widow-boss) |
 
 ### 8. UI 및 기타 에셋
 
 | 이름 | UI 오브젝트 | 씬 | 링크 |
+|------|------------|----|-----|
 | Isometric Asset Jumpstart Pack | InStage 타일 맵 디자인 | InStage | [Asset Site](https://philtacular.itch.io/pixel-art-tileset-isometric-starter-pack) |
 | Super Asset Bundle #5 : Mini Pocket Status | Book, Map, Deck, Card 등 기타 UI | MainScene, MapScene, InStage | [Asset Site](https://humblepixel.itch.io/super-asset-bundle-5-mini-pocket-status) |
 | Holy Spell Effect | Ally 소환 이펙트 | InStage | [Asset Site](https://pimen.itch.io/holy-spell-effect) |
