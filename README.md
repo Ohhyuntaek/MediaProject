@@ -5,8 +5,9 @@
 ---
 Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%80%EC%84%9D (인디크래프트 공모전 제출 당시 영상)
 
-
 ### 1. 프로젝트 소개
+
+![dawnfall title](https://github.com/user-attachments/assets/4c0556bc-9809-4f86-bb41-e9630aaa1bbf)
 
 - Unity Engine을 기반으로 제작된 2D 로그라이크 게임 제작 프로젝트입니다.
 
@@ -179,3 +180,6 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 | Free Pixel Font - Thaleah | 폰트 | TitleScene, MainScene, MapScene, InStage | [Asset Site](https://tinyworlds.itch.io/free-pixel-font-thaleah) |
 | Silver: Premere pixel font for games | 폰트 | TitleScene, MainScene, MapScene, InStage, Shop | [Asset Site](https://poppyworks.itch.io/silver) |
 | 8000+ Raven Fantasy Icons | 아이콘 | MapScene, Shop | [Asset Site](https://clockworkraven.itch.io/raven-fantasy-icons) |
+| All in 1 Vfx Toolkit | 공격 이펙트 | InStage | [Asset Site](https://assetstore.unity.com/packages/vfx/all-in-1-vfx-toolkit-206665) |
+| All in 1 Sprite Shader | 피격 이펙트 | InStage | [Asset Site](https://assetstore.unity.com/packages/vfx/shaders/all-in-1-sprite-shader-156513) |
+| DOTween Pro | 카메라 흔들림 | InStage | [Asset Site](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416) |
