@@ -14,9 +14,6 @@ public class RuntimeDataManager : MonoBehaviour
     public StageNodeVer2 nextNode;                  // 다음으로 이동할 노드
     public bool mapGenerated = false;               // 맵 생성 여부
     
-    [Header("맵")]
-    public List<StageNode> stageGraphData = new();
-    
     [Header("현재 스테이지")]
     public StageData currentStageData;
     
