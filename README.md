@@ -167,7 +167,41 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 | Dark Dusts | 기본 및 특수 Dark | [Asset Site](https://penusbmic.itch.io/the-dark-series-top-down-monster-pack-1) |
 | Boss | 보스 Dark | [Asset Site](https://penusbmic.itch.io/the-dark-series-the-tarnished-widow-boss) |
 
-### 8. UI 및 기타 에셋
+### 8. Stage
+
+**8-1. 개요**
+
+![image](https://github.com/user-attachments/assets/8edb357a-11b1-4131-9fcb-e3ecb664ab87)
+
+- MapScene 진입 시, 여러 경로와 노드로 나뉜 것을 볼 수 있습니다.
+
+  - 경로는 유저가 이동할 수 있는 길을 의미합니다.
+ 
+  - 노드는 유저가 진입할 수 있는 스테이지를 의미합니다.
+ 
+**8-2. Stage Type**
+
+| 이름 | 타입 | 역할 |
+|------|------|------|
+| Normal Stage | StageType.Normal | 기본 Dark가 몰려오는 일반적인 Stage |
+| Shop | StageType.Shop | 아이템을 구매할 수 있는 Stage |
+| Boss | StageType.Boss | Boss Dark가 몰려오는 Boss Stage |
+
+### 9. Ally 카드, 강화 카드, 아이템
+
+**9-1. Ally 카드**
+
+- 
+
+**9-2. 강화 카드**
+
+- 
+
+**9-3. 아이템**
+
+- 
+
+### 10. UI 및 기타 에셋
 
 | 이름 | UI 오브젝트 | 씬 | 링크 |
 |------|------------|----|-----|
