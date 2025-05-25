@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerName: JoanDarc
   _portrait: {fileID: -903937239, guid: a07db537bc13db741a8e462a3053c958, type: 3}
-  _maxHP: 20
+  _maxHP: 200
   _activeSkillCooldown: 30
   _activeSkillType: 4
   _unitTribe: 0

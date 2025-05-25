@@ -22,7 +22,11 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        nextButton.gameObject.SetActive(false);
+        if (nextButton != null)
+        {
+            nextButton.gameObject.SetActive(false);
+        }
+        
     }
 
     private void Update()
