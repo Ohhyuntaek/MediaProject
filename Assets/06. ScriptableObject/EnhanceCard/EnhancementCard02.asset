@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20df4595336a3f44ca5fa1889c48c1ca, type: 3}
   m_Name: EnhancementCard02
   m_EditorClassIdentifier: 
-  _enhancementCardName: CostUp
-  _description: "\uCF54\uC2A4\uD2B8 \uC0C1\uC2B9 \uC18D\uB3C4 \uC99D\uAC00"
-  _cardImage: {fileID: 0}
-  _enhancementType: 0
-  _minMultiplier: 1.2
-  _maxMultiplier: 1.5
+  _enhancementCardName: More Cards
+  _description: "\uCE74\uB4DC \uC0DD\uC131 \uC18D\uB3C4 \uC99D\uAC00"
+  _enhancementType: 1
+  _minRangeValue: 1.2
+  _maxRangeValue: 1.5

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20df4595336a3f44ca5fa1889c48c1ca, type: 3}
   m_Name: EnhancementCard03
   m_EditorClassIdentifier: 
-  _enhancementCardName: "\uCFE8\uD0C0\uC784 \uAC10\uC18C"
+  _enhancementCardName: Skill Faster
   _description: "\uC561\uD2F0\uBE0C \uC2A4\uD0AC\uC758 \uCFE8\uD0C0\uC784 \uAC10\uC18C"
   _enhancementType: 2
-  _minMultiplier: 1.2
-  _maxMultiplier: 1.5
+  _minRangeValue: 1.2
+  _maxRangeValue: 1.5

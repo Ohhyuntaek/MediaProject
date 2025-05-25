@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20df4595336a3f44ca5fa1889c48c1ca, type: 3}
   m_Name: EnhancementCard04
   m_EditorClassIdentifier: 
-  _enhancementCardName: "\uC5D0\uB108\uC9C0 \uCDA9\uC804 \uC18D\uB3C4 \uC99D\uAC00"
+  _enhancementCardName: Energy UP
   _description: "\uC5D0\uB108\uC9C0 \uCDA9\uC804 \uC18D\uB3C4 \uC99D\uAC00"
   _enhancementType: 3
-  _minMultiplier: 1.2
-  _maxMultiplier: 1.5
+  _minRangeValue: 1.2
+  _maxRangeValue: 1.5
