@@ -52,4 +52,12 @@ public class RuntimeDataManager : MonoBehaviour
     {
         return selectedDawn;
     }
+
+    public void InitMapState()
+    {
+        mapGrid = null;                // 전체 맵 구조
+        currentNode = null;               // 현재 노드
+        nextNode = null;                  // 다음으로 이동할 노드
+        mapGenerated = false; 
+    }
 }

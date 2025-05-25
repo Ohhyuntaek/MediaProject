@@ -70,6 +70,7 @@ public class Dawn : MonoBehaviour
         {
             _isDead = true;
             _stateMachine.ChangeState(new PlayerDeadState());
+            InGameSceneManager.Instance.isGameOver = true;
         }
         else
         {   

@@ -65,7 +65,7 @@ public class ClearUIManager : MonoBehaviour
             LoadingSceneManager.LoadScene("MainScene");
         }
     }
-    
+
     /// <summary>
     /// 강화 카드를 보여주는 함수
     /// </summary>

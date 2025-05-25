@@ -13,6 +13,12 @@ public class MapUI : MonoBehaviour
 
     [Header("루멘 텍스트")] 
     [SerializeField] private TMP_Text lumenText;
+
+    [Header("UI 버튼")] 
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button settingButton;
+    
+    public ItemInventoryUI inventoryUI;
     
     // [Header("보유 아이템")]
     
@@ -25,11 +31,13 @@ public class MapUI : MonoBehaviour
         energyChargeMultiplierText.text = RuntimeDataManager.Instance.enhancement.energyChargeMultiplier.ToString("F1");
         
         lumenText.text = RuntimeDataManager.Instance.lumenCalculator.Lumen.ToString();
+        
+        inventoryUI.RefreshUI(RuntimeDataManager.Instance.itemCollector.GetSelectedItems());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickBackButton()
     {
-        
+        RuntimeDataManager.Instance.InitMapState();
+        LoadingSceneManager.LoadScene("MainScene");
     }
 }
