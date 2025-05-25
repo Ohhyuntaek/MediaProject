@@ -72,4 +72,4 @@ Youtube: https://www.youtube.com/watch?v=PAZx04rv7VU&ab_channel=%EC%9C%A4%EC%A7%
 
 | 이미지 | 이름 | 역할군 | 링크 |
 |--------|------|--------|------|
-|![image](https://github.com/user-attachments/assets/98cf7735-b3ab-4494-bfe2-4e9a8d3e341a)|Salamander Witch|Rear|![](https://otsoga.itch.io/eleonore)|
+|![SalamanderWitch](https://github.com/user-attachments/assets/ebf33175-a45f-4f71-85c9-22f60c253566)|Salamander Witch|Rear|![Asset Site](https://otsoga.itch.io/eleonore)|
