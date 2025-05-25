@@ -13,6 +13,10 @@ public class MapUI : MonoBehaviour
 
     [Header("루멘 텍스트")] 
     [SerializeField] private TMP_Text lumenText;
+
+    [Header("UI 버튼")] 
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button settingButton;
     
     public ItemInventoryUI inventoryUI;
     
@@ -31,9 +35,9 @@ public class MapUI : MonoBehaviour
         inventoryUI.RefreshUI(RuntimeDataManager.Instance.itemCollector.GetSelectedItems());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickBackButton()
     {
-        
+        RuntimeDataManager.Instance.InitMapState();
+        LoadingSceneManager.LoadScene("MainScene");
     }
 }
