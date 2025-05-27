@@ -10046,7 +10046,7 @@ MonoBehaviour:
   _shakeFadeOut: 1
   _cameraTransform: {fileID: 330585546}
   _shakeMagnitude: 0.01
-  _shakeInterval: 0.1
+  _shakeInterval: 0.3
 --- !u!1 &1673169217
 GameObject:
   m_ObjectHideFlags: 0
@@ -19123,6 +19123,7 @@ MonoBehaviour:
   - {fileID: 838952261}
   - {fileID: 1405099364}
   canSpawnCards: 1
+  cardSpawnInterval: 1
 --- !u!1001 &5224675121144075666
 PrefabInstance:
   m_ObjectHideFlags: 0

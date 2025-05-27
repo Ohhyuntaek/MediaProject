@@ -179,8 +179,8 @@ public class ParticleManager : MonoBehaviour
         if (_isVignetteActive || _vignetteObject == null || _cameraTransform == null)
             return;
 
-       // StartCoroutine(VignetteAndShakeRoutine());
-        StartVignetteAndShakeByDotween();
+        StartCoroutine(VignetteAndShakeRoutine());
+        //StartVignetteAndShakeByDotween();
     }
 
     private IEnumerator VignetteAndShakeRoutine()
