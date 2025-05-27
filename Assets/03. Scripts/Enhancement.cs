@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class Enhancement : MonoBehaviour
 {
     [Header("유닛 외 강화 수치")]
     [LabelText("코스트 상승 속도")] public float costMultiplier = 1f;
-    [LabelText("카드 스폰 속도")] public float cardSpawnIntervalMultiplier = 2f;
+    [LabelText("카드 스폰 속도")] public float cardSpawnIntervalMultiplier = 1f;
     [LabelText("액티브 스킬 쿨다운 수치")] public float cooldownMultiplier = 1f;  // 쿨다운 속도에 적용될 배수 (1보다 작을수록 빠름)
     [LabelText("액티브 스킬 에너지 충전 속도")] public float energyChargeMultiplier = 1f; // 에너지 회복 배수 (1보다 클수록 빠름)
     
@@ -13,7 +14,21 @@ public class Enhancement : MonoBehaviour
     [LabelText("전열 공격력 수치")] public float increaseFLAttackPoint = 0f;
     [LabelText("중열 공격력 수치")] public float increaseMLAttackPoint = 0f;
     [LabelText("후열 공격력 수치")] public float increaseRLAttackPoint = 0f;
-        
+
+    private float baseCostMultiplier;
+    private float baseCardSpawnIntervalMultiplier;
+    private float baseCooldownMultiplier;
+    private float baseEnergyChargeMultiplier;
+    
+    
+    private void Start()
+    {
+        baseCostMultiplier = this.costMultiplier;
+        baseCardSpawnIntervalMultiplier = this.cardSpawnIntervalMultiplier;
+        baseCooldownMultiplier = this.cooldownMultiplier;
+        baseEnergyChargeMultiplier = this.energyChargeMultiplier;
+    }
+
     /// <summary>
     /// 액티브 스킬 쿨다운 수치 설정
     /// </summary>
@@ -58,5 +73,12 @@ public class Enhancement : MonoBehaviour
     {
         cardSpawnIntervalMultiplier -= differenceValue;
     }
-    
+
+    public void InitialEnhanceValue()
+    {
+        costMultiplier = baseCostMultiplier;
+        cardSpawnIntervalMultiplier = baseCardSpawnIntervalMultiplier;
+        cooldownMultiplier = baseCooldownMultiplier;
+        energyChargeMultiplier = baseEnergyChargeMultiplier;
+    }
 }

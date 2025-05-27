@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Unity.VisualStudio.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

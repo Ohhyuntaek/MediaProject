@@ -61,6 +61,8 @@ public class UIManager : MonoBehaviour
 
     public void OnExitButtonClick()
     {
+        RuntimeDataManager.Instance.InitMapState();
+        RuntimeDataManager.Instance.enhancement.InitialEnhanceValue();
         LoadingSceneManager.LoadScene("MainScene");
     }
 }
