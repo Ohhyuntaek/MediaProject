@@ -107,7 +107,7 @@ public class DarkSpawner : MonoBehaviour
             }
             
             // 다음 Dark까지 대기
-            yield return new WaitForSeconds(stageData.SpawnTerm);
+            yield return new WaitForSeconds(stageData.SpawnTerm * Random.Range(0.5f, 1.5f));
         }
 
         isSpawning = false;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2cefdba06df8040b17350f549e6704, type: 3}
   m_Name: BossStage
   m_EditorClassIdentifier: 
-  _stageName: Boss Stage
+  _stageName: Boss
   _stageType: 1
   _startSpawnDelay: 5
   _spawnTerm: 1

@@ -104,7 +104,7 @@ MonoBehaviour:
   dawnData: {fileID: 11400000, guid: 0cadd73a2bdbfb24e9c772bed424d575, type: 2}
   _animator: {fileID: 2164910166956106845}
   _activeSkillCooldownTimer: 0
-  currentEnergyUpSpeed: 0.5
+  currentEnergyUpSpeed: 0.05
 --- !u!95 &2164910166956106845
 Animator:
   serializedVersion: 7

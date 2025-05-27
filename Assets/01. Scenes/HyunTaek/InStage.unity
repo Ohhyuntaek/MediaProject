@@ -18882,6 +18882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f951e68c42d92f74798725fb31539f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseCostUpSpeed: 1
   costText: {fileID: 247546856}
 --- !u!4 &1618168227812426871
 Transform:

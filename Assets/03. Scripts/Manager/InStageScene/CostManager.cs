@@ -5,28 +5,37 @@ using UnityEngine;
 
 public class CostManager : MonoBehaviour
 {
+    [Header("기본 코스트 증가 주기 (초)")]
+    [SerializeField] private float baseCostUpSpeed = 2f; // costMultiplier가 1일 때의 기본 속도
+
     [Header("코스트 표시 텍스트")]
     [SerializeField] private TMP_Text costText;
 
     private bool isStopCostUp = false;
-    private float costTimer = 0;
     private float totalCost = 0f;
 
+    // 코스트 최대값
+    private const float maxCost = 99f;
+
+    // 외부 강화 시스템에서 가져오는 배수
     private float costMultiplier => RuntimeDataManager.Instance.enhancement.costMultiplier;
+
+    // 실제 코스트 증가 주기 = 기본값 ÷ 배수
+    private float AdjustedCostUpSpeed => baseCostUpSpeed / costMultiplier;
+    
     public float TotalCost
     {
         get => totalCost;
         set
         {
-            totalCost = Mathf.Clamp(value, 0f, 99f);
-            costTimer = totalCost / costMultiplier; // 내부 timer 값도 갱신
+            totalCost = Mathf.Clamp(value, 0f, maxCost);
             UpdateCostText();
         }
     }
 
     private void Start()
     {
-        costTimer = totalCost / costMultiplier; // 내부 timer 값도 갱신
+        UpdateCostText();
     }
 
     private void Update()
@@ -41,14 +50,13 @@ public class CostManager : MonoBehaviour
     {
         while (!isStopCostUp)
         {
-            if (totalCost < 99f)
+            if (totalCost < maxCost)
             {
-                costTimer++;
-                totalCost = Mathf.Min(costTimer * costMultiplier, 99f);
+                totalCost = Mathf.Min(totalCost + 1f, maxCost);
                 UpdateCostText();
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(AdjustedCostUpSpeed);
         }
     }
     

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2cefdba06df8040b17350f549e6704, type: 3}
   m_Name: NormalStage1
   m_EditorClassIdentifier: 
-  _stageName: Normal Stage 1
+  _stageName: Normal
   _stageType: 0
   _startSpawnDelay: 5
-  _spawnTerm: 1
+  _spawnTerm: 5
   _darks:
   - {fileID: 5760704821043082606, guid: 75d16aa4c077f1e41a04af79ffd1f7e5, type: 3}
   - {fileID: 3218703246109134191, guid: c8a4ec50a6f4ed749a1652e530dd055e, type: 3}
-  _darksCount: 5
+  _darksCount: 15

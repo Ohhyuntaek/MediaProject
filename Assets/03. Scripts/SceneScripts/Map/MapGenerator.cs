@@ -251,8 +251,8 @@ public class MapGenerator : MonoBehaviour
 
     private void AssignStageTypes()
     {
-        int shopCount = 0;
-        int maxShops = 3;
+        int shopCount = 1;
+        int maxShops = 4;
 
         for (int y = 0; y < height; y++)
         {

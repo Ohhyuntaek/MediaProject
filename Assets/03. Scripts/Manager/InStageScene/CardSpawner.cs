@@ -11,8 +11,11 @@ public class CardSpawner : MonoBehaviour
     [SerializeField] private Transform[] cardSlots;
     [SerializeField] private bool canSpawnCards = true;
     
+    [Header("카드 스폰 시간 간격")]
+    [SerializeField] private float cardSpawnInterval = 1f;
+    
     private float cardSpawnTimer = 0f;
-    private const float cardSpawnInterval = 1f;
+    
 
     public bool CanSpawnCards
     {

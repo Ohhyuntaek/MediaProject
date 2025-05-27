@@ -33,7 +33,7 @@ public class Dawn : MonoBehaviour
     public bool CanUseActiveSkill => _canUseActiveSkill;
     public float ActiveSkillCooldownTime => dawnData.ActiveSkillCooldown;
     public float CurrentHP => _hp;
-    public float currentEnergyUpSpeed = 0.5f;
+    public float currentEnergyUpSpeed = 0.1f;
     
     private void Start()
     {
