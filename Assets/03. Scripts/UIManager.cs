@@ -54,13 +54,13 @@ public class UIManager : MonoBehaviour
 
     public void OnBackButtonClick()
     {
-    
         soundPanel.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void OnExitButtonClick()
     {
+        Time.timeScale = 1f;
         RuntimeDataManager.Instance.InitMapState();
         RuntimeDataManager.Instance.enhancement.InitialEnhanceValue();
         LoadingSceneManager.LoadScene("MainScene");

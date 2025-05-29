@@ -26,6 +26,11 @@ public class TileManager : MonoBehaviour
     /// <returns>선택된 AllyTile</returns>
     public AllyTile PreviewAvailableTile()
     {
+        if (IsOccupiedAllTiles())
+        {
+            return null;
+        }
+        
         // 현재 비어 있는 타일 필터링
         List<AllyTile> availableTiles = allTiles.Where(tile => !tile.isOccupied).ToList();
         if (availableTiles.Count == 0) return null;
@@ -34,21 +39,48 @@ public class TileManager : MonoBehaviour
         int randomIndex = Random.Range(0, availableTiles.Count);
         currentSelectedTile = availableTiles[randomIndex];
 
+        // 새 이펙트 생성
+        ShowSpawnTileEffect(currentSelectedTile);
+
+        return currentSelectedTile;
+    }
+
+    /// <summary>
+    /// 해당 tile의 위치에 spawnTileEffect 생성
+    /// </summary>
+    /// <param name="tile"></param>
+    public void ShowSpawnTileEffect(AllyTile tile)
+    {
         // 이전 이펙트가 있다면 제거
         if (currentSpawnTileEffect != null)
             Destroy(currentSpawnTileEffect);
-
-        // 새 이펙트 생성
+        
         if (spawnTileEffectPrefab != null)
         {
             currentSpawnTileEffect = Instantiate(
                 spawnTileEffectPrefab,
-                currentSelectedTile.transform.position,
+                tile.transform.position,
                 Quaternion.identity
             );
         }
+    }
 
-        return currentSelectedTile;
+    /// <summary>
+    /// 모든 타일이 가득 차있으면 true, 하나라도 비어 있으면 false를 반환
+    /// </summary>
+    /// <returns></returns>
+    public bool IsOccupiedAllTiles()
+    {
+        // 1. 모든 AllyTile 컴포넌트를 가진 오브젝트 리스트
+        List<AllyTile> allyTiles = new List<AllyTile>(FindObjectsOfType<AllyTile>());
+
+        // 2. isOccupied가 전부 true인지 검사
+        bool allOccupied = allyTiles.All(tile => tile.isOccupied);
+        if (allOccupied)
+        {
+            Debug.Log("모든 AllyTile이 이미 점유되어 있습니다!");
+        }
+        return allOccupied;
     }
 
     /// <summary>
@@ -97,6 +129,7 @@ public class TileManager : MonoBehaviour
             {
                 tile.isOccupied = false;
                 tile.ally = null;
+                ShowSpawnTileEffect(tile);
                 break;
             }
         }

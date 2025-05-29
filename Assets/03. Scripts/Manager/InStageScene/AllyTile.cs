@@ -12,9 +12,13 @@ public class AllyTile : MonoBehaviour
     public Ally ally;
     public PolygonCollider2D _hitCollider;
 
-    public void Start()
+    private void Start()
     {
-       
+        isOccupied = false;
+    }
+
+    private void Update()
+    {
         
     }
 
@@ -33,18 +37,16 @@ public class AllyTile : MonoBehaviour
                 {
                     string aroundString = "AllySpawnPoint_U" + (char)('0' + aroundIndex);
                     Debug.Log(aroundString);
-                    Ally findally = GameObject.Find(aroundString).GetComponent<AllyTile>().ally;
-                    if (findally != null)
+                    Ally findAlly = GameObject.Find(aroundString).GetComponent<AllyTile>().ally;
+                    if (findAlly != null)
                     {   
-                      
-                        allies.Add(findally);
+                        allies.Add(findAlly);
                     }
                 }
             }
         }
         else
         {   
-            
             for (int i = -1; i <= 1; i+=2)
             {   
                 int aroundIndex = currenttileNum + i;
@@ -52,10 +54,10 @@ public class AllyTile : MonoBehaviour
                 {
                     string aroundString = "AllySpawnPoint_D"+ (char)('0' + aroundIndex);
                     Debug.Log(aroundString);
-                    Ally findally = GameObject.Find(aroundString).GetComponent<AllyTile>().ally;
-                    if (findally != null)
+                    Ally findAlly = GameObject.Find(aroundString).GetComponent<AllyTile>().ally;
+                    if (findAlly != null)
                     {
-                        allies.Add(findally);
+                        allies.Add(findAlly);
                     }
                 }
             }
@@ -66,7 +68,4 @@ public class AllyTile : MonoBehaviour
     }
 
     public LineType LineType => lineType;
-
-
-
 }

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MoreMountains.Feedbacks;
-using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum CardType
@@ -15,8 +14,7 @@ public enum CardType
     RearLine
 }
 
-public class Card : MonoBehaviour,IPointerEnterHandler,
-    IPointerExitHandler
+public class Card : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
 {
     public int slotIndex;
     public CardType cardType;
@@ -27,14 +25,15 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
     [SerializeField] private Image unitImage;
     [SerializeField] private Image costColor;
     [SerializeField] private MMF_Player spawnFeedback;
+    
     [Header("어둡게 할 계수 (0~1 사이)")]
     [SerializeField] private float darkenMultiplier = 0.6f; // 어둡게 만드는 강도 (예: 60%)
+    
     private bool hasHovered = false;
     private AllyType allyType;
     private LineType lineType;
     private UnitData unitData;
     private Dictionary<Image, Color> originalColors = new(); // 자식 이미지와 원래 색 저장
-    
     
     void Start()
     {
@@ -123,34 +122,37 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
     {
         EntireGameManager.Instance.soundManager.PlaySfx(selectSound, transform.position, false);
         
+        // 카드에 해당하는 Unit이 없으면 소환하지 않고 종료
         if (unitData == null)
         {
             Debug.LogError($"Card에 대한 UnitData를 찾을 수 없습니다. AllyType: {allyType}");
             return;
         }
 
+        // 코스트가 부족하면 소환하지 않고 종료
         if (UIManager.Instance.costManager.TotalCost < unitData.Cost)
         {
             Debug.Log("코스트가 부족합니다! 소환할 수 없습니다.");
             return;
         }
         
-        var tile = InGameSceneManager.Instance.tileManager.GetPreviewedTile();
-        if (tile == null)
+        // 모든 타일이 차 있으면 소환하지 않고 종료
+        if (InGameSceneManager.Instance.tileManager.IsOccupiedAllTiles())
         {
-            Debug.Log("No available tile or ally in pool");
-            return;
+            Debug.Log("모든 AllyTile이 이미 점유되어 있습니다!");
+            return; // 이후 스폰을 막고 종료
         }
         
         // 이펙트 제거 후 스폰
         InGameSceneManager.Instance.tileManager.ClearSpawnTileEffect();
         GameObject ally = InGameSceneManager.Instance.allyPoolManager.SpawnAlly(unitData, lineType);
-
+        
         if (ally != null)
         {
             Destroy(this.gameObject);
             InGameSceneManager.Instance.cardSpawner.ShiftCardsLeft(slotIndex);   
         }
+        
     }
     
     /// <summary>
@@ -185,9 +187,16 @@ public class Card : MonoBehaviour,IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-       
-        InGameSceneManager.Instance.previewManager.ShowPreview(unitData);
         InGameSceneManager.Instance.previewManager.ShowTooltip(unitData);
+        
+        // 모든 타일이 차 있으면 프리뷰, 툴팁 보지 않기
+        if (InGameSceneManager.Instance.tileManager.IsOccupiedAllTiles())
+        {
+            Debug.Log("모든 AllyTile이 이미 점유되어 있어, 프리뷰와 툴팁이 보이지 않습니다.");
+            return;
+        }
+        
+        InGameSceneManager.Instance.previewManager.ShowPreview(unitData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
