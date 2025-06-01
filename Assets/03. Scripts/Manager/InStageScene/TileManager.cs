@@ -129,7 +129,7 @@ public class TileManager : MonoBehaviour
             {
                 tile.isOccupied = false;
                 tile.ally = null;
-                ShowSpawnTileEffect(tile);
+                //ShowSpawnTileEffect(tile);
                 break;
             }
         }
