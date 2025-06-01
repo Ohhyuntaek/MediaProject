@@ -33,7 +33,6 @@ public class Shop : MonoBehaviour
 
     void Start()
     {
-        
         mapAnimator = GetComponent<Animator>();
         SetCanvasGroupActive(mapCanvasGroup, false);
 
@@ -53,21 +52,26 @@ public class Shop : MonoBehaviour
 
         for (int i = 0; i < buyButtons.Count && i < chosenItems.Count; i++)
         {
+            // 로컬 변수로 복사하여 캡처 문제 방지
             var data = chosenItems[i];
+            var button = buyButtons[i];
+            Image img = (i < itemImages.Count) ? itemImages[i] : null;
+            TMP_Text priceText = (i < itemPrices.Count) ? itemPrices[i] : null;
+            TMP_Text descText = (i < itemDescriptions.Count) ? itemDescriptions[i] : null;
 
             // UI 세팅
-            if (i < itemImages.Count && itemImages[i] != null)
-                itemImages[i].sprite = data.Icon;
+            if (img != null)
+                img.sprite = data.Icon;
 
-            if (i < itemPrices.Count && itemPrices[i] != null)
-                itemPrices[i].text = data.Price.ToString();
+            if (priceText != null)
+                priceText.text = data.Price.ToString();
 
-            if (i < itemDescriptions.Count && itemDescriptions[i] != null)
-                itemDescriptions[i].text = data.Description;
+            if (descText != null)
+                descText.text = data.Description;
 
             // 버튼 클릭 이벤트
-            buyButtons[i].onClick.RemoveAllListeners();
-            buyButtons[i].onClick.AddListener(() =>
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() =>
             {
                 int currentLumen = RuntimeDataManager.Instance.lumenCalculator.Lumen;
                 if (currentLumen < data.Price)
@@ -77,11 +81,13 @@ public class Shop : MonoBehaviour
                 }
 
                 // 구매 처리
-                Debug.Log("구매 완료" + data.Description);
+                Debug.Log("구매 완료: " + data.Description);
                 RuntimeDataManager.Instance.lumenCalculator.RemoveLumen(data.Price);
                 lumenText.text = RuntimeDataManager.Instance.lumenCalculator.Lumen.ToString();
-
                 RuntimeDataManager.Instance.itemCollector.SelectItem(data);
+
+                // 해당 버튼 비활성화
+                button.interactable = false;
             });
         }
     }
@@ -97,7 +103,7 @@ public class Shop : MonoBehaviour
         foreach (Transform child in parent)
         {
             CanvasGroup cg = child.GetComponent<CanvasGroup>() ?? child.gameObject.AddComponent<CanvasGroup>();
-            
+
             cg.alpha = 0f;
             cg.interactable = false;
             cg.blocksRaycasts = false;
