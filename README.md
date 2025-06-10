@@ -1,5 +1,3 @@
-![dawnfall title](https://github.com/user-attachments/assets/4c0556bc-9809-4f86-bb41-e9630aaa1bbf)
-
 - Unity Engine을 기반으로 제작된 2D 로그라이크 게임 제작 프로젝트입니다.
 
 ---
