@@ -1,9 +1,3 @@
-Unity Engine을 기반으로 제작된 2D 로그라이크 게임 제작 프로젝트입니다.
-
-<img src="https://img.shields.io/badge/unity-FFFFFF?style=for-the-badge&logo=unity&logoColor=black"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-
----
-
 # 미디어 프로젝트 - Defeat the Darks (Dawnfall)
 ## 팀명: Eightone
 - 팀원: 윤지석, 양경덕, 오현택, 문 혁(외부 인원)
