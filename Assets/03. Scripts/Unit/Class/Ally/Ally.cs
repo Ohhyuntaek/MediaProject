@@ -296,6 +296,7 @@ public class Ally : MonoBehaviour
             AllySkillType.SalamenderSkill => new SalamenderSkill(),
             AllySkillType.JoanDarcSkill => new JandarkSkill(),
             AllySkillType.NightLordSkill => new NightLordSkill(),
+            AllySkillType.KillrenSkill => new KillrenSkill(),
             AllySkillType.None => new NoneSkill(),
             _ => null
         };

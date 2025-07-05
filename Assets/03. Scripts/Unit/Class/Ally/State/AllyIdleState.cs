@@ -79,6 +79,23 @@ public class AllyIdleState : IState<Ally>
                         }
                     }
                     break;
+                case "Killren":
+                    _detected = ally.DetectTargets();
+                    if (_detected.Count > 0)
+                    {
+                        bool ontile1 = ally.Dircetion && ally.OccupiedTile.LineType == LineType.Front;
+                        bool ontile2 = ally.Dircetion == false && ally.OccupiedTile.LineType == LineType.Rear;
+                        if (ontile1 || ontile2)
+                        {
+                            ally.ChangeState(new KillrenSpecialAttackState());
+                        }
+                        else
+                        {
+                            ally.ChangeState(new AllyAttackState());
+                        }
+                    }
+                    break;
+                    
                 
                     
                 default:

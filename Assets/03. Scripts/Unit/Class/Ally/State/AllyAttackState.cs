@@ -85,6 +85,20 @@ public class AllyAttackState : IState<Ally>
                         ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
                     }
                     break;
+               case "Killren":
+                    _detected =  ally.DetectTargets();
+                    foreach (var e in _detected)
+                    {
+                        if (e is Enemy enemy)
+                        {
+                            enemy.ApplySpeedBuffDebuff(2f,2f,false);
+                        }
+                    }
+                    ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
+
+                    break;
+                    
+                    
 
                 default:
                     ally.ChangeState(new AllyIdleState(1/ally.ATKSPD));
