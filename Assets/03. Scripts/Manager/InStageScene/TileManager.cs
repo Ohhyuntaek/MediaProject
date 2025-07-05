@@ -45,6 +45,16 @@ public class TileManager : MonoBehaviour
         return currentSelectedTile;
     }
 
+    public AllyTile MoveableTile()
+    {
+        List<AllyTile> availableTiles = allTiles.Where(tile => !tile.isOccupied).ToList();
+        if (availableTiles.Count == 0) return null;
+        int randomIndex = Random.Range(0, availableTiles.Count);
+        currentSelectedTile = availableTiles[randomIndex];
+        return currentSelectedTile;
+        
+    }
+
     /// <summary>
     /// 해당 tile의 위치에 spawnTileEffect 생성
     /// </summary>
@@ -134,4 +144,5 @@ public class TileManager : MonoBehaviour
             }
         }
     }
+    
 }

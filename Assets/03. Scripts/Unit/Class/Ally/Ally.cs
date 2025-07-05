@@ -22,6 +22,7 @@ public class Ally : MonoBehaviour
      private float tileWidth = 0.9f;
     private float tileHeight =  0.9f;
     [SerializeField]private List<PolygonCollider2D> _patternColliders;
+    [SerializeField] private List<PolygonCollider2D> _skillpatternColliders;
     private float _atkSpd;
 
     private int _lastKnockbackEnemyCount = 0;
@@ -194,6 +195,48 @@ public class Ally : MonoBehaviour
                 _patternColliders.Add(poly);
         }
     }
+    public void InitSkillPatternColliders()
+    {
+        // 1) 초기화
+        _skillpatternColliders = new List<PolygonCollider2D>();
+        if (_occupiedTile == null || _occupiedTile._hitCollider == null)
+        {
+            return;
+        } 
+        
+
+        // 2) 소환된 타일(히트셀) 콜라이더 가져오기
+        PolygonCollider2D hitCellCollider = _occupiedTile._hitCollider;
+
+        // 3) GridTargetManager 에서 해당 콜라이더의 행·열 인덱스 얻기
+        if (!GridTargetManager.Instance.TryGetGridIndex(hitCellCollider, out int baseRow, out int baseCol))
+            return;
+        Debug.Log("히트셀 위치 인덱스 " + baseRow +" "+baseCol);
+
+        // 4) DetectionPattern 만큼 오프셋 순회
+        var pattern = UnitData.SkillDetectionPatternSo.cellOffsets;
+        foreach (var ofs in pattern)
+        {
+            
+            var applied = (_occupiedTile.dir)  // dir=false → up, dir=true → down (flip 여부에 따라)
+                ? new Vector2Int(ofs.x, -ofs.y)   
+                : new Vector2Int(ofs.x, ofs.y); 
+
+            int row = baseRow + applied.y;
+            int col = baseCol + applied.x;
+
+            // 4-2) 범위 검사
+            if (row < 0 || row >= GridTargetManager.Instance.coliderMat.Length) 
+                continue;
+            if (col < 0 || col >= GridTargetManager.Instance.coliderMat[row].arr_row.Length) 
+                continue;
+
+            // 4-3) 해당 슬롯의 PolygonCollider2D 추가
+            var poly = GridTargetManager.Instance.coliderMat[row].arr_row[col];
+            if (poly != null)
+                _skillpatternColliders.Add(poly);
+        }
+    }
 
     public void ChangeState(IState<Ally> newState)
     {
@@ -274,6 +317,7 @@ public class Ally : MonoBehaviour
     private void OnEnable()
     {
         InitPatternColliders();
+        InitSkillPatternColliders();
         Debug.Log("지속시간 증가 햇으려나" + _duration);
         
     }
@@ -297,6 +341,8 @@ public class Ally : MonoBehaviour
             AllySkillType.JoanDarcSkill => new JandarkSkill(),
             AllySkillType.NightLordSkill => new NightLordSkill(),
             AllySkillType.KillrenSkill => new KillrenSkill(),
+            AllySkillType.AuraSkill => new AuraSkill(),
+            AllySkillType.DiabunnySkill => new DiabunnySkill(),
             AllySkillType.None => new NoneSkill(),
             _ => null
         };
@@ -334,6 +380,39 @@ public class Ally : MonoBehaviour
 
         // 1) 미리 계산해둔 패턴 콜라이더 리스트 순회
         foreach (var poly in _patternColliders)
+        {
+            // 해당 폴리곤 안에 있는 모든 콜라이더를 가져옴
+            int count = poly.Overlap(filter, buffer);
+            for (int i = 0; i < count; i++)
+            {
+                var col = buffer[i];
+                if (col == null) continue;
+
+                // 2) IDamageable 인터페이스를 구현한 몬스터(Enemy, Boss 등)만 추가
+                if (col.TryGetComponent<IDamageable>(out var dmg) 
+                    && !targets.Contains(dmg))
+                {
+                    targets.Add(dmg);
+                }
+            }
+        }
+
+        return targets;
+    }
+    public List<IDamageable> DetectSkillTargets()
+    {
+        var targets = new List<IDamageable>();
+        if (_patternColliders == null) 
+            return targets;
+
+        // 중복 방지용 임시 버퍼
+        var buffer = new Collider2D[30];
+        var filter = new ContactFilter2D();
+        filter.SetLayerMask(_enemyLayer);
+        filter.useTriggers = true;
+
+        // 1) 미리 계산해둔 패턴 콜라이더 리스트 순회
+        foreach (var poly in _skillpatternColliders)
         {
             // 해당 폴리곤 안에 있는 모든 콜라이더를 가져옴
             int count = poly.Overlap(filter, buffer);
@@ -705,11 +784,17 @@ public class Ally : MonoBehaviour
 
     public AllyTile OccupiedTile => _occupiedTile;
 
+    public void SetOccupiedTile(AllyTile changeTile)
+    {
+        _occupiedTile = changeTile;
+    }
+
     public bool SpawnEnd
     {
         get => _isSpawnEnd;
         set => _isSpawnEnd = value;
     }
+    
     public void SetSkillRandomNum(int value) => skillNumByRandom = value;
     public int GetSkillRandomNum() => skillNumByRandom;
     public int BASEATTACK => _baseAttack;

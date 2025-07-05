@@ -95,6 +95,31 @@ public class AllyIdleState : IState<Ally>
                         }
                     }
                     break;
+                case "Aura":
+                    int lifetime = (int) ally.GetTotalLifeTime;
+                    if (lifetime % 5 == 0)
+                    {
+                        ally.ChangeState(new AuraSpecialAttackState());
+                    }
+                    else
+                    {
+                        ally.ChangeState(new AllyAttackState());
+                    }
+
+                    break;
+                case "Diabunny":
+                    int randomNum = Random.Range(1, 11);
+                    bool isSpecial = randomNum > 3;
+                    if (isSpecial)
+                    {
+                        //특수 공격
+                    }
+                    else
+                    {
+                        //일반 공격 
+                    }
+
+                    break;
                     
                 
                     

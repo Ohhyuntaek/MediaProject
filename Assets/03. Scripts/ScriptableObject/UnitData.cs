@@ -6,9 +6,9 @@ using UnityEngine.Serialization;
 public enum UnitFaction { Ally,Player }
 public enum UnitTribe{Person,}
 public enum UnitType { Front, Mid, Rear }
-public enum AllyType { JoanDarc, NightLord, BountyHunter, Rogue, CentaurLady, Salamander,Killren }
+public enum AllyType { JoanDarc, NightLord, BountyHunter, Rogue, CentaurLady, Salamander,Killren,Aura,Diabunny }
 public enum DamageType { Physical, Magical }
-public enum AllySkillType { None, CentaurLadySkill, BountyHunterSkill, SalamenderSkill, JoanDarcSkill, NightLordSkill,KillrenSkill }
+public enum AllySkillType { None, CentaurLadySkill, BountyHunterSkill, SalamenderSkill, JoanDarcSkill, NightLordSkill,KillrenSkill,AuraSkill,DiabunnySkill }
 public enum PlayerSkillType{Test1,Test2,Test3}
 public enum TargetingType { Single, Area }
 
@@ -24,7 +24,8 @@ public class UnitData : ScriptableObject
     [SerializeField, LabelText("유닛 종족")] private UnitTribe _unitTribe;
     [SerializeField, LabelText("부활 가능 여부")] private bool _canRevive;
     [SerializeField, LabelText("스킬/공격 사정거리 ")] private int _attackRange;
-    [SerializeField] private DetectionPatternSO _detectionPattern;
+    [SerializeField,LabelText("공격 사정거리 So ")] private DetectionPatternSO _detectionPattern;
+    [SerializeField,LabelText("specialattack 사정거리 So ")] private DetectionPatternSO _skilldetectionPattern;
 
     
     [FormerlySerializedAs("_skillCooltime")]
@@ -131,5 +132,6 @@ public class UnitData : ScriptableObject
     public AudioClip[] SkillSound => skillSfx;
     public string NomalDescriptor => _nomalText;
     public string RecomendDescriptor => _recomendText;
+    public DetectionPatternSO SkillDetectionPatternSo => _skilldetectionPattern;
 
 }
