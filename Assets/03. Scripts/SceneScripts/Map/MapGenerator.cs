@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -366,23 +367,9 @@ public class MapGenerator : MonoBehaviour
 
     private void PruneUnreachableNodes()
     {
-        int[,] inDegree = new int[width, height];
+        List<Vector2Int> toRemove = new();
 
-        for (int y = 0; y < height - 1; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                var node = grid[x, y];
-                if (node == null) continue;
-
-                foreach (var target in node.ConnectedNodes)
-                {
-                    Vector2Int pos = target.GridPosition;
-                    inDegree[pos.x, pos.y]++;
-                }
-            }
-        }
-
+        // 1. 제거 대상 수집
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
@@ -393,14 +380,52 @@ public class MapGenerator : MonoBehaviour
                 bool isStart = (x == 0 && y == 0);
                 bool isEnd = (x == width - 1 && y == height - 1);
 
-                bool hasIn = isStart || inDegree[x, y] > 0;
-                bool hasOut = isEnd || node.ConnectedNodes.Count > 0;
+                if (isStart || isEnd)
+                    continue;
 
-                if (!hasIn || !hasOut)
+                int inCount = node.IncomingNodes.Count(n => IsValid(n));
+                int outCount = node.ConnectedNodes.Count(n => IsValid(n));
+
+                // ✅ 제거 조건: 부모 없음, 자식 없음, 또는 연결이 양쪽 1개 이하 (통과만 하는 노드)
+                if (inCount == 0 || outCount == 0 || (inCount <= 1 && outCount <= 1))
                 {
-                    grid[x, y] = null;
+                    toRemove.Add(new Vector2Int(x, y));
                 }
             }
+        }
+
+        // 2. 연결 정리 + 제거
+        foreach (var pos in toRemove)
+        {
+            var node = grid[pos.x, pos.y];
+            if (node == null) continue;
+
+            foreach (var prev in node.IncomingNodes)
+                prev.ConnectedNodes.Remove(node);
+            foreach (var next in node.ConnectedNodes)
+                next.IncomingNodes.Remove(node);
+
+            grid[pos.x, pos.y] = null;
+        }
+
+        // 3. 남은 노드의 연결 다시 정리
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                var node = grid[x, y];
+                if (node == null) continue;
+
+                node.ConnectedNodes.RemoveAll(n => !IsValid(n));
+                node.IncomingNodes.RemoveAll(n => !IsValid(n));
+            }
+        }
+
+        // 4. 유효성 검사 함수
+        bool IsValid(StageNodeVer2 n)
+        {
+            var p = n.GridPosition;
+            return p.x >= 0 && p.x < width && p.y >= 0 && p.y < height && grid[p.x, p.y] != null;
         }
     }
 
