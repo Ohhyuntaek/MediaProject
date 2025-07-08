@@ -29,11 +29,11 @@ public class MapGenerator : MonoBehaviour
     public List<StageData> bossStages;
 
     [Header("디버그용 그리드")]
-    public Transform gridLineContainer;     // 격자 부모
-    public GameObject gridLinePrefab;       // 얇은 Image 또는 Line 프리팹
+    public Transform gridLineContainer;
+    public GameObject gridLinePrefab;
     public Color gridColor = Color.gray;
     public float lineWidth = 2f;
-    
+
     [SerializeField]
     private GameObject markerPrefab;
 
@@ -48,6 +48,7 @@ public class MapGenerator : MonoBehaviour
 
         if (RuntimeDataManager.Instance.mapGenerated)
         {
+            // 기존 맵 로드
             LoadMapFromRuntime();
 
             if (RuntimeDataManager.Instance.nextNode != null)
@@ -59,109 +60,37 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            StageNodeVer2 bossNode = null;
-            bool success = false;
+            // 새 맵 생성 (경로 구성 포함)
+            GenerateValidMap();
 
-            for (int attempt = 0; attempt < 30 && !success; attempt++)
-            {
-                StageNodeVer2[,] tempGrid;
-                List<StageNodeVer2> mainPath = GenerateLogicalGrid(out tempGrid);
+            // 여기에서 연결 수 적은 노드 제거 (중요 경로 제외)
+            RemoveWeaklyConnectedNodes();
 
-                // 💡 보스 노드 강제 생성
-                if (tempGrid[width - 1, height - 1] == null)
-                    tempGrid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
+            // 맵 정보 저장
+            SaveMapToRuntime();
 
-                bossNode = tempGrid[width - 1, height - 1];
-
-                // mainPath 강제 연결
-                for (int i = 0; i < mainPath.Count - 1; i++)
-                {
-                    var from = mainPath[i];
-                    var to = mainPath[i + 1];
-                    from.ConnectedNodes.Add(to);
-                    to.IncomingNodes.Add(from);
-                }
-
-                grid = tempGrid;
-                AssignStageTypes();
-                ConnectNodes();
-
-                var reachable = CollectConnectedNodes(grid[0, 0]);
-
-                if (!reachable.Contains(bossNode))
-                {
-                    StageNodeVer2 nearest = null;
-                    float minDist = float.MaxValue;
-
-                    foreach (var node in reachable)
-                    {
-                        float dist = Vector2Int.Distance(node.GridPosition, bossNode.GridPosition);
-                        if (dist < minDist)
-                        {
-                            minDist = dist;
-                            nearest = node;
-                        }
-                    }
-
-                    if (nearest != null)
-                    {
-                        nearest.ConnectedNodes.Add(bossNode);
-                        bossNode.IncomingNodes.Add(nearest);
-                    }
-
-                    reachable = CollectConnectedNodes(grid[0, 0]);
-                }
-
-                if (reachable.Contains(bossNode))
-                    success = true;
-            }
-
-            if (!success)
-            {
-                Debug.LogError("보스 노드까지 연결된 경로 생성 실패");
-                return;
-            }
-
-            var fromStart = CollectConnectedNodes(grid[0, 0]);
-            var toBoss = CollectNodesReachableFrom(bossNode);
-            var validNodes = new HashSet<StageNodeVer2>(fromStart);
-            validNodes.IntersectWith(toBoss);
-            validNodes.Add(grid[0, 0]);
-            validNodes.Add(bossNode);
-
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    var node = grid[x, y];
-                    if (node == null) continue;
-
-                    bool isStart = (x == 0 && y == 0);
-                    bool isBoss = (x == width - 1 && y == height - 1);
-
-                    if (!validNodes.Contains(node) && !isStart && !isBoss)
-                        grid[x, y] = null;
-                }
-            }
-
-            ConnectNodes();
-            PruneUnreachableNodes();
-            ConnectNodes();
-
+            // 시작 노드는 자동 클리어
             currentNode = grid[0, 0];
             currentNode.IsCleared = true;
-
-            SaveMapToRuntime();
         }
 
+        // 반드시 노드 정리 후 UI 버튼 생성
         GenerateNodeButtons();
+
+        // 현재 위치에서 도달 가능한 노드 활성화
         HighlightAvailableNodes(currentNode);
+
+        // 마커 표시
         UpdateMarkerPosition(currentNode);
 
+        // 노드 UI 초기화
         foreach (var btn in nodeButtons.Values)
             btn.GetComponent<NodeButton>().Refresh();
     }
-    
+
+
+    #region Map 생성 및 유효성 검증
+
     private void GenerateDebugGridLines()
     {
         float totalWidth = (width - 1) * xSpacing;
@@ -189,21 +118,174 @@ public class MapGenerator : MonoBehaviour
             line.GetComponent<Image>().color = gridColor;
         }
     }
-
-    private void SaveMapToRuntime()
+    
+    // 유효한 맵 생성 및 연결
+    void GenerateValidMap()
     {
-        RuntimeDataManager.Instance.mapGrid = grid;
-        RuntimeDataManager.Instance.currentNode = currentNode;
-        RuntimeDataManager.Instance.mapGenerated = true;
+        for (int attempt = 0; attempt < 30; attempt++)
+        {
+            StageNodeVer2[,] tempGrid;
+            List<StageNodeVer2> mainPath = GenerateLogicalGrid(out tempGrid);
+            ForcePlaceBossNode(ref tempGrid);
+            ForceConnectPath(mainPath);
+
+            grid = tempGrid;
+            AssignStageTypes();
+            ConnectNodes();
+
+            var reachable = CollectConnectedNodes(grid[0, 0]);
+            var bossNode = grid[width - 1, height - 1];
+
+            // 보스가 도달 가능하면 종료
+            if (reachable.Contains(bossNode))
+                break;
+
+            // 도달 불가능하면 보스까지 강제로 연결
+            ForceConnectToBoss(bossNode, reachable);
+            reachable = CollectConnectedNodes(grid[0, 0]);
+
+            if (reachable.Contains(bossNode))
+                break;
+        }
+
+        CleanDisconnectedNodes();
+        ConnectNodes();
     }
 
-    private void LoadMapFromRuntime()
+    // 보스 노드 강제 배치
+    void ForcePlaceBossNode(ref StageNodeVer2[,] tempGrid)
     {
-        grid = RuntimeDataManager.Instance.mapGrid;
-        currentNode = RuntimeDataManager.Instance.currentNode;
+        if (tempGrid[width - 1, height - 1] == null)
+            tempGrid[width - 1, height - 1] = new StageNodeVer2(width - 1, height - 1);
     }
 
-    private List<StageNodeVer2> GenerateLogicalGrid(out StageNodeVer2[,] generatedGrid)
+    // mainPath 연결
+    void ForceConnectPath(List<StageNodeVer2> path)
+    {
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            var from = path[i];
+            var to = path[i + 1];
+            from.ConnectedNodes.Add(to);
+            to.IncomingNodes.Add(from);
+        }
+    }
+
+    // 보스까지 연결되지 않은 경우, 가장 가까운 노드와 연결
+    void ForceConnectToBoss(StageNodeVer2 bossNode, HashSet<StageNodeVer2> reachable)
+    {
+        StageNodeVer2 nearest = null;
+        float minDist = float.MaxValue;
+
+        foreach (var node in reachable)
+        {
+            float dist = Vector2Int.Distance(node.GridPosition, bossNode.GridPosition);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = node;
+            }
+        }
+
+        if (nearest != null)
+        {
+            nearest.ConnectedNodes.Add(bossNode);
+            bossNode.IncomingNodes.Add(nearest);
+        }
+    }
+
+    // 도달 불가능한 노드 제거
+    void CleanDisconnectedNodes()
+    {
+        var fromStart = CollectConnectedNodes(grid[0, 0]);
+        var toBoss = CollectNodesReachableFrom(grid[width - 1, height - 1]);
+
+        var validNodes = new HashSet<StageNodeVer2>(fromStart);
+        validNodes.IntersectWith(toBoss);
+        validNodes.Add(grid[0, 0]);
+        validNodes.Add(grid[width - 1, height - 1]);
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                var node = grid[x, y];
+                if (node != null && !validNodes.Contains(node))
+                    grid[x, y] = null;
+            }
+        }
+
+        PruneUnreachableNodes();
+    }
+    
+    /// <summary>
+    /// 연결 수가 너무 적은 노드 제거 (단, 시작/보스/중요 경로 노드는 유지)
+    /// </summary>
+    private void RemoveWeaklyConnectedNodes()
+    {
+        // 중요한 경로 노드 수집
+        var start = grid[0, 0];
+        var boss = grid[width - 1, height - 1];
+        var forward = CollectConnectedNodes(start);
+        var backward = CollectNodesReachableFrom(boss);
+
+        var essential = new HashSet<StageNodeVer2>(forward);
+        essential.IntersectWith(backward);
+        essential.Add(start);
+        essential.Add(boss);
+
+        List<Vector2Int> toRemove = new();
+
+        // 제거 대상 수집
+        for (int y = 0; y < height; y++)
+        for (int x = 0; x < width; x++)
+        {
+            var node = grid[x, y];
+            if (node == null) continue;
+            if (essential.Contains(node)) continue;
+
+            if (node.TotalConnections <= 1)
+                toRemove.Add(new Vector2Int(x, y));
+        }
+
+        // 제거 실행
+        foreach (var pos in toRemove)
+        {
+            var node = grid[pos.x, pos.y];
+            if (node == null) continue;
+
+            foreach (var prev in node.IncomingNodes)
+                prev.ConnectedNodes.Remove(node);
+
+            foreach (var next in node.ConnectedNodes)
+                next.IncomingNodes.Remove(node);
+
+            grid[pos.x, pos.y] = null;
+        }
+
+        // 연결 재정리
+        for (int y = 0; y < height; y++)
+        for (int x = 0; x < width; x++)
+        {
+            var node = grid[x, y];
+            if (node == null) continue;
+
+            node.ConnectedNodes.RemoveAll(n => !IsValid(n));
+            node.IncomingNodes.RemoveAll(n => !IsValid(n));
+        }
+
+        bool IsValid(StageNodeVer2 n)
+        {
+            var p = n.GridPosition;
+            return p.x >= 0 && p.x < width && p.y >= 0 && p.y < height && grid[p.x, p.y] != null;
+        }
+    }
+
+    #endregion
+
+    #region Stage 배치 및 연결
+
+    List<StageNodeVer2> GenerateLogicalGrid(out StageNodeVer2[,] generatedGrid)
     {
         generatedGrid = new StageNodeVer2[width, height];
         List<StageNodeVer2> mainPath = new();
@@ -235,111 +317,89 @@ public class MapGenerator : MonoBehaviour
             mainPath.Add(node);
         }
 
+        // 랜덤 노드 추가
         for (int j = 0; j < height; j++)
-        {
             for (int i = 0; i < width; i++)
-            {
                 if (generatedGrid[i, j] == null && Random.value < nodeSpawnChance)
-                {
                     generatedGrid[i, j] = new StageNodeVer2(i, j);
-                }
-            }
-        }
 
         return mainPath;
     }
 
-
-    private void AssignStageTypes()
+    void AssignStageTypes()
     {
-        int shopCount = 1;
+        int shopCount = 0;
         int maxShops = 4;
 
         for (int y = 0; y < height; y++)
+        for (int x = 0; x < width; x++)
         {
-            for (int x = 0; x < width; x++)
+            var node = grid[x, y];
+            if (node == null) continue;
+
+            if (x == 0 && y == 0)
             {
-                var node = grid[x, y];
-                if (node == null) continue;
-
-                // 시작 노드는 반드시 Normal
-                if (x == 0 && y == 0)
-                {
-                    node.StageData = GetRandomStage(StageType.Normal);
-                    continue;
-                }
-
-                // 보스 노드는 반드시 Boss
-                if (x == width - 1 && y == height - 1)
-                {
-                    node.StageData = GetRandomStage(StageType.Boss);
-                    continue;
-                }
-
-                // 나머지 노드 랜덤 지정
-                StageType type;
-                if (shopCount < maxShops && y >= height / 2 && Random.value < 0.25f)
-                {
-                    type = StageType.Shop;
-                    shopCount++;
-                }
-                else
-                {
-                    type = StageType.Normal;
-                }
-
-                node.StageData = GetRandomStage(type);
+                node.StageData = GetRandomStage(StageType.Normal);
+                continue;
             }
+
+            if (x == width - 1 && y == height - 1)
+            {
+                node.StageData = GetRandomStage(StageType.Boss);
+                continue;
+            }
+
+            StageType type;
+            if (shopCount < maxShops && y >= height / 2 && Random.value < 0.25f)
+            {
+                type = StageType.Shop;
+                shopCount++;
+            }
+            else
+            {
+                type = StageType.Normal;
+            }
+
+            node.StageData = GetRandomStage(type);
         }
 
-        // ✅ 예외 방어: StageData가 누락된 노드가 있는지 최종 검수
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                var node = grid[x, y];
-                if (node != null && node.StageData == null)
-                {
-                    Debug.LogWarning($"[경고] ({x},{y}) 노드에 StageData가 비어 있어 Normal로 지정합니다.");
-                    node.StageData = GetRandomStage(StageType.Normal);
-                }
-            }
-        }
-
-        // ✅ 최소 1개는 Shop이 존재하도록 강제
+        // 보정
         if (shopCount == 0)
             ForcePlaceAShop();
-    }
 
-
-    private StageData GetRandomStage(StageType type)
-    {
-        switch (type)
-        {
-            case StageType.Normal: return normalStages[Random.Range(0, normalStages.Count)];
-            case StageType.Shop: return shopStages[Random.Range(0, shopStages.Count)];
-            case StageType.Boss: return bossStages[Random.Range(0, bossStages.Count)];
-            default: return null;
-        }
-    }
-
-    private void ForcePlaceAShop()
-    {
-        List<StageNodeVer2> candidates = new();
         foreach (var node in grid)
         {
-            if (node != null && node.StageData.StageType == StageType.Normal)
-                candidates.Add(node);
-        }
-
-        if (candidates.Count > 0)
-        {
-            var chosen = candidates[Random.Range(0, candidates.Count)];
-            chosen.StageData = GetRandomStage(StageType.Shop);
+            if (node != null && node.StageData == null)
+                node.StageData = GetRandomStage(StageType.Normal);
         }
     }
 
-    private void ConnectNodes()
+    StageData GetRandomStage(StageType type)
+    {
+        return type switch
+        {
+            StageType.Normal => normalStages[Random.Range(0, normalStages.Count)],
+            StageType.Shop => shopStages[Random.Range(0, shopStages.Count)],
+            StageType.Boss => bossStages[Random.Range(0, bossStages.Count)],
+            _ => null
+        };
+    }
+
+    void ForcePlaceAShop()
+    {
+        var candidates = grid.Cast<StageNodeVer2>()
+            .Where(n => n != null && n.StageData.StageType == StageType.Normal)
+            .ToList();
+
+        if (candidates.Count > 0)
+            candidates[Random.Range(0, candidates.Count)].StageData = GetRandomStage(StageType.Shop);
+    }
+
+    #endregion
+    #region 노드 연결 및 UI
+
+    // 노드 간 연결 생성
+    void ConnectNodes()
     {
         for (int y = 0; y < height - 1; y++)
         {
@@ -365,11 +425,11 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void PruneUnreachableNodes()
+    // 연결되지 않은 고립 노드 제거
+    void PruneUnreachableNodes()
     {
         List<Vector2Int> toRemove = new();
 
-        // 1. 제거 대상 수집
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
@@ -380,21 +440,16 @@ public class MapGenerator : MonoBehaviour
                 bool isStart = (x == 0 && y == 0);
                 bool isEnd = (x == width - 1 && y == height - 1);
 
-                if (isStart || isEnd)
-                    continue;
+                if (isStart || isEnd) continue;
 
                 int inCount = node.IncomingNodes.Count(n => IsValid(n));
                 int outCount = node.ConnectedNodes.Count(n => IsValid(n));
 
-                // ✅ 제거 조건: 부모 없음, 자식 없음, 또는 연결이 양쪽 1개 이하 (통과만 하는 노드)
                 if (inCount == 0 || outCount == 0 || (inCount <= 1 && outCount <= 1))
-                {
                     toRemove.Add(new Vector2Int(x, y));
-                }
             }
         }
 
-        // 2. 연결 정리 + 제거
         foreach (var pos in toRemove)
         {
             var node = grid[pos.x, pos.y];
@@ -408,20 +463,15 @@ public class MapGenerator : MonoBehaviour
             grid[pos.x, pos.y] = null;
         }
 
-        // 3. 남은 노드의 연결 다시 정리
         for (int y = 0; y < height; y++)
+        for (int x = 0; x < width; x++)
         {
-            for (int x = 0; x < width; x++)
-            {
-                var node = grid[x, y];
-                if (node == null) continue;
-
-                node.ConnectedNodes.RemoveAll(n => !IsValid(n));
-                node.IncomingNodes.RemoveAll(n => !IsValid(n));
-            }
+            var node = grid[x, y];
+            if (node == null) continue;
+            node.ConnectedNodes.RemoveAll(n => !IsValid(n));
+            node.IncomingNodes.RemoveAll(n => !IsValid(n));
         }
 
-        // 4. 유효성 검사 함수
         bool IsValid(StageNodeVer2 n)
         {
             var p = n.GridPosition;
@@ -429,46 +479,8 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private HashSet<StageNodeVer2> CollectNodesReachableFrom(StageNodeVer2 end)
-    {
-        var visited = new HashSet<StageNodeVer2>();
-        var stack = new Stack<StageNodeVer2>();
-        stack.Push(end);
-
-        while (stack.Count > 0)
-        {
-            var node = stack.Pop();
-            if (node == null || visited.Contains(node)) continue;
-
-            visited.Add(node);
-
-            foreach (var prev in node.IncomingNodes)
-                stack.Push(prev);
-        }
-
-        return visited;
-    }
-    
-    private HashSet<StageNodeVer2> CollectConnectedNodes(StageNodeVer2 start)
-    {
-        var visited = new HashSet<StageNodeVer2>();
-        var stack = new Stack<StageNodeVer2>();
-        stack.Push(start);
-
-        while (stack.Count > 0)
-        {
-            var node = stack.Pop();
-            if (node == null || visited.Contains(node)) continue;
-
-            visited.Add(node);
-            foreach (var next in node.ConnectedNodes) stack.Push(next);
-            foreach (var prev in node.IncomingNodes) stack.Push(prev);
-        }
-
-        return visited;
-    }
-
-    private void GenerateNodeButtons()
+    // UI 노드 버튼 생성
+    void GenerateNodeButtons()
     {
         nodeButtons.Clear();
 
@@ -482,12 +494,9 @@ public class MapGenerator : MonoBehaviour
                 GameObject btn = Instantiate(nodeButtonPrefab, gridOrigin);
                 var rt = btn.GetComponent<RectTransform>();
 
-                // ✅ 위치 캐싱 로직
                 Vector2 offset;
                 if (node.CachedPosition.HasValue)
-                {
                     offset = node.CachedPosition.Value;
-                }
                 else
                 {
                     float xOffset = x * xSpacing + Random.Range(-xJitter, xJitter);
@@ -497,7 +506,6 @@ public class MapGenerator : MonoBehaviour
                 }
 
                 rt.anchoredPosition = offset;
-
                 btn.GetComponent<NodeButton>().Init(node);
                 nodeButtons[node] = btn;
             }
@@ -506,7 +514,8 @@ public class MapGenerator : MonoBehaviour
         DrawConnections();
     }
 
-    private void DrawConnections()
+    // 노드 간 선 그리기
+    void DrawConnections()
     {
         foreach (var pair in nodeButtons)
         {
@@ -531,6 +540,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    // 현재 노드 기준으로 이동 가능한 노드 활성화
     void HighlightAvailableNodes(StageNodeVer2 current)
     {
         foreach (var pair in nodeButtons)
@@ -538,41 +548,107 @@ public class MapGenerator : MonoBehaviour
             var node = pair.Key;
             var button = pair.Value;
 
-            bool isReachable =
-                current.ConnectedNodes.Contains(node) ||
-                current.IncomingNodes.Contains(node) ||
-                node.IncomingNodes.Contains(current);
+            bool isReachable = current.ConnectedNodes.Contains(node)
+                               || current.IncomingNodes.Contains(node)
+                               || node.IncomingNodes.Contains(current);
 
             button.GetComponent<Button>().interactable = isReachable;
         }
     }
 
+    // 마커 위치 업데이트
+    void UpdateMarkerPosition(StageNodeVer2 node)
+    {
+        if (!nodeButtons.TryGetValue(node, out var button)) return;
+
+        if (markerInstance == null)
+            markerInstance = Instantiate(markerPrefab, button.transform.parent);
+
+        markerInstance.SetActive(true);
+        markerInstance.transform.SetAsLastSibling();
+        markerInstance.transform.position = button.transform.position;
+    }
+
+    #endregion
+
+    #region 경로 수집
+
+    // 시작 노드부터 연결된 모든 노드 수집
+    HashSet<StageNodeVer2> CollectConnectedNodes(StageNodeVer2 start)
+    {
+        var visited = new HashSet<StageNodeVer2>();
+        var stack = new Stack<StageNodeVer2>();
+        stack.Push(start);
+
+        while (stack.Count > 0)
+        {
+            var node = stack.Pop();
+            if (node == null || visited.Contains(node)) continue;
+
+            visited.Add(node);
+            foreach (var next in node.ConnectedNodes) stack.Push(next);
+            foreach (var prev in node.IncomingNodes) stack.Push(prev);
+        }
+
+        return visited;
+    }
+
+    // 특정 노드로 도달 가능한 모든 노드 수집
+    HashSet<StageNodeVer2> CollectNodesReachableFrom(StageNodeVer2 end)
+    {
+        var visited = new HashSet<StageNodeVer2>();
+        var stack = new Stack<StageNodeVer2>();
+        stack.Push(end);
+
+        while (stack.Count > 0)
+        {
+            var node = stack.Pop();
+            if (node == null || visited.Contains(node)) continue;
+
+            visited.Add(node);
+            foreach (var prev in node.IncomingNodes) stack.Push(prev);
+        }
+
+        return visited;
+    }
+
+    #endregion
+
+    #region 저장/로드 및 씬 이동
+
+    void SaveMapToRuntime()
+    {
+        RuntimeDataManager.Instance.mapGrid = grid;
+        RuntimeDataManager.Instance.currentNode = currentNode;
+        RuntimeDataManager.Instance.mapGenerated = true;
+    }
+
+    void LoadMapFromRuntime()
+    {
+        grid = RuntimeDataManager.Instance.mapGrid;
+        currentNode = RuntimeDataManager.Instance.currentNode;
+    }
+
     public void OnNodeSelected(StageNodeVer2 selectedNode)
     {
-        bool isReachable =
-            currentNode != null &&
-            (currentNode.ConnectedNodes.Contains(selectedNode) ||
-             currentNode.IncomingNodes.Contains(selectedNode) ||
-             selectedNode.IncomingNodes.Contains(currentNode));
+        bool isReachable = currentNode != null &&
+                           (currentNode.ConnectedNodes.Contains(selectedNode)
+                            || currentNode.IncomingNodes.Contains(selectedNode)
+                            || selectedNode.IncomingNodes.Contains(currentNode));
 
-        if (!isReachable)
-            return;
+        if (!isReachable) return;
 
-        // ✅ 이동 (씬 전환 여부와 관계없이)
         currentNode = selectedNode;
         RuntimeDataManager.Instance.currentNode = currentNode;
         HighlightAvailableNodes(currentNode);
-
         UpdateMarkerPosition(currentNode);
-        
-        // ✅ 클리어된 노드일 경우 씬 전환 없이 종료
+
         if (selectedNode.IsCleared)
         {
             Debug.Log("이미 클리어한 노드에 도착함. 씬 전환 없음.");
             return;
         }
 
-        // ⛳ 씬 전환 처리
         RuntimeDataManager.Instance.nextNode = selectedNode;
         RuntimeDataManager.Instance.currentStageData = selectedNode.StageData;
 
@@ -587,18 +663,7 @@ public class MapGenerator : MonoBehaviour
                 break;
         }
     }
-    
-    private void UpdateMarkerPosition(StageNodeVer2 node)
-    {
-        if (!nodeButtons.TryGetValue(node, out var button)) return;
 
-        if (markerInstance == null)
-        {
-            markerInstance = Instantiate(markerPrefab, button.transform.parent);
-        }
-
-        markerInstance.SetActive(true);
-        markerInstance.transform.SetAsLastSibling(); // 항상 위에 뜨게
-        markerInstance.transform.position = button.transform.position;
-    }
+    #endregion
 }
+

@@ -22,6 +22,11 @@ public class StageNodeVer2
 
     public Vector2? CachedPosition = null;
     
+    /// <summary>
+    /// 총 연결된 노드 수 (입력 + 출력)
+    /// </summary>
+    public int TotalConnections => ConnectedNodes.Count + IncomingNodes.Count;
+    
     // 생성자
     public StageNodeVer2(int x, int y)
     {
