@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/01. Scenes/HyunTaek/InStage.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/01. Scenes/JiSeok/ShopScene.unity
+    path: Assets/01. Scenes/HyunTaek/ShopScene.unity
     guid: 3226fd1748d5a7d44a3c045393be6246
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
